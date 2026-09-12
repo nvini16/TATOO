@@ -1,20 +1,25 @@
 function App() {
   return (
     <main>
-      <header>
+      <header className="header">
         <div>
-          <strong>TATOO</strong>
+          <strong className="brand">TATOO</strong>
         </div>
 
         <nav>
           <a href="#trabalhos">Trabalhos</a>
           <a href="#sobre">Sobre</a>
-          <a href="#login">Login</a>
+
+          <a className="login-link" href="#login">
+            Login
+          </a>
+
         </nav>
       </header>
 
-      <section id="inicio">
-        <p>ESTÚDIO DE TATUAGEM</p>
+      <section className="hero" id="inicio">
+        <div className="hero-content">
+          <p className="hero-label">ESTÚDIO DE TATUAGEM</p>
 
         <h1>
           Tatuagem não é só
@@ -31,12 +36,15 @@ function App() {
         <button type="button">
           Agendar horário
         </button>
+        </div>
       </section>
 
       <section id="trabalhos">
-        <p>Nosso trabalho</p>
+        <div className="section-heading">
+          <p>Nosso trabalho</p>
 
         <h2>Arte. Precisão. Indentidade.</h2>
+        </div>
 
         <div>
           <h3>Arte</h3>

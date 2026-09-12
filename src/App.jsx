@@ -43,7 +43,7 @@ function App() {
         <div className="section-heading">
           <p>Nosso trabalho</p>
 
-        <h2>Arte. Precisão. Indentidade.</h2>
+        <h2>Arte. Precisão. Identidade.</h2>
         </div>
 
         <div>

@@ -135,7 +135,7 @@ body {
   gap: 20px;
 }
 
-#trabalhos > p {
+.section-heading  p {
   color: var(--marsali-tatoo-color-gold);
   font-size: 14px;
   letter-spacing: 3px;

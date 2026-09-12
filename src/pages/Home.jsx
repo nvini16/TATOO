@@ -1,5 +1,6 @@
 import Header from '../components/Header';
 import Hero from '../components/Hero';
+import Trabalhos from '../components/Trabalhos';
 
 function Home() {
     return (
@@ -8,37 +9,7 @@ function Home() {
 
       <Hero />
 
-      <section id="trabalhos">
-        <div className="section-heading">
-          <p>Nosso trabalho</p>
-
-        <h2>Arte. Precisão. Identidade.</h2>
-        </div>
-
-        <div>
-          <h3>Arte</h3>
-
-          <p>
-            Projetos pensados para cada pessoa.
-          </p>
-        </div>
-
-        <div>
-          <h3>Precisão</h3>
-
-          <p>
-            Técnica e atenção em cada detalhe.
-          </p>
-        </div>
-
-        <div>
-          <h3>Identidade</h3>
-
-          <p>
-            Uma tatuagem que representa você.
-          </p>
-        </div>
-      </section>
+      <Trabalhos />
 
       <section id="sobre">
         <div className="section-heading">

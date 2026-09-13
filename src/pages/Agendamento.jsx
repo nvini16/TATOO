@@ -1,3 +1,4 @@
+import './Agendamento.css';
 import { Link } from 'react-router-dom';
 
 function Agendamento() {

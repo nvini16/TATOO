@@ -12,10 +12,11 @@ function Login() {
 
                     <div className="login-brand">
                         <img src={logo} alt="Marsali Tatoo" />
+                        <h1>MARSALI TATOO</h1>
 
                         <form className="login-form">
 
-                            <div classname="form-field">
+                            <div className="form-field">
                                 <label htmlFor="text">Nome</label>
 
                                 <input
@@ -25,7 +26,7 @@ function Login() {
                                 />
                             </div>
 
-                            <div className="Form-field">
+                            <div className="form-field">
                                 <label htmlFor="email">E-mail</label>
 
                                 <input
@@ -51,7 +52,6 @@ function Login() {
 
                         </form>
 
-                        <h1>MARSALI TATOO</h1>
                     </div>
 
                 </div>

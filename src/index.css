@@ -319,8 +319,17 @@ body {
 }
 
 .login-form {
-  width: 80%;
-  max-width: 500px;
+ .cadastro-form {
+  width: 100%;
+  max-width: 380px;
+
+  margin-top: 30px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
 }
 
 .form-field {
@@ -360,6 +369,7 @@ body {
 }
 
 .login-form button:hover {
+  opacity: 0.85;
   background-color: var(--marsali-tatoo-color-dark-green);
 }
 
@@ -450,7 +460,7 @@ body {
 .cadastro-brand h1 {
   margin: 10px 0 0;
 
-  color: var(--marsali-tatoo-color-white);
+  color: var(--marsali-tatoo-color-green);
 
   font-size: 28px;
   font-weight: 600;
@@ -470,7 +480,30 @@ body {
 
 .cadastro-form button {
   width: 100%;
+  padding: 12px;
   margin-top: 5px;
+
+  background-color: var(--marsali-tatoo-color-green);
+  color: var(--marsali-tatoo-color-white);
+
+  border:none;
+  cursor: pointer;
+}
+
+.cadastro-form button:hover {
+  opacity: 0.85;
+}
+
+.cadastro-form a {
+  margin-top: 5px;
+
+  color: var(--marsali-tatoo-color-white);
+  text-decoration: none;
+}
+
+.cadastro-content > a {
+  color: var(--marsali-tatoo-color-green);
+  text-decoration: none;
 }
 
 

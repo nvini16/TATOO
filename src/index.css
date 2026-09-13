@@ -232,3 +232,98 @@ body {
   font-size: 18px;
   color: var(--marsali-tatoo-color-black);
 }
+
+/* LOGIN  */
+
+.login-page {
+  min-height: 100vh;
+  display: flex;
+}
+
+.login-left {
+  width: 55%;
+  background-color: var(--marsali-tatoo-color-white);
+}
+
+.login-right {
+  width: 45%;
+  background-color: var(--marsali-tatoo-color-black);
+}
+
+.login-content {
+  width: 100%;
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 40px 0 0 ;
+}
+
+.login-content > a {
+  color: var(--marsali-tatoo-color-green);
+  text-decoration: none;
+  font-size: 14px;
+  align-self: flex-start;
+  margin-left: 40px;
+}
+
+.login-brand img {
+  width: 180px;
+  height: auto;
+}
+
+.login-brand h1 {
+  color: var(--marsali-tatoo-color-green);
+  font-size: 24px;
+  margin: 10px 0 30px;
+}
+
+.login-form {
+  width: 80%;
+  max-width: 500px;
+}
+
+.form-field {
+  margin-bottom: 20px;
+}
+
+.form-field label {
+  display: block;
+  color: var(--marsali-tatoo-color-green);
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+.form-field input {
+  width: 100%;
+  box-sizing: border-box;
+
+  background-color: var(--marsali-tatoo-color-white);
+  border: 1px solid var(--marsali-tatoo-color-green);
+
+  padding: 12px;
+  font-size: 14px;
+
+  border-radius: 4px;
+}
+
+.login-form button {
+  width: 100%;
+  padding: 12px;
+
+  background-color: var(--marsali-tatoo-color-green);
+  color: var(--marsali-tatoo-color-white);
+
+  border: none;
+  cursor: pointer;
+}
+
+.login-form button:hover {
+  background-color: var(--marsali-tatoo-color-dark-green);
+}
+
+.form-field:last-of-type {
+  margin-bottom: 10px;
+}

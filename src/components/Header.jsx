@@ -11,7 +11,7 @@ function Header() {
           <a href="#trabalhos">Trabalhos</a>
           <a href="#sobre">Sobre</a>
 
-          <Link className="login-link" to="/login">
+          <Link className="login-link" to="/Login">
             Login
           </Link>
 

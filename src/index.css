@@ -319,7 +319,6 @@ body {
 }
 
 .login-form {
- .cadastro-form {
   width: 100%;
   max-width: 380px;
 
@@ -330,7 +329,7 @@ body {
   gap: 18px;
 }
 
-}
+
 
 .form-field {
   margin-bottom: 20px;

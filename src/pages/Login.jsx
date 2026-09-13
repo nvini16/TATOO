@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
-import logo from '../assets/logo/marsali-tatoo-logo-fundo-none.png';
+import logo from '../assets/logo/marsali-tatoo-logo-green.png';
+import fotoBraco from '../assets/foto-do-braco-do-login.jpg';
+
 function Login() {
     return (
         <main className="login-page">
@@ -59,7 +61,7 @@ function Login() {
 
             <section className="login-right">
                 <div className="login-image">
-                    {/* A imagem do braço sera colocada aqui truta */}
+                    <img src={fotoBraco} alt="Braço tatuado" />
                 </div>
             </section>
         </main>

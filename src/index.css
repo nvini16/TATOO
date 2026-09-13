@@ -1,6 +1,6 @@
 :root {
   --marsali-tatoo-color-green: #075A2B;
-  --marsali-tatoo-color-dark-green: #006102;
+  --marsali-tatoo-color-dark-green: #003B1E;
   --marsali-tatoo-color-white: #F5F5F5;
   --marsali-tatoo-color-gold: #DCBE24;
   --marsali-tatoo-color-black: #000000;
@@ -326,4 +326,34 @@ body {
 
 .form-field:last-of-type {
   margin-bottom: 10px;
+}
+
+.login-image {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.login-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    to right,
+    var(--marsali-tatoo-color-black),
+    transparent 25%,
+    transparent 75%,
+    var(--marsali-tatoo-color-black)
+  );
+
+  pointer-events: none;
+}
+
+.login-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
 }

@@ -6,7 +6,6 @@ function Login() {
     return (
         <main className="login-page">
 
-            <section className="login-left">
                 <div className="login-content">
                     <Link to="/">
                         Voltar para Home
@@ -57,13 +56,10 @@ function Login() {
                     </div>
 
                 </div>
-            </section>
 
-            <section className="login-right">
                 <div className="login-image">
                     <img src={fotoBraco} alt="Braço tatuado" />
                 </div>
-            </section>
         </main>
 
 

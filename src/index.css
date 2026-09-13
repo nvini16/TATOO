@@ -237,21 +237,13 @@ body {
 
 .login-page {
   min-height: 100vh;
-  display: flex;
-}
-
-.login-left {
-  width: 55%;
-  background-color: var(--marsali-tatoo-color-white);
-}
-
-.login-right {
-  width: 45%;
   background-color: var(--marsali-tatoo-color-black);
+  position: relative;
+  overflow: hidden;
 }
 
 .login-content {
-  width: 100%;
+  width: 45%;
   min-height: 100vh;
 
   display: flex;
@@ -259,6 +251,39 @@ body {
   align-items: center;
 
   padding: 40px 0 0 ;
+}
+
+.login-image {
+  width: 65%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.login-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.login-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    to right,
+    var(--marsali-tatoo-color-black) 0%,
+    rgba(0, 0, 0, 0.8) 20%,
+    rgba(0, 0, 0, 0.3) 45%,
+    transparent 70%,
+  );
+
+  pointer-events: none;
+
+  z-index: 2;
 }
 
 .login-content > a {
@@ -326,34 +351,4 @@ body {
 
 .form-field:last-of-type {
   margin-bottom: 10px;
-}
-
-.login-image {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  overflow: hidden;
-}
-
-.login-image::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-
-  background: linear-gradient(
-    to right,
-    var(--marsali-tatoo-color-black),
-    transparent 25%,
-    transparent 75%,
-    var(--marsali-tatoo-color-black)
-  );
-
-  pointer-events: none;
-}
-
-.login-image img {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: contain;
 }

@@ -243,7 +243,7 @@ body {
 }
 
 .login-content {
-  width: 45%;
+  width: 50%;
   min-height: 100vh;
 
   display: flex;
@@ -268,23 +268,36 @@ body {
   object-fit: cover;
 }
 
+
 .login-image::after {
   content: "";
   position: absolute;
   inset: 0;
-
+  
   background: linear-gradient(
     to right,
     var(--marsali-tatoo-color-black) 0%,
     rgba(0, 0, 0, 0.8) 20%,
     rgba(0, 0, 0, 0.3) 45%,
-    transparent 70%,
-  );
-
-  pointer-events: none;
-
-  z-index: 2;
-}
+    transparent 70%
+    );
+    
+    pointer-events: none;
+    
+    z-index: 2;
+  }
+  
+  .login-image::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+  
+    background-color: var(--marsali-tatoo-color-green);
+    opacity: 0.30;
+  
+    pointer-events: none;
+    z-index: 1;
+  }
 
 .login-content > a {
   color: var(--marsali-tatoo-color-green);
@@ -342,6 +355,7 @@ body {
   color: var(--marsali-tatoo-color-white);
 
   border: none;
+    
   cursor: pointer;
 }
 
@@ -352,3 +366,111 @@ body {
 .form-field:last-of-type {
   margin-bottom: 10px;
 }
+
+/* CADASTRO  */
+
+.cadastro-page {
+  min-height: 100vh;
+  background-color: var(--marsali-tatoo-color-black);
+  position: relative;
+  overflow: hidden;
+}
+
+.cadastro-image {
+  width: 65%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.cadastro-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.cadastro-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    to right,
+    transparent 30%,
+    rgba(0, 0, 0, 0.3) 55%,
+    rgba(0, 0, 0, 0.8) 80%,
+    var(--marsali-tatoo-color-black) 100%
+  );
+
+  pointer-events: none;
+
+  z-index: 2;
+}
+
+.cadastro-image::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background-color: var(--marsali-tatoo-color-green);
+  opacity: 0.30;
+
+  pointer-events: none;
+  z-index: 1;
+}
+
+.cadastro-content {
+  width: 50%;
+  min-height: 100vh;
+
+  margin-left: 50%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+  z-index: 3;
+}
+
+.cadastro-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cadastro-brand img {
+  width: 120px;
+  height: auto;
+}
+
+.cadastro-brand h1 {
+  margin: 10px 0 0;
+
+  color: var(--marsali-tatoo-color-white);
+
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+.cadastro-form {
+  width: 100%;
+  max-width: 380px;
+
+  margin-top: 30px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.cadastro-form button {
+  width: 100%;
+  margin-top: 5px;
+}
+
+

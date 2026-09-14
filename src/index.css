@@ -301,16 +301,21 @@ body {
     z-index: 1;
   }
 
-.login-content > a {
+.login-home-link {
+  position: absolute;
+  top: 30px;
+  left: 40px;
+
   color: var(--marsali-tatoo-color-green);
   text-decoration: none;
   font-size: 14px;
-  align-self: flex-start;
-  margin-left: 40px;
+
   transition: color 0.2s ease;
+
+  z-index: 4;
 }
 
-.login-content > a:hover {
+.login-home-link:hover {
   color: var(--marsali-tatoo-color-gold);
 }
 
@@ -327,13 +332,15 @@ body {
 
 .login-form {
   width: 100%;
-  max-width: 460px;
+  max-width: 640px;
 
   margin-top: 30px;
 
   display: flex;
   flex-direction: column;
   gap: 18px;
+
+  align-items: center;
 }
 
 
@@ -381,6 +388,16 @@ body {
 
 .form-field:last-of-type {
   margin-bottom: 10px;
+}
+
+.login-register-link {
+  color: var(--marsali-tatoo-color-green);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.login-register-link:hover {
+  color: var(--marsali-tatoo-color-gold);
 }
 
 /* CADASTRO  */

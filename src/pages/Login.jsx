@@ -6,10 +6,11 @@ function Login() {
     return (
         <main className="login-page">
 
-                <div className="login-content">
-                    <Link to="/">
+                    <Link to="/" className="login-home-link">
                         Voltar para Home
                     </Link>
+
+                <div className="login-content">
 
                     <div className="login-brand">
                         <img src={logo} alt="Marsali Tatoo" />
@@ -47,9 +48,14 @@ function Login() {
                                 />
                             </div>
 
+
                             <button type="submit">
                                 Confirmar
                             </button>
+
+                            <Link to="/cadastro" className="login-register-link">
+                                Ainda não tem uma conta?
+                            </Link>
 
                         </form>
 

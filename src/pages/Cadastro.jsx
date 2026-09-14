@@ -65,9 +65,9 @@ function Cadastro() {
                         Criar conta
                     </button>
 
-                    <a href="/Login">
+                    <Link to="/Login">
                         Já possui uma conta? Entrar
-                    </a>
+                    </Link>
 
                 </form>
             </div>

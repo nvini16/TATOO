@@ -1,4 +1,9 @@
 function Agendamento() {
+
+    const handleSubmit = (event) => {
+        event.preventDefault()
+    }
+
     return (
         <main>
             <h1>Agende sua tattoo</h1>
@@ -30,7 +35,7 @@ function Agendamento() {
                 </select>
             </section>
 
-            <form>
+            <form onSubmit={handleSubmit}>
                 <h2>Seus dados</h2>
 
                 <input type="text" placeholder="Seu nome" />

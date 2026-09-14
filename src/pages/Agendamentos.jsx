@@ -5,7 +5,7 @@ function Agendamento() {
     }
 
     return (
-        <main>
+        <main className="agendamento-page">
             <h1>Agende sua tattoo</h1>
 
             <section>

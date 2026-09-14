@@ -6,6 +6,10 @@
   --marsali-tatoo-color-black: #000000;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   background-color: var(--marsali-tatoo-color-black);

@@ -6,7 +6,7 @@ import Agendamento from './pages/Agendamentos';
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/TATOO">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/Login" element={<Login />} />

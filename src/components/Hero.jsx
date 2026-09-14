@@ -1,4 +1,9 @@
+import { useNavigate } from 'react-router-dom';
+
 function Hero() {
+
+  const navigate = useNavigate();
+
     return (
         <section className="hero" id="inicio">
         <div className="hero-content">
@@ -16,7 +21,7 @@ function Hero() {
           para transformar ideias em tatuagens.
         </p>
 
-        <button type="button">
+        <button type="button" onClick={() => navigate('/Agendamento')}>
           Agendar horário
         </button>
         </div>

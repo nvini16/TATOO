@@ -1,10 +1,17 @@
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 function Header() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  function closeMenu() {
+    setMenuOpen(false);
+  }
+
   return (
     <header className="header">
       <div className="header-brand">
-        <Link to="/" className="brand">
+        <Link to="/" className="brand" onClick={closeMenu}>
           <span className="brand-name">MARSALI</span>
           <span className="brand-subtitle">TATTOO STAUDIO</span>
         </Link>
@@ -19,6 +26,32 @@ function Header() {
       <Link className="header-cta" to="/Agendamento">
         Agendar horário
       </Link>
+
+      <button 
+        type="button"
+        className="mobile-menu-button"
+        onClick={() => setMenuOpen(!menuOpen)}
+        arial-label="Abrir menu"
+        arial-expanded={menuOpen}
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
+        <a href="#inicio" onClick={closeMenu}>Inicío</a>
+        <a href="#trabalhos" onClick={closeMenu}>Trabalhos</a>
+        <a href="#sobre" onClick={closeMenu}>Sobre</a>
+
+          <Link 
+            className="mobile-menu-cta"
+            to="/Agendamento"
+            onClick={closeMenu}
+          >
+            Agerdar horário
+          </Link>
+      </nav>
 
     </header>
   );

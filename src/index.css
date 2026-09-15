@@ -141,64 +141,92 @@ body {
   outline-offset: 4px;
 }
 
-#trabalhos {
+.trabalhos {
+  min-height: 100vh;
+
   background-color: var(--marsali-tatoo-color-green);
   color: var(--marsali-tatoo-color-white);
 
   padding: 80px 40px;
 
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  overflow: hidden;
 }
 
-.section-heading  p {
+.trabalhos-header {
+  text-align: center;
+
+  margin-bottom: 48px;
+}
+
+.trabalhos-header p {
   color: var(--marsali-tatoo-color-gold);
+
   font-size: 14px;
   letter-spacing: 3px;
   text-transform: uppercase;
+
   margin: 0 0 16px;
 }
 
-#trabalhos h2 {
+.trabalhos-header h2 {
   color: var(--marsali-tatoo-color-white);
+
   font-size: 40px;
   line-height: 1.1;
-  margin: 0 0 48px;
-  font-weight: 700;
-}
 
-#trabalhos > div {
-  background-color: var(--marsali-tatoo-color-white);
-  color: var(--marsali-tatoo-color-black);
-
-  padding: 28px;
-
-  border-left: 4px solid var(--marsali-tatoo-color-gold);
-}
-
-.section-heading {
-  grid-column: 1 / -1;
-}
-
-@media (min-width: 768px) {
-  #trabalhos {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-#trabalhos > div:not(.section-heading) h3 {
-  color: var(--marsali-tatoo-color-gold);
-  font-size: 24px;
-  margin: 0 0 12px;
-  font-weight: 700;
-}
-
-#trabalhos > div:not(.section-heading) p {
-  color: var(--marsali-tatoo-color-black);
-  font-size: 16px;
-  line-height: 1.5;
   margin: 0;
+
+  font-weight: 700;
+}
+
+.trabalhos-gallery {
+  position: relative;
+  display: flex;
+  gap: 24px;
+
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 10px 0 30px;
+}
+
+
+.trabalhos-gallery::-webkit-scrollbar {
+  display: none;
+}
+
+.trabalho-card {
+  flex: 0 0 280px;
+  scroll-snap-align: center;
+  margin: 0;
+}
+
+.trabalho-card img {
+  border-radius: 10px;
+  width: 280px;
+  height: 280px;
+
+  display: block;
+
+  object-fit: cover;
+}
+
+.trabalho-card img:hover {
+  border: 2px solid var(--marsali-tatoo-color-gold);
+}
+
+.trabalho-card h3 {
+  color: var(--marsali-tatoo-color-white);
+
+  font-size: 22px;
+  text-align: center;
+
+  margin: 16px 0 0;
+
+  font-weight: 700;
 }
 
 @media (max-width: 767px) {

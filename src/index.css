@@ -19,48 +19,114 @@ body {
   font-family: "Cormorant Garamond", serif;
 }
 
+/* HEADER  */
+
 .header {
-  background-color: var(--marsali-tatoo-color-green);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  
+  height: 80px;
+  padding: 0 40px;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  padding: 20px 40px;
+  background-color: rgba(245, 245, 245, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 
-  border-bottom: 2px solid var(--marsali-tatoo-color-gold);
+  border-bottom: 1px solid rgba(220, 190, 36, 0.35);
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
 }
 
 .brand {
-  color: var(--marsali-tatoo-color-white);
-  font-size: 28px;
-  letter-spacing: 2px;
-  font-weight: 800;
+  display: flex;
+  flex-direction: column;
+
+  text-decoration: none;
+  line-height: 1;
+}
+
+.brand-nome {
+  color: var(--marsali-tatoo-color-green);
+
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 3px;
+}
+
+.brand-subtitle {
+  margin-top: 5px;
+
+  color: var(--marsali-tatoo-color-gold);
+
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
 }
 
 .header nav {
   display: flex;
-  gap: 28px;
+  align-items: center;
+  gap: 32px;
 }
 
 .header nav a {
-  color: var(--marsali-tatoo-color-white);
+  color: var(--marsali-tatoo-color-dark-green);
   text-decoration: none;
   font-size: 16px;
-  font-weight: 500;
-  letter-spacing: 0.5px;
+  font-weight: 600;
   
-  transition: color 0.2s ease;
+  transition: color 0.3s ease,
+  transform 0.3s ease;
 }
 
 .header nav a:hover {
   color: var(--marsali-tatoo-color-gold);
+  transform: translateY(-1px);
 }
 
 .login-link {
-  color: var(--marsali-tatoo-color-gold) !important;
+  padding-left: 8px;
+}
+
+.header-cta {
+  padding: 11px 20px;
+
+  background-color: var(--marsali-tatoo-color-green);
+  color: 1px solid var(--marsali-tatoo-color-white);
   border: 1px solid var(--marsali-tatoo-color-gold);
-  padding: 8px 16px;
+  border-radius: 6px;
+
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+}
+
+.header-cta:hover {
+  background-color: var(--marsali-tatoo-color-dark-green);
+  color: var(--marsali-tatoo-color-gold);
+
+  box-shadow: 0 8px 20px rgba(7, 90, 43, 0.18);
+
+  transform: translateY(-2px);
 }
 
 .hero {

@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MT MARSALI TATTOO | Estúdio de Tatuagem Autoral & Exclusiva</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cinzel for luxury headings & Inter for sleek body text -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-bg': '#F8F9FA',
+                        'brand-surface': '#FFFFFF',
+                        'brand-muted': '#EBF0E6',
+                        'brand-card': '#F1F4EE',
+                        'military-dark': '#21291A',
+                        'military-green': '#3A482A',
+                        'military-light': '#51623D',
+                        'military-soft': '#8B9C78',
+                        'gold-dark': '#9A7A25',
+                        'gold-primary': '#C5A059',
+                        'gold-light': '#E6C987',
+                        'gold-soft': '#F7F2E6',
+                        'text-main': '#1A1C18',
+                        'text-sub': '#4A5043',
+                        'text-muted': '#737A6B'
+                    },
+                    fontFamily: {
+                        heading: ['Cinzel', 'serif'],
+                        body: ['Inter', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'gold-glow': '0 0 25px rgba(197, 160, 89, 0.25)',
+                        'gold-sm': '0 0 10px rgba(197, 160, 89, 0.2)',
+                        'green-glow': '0 10px 25px -5px rgba(58, 72, 42, 0.3)',
+                        'card-light': '0 10px 30px -5px rgba(0, 0, 0, 0.05), 0 0 2px rgba(58, 72, 42, 0.1)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F9FA;
+            color: #1A1C18;
+            overflow-x: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F8F9FA;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #8B9C78;
+            border-radius: 4px;
+            border: 1px solid #C5A059;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3A482A;
+        }
+
+        /* Metallic Gold Gradient Text */
+        .text-gold-gradient {
+            background: linear-gradient(135deg, #9A7A25 0%, #C5A059 50%, #836417 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-green-gradient {
+            background: linear-gradient(135deg, #21291A 0%, #3A482A 60%, #51623D 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Gold Metallic Border Effect */
+        .border-gold-gradient {
+            border-image: linear-gradient(to right, #C5A059, #E6C987, #9A7A25) 1;
+        }
+
+        /* Particle Canvas styling */
+        #particles-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Glassmorphism Light Navigation */
+        .glass-nav-light {
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(197, 160, 89, 0.3);
+        }
+
+        /* Custom Card Hover Animation */
+        .luxury-card {
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .luxury-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(58, 72, 42, 0.12), 0 0 15px rgba(197, 160, 89, 0.25);
+        }
+
+        /* Custom Accordion transitions */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease-out, padding 0.35s ease;
+        }
+        .accordion-content.open {
+            max-height: 500px;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-military-green selection:text-white">
+
+    <div class="relative bg-brand-bg">
+        
+    <header class="fixed top-0 left-0 right-0 z-50 glass-nav-light transition-all duration-300 shadow-sm" id="main-header">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Brand Logo -->
+                <a href="#inicio" class="flex items-center space-x-3 group">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gold-primary via-military-green to-military-dark p-[2px] flex items-center justify-center shadow-md">
+                        <div class="w-full h-full bg-white rounded-full flex items-center justify-center group-hover:bg-military-green transition-colors">
+                            <i class="fa-solid fa-pen-nib text-military-green group-hover:text-gold-light text-lg transition-colors"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="font-heading font-extrabold text-xl tracking-wider text-military-dark block leading-none">MT MARSALI</span>
+                        <span class="text-[9px] font-bold tracking-[0.3em] text-gold-dark uppercase block mt-1">Tattoo Studio</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Menu Navigation -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#inicio" class="text-sm font-semibold text-text-sub hover:text-military-green transition-colors">Início</a>
+                    <a href="#portfolio" class="text-sm font-semibold text-text-sub hover:text-military-green transition-colors">Portfólio</a>
+                    <a href="#estudio" class="text-sm font-semibold text-text-sub hover:text-military-green transition-colors">O Estúdio</a>
+                    <a href="#cuidados" class="text-sm font-semibold text-text-sub hover:text-military-green transition-colors">Cuidados</a>
+                    <a href="#faq" class="text-sm font-semibold text-text-sub hover:text-military-green transition-colors">FAQ</a>
+                </nav>
+
+                <!-- Action CTA Button Header -->
+                <div class="hidden md:block">
+                    <a href="#orcamento" class="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-xs font-bold uppercase tracking-widest text-white rounded-lg group bg-gradient-to-br from-military-green via-gold-primary to-military-dark hover:shadow-green-glow transition-all">
+                        <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-military-green rounded-md group-hover:bg-military-dark">
+                            <i class="fa-brands fa-whatsapp mr-2 text-gold-light"></i> Solicitar Orçamento
+                        </span>
+                    </a>
+                </div>
+
+                <!-- Mobile Navigation Toggle -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="p-2 rounded-md text-military-dark hover:bg-brand-muted focus:outline-none">
+                        <i class="fa-solid fa-bars text-xl" id="menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white/95 border-b border-gold-primary/30 backdrop-blur-lg px-4 pt-2 pb-6 space-y-3 shadow-xl">
+            <a href="#inicio" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-semibold text-text-main hover:text-military-green hover:bg-brand-muted">Início</a>
+            <a href="#portfolio" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-semibold text-text-main hover:text-military-green hover:bg-brand-muted">Portfólio</a>
+            <a href="#estudio" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-semibold text-text-main hover:text-military-green hover:bg-brand-muted">O Estúdio</a>
+            <a href="#cuidados" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-semibold text-text-main hover:text-military-green hover:bg-brand-muted">Cuidados</a>
+            <a href="#faq" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-semibold text-text-main hover:text-military-green hover:bg-brand-muted">FAQ</a>
+            <a href="#orcamento" class="mobile-nav-link block text-center mt-4 w-full py-3 bg-military-green text-white font-semibold rounded-md shadow-md">
+                <i class="fa-brands fa-whatsapp mr-2 text-gold-light"></i> Solicitar Orçamento
+            </a>
+        </div>
+    </header>
+
+    <section id="inicio" class="relative min-h-screen flex items-center justify-center pt-24 pb-16 overflow-hidden bg-gradient-to-b from-brand-muted via-brand-bg to-white">
+        <!-- Canvas for Gold/Green Subtle Dust Particles -->
+        <canvas id="particles-canvas"></canvas>
+        
+        <!-- Ambient Light Gradient Spots -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-military-soft/15 rounded-full blur-[140px] pointer-events-none"></div>
+        <div class="absolute bottom-10 right-10 w-96 h-96 bg-gold-primary/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+        <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <!-- Badge -->
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-gold-primary/40 text-military-green text-xs font-bold tracking-widest uppercase mb-6 shadow-sm">
+                <span class="w-2.5 h-2.5 rounded-full bg-gold-primary animate-pulse"></span> Estúdio Autoral de Alta Precisão
+            </div>
+
+            <!-- Main Heading -->
+            <h1 class="font-heading text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-military-dark mb-6 leading-tight">
+                ARTE EXCLUSIVA <br>
+                <span class="text-gold-gradient">MARCADA NA PELE</span>
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="max-w-3xl mx-auto text-base sm:text-lg md:text-xl text-text-sub font-normal leading-relaxed mb-10">
+                Especializado em <strong class="text-military-dark font-bold">Realismo, Blackwork e Fine Line de extrema precisão</strong>. Biossegurança padrão internacional em um ambiente privativo e iluminado de alto padrão.
+            </p>
+
+            <!-- Dual Action CTA Buttons -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+                <a href="#orcamento" class="w-full sm:w-auto px-8 py-4 rounded-lg bg-military-green hover:bg-military-dark text-white font-bold uppercase text-xs tracking-widest border border-gold-primary/40 shadow-green-glow transition-all duration-300 flex items-center justify-center gap-3 group">
+                    <span>Agendar Consulta</span>
+                    <i class="fa-solid fa-arrow-right text-gold-light group-hover:translate-x-1 transition-transform"></i>
+                </a>
+                
+                <a href="#portfolio" class="w-full sm:w-auto px-8 py-4 rounded-lg bg-white hover:bg-brand-muted text-military-dark hover:text-military-green font-bold uppercase text-xs tracking-widest border border-military-green/20 hover:border-gold-primary/60 transition-all duration-300 flex items-center justify-center gap-3 shadow-sm">
+                    <i class="fa-solid fa-images text-gold-dark"></i>
+                    <span>Ver Portfólio</span>
+                </a>
+            </div>
+
+            <!-- Stats Bar -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mt-16 pt-10 border-t border-military-soft/20 max-w-4xl mx-auto">
+                <div class="p-4 rounded-xl bg-white border border-military-green/10 shadow-sm">
+                    <p class="font-heading text-2xl sm:text-3xl font-bold text-military-green">8+ Anos</p>
+                    <p class="text-xs text-text-muted mt-1 uppercase font-semibold tracking-wider">De Experiência</p>
+                </div>
+                <div class="p-4 rounded-xl bg-white border border-military-green/10 shadow-sm">
+                    <p class="font-heading text-2xl sm:text-3xl font-bold text-military-green">3.500+</p>
+                    <p class="text-xs text-text-muted mt-1 uppercase font-semibold tracking-wider">Tatuagens Realizadas</p>
+                </div>
+                <div class="p-4 rounded-xl bg-white border border-military-green/10 shadow-sm">
+                    <p class="font-heading text-2xl sm:text-3xl font-bold text-military-green">100%</p>
+                    <p class="text-xs text-text-muted mt-1 uppercase font-semibold tracking-wider">Descartável & Seguro</p>
+                </div>
+                <div class="p-4 rounded-xl bg-white border border-military-green/10 shadow-sm">
+                    <p class="font-heading text-2xl sm:text-3xl font-bold text-gold-dark">5.0 ★</p>
+                    <p class="text-xs text-text-muted mt-1 uppercase font-semibold tracking-wider">Avaliação Clientes</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="py-24 bg-white relative border-t border-military-green/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-bold uppercase tracking-[0.3em] text-gold-dark mb-3">Galeria de Trabalhos</h2>
+                <h3 class="font-heading text-3xl sm:text-5xl font-bold text-military-dark tracking-tight">PORTFÓLIO AUTORAL</h3>
+                <div class="w-16 h-1 bg-gradient-to-r from-military-green via-gold-primary to-military-green mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="flex flex-wrap justify-center gap-2 sm:gap-4 mb-12" id="portfolio-filters">
+                <button data-filter="all" class="filter-btn active px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 bg-military-green text-white border border-gold-primary shadow-sm">Todos</button>
+                <button data-filter="blackwork" class="filter-btn px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 bg-brand-bg text-text-sub border border-military-green/15 hover:border-gold-primary hover:text-military-green">Blackwork</button>
+                <button data-filter="fineline" class="filter-btn px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 bg-brand-bg text-text-sub border border-military-green/15 hover:border-gold-primary hover:text-military-green">Fine Line</button>
+                <button data-filter="realismo" class="filter-btn px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 bg-brand-bg text-text-sub border border-military-green/15 hover:border-gold-primary hover:text-military-green">Realismo</button>
+                <button data-filter="fechamentos" class="filter-btn px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 bg-brand-bg text-text-sub border border-military-green/15 hover:border-gold-primary hover:text-military-green">Fechamentos</button>
+                <button data-filter="coverup" class="filter-btn px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 bg-brand-bg text-text-sub border border-military-green/15 hover:border-gold-primary hover:text-military-green">Cover-up</button>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="gallery-container">
+                <!-- Item 1: Blackwork Lion -->
+                <div class="gallery-item luxury-card group relative rounded-2xl overflow-hidden bg-brand-bg border border-military-green/10 shadow-card-light cursor-pointer" data-category="blackwork realismo" data-title="Leão Blackwork Neotradicional" data-style="Blackwork / Sombreado" data-placement="Antebraço" data-time="6 Horas">
+                    <div class="aspect-w-4 aspect-h-5 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?auto=format&fit=crop&w=800&q=80" alt="Blackwork Tattoo Lion" class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-military-dark/90 via-military-dark/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <span class="text-xs font-bold uppercase tracking-widest text-gold-light mb-1">Blackwork</span>
+                        <h4 class="font-heading text-lg font-bold text-white">Leão Neotradicional</h4>
+                        <p class="text-xs text-brand-muted mt-1"><i class="fa-solid fa-clock text-gold-light mr-1"></i> 6 Horas • Antebraço</p>
+                    </div>
+                </div>
+
+                <!-- Item 2: Fine Line Floral -->
+                <div class="gallery-item luxury-card group relative rounded-2xl overflow-hidden bg-brand-bg border border-military-green/10 shadow-card-light cursor-pointer" data-category="fineline" data-title="Composição Floral Micro-Fine Line" data-style="Fine Line Minimalista" data-placement="Costelas / Tornozelo" data-time="3 Horas">
+                    <div class="aspect-w-4 aspect-h-5 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?auto=format&fit=crop&w=800&q=80" alt="Fine Line Floral Tattoo" class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-military-dark/90 via-military-dark/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <span class="text-xs font-bold uppercase tracking-widest text-gold-light mb-1">Fine Line</span>
+                        <h4 class="font-heading text-lg font-bold text-white">Ramos & Flores Delicadas</h4>
+                        <p class="text-xs text-brand-muted mt-1"><i class="fa-solid fa-clock text-gold-light mr-1"></i> 3 Horas • Costelas</p>
+                    </div>
+                </div>
+
+                <!-- Item 3: Realismo Escultura -->
+                <div class="gallery-item luxury-card group relative rounded-2xl overflow-hidden bg-brand-bg border border-military-green/10 shadow-card-light cursor-pointer" data-category="realismo fechamentos" data-title="Estátua Grega & Geometria Sacred" data-style="Realismo Preto e Cinza" data-placement="Braço Completo" data-time="2 Sessões (14h)">
+                    <div class="aspect-w-4 aspect-h-5 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1562962230-16e4623d36e6?auto=format&fit=crop&w=800&q=80" alt="Realism Sculpture Tattoo" class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-military-dark/90 via-military-dark/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <span class="text-xs font-bold uppercase tracking-widest text-gold-light mb-1">Realismo</span>
+                        <h4 class="font-heading text-lg font-bold text-white">Escultura Grega Clássica</h4>
+                        <p class="text-xs text-brand-muted mt-1"><i class="fa-solid fa-clock text-gold-light mr-1"></i> 2 Sessões • Fechamento Braço</p>
+                    </div>
+                </div>
+
+                <!-- Item 4: Fechamento de Costas Blackwork -->
+                <div class="gallery-item luxury-card group relative rounded-2xl overflow-hidden bg-brand-bg border border-military-green/10 shadow-card-light cursor-pointer" data-category="fechamentos blackwork" data-title="Fechamento de Costas Geométrico" data-style="Dark Blackwork & Dotwork" data-placement="Costas Inteiras" data-time="4 Sessões">
+                    <div class="aspect-w-4 aspect-h-5 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1590246814885-568637649578?auto=format&fit=crop&w=800&q=80" alt="Full Back Tattoo" class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-military-dark/90 via-military-dark/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <span class="text-xs font-bold uppercase tracking-widest text-gold-light mb-1">Fechamentos</span>
+                        <h4 class="font-heading text-lg font-bold text-white">Geometria e Pontilhismo Oriental</h4>
+                        <p class="text-xs text-brand-muted mt-1"><i class="fa-solid fa-clock text-gold-light mr-1"></i> 4 Sessões • Costas</p>
+                    </div>
+                </div>
+
+                <!-- Item 5: Cover-Up Transformation -->
+                <div class="gallery-item luxury-card group relative rounded-2xl overflow-hidden bg-brand-bg border border-military-green/10 shadow-card-light cursor-pointer" data-category="coverup realismo" data-title="Cobertura de Arte Antiga por Pantera" data-style="Cover-Up / Realismo Obscuro" data-placement="Bíceps / Ombro" data-time="7 Horas">
+                    <div class="aspect-w-4 aspect-h-5 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1542382257-80dedb725088?auto=format&fit=crop&w=800&q=80" alt="Coverup Tattoo" class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-military-dark/90 via-military-dark/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <span class="text-xs font-bold uppercase tracking-widest text-gold-light mb-1">Cover-Up</span>
+                        <h4 class="font-heading text-lg font-bold text-white">Pantera Realista (Cobertura)</h4>
+                        <p class="text-xs text-brand-muted mt-1"><i class="fa-solid fa-clock text-gold-light mr-1"></i> 7 Horas • Ombro</p>
+                    </div>
+                </div>
+
+                <!-- Item 6: Fine Line Geométrico -->
+                <div class="gallery-item luxury-card group relative rounded-2xl overflow-hidden bg-brand-bg border border-military-green/10 shadow-card-light cursor-pointer" data-category="fineline" data-title="Bússola & Traços Finos" data-style="Fine Line & Micro-Realismo" data-placement="Antebraço Interno" data-time="4 Horas">
+                    <div class="aspect-w-4 aspect-h-5 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80" alt="Fine Line Geometric Tattoo" class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-military-dark/90 via-military-dark/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <span class="text-xs font-bold uppercase tracking-widest text-gold-light mb-1">Fine Line</span>
+                        <h4 class="font-heading text-lg font-bold text-white">Bússola & Geometria Sagrada</h4>
+                        <p class="text-xs text-brand-muted mt-1"><i class="fa-solid fa-clock text-gold-light mr-1"></i> 4 Horas • Antebraço</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Lightbox for Portfolio Detail -->
+    <div id="lightbox-modal" class="fixed inset-0 z-50 hidden bg-military-dark/80 backdrop-blur-xl flex items-center justify-center p-4">
+        <div class="relative max-w-4xl w-full bg-white rounded-2xl border border-gold-primary/30 overflow-hidden shadow-2xl flex flex-col md:flex-row">
+            <!-- Close Button -->
+            <button id="modal-close" class="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-white text-military-dark hover:bg-military-green hover:text-white flex items-center justify-center shadow-md border border-military-green/10 transition-colors">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            
+            <div class="md:w-1/2 bg-black flex items-center justify-center">
+                <img id="modal-img" src="" alt="Tattoo Detail" class="max-h-[70vh] w-full object-cover">
+            </div>
+            <div class="md:w-1/2 p-8 flex flex-col justify-between">
+                <div>
+                    <span id="modal-style" class="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest bg-brand-muted text-military-green mb-4 border border-gold-primary/30"></span>
+                    <h3 id="modal-title" class="font-heading text-2xl font-bold text-military-dark mb-4"></h3>
+                    <div class="space-y-3 text-sm text-text-sub mb-6">
+                        <p><strong class="text-military-green">Local do Corpo:</strong> <span id="modal-placement"></span></p>
+                        <p><strong class="text-military-green">Tempo de Execução:</strong> <span id="modal-time"></span></p>
+                        <p class="text-xs text-text-muted pt-2 border-t border-military-green/10">Tatuagem desenvolvida sob medida com estudo anatômico prévio e pigmentos premium homologados.</p>
+                    </div>
+                </div>
+                <a href="#orcamento" id="modal-cta" class="w-full py-3.5 rounded-lg bg-military-green hover:bg-military-dark text-center text-white text-xs font-bold uppercase tracking-widest shadow-md flex items-center justify-center gap-2 transition-colors">
+                    <i class="fa-brands fa-whatsapp text-gold-light"></i> Quero Uma Arte Parecida
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <section id="estudio" class="py-24 bg-brand-bg relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                
+                <!-- Left Column: Studio Narrative Card -->
+                <div class="relative rounded-2xl p-8 sm:p-12 bg-white border border-gold-primary/30 shadow-card-light">
+                    <div class="absolute -top-3 -left-3 w-16 h-16 border-t-2 border-l-2 border-gold-primary pointer-events-none"></div>
+                    
+                    <span class="text-xs font-bold uppercase tracking-[0.3em] text-gold-dark block mb-2">Exclusividade & Conforto</span>
+                    <h2 class="font-heading text-3xl sm:text-4xl font-bold text-military-dark mb-6">O ESTÚDIO MT MARSALI</h2>
+                    
+                    <p class="text-text-sub leading-relaxed mb-6 font-normal">
+                        Projetado para ser mais do que um local de tatuagem: um ambiente claro, sofisticado e acolhedor. Nosso atendimento é exclusivamente individualizado com hora marcada, garantindo total privacidade durante a sua sessão.
+                    </p>
+
+                    <div class="space-y-4 mb-8">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 rounded-xl bg-brand-muted border border-gold-primary/30 flex items-center justify-center shrink-0 mt-1">
+                                <i class="fa-solid fa-shield-halved text-military-green text-base"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-military-dark font-bold text-sm">Biossegurança Nível Hospitalar</h4>
+                                <p class="text-xs text-text-muted mt-0.5">Materiais 100% descartáveis, pigmentos com registro Anvisa e esterilização rigorosa.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 rounded-xl bg-brand-muted border border-gold-primary/30 flex items-center justify-center shrink-0 mt-1">
+                                <i class="fa-solid fa-mug-hot text-military-green text-base"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-military-dark font-bold text-sm">Lounge Privativo & Bar</h4>
+                                <p class="text-xs text-text-muted mt-0.5">Cafés especiais, bebidas selecionadas, ambiente climatizado e iluminação aconchegante.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 rounded-xl bg-brand-muted border border-gold-primary/30 flex items-center justify-center shrink-0 mt-1">
+                                <i class="fa-solid fa-compass-drafting text-military-green text-base"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-military-dark font-bold text-sm">Criação Autoral Sob Medida</h4>
+                                <p class="text-xs text-text-muted mt-0.5">Cada projeto é desenhado levando em conta o fluxo anatômico único do seu corpo.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="#orcamento" class="inline-flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-military-green hover:text-gold-dark group">
+                        <span>Conheça nosso processo de atendimento</span>
+                        <i class="fa-solid fa-chevron-right text-xs group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+
+                <!-- Right Column: Visual Layout Grid -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="space-y-4">
+                        <div class="rounded-2xl overflow-hidden border border-military-green/10 h-64 shadow-md">
+                            <img src="https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?auto=format&fit=crop&w=600&q=80" alt="Studio Setup" class="w-full h-full object-cover">
+                        </div>
+                        <div class="rounded-2xl overflow-hidden border border-gold-primary/30 p-6 bg-white shadow-sm">
+                            <i class="fa-solid fa-certificate text-3xl text-gold-dark mb-3"></i>
+                            <h4 class="text-military-dark font-bold text-sm">Certificação Internacional</h4>
+                            <p class="text-xs text-text-muted mt-1">Especializações constantes com grandes mestres da tatuagem mundial.</p>
+                        </div>
+                    </div>
+                    <div class="space-y-4 pt-8">
+                        <div class="rounded-2xl overflow-hidden border border-gold-primary/30 p-6 bg-white shadow-sm">
+                            <i class="fa-solid fa-gem text-3xl text-gold-dark mb-3"></i>
+                            <h4 class="text-military-dark font-bold text-sm">Tintas Veganas Premium</h4>
+                            <p class="text-xs text-text-muted mt-1">Pigmentos de alta fixação que mantêm o tom vivo por muito mais anos.</p>
+                        </div>
+                        <div class="rounded-2xl overflow-hidden border border-military-green/10 h-64 shadow-md">
+                            <img src="https://images.unsplash.com/photo-1562962230-16e4623d36e6?auto=format&fit=crop&w=600&q=80" alt="Artist at work" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="cuidados" class="py-24 bg-white border-t border-military-green/10 relative">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-bold uppercase tracking-[0.3em] text-gold-dark mb-3">Guia Prático</h2>
+                <h3 class="font-heading text-3xl sm:text-5xl font-bold text-military-dark tracking-tight">CUIDADOS PRÉ & PÓS SESSÃO</h3>
+                <p class="text-text-sub text-sm mt-3">Uma boa cicatrização é responsável por 50% da qualidade final da sua tatuagem.</p>
+                <div class="w-16 h-1 bg-gradient-to-r from-military-green via-gold-primary to-military-green mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <!-- Tab Buttons -->
+            <div class="flex justify-center mb-8 border-b border-military-green/10">
+                <button id="tab-pre-btn" class="care-tab active px-8 py-4 text-xs font-bold uppercase tracking-widest text-military-green border-b-2 border-military-green transition-all">
+                    <i class="fa-solid fa-calendar-check mr-2 text-gold-dark"></i> Pré-Tatuagem (Antes)
+                </button>
+                <button id="tab-pos-btn" class="care-tab px-8 py-4 text-xs font-bold uppercase tracking-widest text-text-muted hover:text-military-green border-b-2 border-transparent transition-all">
+                    <i class="fa-solid fa-band-aid mr-2 text-gold-dark"></i> Pós-Tatuagem (Cicatrização)
+                </button>
+            </div>
+
+            <!-- Content Panel 1: PRE-TATTOO -->
+            <div id="care-pre-panel" class="space-y-4">
+                <div class="bg-brand-bg rounded-xl border border-military-green/10 p-6 shadow-sm">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-10 h-10 rounded-full bg-military-green border border-gold-primary/40 flex items-center justify-center shrink-0 text-white font-bold">1</div>
+                        <div>
+                            <h4 class="text-military-dark font-bold text-base mb-1">Hidratação e Descanso Prévia</h4>
+                            <p class="text-sm text-text-sub leading-relaxed">Beba bastante água nos 3 dias anteriores à sessão e garanta uma boa noite de sono. A pele bem hidratada recebe o pigmento com maior facilidade e cicatriza mais rápido.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-brand-bg rounded-xl border border-military-green/10 p-6 shadow-sm">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-10 h-10 rounded-full bg-military-green border border-gold-primary/40 flex items-center justify-center shrink-0 text-white font-bold">2</div>
+                        <div>
+                            <h4 class="text-military-dark font-bold text-base mb-1">Alimentação Reforçada</h4>
+                            <p class="text-sm text-text-sub leading-relaxed">Faça uma refeição reforçada antes de vir ao estúdio. Evite vir em jejum para prevenir quedas de pressão ou glicose durante procedimentos mais longos.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-brand-bg rounded-xl border border-military-green/10 p-6 shadow-sm">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-10 h-10 rounded-full bg-military-green border border-gold-primary/40 flex items-center justify-center shrink-0 text-white font-bold">3</div>
+                        <div>
+                            <h4 class="text-military-dark font-bold text-base mb-1">Evite Bebidas Alcoólicas & Sol</h4>
+                            <p class="text-sm text-text-sub leading-relaxed">Não consuma bebidas alcoólicas 24 horas antes do procedimento (o álcool afina o sangue e aumenta o sangramento). Evite bronzear a região antes da sessão.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Panel 2: POST-TATTOO (Hidden by default) -->
+            <div id="care-pos-panel" class="space-y-4 hidden">
+                <div class="bg-brand-bg rounded-xl border border-military-green/10 p-6 shadow-sm">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-10 h-10 rounded-full bg-military-green border border-gold-primary/40 flex items-center justify-center shrink-0 text-white font-bold">1</div>
+                        <div>
+                            <h4 class="text-military-dark font-bold text-base mb-1">Uso do Filme Protetor (Tropical/Plastic)</h4>
+                            <p class="text-sm text-text-sub leading-relaxed">Mantenha o filme de cicatrização recomendado pelo estúdio pelo período indicado (geralmente de 2 a 4 dias). Ele protege contra bactérias e atrito externo.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-brand-bg rounded-xl border border-military-green/10 p-6 shadow-sm">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-10 h-10 rounded-full bg-military-green border border-gold-primary/40 flex items-center justify-center shrink-0 text-white font-bold">2</div>
+                        <div>
+                            <h4 class="text-military-dark font-bold text-base mb-1">Higienização Suave & Pomada</h4>
+                            <p class="text-sm text-text-sub leading-relaxed">Lave a tattoo com sabonete neutro e água corrente fria/morna. Seque com papel toalha (sem esfregar) e aplique uma camada bem fina da pomada de cicatrização recomendada.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-brand-bg rounded-xl border border-military-green/10 p-6 shadow-sm">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-10 h-10 rounded-full bg-military-green border border-gold-primary/40 flex items-center justify-center shrink-0 text-white font-bold">3</div>
+                        <div>
+                            <h4 class="text-military-dark font-bold text-base mb-1">Proibições Críticas nos Primeiros 15 Dias</h4>
+                            <p class="text-sm text-text-sub leading-relaxed">NÃO arranque as casquinhas que se formarem, NÃO tome banho de mar, piscina ou sauna, e JAMAIS exponha a tatuagem diretamente ao sol durante a cicatrização.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="faq" class="py-24 bg-brand-bg relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-bold uppercase tracking-[0.3em] text-gold-dark mb-3">Tire Suas Dúvidas</h2>
+                <h3 class="font-heading text-3xl sm:text-5xl font-bold text-military-dark tracking-tight">PERGUNTAS FREQUENTES</h3>
+                <div class="w-16 h-1 bg-gradient-to-r from-military-green via-gold-primary to-military-green mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <!-- Accordion items -->
+            <div class="space-y-4" id="faq-accordion">
+                <!-- Item 1 -->
+                <div class="bg-white border border-military-green/10 rounded-2xl overflow-hidden shadow-sm">
+                    <button class="faq-btn w-full p-6 text-left font-bold text-military-dark flex justify-between items-center hover:text-military-green transition-colors">
+                        <span>Como funciona o cálculo do valor de uma tatuagem?</span>
+                        <i class="fa-solid fa-chevron-down text-gold-dark transition-transform duration-300"></i>
+                    </button>
+                    <div class="accordion-content px-6 pb-6 text-sm text-text-sub leading-relaxed">
+                        O valor varia de acordo com o nível de detalhamento da arte, estilo (realismo, fine line, etc), tamanho em centímetros e local do corpo a ser tatuado. Para projetos grandes (como fechamentos), trabalhamos com valor por sessão ou diária.
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="bg-white border border-military-green/10 rounded-2xl overflow-hidden shadow-sm">
+                    <button class="faq-btn w-full p-6 text-left font-bold text-military-dark flex justify-between items-center hover:text-military-green transition-colors">
+                        <span>É preciso pagar sinal para agendar a sessão?</span>
+                        <i class="fa-solid fa-chevron-down text-gold-dark transition-transform duration-300"></i>
+                    </button>
+                    <div class="accordion-content px-6 pb-6 text-sm text-text-sub leading-relaxed">
+                        Sim. Solicita-se um sinal de reserva para garantir o horário na agenda e cobrir o tempo de desenvolvimento da arte autoral prévia. O valor do sinal é descontado do valor total no dia da sessão.
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="bg-white border border-military-green/10 rounded-2xl overflow-hidden shadow-sm">
+                    <button class="faq-btn w-full p-6 text-left font-bold text-military-dark flex justify-between items-center hover:text-military-green transition-colors">
+                        <span>O estúdio realiza retoques? Como funciona a política?</span>
+                        <i class="fa-solid fa-chevron-down text-gold-dark transition-transform duration-300"></i>
+                    </button>
+                    <div class="accordion-content px-6 pb-6 text-sm text-text-sub leading-relaxed">
+                        Oferecemos 1 retoque gratuito (caso necessário) entre 30 a 60 dias após a sessão, desde que o cliente comprove ter seguido corretamente todas as instruções do nosso guia de pós-cuidados.
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="bg-white border border-military-green/10 rounded-2xl overflow-hidden shadow-sm">
+                    <button class="faq-btn w-full p-6 text-left font-bold text-military-dark flex justify-between items-center hover:text-military-green transition-colors">
+                        <span>É possível tatuar menores de idade com autorização?</span>
+                        <i class="fa-solid fa-chevron-down text-gold-dark transition-transform duration-300"></i>
+                    </button>
+                    <div class="accordion-content px-6 pb-6 text-sm text-text-sub leading-relaxed">
+                        No estúdio MT MARSALI TATTOO atendemos estritamente maiores de 18 anos completos no dia do procedimento, mediante apresentação de documento oficial de identidade com foto.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="orcamento" class="py-24 bg-white border-t border-gold-primary/20 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-brand-bg border border-gold-primary/30 rounded-2xl p-6 sm:p-12 shadow-card-light relative">
+                
+                <div class="text-center max-w-2xl mx-auto mb-10">
+                    <span class="text-xs font-bold uppercase tracking-[0.3em] text-gold-dark mb-2 block">Pré-Avaliação Gratuita</span>
+                    <h2 class="font-heading text-3xl sm:text-4xl font-bold text-military-dark">SOLICITAR ORÇAMENTO</h2>
+                    <p class="text-xs sm:text-sm text-text-sub mt-2">Preencha os dados da sua ideia para ser direcionado ao WhatsApp do artista com o resumo pronto.</p>
+                </div>
+
+                <form id="tattoo-quote-form" class="space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <!-- Name Input -->
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-military-dark mb-2">Seu Nome Completo *</label>
+                            <input type="text" id="quote-name" required placeholder="Ex: Gabriel Silva" class="w-full px-4 py-3 bg-white border border-military-green/20 rounded-lg text-military-dark placeholder-text-muted focus:outline-none focus:border-military-green transition-colors text-sm shadow-sm">
+                        </div>
+
+                        <!-- WhatsApp Input -->
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-military-dark mb-2">Seu WhatsApp com DDD *</label>
+                            <input type="tel" id="quote-phone" required placeholder="(11) 99999-9999" class="w-full px-4 py-3 bg-white border border-military-green/20 rounded-lg text-military-dark placeholder-text-muted focus:outline-none focus:border-military-green transition-colors text-sm shadow-sm">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                        <!-- Body Placement -->
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-military-dark mb-2">Local do Corpo *</label>
+                            <input type="text" id="quote-placement" required placeholder="Ex: Antebraço interno" class="w-full px-4 py-3 bg-white border border-military-green/20 rounded-lg text-military-dark placeholder-text-muted focus:outline-none focus:border-military-green transition-colors text-sm shadow-sm">
+                        </div>
+
+                        <!-- Size in CM -->
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-military-dark mb-2">Tamanho Aprox. (cm) *</label>
+                            <input type="text" id="quote-size" required placeholder="Ex: 15 cm x 10 cm" class="w-full px-4 py-3 bg-white border border-military-green/20 rounded-lg text-military-dark placeholder-text-muted focus:outline-none focus:border-military-green transition-colors text-sm shadow-sm">
+                        </div>
+
+                        <!-- Style Selection -->
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-military-dark mb-2">Estilo Desejado</label>
+                            <select id="quote-style" class="w-full px-4 py-3 bg-white border border-military-green/20 rounded-lg text-military-dark focus:outline-none focus:border-military-green transition-colors text-sm shadow-sm">
+                                <option value="Blackwork / Sombreado">Blackwork / Sombreado</option>
+                                <option value="Fine Line Minimalista">Fine Line / Traço Fino</option>
+                                <option value="Realismo Preto e Cinza">Realismo Preto e Cinza</option>
+                                <option value="Fechamento Completo">Fechamento Completo</option>
+                                <option value="Cover-Up / Cobertura">Cover-Up / Cobertura</option>
+                                <option value="Outro / Indefinido">Ainda não sei o estilo</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Idea Description -->
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-military-dark mb-2">Descreva a sua ideia de arte *</label>
+                        <textarea id="quote-idea" rows="4" required placeholder="Conte em detalhes a sua ideia, elementos que deseja incluir, referências ou significados..." class="w-full px-4 py-3 bg-white border border-military-green/20 rounded-lg text-military-dark placeholder-text-muted focus:outline-none focus:border-military-green transition-colors text-sm resize-none shadow-sm"></textarea>
+                    </div>
+
+                    <!-- Reference Uploader Visual Simulation -->
+                    <div class="border-2 border-dashed border-military-green/30 hover:border-gold-primary rounded-xl p-6 text-center bg-white cursor-pointer transition-colors shadow-sm" id="upload-box">
+                        <i class="fa-solid fa-cloud-arrow-up text-3xl text-military-green mb-2"></i>
+                        <p class="text-xs text-military-dark font-semibold">Arraste ou clique para anexar imagem de referência (Opcional)</p>
+                        <p class="text-[10px] text-text-muted mt-1">PNG, JPG até 5MB</p>
+                        <input type="file" id="quote-file" class="hidden" accept="image/*">
+                        <p id="file-name-display" class="text-xs text-gold-dark font-bold mt-2 hidden"></p>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="w-full py-4 rounded-xl bg-military-green hover:bg-military-dark text-white font-bold uppercase text-xs tracking-[0.2em] shadow-green-glow transition-all duration-300 flex items-center justify-center space-x-3">
+                        <i class="fa-brands fa-whatsapp text-lg text-gold-light"></i>
+                        <span>Enviar Orçamento Para o WhatsApp</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-military-dark text-white pt-16 pb-12 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-white/10">
+                
+                <!-- Col 1: Brand Info -->
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 rounded-full bg-gold-primary flex items-center justify-center text-military-dark font-bold shadow-md">
+                            <i class="fa-solid fa-pen-nib"></i>
+                        </div>
+                        <span class="font-heading font-extrabold text-lg text-white tracking-wider">MT MARSALI</span>
+                    </div>
+                    <p class="text-xs text-gray-300 leading-relaxed">
+                        Estúdio autoral dedicado a transformar histórias e conceitos em tatuagens de alto valor artístico e durabilidade.
+                    </p>
+                    <div class="flex space-x-4 pt-2">
+                        <a href="#" class="w-9 h-9 rounded-full bg-white/10 hover:bg-gold-primary hover:text-military-dark flex items-center justify-center text-white transition-colors">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-white/10 hover:bg-gold-primary hover:text-military-dark flex items-center justify-center text-white transition-colors">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-white/10 hover:bg-gold-primary hover:text-military-dark flex items-center justify-center text-white transition-colors">
+                            <i class="fa-brands fa-pinterest"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Col 2: Navigation Links -->
+                <div>
+                    <h4 class="font-heading text-xs font-bold uppercase tracking-widest text-gold-light mb-4">Navegação</h4>
+                    <ul class="space-y-2.5 text-xs text-gray-300">
+                        <li><a href="#inicio" class="hover:text-gold-light transition-colors">Início</a></li>
+                        <li><a href="#portfolio" class="hover:text-gold-light transition-colors">Portfólio Autoral</a></li>
+                        <li><a href="#estudio" class="hover:text-gold-light transition-colors">O Estúdio & Biossegurança</a></li>
+                        <li><a href="#cuidados" class="hover:text-gold-light transition-colors">Guia de Cuidados</a></li>
+                        <li><a href="#faq" class="hover:text-gold-light transition-colors">Perguntas Frequentes</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Hours & Booking -->
+                <div>
+                    <h4 class="font-heading text-xs font-bold uppercase tracking-widest text-gold-light mb-4">Atendimento</h4>
+                    <p class="text-xs text-gray-300 mb-2"><strong class="text-white">Segunda a Sábado:</strong> 10:00h às 20:00h</p>
+                    <p class="text-xs text-gray-300 mb-4"><strong class="text-white">Atendimento:</strong> Exclusivamente com hora marcada.</p>
+                    <span class="inline-block px-3 py-1 rounded bg-white/10 text-[10px] font-semibold text-gold-light border border-gold-primary/30">
+                        <i class="fa-solid fa-lock text-[9px] mr-1"></i> Ambiente Privativo
+                    </span>
+                </div>
+
+                <!-- Col 4: Location -->
+                <div>
+                    <h4 class="font-heading text-xs font-bold uppercase tracking-widest text-gold-light mb-4">Localização</h4>
+                    <p class="text-xs text-gray-300 leading-relaxed mb-3">
+                        <i class="fa-solid fa-location-dot text-gold-light mr-2"></i> Av. Principal de Alto Padrão - Sala VIP Estúdio<br>
+                        São Paulo / SP - Brasil
+                    </p>
+                    <p class="text-xs text-gray-300">
+                        <i class="fa-solid fa-envelope text-gold-light mr-2"></i> contato@mtmarsalitattoo.com.br
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Bottom Copyright -->
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] text-gray-400">
+                <p>&copy; 2026 MT MARSALI TATTOO. Todos os direitos reservados.</p>
+                <p class="mt-2 sm:mt-0">Design & Arquitetura por <span class="text-gold-light font-semibold">MT Marsali Studio</span></p>
+            </div>
+        </div>
+    </footer>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            /* 1. Floating Dust/Gold Particles Effect for Light Background */
+            const canvas = document.getElementById('particles-canvas');
+            const ctx = canvas.getContext('2d');
+            let particlesArray = [];
+
+            function resizeCanvas() {
+                canvas.width = canvas.parentElement.clientWidth;
+                canvas.height = canvas.parentElement.clientHeight;
+            }
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.size = Math.random() * 2.5 + 0.5;
+                    this.speedY = Math.random() * -0.5 - 0.2;
+                    this.speedX = (Math.random() - 0.5) * 0.3;
+                    this.opacity = Math.random() * 0.5 + 0.15;
+                }
+                update() {
+                    this.y += this.speedY;
+                    this.x += this.speedX;
+                    if (this.y < 0) {
+                        this.y = canvas.height;
+                        this.x = Math.random() * canvas.width;
+                    }
+                }
+                draw() {
+                    ctx.fillStyle = `rgba(58, 72, 42, ${this.opacity})`;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            function initParticles() {
+                particlesArray = [];
+                const numberOfParticles = Math.floor(canvas.width / 30);
+                for (let i = 0; i < numberOfParticles; i++) {
+                    particlesArray.push(new Particle());
+                }
+            }
+            initParticles();
+
+            function animateParticles() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                for (let i = 0; i < particlesArray.length; i++) {
+                    particlesArray[i].update();
+                    particlesArray[i].draw();
+                }
+                requestAnimationFrame(animateParticles);
+            }
+            animateParticles();
+
+            /* 2. Mobile Menu Toggle */
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            /* 3. Portfolio Gallery Filter Logic */
+            const filterBtns = document.querySelectorAll('#portfolio-filters .filter-btn');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => {
+                        b.classList.remove('active', 'bg-military-green', 'text-white', 'border-gold-primary', 'shadow-sm');
+                        b.classList.add('bg-brand-bg', 'text-text-sub', 'border-military-green/15');
+                    });
+                    btn.classList.add('active', 'bg-military-green', 'text-white', 'border-gold-primary', 'shadow-sm');
+                    btn.classList.remove('bg-brand-bg', 'text-text-sub', 'border-military-green/15');
+
+                    const filterValue = btn.getAttribute('data-filter');
+
+                    galleryItems.forEach(item => {
+                        const categories = item.getAttribute('data-category');
+                        if (filterValue === 'all' || categories.includes(filterValue)) {
+                            item.style.display = 'block';
+                            setTimeout(() => { item.style.opacity = '1'; item.style.transform = 'scale(1)'; }, 50);
+                        } else {
+                            item.style.opacity = '0';
+                            item.style.transform = 'scale(0.95)';
+                            setTimeout(() => { item.style.display = 'none'; }, 300);
+                        }
+                    });
+                });
+            });
+
+            /* 4. Portfolio Lightbox Modal */
+            const modal = document.getElementById('lightbox-modal');
+            const modalClose = document.getElementById('modal-close');
+            const modalImg = document.getElementById('modal-img');
+            const modalTitle = document.getElementById('modal-title');
+            const modalStyle = document.getElementById('modal-style');
+            const modalPlacement = document.getElementById('modal-placement');
+            const modalTime = document.getElementById('modal-time');
+
+            galleryItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const img = item.querySelector('img').src;
+                    const title = item.getAttribute('data-title');
+                    const style = item.getAttribute('data-style');
+                    const placement = item.getAttribute('data-placement');
+                    const time = item.getAttribute('data-time');
+
+                    modalImg.src = img;
+                    modalTitle.textContent = title;
+                    modalStyle.textContent = style;
+                    modalPlacement.textContent = placement;
+                    modalTime.textContent = time;
+
+                    modal.classList.remove('hidden');
+                });
+            });
+
+            modalClose.addEventListener('click', () => modal.classList.add('hidden'));
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) modal.classList.add('hidden');
+            });
+
+            /* 5. Care Guide Tabs (Pre vs Post) */
+            const tabPre = document.getElementById('tab-pre-btn');
+            const tabPos = document.getElementById('tab-pos-btn');
+            const panelPre = document.getElementById('care-pre-panel');
+            const panelPos = document.getElementById('care-pos-panel');
+
+            tabPre.addEventListener('click', () => {
+                tabPre.classList.add('text-military-green', 'border-military-green');
+                tabPre.classList.remove('text-text-muted', 'border-transparent');
+                tabPos.classList.remove('text-military-green', 'border-military-green');
+                tabPos.classList.add('text-text-muted', 'border-transparent');
+
+                panelPre.classList.remove('hidden');
+                panelPos.classList.add('hidden');
+            });
+
+            tabPos.addEventListener('click', () => {
+                tabPos.classList.add('text-military-green', 'border-military-green');
+                tabPos.classList.remove('text-text-muted', 'border-transparent');
+                tabPre.classList.remove('text-military-green', 'border-military-green');
+                tabPre.classList.add('text-text-muted', 'border-transparent');
+
+                panelPos.classList.remove('hidden');
+                panelPre.classList.add('hidden');
+            });
+
+            /* 6. FAQ Accordion Toggle */
+            const faqBtns = document.querySelectorAll('.faq-btn');
+            faqBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const content = btn.nextElementSibling;
+                    const icon = btn.querySelector('i');
+
+                    document.querySelectorAll('.accordion-content').forEach(c => {
+                        if (c !== content) {
+                            c.classList.remove('open');
+                            c.previousElementSibling.querySelector('i').style.transform = 'rotate(0deg)';
+                        }
+                    });
+
+                    content.classList.toggle('open');
+                    if (content.classList.contains('open')) {
+                        icon.style.transform = 'rotate(180deg)';
+                    } else {
+                        icon.style.transform = 'rotate(0deg)';
+                    }
+                });
+            });
+
+            /* 7. File Upload Visual Trigger */
+            const uploadBox = document.getElementById('upload-box');
+            const fileInput = document.getElementById('quote-file');
+            const fileNameDisplay = document.getElementById('file-name-display');
+
+            uploadBox.addEventListener('click', () => fileInput.click());
+            fileInput.addEventListener('change', (e) => {
+                if (e.target.files.length > 0) {
+                    fileNameDisplay.textContent = `Arquivo selecionado: ${e.target.files[0].name}`;
+                    fileNameDisplay.classList.remove('hidden');
+                }
+            });
+
+            /* 8. WhatsApp Quote Form Generator */
+            const form = document.getElementById('tattoo-quote-form');
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                const name = document.getElementById('quote-name').value;
+                const phone = document.getElementById('quote-phone').value;
+                const placement = document.getElementById('quote-placement').value;
+                const size = document.getElementById('quote-size').value;
+                const style = document.getElementById('quote-style').value;
+                const idea = document.getElementById('quote-idea').value;
+
+                const textMessage = `Olá, MT MARSALI TATTOO! Gostaria de solicitar um orçamento:%0A%0A` +
+                    `*Nome:* ${encodeURIComponent(name)}%0A` +
+                    `*WhatsApp:* ${encodeURIComponent(phone)}%0A` +
+                    `*Local do Corpo:* ${encodeURIComponent(placement)}%0A` +
+                    `*Tamanho Aproximado:* ${encodeURIComponent(size)}%0A` +
+                    `*Estilo:* ${encodeURIComponent(style)}%0A` +
+                    `*Descrição da Ideia:* ${encodeURIComponent(idea)}`;
+
+                // Studio WhatsApp Target
+                const targetPhone = "5511999999999"; 
+                window.open(`https://wa.me/${targetPhone}?text=${textMessage}`, '_blank');
+            });
+
+        });
+    </script>
+</body>
+</html>

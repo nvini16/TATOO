@@ -13,12 +13,12 @@ function Header() {
       <div className="header-brand">
         <Link to="/" className="brand" onClick={closeMenu}>
           <span className="brand-name">MARSALI</span>
-          <span className="brand-subtitle">TATTOO STAUDIO</span>
+          <span className="brand-subtitle">TATTOO STUDIO</span>
         </Link>
       </div>
 
       <nav className="header-nav">
-        <a href="#inicio">Inicío</a>
+        <a href="#inicio">Início</a>
         <a href="#trabalhos">Trabalhos</a>
         <a href="#sobre">Sobre</a>
       </nav>
@@ -31,8 +31,8 @@ function Header() {
         type="button"
         className="mobile-menu-button"
         onClick={() => setMenuOpen(!menuOpen)}
-        arial-label="Abrir menu"
-        arial-expanded={menuOpen}
+        aria-label="Abrir menu"
+        aria-expanded={menuOpen}
       >
         <span></span>
         <span></span>
@@ -49,7 +49,7 @@ function Header() {
             to="/Agendamento"
             onClick={closeMenu}
           >
-            Agerdar horário
+            Agendar horário
           </Link>
       </nav>
 

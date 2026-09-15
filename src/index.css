@@ -909,7 +909,7 @@ body {
   ;
 }
 
-.mobile-menu {
+.header .mobile-menu {
   display: none;
 }
 
@@ -924,8 +924,8 @@ body {
     letter-spacing: 2px;
   }
 
-  .header-nav,
-  .header-cta {
+  .header .header-nav,
+  .header .header-cta {
     display: none;
   }
 
@@ -933,7 +933,7 @@ body {
     display: flex;
   }
 
-  .mobile-menu {
+  .header .mobile-menu {
     position: absolute;
     top: 70px;
     left: 0;
@@ -953,7 +953,7 @@ body {
 
     opacity: 0;
     visibility: hidden;
-    transform: rotateY(-10px);
+    transform: translateY(-10px);
 
     transition: 
     opacity 0.3s ease,

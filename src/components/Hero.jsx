@@ -1,4 +1,6 @@
 import { useNavigate } from 'react-router-dom';
+import ScrollReveal from './ScrollReveal';
+
 
 function Hero() {
 
@@ -6,7 +8,8 @@ function Hero() {
 
     return (
         <section className="hero" id="inicio">
-        <div className="hero-content">
+          <ScrollReveal>
+            <div className="hero-content">
           <p className="hero-label">ESTÚDIO DE TATUAGEM</p>
 
         <h1>
@@ -25,6 +28,7 @@ function Hero() {
           Agendar horário
         </button>
         </div>
+          </ScrollReveal>
       </section>
     )
 }

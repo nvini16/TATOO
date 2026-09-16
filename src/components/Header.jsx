@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import logo from '../assets/logo/marsali-tatoo-logo-fundo-none.png';
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -12,8 +13,7 @@ function Header() {
     <header className="header">
       <div className="header-brand">
         <Link to="/" className="brand" onClick={closeMenu}>
-          <span className="brand-name">MARSALI</span>
-          <span className="brand-subtitle">TATTOO STUDIO</span>
+          <img src={logo} alt="Marsali Tattoo Studio" className="brand-logo" />
         </Link>
       </div>
 

@@ -158,8 +158,8 @@ body {
 
   background:
     linear-gradient(
-      rgba(0, 0, 0, 0.62),
-      rgba(0, 0, 0, 0.62)
+      rgba(0, 0, 0, 0.60),
+      rgba(0, 0, 0, 70)
     ),
     url('./assets/imagem-da-hero.jpg');
 

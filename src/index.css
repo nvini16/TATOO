@@ -1054,6 +1054,8 @@ body {
 
   .mobile-menu a {
     padding: 14px 10px;
+    width: 80%;
+    text-align: center;
 
     color: var(--marsali-tatoo-color-dark-green);
 

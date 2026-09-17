@@ -1,137 +1,135 @@
-import { useEffect, useRef, useState } from 'react';
-
-import arte from '../assets/trabalhos/arte.jpg';
-import precisao from '../assets/trabalhos/precisao.jpg';
-import identidade from '../assets/trabalhos/identidade.jpg';
+import trabalho1 from '../assets/trabalhos/trabalho-1.png';
+import trabalho2 from '../assets/trabalhos/trabalho-2.jpg';
+import trabalho3 from '../assets/trabalhos/trabalho-3.jpg';
+import trabalho4 from '../assets/trabalhos/trabalho-4.jpg';
+import trabalho5 from '../assets/trabalhos/trabalho-5.jpg';
+import trabalho6 from '../assets/trabalhos/trabalho-6.webp';
 
 function Trabalhos() {
-
-  
-  const galleryRef = useRef(null);
-  const [isPaused, setIsPaused] = useState(false);
-
-  useEffect(() => {
-  const gallery = galleryRef.current;
-
-  if (isPaused) {
-    return;
-  }
-
-  const interval = setInterval(() => {
-    const cardWidth = gallery.firstElementChild.offsetWidth;
-    const gap = 24;
-    const step = cardWidth + gap;
-
-    const reachedEnd =
-      gallery.scrollLeft + gallery.clientWidth >= gallery.scrollWidth - step;
-
-    if (reachedEnd) {
-      gallery.scrollTo({
-        left: 0,
-        behavior: 'smooth',
-      });
-
-      return;
-    }
-
-    gallery.scrollBy({
-      left: step,
-      behavior: 'smooth',
-    });
-  }, 3000);
-
-  return () => clearInterval(interval);
-}, [isPaused]);
-
   return (
     <section className="trabalhos" id="trabalhos">
+      <div className="trabalhos-container">
 
-      <header className="trabalhos-header">
-        <p>Nosso trabalho</p>
+        <div className="trabalhos-header">
+          <p className="trabalhos-label">
+            Galeria de trabalhos
+          </p>
 
-        <h2>Arte. Precisão. Identidade.</h2>
-      </header>
+          <h2>
+            Portifólio Autoral
+          </h2>
 
-      <div className="trabalhos-gallery-container">
-
-        <div 
-        className="trabalhos-gallery"
-        ref={galleryRef}
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
-        onTouchStart={() => setIsPaused(true)}
-        onTouchEnd={() => setIsPaused(false)}
-      >
-
-        <article className="trabalho-card">
-          <img
-            src={arte}
-            alt="Tatuagem de arte"
-          />
-
-          <h3>Arte</h3>
-        </article>
-
-        <article className="trabalho-card">
-          <img
-            src={arte}
-            alt="Tatuagem de arte"
-          />
-
-          <h3>Arte</h3>
-        </article>
-
-        <article className="trabalho-card">
-          <img
-            src={arte}
-            alt="Tatuagem de arte"
-          />
-
-          <h3>Arte</h3>
-        </article>
-
-        <article className="trabalho-card">
-          <img
-            src={arte}
-            alt="Tatuagem de arte"
-          />
-
-          <h3>Arte</h3>
-        </article>
-
-        <article className="trabalho-card">
-          <img
-            src={arte}
-            alt="Tatuagem de arte"
-          />
-
-          <h3>Arte</h3>
-        </article>
-
-        <article className="trabalho-card">
-          <img
-            src={precisao}
-            alt="Tatuagem de precisão"
-          />
-
-          <h3>Precisão</h3>
-        </article>
-
-        <article className="trabalho-card">
-          <img
-            src={identidade}
-            alt="Tatuagem de identidade"
-          />
-
-          <h3>Identidade</h3>
-        </article>
-
+          <div className="trabalhos-divider"></div>
         </div>
-        
+
       </div>
 
+      <div className="trabalhos-filtros">
+        <button type="button" className="filtro-ativo">
+          Todos
+        </button>
+
+        <button type="button">
+          Preto e Cinza
+        </button>
+
+        <button type="button">
+          Fine Line
+        </button>
+
+        <button type="button">
+          Blackword
+        </button>
+
+      </div>
+
+      <div className="trabalhos-grid">
+        <article className="trabalho-card">
+          <div className="trabalhos-imagem">
+            <img 
+              src={trabalho1}
+              alt="Trabalho de tatuagem"
+            />
+          </div>
+
+          <div className="trabalhos-info">
+            <span>Preto e Cinza</span>
+            <h3>Tatuagem autoral</h3>
+          </div>
+        </article>
+
+        <article className="trabalho-card">
+          <div className="trabalhos-imagem">
+            <img 
+              src={trabalho2}
+              alt="Trabalho de tatuagem"
+            />
+          </div>
+
+          <div className="trabalhos-info">
+            <span>Preto e Cinza</span>
+            <h3>Tatuagem autoral</h3>
+          </div>
+        </article>
+
+        <article className="trabalho-card">
+          <div className="trabalhos-imagem">
+            <img 
+              src={trabalho3}
+              alt="Trabalho de tatuagem"
+            />
+          </div>
+
+          <div className="trabalhos-info">
+            <span>Fine Line</span>
+            <h3>Tatuagem autoral</h3>
+          </div>
+        </article>
+
+        <article className="trabalho-card">
+          <div className="trabalhos-imagem">
+            <img 
+              src={trabalho4}
+              alt="Trabalho de tatuagem"
+            />
+          </div>
+
+          <div className="trabalhos-info">
+            <span>Blackwork</span>
+            <h3>Tatuagem autoral</h3>
+          </div>
+        </article>
+
+        <article className="trabalho-card">
+          <div className="trabalhos-imagem">
+            <img 
+              src={trabalho5}
+              alt="Trabalho de tatuagem"
+            />
+          </div>
+
+          <div className="trabalhos-info">
+            <span>Preto e Cinza</span>
+            <h3>Tatuagem autoral</h3>
+          </div>
+        </article>
+
+        <article className="trabalho-card">
+          <div className="trabalhos-imagem">
+            <img 
+              src={trabalho6}
+              alt="Trabalho de tatuagem"
+            />
+          </div>
+
+          <div className="trabalhos-info">
+            <span>Fine Line</span>
+            <h3>Tatuagem autoral</h3>
+          </div>
+        </article>
+      </div>
     </section>
-  )
+  );
 }
 
-export default Trabalhos
+export default Trabalhos;

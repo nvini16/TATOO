@@ -61,7 +61,7 @@ function Trabalhos() {
           <div className="trabalhos-info">
             <span>Blackwork</span>
 
-            <h3>Flor no Vaso</h3>
+            <h3>1</h3>
           </div>
         </article>
 
@@ -75,7 +75,7 @@ function Trabalhos() {
 
           <div className="trabalhos-info">
             <span>Preto e Cinza</span>
-            <h3>Braço Florido</h3>
+            <h3>2</h3>
           </div>
         </article>
 
@@ -89,7 +89,7 @@ function Trabalhos() {
 
           <div className="trabalhos-info">
             <span>Cybertribal</span>
-            <h3>Cyber</h3>
+            <h3>3</h3>
           </div>
         </article>
 
@@ -103,7 +103,7 @@ function Trabalhos() {
 
           <div className="trabalhos-info">
             <span>Blackwork</span>
-            <h3>Gato Anjo Noturno</h3>
+            <h3>4</h3>
           </div>
         </article>
 
@@ -117,7 +117,7 @@ function Trabalhos() {
 
           <div className="trabalhos-info">
             <span>Blackwork</span>
-            <h3>Tigre Black</h3>
+            <h3>5</h3>
           </div>
         </article>
 
@@ -130,8 +130,8 @@ function Trabalhos() {
           </div>
 
           <div className="trabalhos-info">
-            <span>Fine Line</span>
-            <h3>Mãe Pai Infinito</h3>
+            <span>Fine Line | Autoral</span>
+            <h3>6</h3>
           </div>
         </article>
 
@@ -145,7 +145,7 @@ function Trabalhos() {
 
           <div className="trabalhos-info">
             <span>Blackwork | Autoral</span>
-            <h3>Gato morcego</h3>
+            <h3>7</h3>
           </div>
         </article>
 
@@ -158,8 +158,8 @@ function Trabalhos() {
           </div>
 
           <div className="trabalhos-info">
-            <span>Blackwork</span>
-            <h3>Laroyê</h3>
+            <span>Blackwork | Autoral</span>
+            <h3>8</h3>
           </div>
         </article>
 
@@ -172,8 +172,8 @@ function Trabalhos() {
           </div>
 
           <div className="trabalhos-info">
-            <span>Blackwork</span>
-            <h3>Laroyê</h3>
+            <span>Blackwork | Autoral</span>
+            <h3>9</h3>
           </div>
         </article>
 
@@ -186,8 +186,8 @@ function Trabalhos() {
           </div>
 
           <div className="trabalhos-info">
-            <span>Blackwork</span>
-            <h3>Laroyê</h3>
+            <span>Blackwork | Autoral</span>
+            <h3>10</h3>
           </div>
         </article>
 
@@ -200,8 +200,8 @@ function Trabalhos() {
           </div>
 
           <div className="trabalhos-info">
-            <span>Blackwork</span>
-            <h3>Laroyê</h3>
+            <span>Blackwork | Autoral</span>
+            <h3>11</h3>
           </div>
         </article>
 
@@ -214,8 +214,8 @@ function Trabalhos() {
           </div>
 
           <div className="trabalhos-info">
-            <span>Blackwork</span>
-            <h3>Laroyê</h3>
+            <span>Blackwork | Autoral</span>
+            <h3>12</h3>
           </div>
         </article>
       </div>

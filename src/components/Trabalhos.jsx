@@ -1,4 +1,4 @@
-import trabalho1 from '../assets/trabalhos/trabalho-1.png';
+import trabalho1 from '../assets/trabalhos/trabalho-1.jpg';
 import trabalho2 from '../assets/trabalhos/trabalho-2.jpg';
 import trabalho3 from '../assets/trabalhos/trabalho-3.jpg';
 import trabalho4 from '../assets/trabalhos/trabalho-4.jpg';

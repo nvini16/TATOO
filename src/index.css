@@ -1079,7 +1079,7 @@ body {
     text-align: center;
 
     background-color: var(--marsali-tatoo-color-green);
-    color: var(--marsali-tatoo-color-white) !important;
+    color: var(--marsali-tatoo-color-white) ;
     border-radius: 6px;
     border: 1px solid var(--marsali-tatoo-color-gold);
   }

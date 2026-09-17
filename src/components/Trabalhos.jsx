@@ -53,7 +53,8 @@ function Trabalhos() {
           </div>
 
           <div className="trabalhos-info">
-            <span>Preto e Cinza</span>
+            <span>Blackwork</span>
+
             <h3>Tatuagem autoral</h3>
           </div>
         </article>
@@ -81,7 +82,7 @@ function Trabalhos() {
           </div>
 
           <div className="trabalhos-info">
-            <span>Fine Line</span>
+            <span>Cybertribal</span>
             <h3>Tatuagem autoral</h3>
           </div>
         </article>
@@ -109,7 +110,7 @@ function Trabalhos() {
           </div>
 
           <div className="trabalhos-info">
-            <span>Preto e Cinza</span>
+            <span>Blackwork</span>
             <h3>Tatuagem autoral</h3>
           </div>
         </article>

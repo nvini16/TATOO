@@ -387,7 +387,7 @@ body {
 }
 
 .trabalhos-filtros .filtro-ativo {
-  background-color: var(--marsali-tatoo-clor-green);
+  background-color: var(--marsali-tatoo-color-green);
   color: var(--marsali-tatoo-color-white);
 
   border-color: var(--marsali-tatoo-clor-green);

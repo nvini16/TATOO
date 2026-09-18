@@ -125,6 +125,11 @@ function Trabalhos() {
 
 
   const [filtro, setFiltro] = useState('Todos');
+
+  const trabalhosFiltrados = 
+    filtro === 'Todos'
+      ? trabalhos
+      : trabalhos.filter(() => trabalhos.categoria === filtro);
   return (
     <section className="trabalhos" id="trabalhos">
       <div className="trabalhos-container">
@@ -173,7 +178,7 @@ function Trabalhos() {
           className={filtro === 'Blackwork' ? 'filtro-ativo' : ''}
           onClick={() => setFiltro('Blackwork')}
         >
-          Blackword
+          Blackwork
         </button>
 
         <button 
@@ -188,7 +193,7 @@ function Trabalhos() {
 
       <div className="trabalhos-grid">
 
-      {trabalhos.map((trabalho) => (
+      {trabalhosFiltrados.map((trabalho) => (
         <article className="trabalho-card" key={trabalho.id}>
           <div className="trabalhos-imagem">
             <img 
@@ -208,7 +213,6 @@ function Trabalhos() {
       </div>
     </section>
 
-    // <section></section>
   );
 }
 

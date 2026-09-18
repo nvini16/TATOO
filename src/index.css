@@ -428,6 +428,7 @@ body {
 
 .trabalho-card:hover {
   transform: translateY(-6px);
+  transform: scale(1.03);
 
   box-shadow: 
   0 20px 40px rgba(7, 90, 43, 0.12),

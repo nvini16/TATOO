@@ -129,7 +129,7 @@ function Trabalhos() {
   const trabalhosFiltrados = 
     filtro === 'Todos'
       ? trabalhos
-      : trabalhos.filter(() => trabalhos.categoria === filtro);
+      : trabalhos.filter((trabalhos) => trabalhos.categoria === filtro);
   return (
     <section className="trabalhos" id="trabalhos">
       <div className="trabalhos-container">

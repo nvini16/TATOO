@@ -2,11 +2,13 @@
 
 :root {
   --marsali-tatoo-color-green: #075A2B;
-  --marsali-tatoo-color-dark-green: #003B1E;
+  --marsali-tatoo-color-dark-green: #012b16;
   --marsali-tatoo-color-white: #F5F5F5;
-  --marsali-tatoo-color-transparent-white: #f5f5f534;
   --marsali-tatoo-color-gold: #DCBE24;
   --marsali-tatoo-color-black: #000000;
+  
+  --marsali-tatoo-color-transparent-white: #f5f5f534;
+  --marsali-tatoo-color-transparent-gold: #dcbd2418;
 }
 
 html {
@@ -337,9 +339,9 @@ body {
 
   background: linear-gradient(
     90deg,
-    var(--marsali-tatoo-color-green),
+    var(--marsali-tatoo-color-transparent-white),
     var(--marsali-tatoo-color-gold),
-    var(--marsali-tatoo-color-green)
+    var(--marsali-tatoo-color-transparent-white)
   );
 
   border-radius: 999px;
@@ -507,29 +509,70 @@ body {
   }
 }
 
-#sobre {
-  background-color: var(--marsali-tatoo-color-white);
-  padding: 80px 40px;
+/* SOBRE  */
+
+.sobre {
+  padding: 100px 14px;
+  background-color: var(--marsali-tatoo-color-green);
+
 }
 
-#sobre .section-heading p {
-  color: var(--marsali-tatoo-color-green);
-  font-size: 14px;
+.sobre-header {
+  max-width: 760px;
+  margin: 0 auto 80px;
+  text-align: center;
+}
+
+.sobre-label {
   margin: 0 0 16px;
+
+  color: var(--marsali-tatoo-color-gold);
+  font-size: 14px;
+  font-weight: 700;
+
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
 }
 
-#sobre h2 {
-  color: var(--marsali-tatoo-color-green);
-  font-size: 40px;
+.sobre-header h2 {
+  margin: 0;
+
+  color: var(--marsali-tatoo-color-dark-green);
+  font-family: inherit;
+  font-size: 46px; font-weight: 700;
   line-height: 1.1;
-  margin: 0 0 24px;
 }
 
-#sobre > p {
+.sobre-divider {
+  width: 64px;
+  height: 4px;
+
+  margin: 24px auto;
+
+  background: linear-gradient(
+    90deg,
+    var(--marsali-tatoo-color-green),
+    var(--marsali-tatoo-color-gold),
+    var(--marsali-tatoo-color-green)
+  );
+
+  border-radius: 999px;
+}
+
+.sobre-intro {
   max-width: 650px;
+  margin: 0 auto;
+
+  color: var(--marsali-tatoo-color-gold);
+  background-color: var(--marsali-tatoo-color-transparent-gold);
+  border-bottom: 2px  solid var(--marsali-tatoo-color-gold);
+
+  border-radius: 20px 20px 0 0 ;
+  padding: 10px;
+
+  font-size: 19px;
   line-height: 1.6;
-  font-size: 18px;
-  color: var(--marsali-tatoo-color-black);
+
 }
 
 /* LOGIN  */

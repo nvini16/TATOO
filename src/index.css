@@ -564,15 +564,74 @@ body {
   margin: 0 auto;
 
   color: var(--marsali-tatoo-color-gold);
-  background-color: var(--marsali-tatoo-color-transparent-gold);
-  border-bottom: 2px  solid var(--marsali-tatoo-color-gold);
 
-  border-radius: 20px 20px 0 0 ;
   padding: 10px;
 
   font-size: 19px;
   line-height: 1.6;
 
+}
+
+.sobre-bloco {
+  max-width: 1100px;
+  margin: 0 auto 70px;
+}
+
+.sobre-trajetoria {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  min-height: 420px;
+  padding: 40px;
+
+  border: 1px solid rgba(7, 90, 43, 0.12);
+  border-radius: 8px;
+
+  background-color: #ffffff;
+
+  box-shadow: 0 12px 30px rgba(0, 59, 30, 0.06);
+}
+
+.sobre-conteudo {
+  max-width: 600px;
+  padding: 60px 0;
+}
+
+.sobre-numero {
+  display: block;
+  margin-bottom: 12px;
+
+  color: var(--marsali-tatoo-color-gold);
+
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+}
+
+.sobre-conteudo h3 {
+  margin: 0 0 24px;
+
+  color: var(--marsali-tatoo-color-dark-green);
+
+  font-family: inherit;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.sobre-conteudo p {
+  margin: 0 0 18px;
+
+  color: var(--marsali-tatoo-color-black);
+
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.sobre-conteudo p:last-child {
+  margin-bottom: 0;
 }
 
 /* LOGIN  */

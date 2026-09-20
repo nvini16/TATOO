@@ -1,3 +1,5 @@
+import sobre01 from '../assets/sobre/sobre-01.jpg';
+
 function Sobre() {
     return (
         <section className="sobre" id="sobre">
@@ -47,6 +49,13 @@ function Sobre() {
             tatuagens realizadas.
             </p>
 
+          </div>
+
+          <div className="sobre-imagem">
+            <img 
+            src={sobre01}
+            alt="Leticia Marsali durante sua trajetória como tatuadora"
+            />
           </div>
         </article>
 

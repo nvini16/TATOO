@@ -518,7 +518,7 @@ body {
       rgba(7, 90, 43, 0.55),
       rgba(7, 90, 43, 0.55)
     ),
-    url('./assets//sobre/sobre-02.png ')
+    url('./assets/sobre/sobre-02.png')
   ;
 
   background-size: cover;
@@ -652,7 +652,7 @@ body {
   border-radius: 6px;
 }
 
-.sobre-imagem {
+.sobre-imagem img {
   width: 100%;
   height: 100%;
   display: block;

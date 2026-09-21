@@ -1,0 +1,88 @@
+/* AGENDAMENTOS  */
+
+.agendamento-page {
+  min-height: 100vh;
+  background-color: var(--marsali-tatoo-color-green);
+  color: var(--marsali-tatoo-color-white);
+  padding: 80px 40px;
+}
+
+.agendamento-page h1 {
+  color: var(--marsali-tatoo-color-gold);
+  font-size: 48px;
+  line-height: 1.1;
+  margin: 0 0 48px;
+  font-weight: 700;
+  max-width: 900;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.agendamento-page h2 {
+  color: var(--marsali-tatoo-color-gold);
+  font-size: 24px;
+  margin: 0 0 16px;
+  font-weight: 700;
+}
+
+.agendamento-page section, 
+.agendamento-page form {
+  margin-bottom: 48px;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.agendamento-page input, 
+.agendamento-page select, 
+.agendamento-page textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 16px;
+  margin-bottom: 16px;
+  border-radius: 30px;
+  border: 2px solid var(--marsali-tatoo-color-gold);
+  background-color: var(--marsali-tatoo-color-transparent-white);
+  color: var(--marsali-tatoo-color-white);
+  font-size: 16px;
+}
+
+::placeholder {
+  color: var(--marsali-tatoo-color-white);
+}
+
+.agendamento-page input:focus, 
+.agendamento-page select:focus, 
+.agendamento-page textarea:focus {
+  border: 3px solid var(--marsali-tatoo-color-dark-green);
+  outline: none;
+}
+
+.agendamento-page button {
+  padding: 16px 32px;
+  border: 1px solid var(--marsali-tatoo-color-gold);
+  background-color: var(--marsali-tatoo-color-green);
+  color: var(--marsali-tatoo-color-white);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.agendamento-page button:hover {
+  background-color: var(--marsali-tatoo-color-dark-green);
+}
+
+.agendamento-page textarea {
+  min-height: 160px;
+  resize: vertical;
+}
+
+@media (max-width: 768px) {
+  .agendamento-page {
+    padding: 48px 20px;
+  }
+
+  .agendamento-page h1 {
+    font-size: 36px;
+  }
+}

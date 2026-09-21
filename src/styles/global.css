@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap');
+
+:root {
+  --marsali-tatoo-color-green: #075A2B;
+  --marsali-tatoo-color-dark-green: #012b16;
+  --marsali-tatoo-color-white: #F5F5F5;
+  --marsali-tatoo-color-gold: #DCBE24;
+  --marsali-tatoo-color-black: #000000;
+  
+  --marsali-tatoo-color-transparent-white: #f5f5f534;
+  --marsali-tatoo-color-transparent-gold: #dcbd2418;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: var(--marsali-tatoo-color-black);
+  color: var(--marsali-tatoo-color-white);
+  font-family: "Cormorant Garamond", serif;
+}

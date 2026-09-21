@@ -2,20 +2,21 @@
 
 .agendamento-page {
   min-height: 100vh;
-  /* background-color: var(--marsali-tatoo-color-dark-green); */
   color: var(--marsali-tatoo-color-white);
   padding: 80px 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-image: 
-    linear-gradient(
-      rgba(7, 90, 43, 0.55),
-      rgba(7, 90, 43, 0.55)
-    ),
-    url('../assets/sobre/sobre-02.png')
-  ;
+
+ background-image:
+  radial-gradient(
+    circle,
+    rgba(7, 90, 43, 0.10) 0%,
+    rgba(7, 90, 43, 0.45) 55%,
+    rgba(7, 90, 43, 0.90) 100%
+  ),
+  url('../assets/sobre/sobre-02.png');
 
   background-size: cover;
   background-position: center;
@@ -59,7 +60,7 @@
   margin-bottom: 16px;
   border-radius: 10px;
   border: 1px solid var(--marsali-tatoo-color-gold);
-  background-color: var(--marsali-tatoo-color-transparent-white);
+  background-color: #075a2b77;
   color: var(--marsali-tatoo-color-white);
   font-size: 16px;
 }

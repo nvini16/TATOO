@@ -124,7 +124,7 @@ body {
   padding: 11px 20px;
 
   background-color: var(--marsali-tatoo-color-green);
-  color: 1px solid var(--marsali-tatoo-color-white);
+  color: var(--marsali-tatoo-color-white);
   border: 1px solid var(--marsali-tatoo-color-gold);
   border-radius: 6px;
 
@@ -156,12 +156,12 @@ body {
   display: flex;
   align-items: center;
 
-  padding: 80px 40px;
+  padding: 30px 40px;
 
   background:
     linear-gradient(
       rgba(0, 0, 0, 0.60),
-      rgba(0, 0, 0, 70)
+      rgba(0, 0, 0, 0.70)
     ),
     url('./assets/imagem-da-hero.jpg');
 
@@ -261,12 +261,12 @@ body {
 }
 
 .hero-secondary-button:hover {
-  background-color: var(--marsali-tatoo-clor-green);
+  background-color: var(--marsali-tatoo-color-green);
   color: var(--marsali-tatoo-color-gold);
 
   border-color: var(--marsali-tatoo-color-gold);
 
-  transform: transalteY(-2px);
+  transform: translateY(-2px);
 }
 
 .hero-actions {
@@ -380,7 +380,7 @@ body {
 }
 
 .trabalhos-filtros button:hover {
-  background-color: var(--marsali-tatoo-clor-green);
+  background-color: var(--marsali-tatoo-color-green);
   color: var(--marsali-tatoo-color-gold);
 
   border-color: var(--marsali-tatoo-color-gold);
@@ -392,7 +392,7 @@ body {
   background-color: var(--marsali-tatoo-color-green);
   color: var(--marsali-tatoo-color-white);
 
-  border-color: var(--marsali-tatoo-clor-green);
+  border-color: var(--marsali-tatoo-color-green);
 }
 
 .trabalhos-grid {
@@ -429,8 +429,7 @@ body {
 }
 
 .trabalho-card:hover {
-  transform: translateY(-6px);
-  transform: scale(1.03);
+  transform: translateY(-6px) scale(1.03);
 
   box-shadow: 
   0 20px 40px rgba(7, 90, 43, 0.12),
@@ -1027,7 +1026,7 @@ body {
 .agendamento-page input:focus, 
 .agendamento-page select:focus, 
 .agendamento-page textarea:focus {
-  border: 3px solid var(--marsali-tatoo-color-dark-greengreen);
+  border: 3px solid var(--marsali-tatoo-color-dark-green);
   outline: none;
 }
 

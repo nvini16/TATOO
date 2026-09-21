@@ -603,6 +603,12 @@ body {
   box-shadow: 0 12px 30px rgba(0, 59, 30, 0.06);
 }
 
+@media (max-width: 768px) {
+  .sobre-trajetoria {
+    flex-direction:column;
+  }
+}
+
 .sobre-conteudo {
   flex: 1;
   max-width: 600px;

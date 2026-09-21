@@ -9,20 +9,40 @@
   justify-content: center;
   align-items: center;
 
- background-image:
-  radial-gradient(
-    circle,
-    rgba(7, 90, 43, 0.10) 0%,
-    rgba(7, 90, 43, 0.45) 55%,
-    rgba(7, 90, 43, 0.90) 100%
-  ),
-  url('../assets/sobre/sobre-02.png');
+  position: relative;
+  overflow: hidden;
 
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-color: var(--marsali-tatoo-color-dark-green);
 }
 
+.agendamento-page::before {
+    content:"";
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    width: 65%;
+    height: 100%;
+
+    background-image: 
+        linear-gradient(
+            to left,
+            rgba(7, 90, 43, 0.10),
+            rgba(7, 90, 43, 0.35),
+            rgba(1, 43, 22, 0.85),
+            var(--marsali-tatoo-color-dark-green) 100%
+        ),
+        url('../assets/sobre/sobre-02.png');
+
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+}
+
+.agendamento-page > * {
+    position: relative;
+    z-index: 1;
+}
 
 
 .agendamento-page h1 {
@@ -31,7 +51,7 @@
   line-height: 1.1;
   margin: 0 0 48px;
   font-weight: 700;
-  max-width: 900;
+  max-width: 900px;
   margin-left: auto;
   margin-right: auto;
 }

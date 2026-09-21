@@ -8,7 +8,8 @@ function Agendamento() {
         <main className="agendamento-page">
             <h1>Agende sua tattoo</h1>
 
-            <section>
+            <div className="agendamento-center">
+                <section>
                 <h2>Escolha o trabalho</h2>
 
                 <select>
@@ -44,9 +45,10 @@ function Agendamento() {
 
                 <textarea placeholder="Conte mais sobre sua próxima tattoo"></textarea>
 
-                <button type="submit">Continuar</button>
 
             </form>
+                <button type="submit">Continuar</button>
+            </div>
         </main>
     );
 }

@@ -64,9 +64,7 @@
   border: 1px solid var(--marsali-tatoo-color-gold);
 }
 
-.login-link {
-  padding-left: 8px;
-}
+
 
 .header-cta {
   padding: 11px 20px;
@@ -216,6 +214,7 @@
   .header {
     padding: 20px;
   }
+
 }
 
 .mobile-menu-button {

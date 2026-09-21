@@ -96,7 +96,15 @@
   outline: none;
 }
 
-.agendamento-page button {
+.agendamento-acoes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  width: 100%;
+}
+
+.agendamento-acoes button {
   padding: 16px 32px;
   border: 1px solid var(--marsali-tatoo-color-gold);
   border-radius: 10px;
@@ -105,6 +113,15 @@
   font-size: 16px;
   font-weight: 700;
   cursor: pointer;
+  width: 100%;
+}
+
+.agendamento-link {
+  text-decoration: none;
+  color: var(--marsali-tatoo-color-white);
+  padding: 16px 15px;
+
+  
 }
 
 .agendamento-page button:hover {
@@ -123,5 +140,11 @@
 
   .agendamento-page h1 {
     font-size: 36px;
+  }
+
+  .agendamento-acoes {
+    display: flex;
+    flex-direction: column;
+    
   }
 }

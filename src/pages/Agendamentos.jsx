@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 function Agendamento() {
 
     const handleSubmit = (event) => {
@@ -47,7 +49,17 @@ function Agendamento() {
 
 
             </form>
+                <div className="agendamento-acoes">
                 <button type="submit">Continuar</button>
+                <button>
+                <Link
+                    to="/"
+                    className="agendamento-link"
+                >
+                    Voltar
+                </Link>
+                </button>
+                </div>
             </div>
         </main>
     );

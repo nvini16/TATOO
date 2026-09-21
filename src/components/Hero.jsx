@@ -10,7 +10,7 @@ function Hero() {
         <div className="hero-content">
 
           <p className="hero-label">
-            ESTÚDIO DE TATUAGEM
+            MARSALI TATTOO
           </p>
 
           <h1>

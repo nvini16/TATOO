@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import IndexardorImagens from '../components/IndexadorImagens';
 
 function Agendamento() {
 
@@ -47,10 +48,8 @@ function Agendamento() {
 
                 <textarea placeholder="Conte mais sobre sua tattoo"></textarea>
 
-                <p className="agendamento-opcao">Ou</p>
-
-                <input type="file" placeholder="Escolha" />
-
+                
+                <IndexardorImagens />
 
             </form>
                 <div className="agendamento-acoes">

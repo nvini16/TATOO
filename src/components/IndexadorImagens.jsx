@@ -1,7 +1,23 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-function IndexardorImagens() {
+function IndexadorImagens() {
     const [imagens, setImagens] = useState([])
+    const [previews, setPreviews] = useState([])
+
+        useEffect(() => {
+            const novasPreviews = imagens.map((imagem) => ({
+                arquivo: imagem,
+                url: URL.createObjectURL(imagem),
+            }))
+
+            setPreviews(novasPreviews)
+
+            return () => {
+                novasPreviews.forEach((preview) => {
+                    URL.revokeObjectURL(preview.url)
+                })
+            }
+        }, [imagens])
     const handleSelecionatImagens = (event) => {
         const arquivos = Array.from(event.target.files)
 
@@ -16,10 +32,10 @@ function IndexardorImagens() {
     }
 
     const handleDrop = (event) => {
-        event.preventDafault()
+        event.preventDefault()
 
         const arquivos = Array.from(event.dataTransfer.files)
-            .filter((arquivo) => arquivo.type.statsWith('image/'))
+            .filter((arquivo) => arquivo.type.startsWith('image/'))
         
             setImagens((imagensAtuais) => [
                 ...imagensAtuais,
@@ -28,7 +44,7 @@ function IndexardorImagens() {
     };
 
     const handleRemoverImagem = (indexParaRemover) => {
-        SetImagens((imagensAtuais) => 
+        setImagens((imagensAtuais) => 
             imagensAtuais.filter((_, index) => index !== indexParaRemover)
     )
 }
@@ -56,22 +72,25 @@ function IndexardorImagens() {
             </div>
 
             <div className="indexador-imagens-lista">
-                {imagens.map((imagem, index) => (
-                    <article className="indexador-imagem-card" key={`${imagem.name}-${index}`}>
-                        <butoon
+                {previews.map((preview, index) => (
+                    <article 
+                        className="indexador-imagem-card" 
+                        key={`${preview.name}-${index}`}
+                        >
+                        <button
                             type="button"
                             className="indexador-imagem-remover"
                             onClick={() => handleRemoverImagem(index)}
                         >
                             X
-                        </butoon>
+                        </button>
 
                         <img
-                            src={URL.createObjectURL(imagem)}
-                            alt={imagem.name}
+                            src={preview}
+                            alt={preview.arquivo.name}
                         />
 
-                        <p>{imagem.name}</p>
+                        <p>{preview.name}</p>
                     </article>
                 ))}
             </div>
@@ -79,4 +98,4 @@ function IndexardorImagens() {
     )
 }
 
-export default IndexardorImagens
+export default IndexadorImagens

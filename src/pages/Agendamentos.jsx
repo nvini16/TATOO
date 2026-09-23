@@ -45,7 +45,11 @@ function Agendamento() {
 
                 <input type="tel" placeholder="Seu WhatsApp" />
 
-                <textarea placeholder="Conte mais sobre sua próxima tattoo"></textarea>
+                <textarea placeholder="Conte mais sobre sua tattoo"></textarea>
+
+                <p className="agendamento-opcao">Ou</p>
+
+                <input type="file" placeholder="Escolha" />
 
 
             </form>

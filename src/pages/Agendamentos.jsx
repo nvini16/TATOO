@@ -40,6 +40,12 @@ function Agendamento() {
                 return
 
             }
+
+            const hoje = new Date().toISOString().split('T')[0]
+                if (data < hoje) {
+                    alert('Escolha uma data apartir de hoje!')
+                    return
+                }
         const horario = formData.get('horario')
             if (!horario) {
                 alert('Escolha o horário da sua tattoo!')

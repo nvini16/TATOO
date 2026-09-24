@@ -43,7 +43,7 @@ function Agendamento() {
 
             const hoje = new Date().toISOString().split('T')[0]
                 if (data < hoje) {
-                    alert('Escolha uma data apartir de hoje!')
+                    alert('Escolha uma data a partir de hoje!')
                     return
                 }
         const horario = formData.get('horario')
@@ -54,10 +54,10 @@ function Agendamento() {
 
             const agora = new Date()
             const dataAtual = agora.toISOString().split('T')[0]
-            const horaAtual = agora.toISOString().split(0, 5)
+            const horaAtual = agora.toISOString().slice(0, 5)
                 if (data === dataAtual && horario <= horaAtual) {
                     alert('Escolha um horário válido!')
-                    return
+                    
                 }            
 
         console.log({

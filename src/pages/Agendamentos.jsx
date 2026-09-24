@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import IndexardorImagens from '../components/IndexadorImagens';
+import IndexadorImagens from '../components/IndexadorImagens';
 
 function Agendamento() {
 
@@ -49,9 +49,8 @@ function Agendamento() {
                 <textarea placeholder="Conte mais sobre sua tattoo"></textarea>
 
                 
-                <IndexardorImagens />
+                <IndexadorImagens />
 
-            </form>
                 <div className="agendamento-acoes">
                 <button type="submit">Continuar</button>
                 <button>
@@ -63,6 +62,7 @@ function Agendamento() {
                 </Link>
                 </button>
                 </div>
+            </form>
             </div>
         </main>
     );

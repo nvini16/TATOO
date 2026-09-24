@@ -1,7 +1,21 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 function IndexadorImagens() {
     const [imagens, setImagens] = useState([])
+
+    const imagensRef = useRef([])
+
+    useEffect(() => {
+        imagensRef.current = imagens
+    }, [imagens])
+
+    useEffect(() => {
+        return () => {
+            imagensRef.current.forEach((imagem) => {
+                URL.revokeObjectURL(imagem.url)
+            })
+        }
+    }, [])
 
    
            
@@ -29,7 +43,10 @@ function IndexadorImagens() {
         
             setImagens((imagensAtuais) => [
                 ...imagensAtuais,
-                ...arquivos,
+                ...arquivos.map((arquivo) => ({
+                    arquivo,
+                    url: URL.createObjectURL(arquivo),
+                })),
             ])
     };
 

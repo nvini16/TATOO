@@ -5,6 +5,28 @@ function Agendamento() {
 
     const handleSubmit = (event) => {
         event.preventDefault()
+
+        const formData = new FormData(event.currentTarget)
+
+        const nome = formData.get('nome')
+            if (!nome) {
+                alert('Acho que se esqueceu de colocar seu nome :(')
+                return
+            }
+
+        const whatsapp = formData.get('whatsapp')
+            if (!whatsapp) {
+                alert('Informe seu Whatsapp!')
+            }
+
+        const descricao = formData.get('descricao')
+            
+
+        console.log({
+            nome,
+            whatsapp,
+            descricao,
+        })
     }
 
     return (
@@ -42,18 +64,23 @@ function Agendamento() {
             <form onSubmit={handleSubmit}>
                 <h2>Seus dados</h2>
 
-                <input type="text" placeholder="Seu nome" />
+                <input type="text" name="nome" placeholder="Seu nome" />
 
-                <input type="tel" placeholder="Seu WhatsApp" />
+                <input type="tel" name="whatsapp" placeholder="Seu WhatsApp" />
 
-                <textarea placeholder="Conte mais sobre sua tattoo"></textarea>
+                <textarea name="descricao" placeholder="Conte mais sobre sua tattoo"></textarea>
+
+                <div className="agendamento-opcao">
+                    <p>Ou nos mande uma imagem de referência</p>
+                </div>
 
                 
                 <IndexadorImagens />
 
                 <div className="agendamento-acoes">
                 <button type="submit">Continuar</button>
-                <button>
+
+                <button type="button">
                 <Link
                     to="/"
                     className="agendamento-link"

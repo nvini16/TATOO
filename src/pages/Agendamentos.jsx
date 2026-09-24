@@ -55,7 +55,7 @@ function Agendamento() {
             <section>
                 <h2>Escolha o horário</h2>
 
-                <input type="date" />
+                <input type="date" name="data" />
 
                 <select>
                     <option value="">Selecione um horário</option>

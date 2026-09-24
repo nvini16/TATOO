@@ -48,13 +48,19 @@ function IndexadorImagens({onImagensChange}) {
         const arquivos = Array.from(event.dataTransfer.files)
             .filter((arquivo) => arquivo.type.startsWith('image/'))
         
-            setImagens((imagensAtuais) => [
-                ...imagensAtuais,
-                ...arquivos.map((arquivo) => ({
-                    arquivo,
-                    url: URL.createObjectURL(arquivo),
+            setImagens((imagensAtuais) => { 
+                const novasImagens = [
+                    ...imagensAtuais,
+                    ...arquivos.map((arquivo) => ({
+                        arquivo,
+                        url: URL.createObjectURL(arquivo),
                 })),
-            ])
+            ]
+
+            onImagensChange(novasImagens)
+
+            return novasImagens
+    })
     };
 
     const handleRemoverImagem = (indexParaRemover) => {
@@ -71,9 +77,7 @@ function IndexadorImagens({onImagensChange}) {
 
             onImagensChange(novasImagens)
 
-            return imagensAtuais.filter(
-                (_, index) => index !== indexParaRemover
-            )
+            return novasImagens
         })
 }
     return (

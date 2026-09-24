@@ -19,6 +19,7 @@ function Agendamento() {
         const whatsapp = formData.get('whatsapp')
             if (!whatsapp) {
                 alert('Informe seu Whatsapp!')
+                return
             }
 
         const descricao = formData.get('descricao')

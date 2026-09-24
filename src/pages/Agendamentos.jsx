@@ -51,7 +51,14 @@ function Agendamento() {
                 alert('Escolha o horário da sua tattoo!')
                 return
             }
-            
+
+            const agora = new Date()
+            const dataAtual = agora.toISOString().split('T')[0]
+            const horaAtual = agora.toISOString().split(0, 5)
+                if (data === dataAtual && horario <= horaAtual) {
+                    alert('Escolha um horário válido!')
+                    return
+                }            
 
         console.log({
             nome,

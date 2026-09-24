@@ -3,15 +3,16 @@ import { useState } from 'react';
 function IndexadorImagens() {
     const [imagens, setImagens] = useState([])
 
+   
            
     const handleSelecionatImagens = (event) => {
         const arquivos = Array.from(event.target.files)
 
         setImagens((imagensAtuais) => [
             ...imagensAtuais,
-            ...arquivos.map(() => ({
-                arquivos,
-                url: URL.createObjectURL(arquivos),
+            ...arquivos.map((arquivo) => ({
+                arquivo,
+                url: URL.createObjectURL(arquivo),
             })),
         ])
     };
@@ -33,9 +34,17 @@ function IndexadorImagens() {
     };
 
     const handleRemoverImagem = (indexParaRemover) => {
-        setImagens((imagensAtuais) => 
-            imagensAtuais.filter((_, index) => index !== indexParaRemover)
-    )
+        setImagens((imagensAtuais) => {
+            const imagemRemovida = imagensAtuais[indexParaRemover]
+
+            if (imagemRemovida) {
+                URL.revokeObjectURL(imagemRemovida.url)
+            }
+
+            return imagensAtuais.filter(
+                (_, index) => index !== indexParaRemover
+            )
+        })
 }
     return (
         <section className="indexador-imagens">

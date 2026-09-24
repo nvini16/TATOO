@@ -44,7 +44,7 @@ function Agendamento() {
                 <section>
                 <h2>Escolha o trabalho</h2>
 
-                <select>
+                <select name="trabalho">
                     <option value="">Selecione um trabalho</option>
                     <option value="tattoo-pequena">Tattoo pequena</option>
                     <option value="tattoo-media">Tattoo média</option>

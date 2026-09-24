@@ -68,7 +68,7 @@ function Agendamento() {
                 </select>
             </section>
 
-            <form onSubmit={handleSubmit}>
+            <form id="agendamento-form" onSubmit={handleSubmit}>
                 <h2>Seus dados</h2>
 
                 <input type="text" name="nome" placeholder="Seu nome" />

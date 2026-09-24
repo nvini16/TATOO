@@ -25,6 +25,7 @@ function Agendamento() {
         const descricao = formData.get('descricao')
             if (!descricao?.trim() && imagens.length === 0) {
                 alert('Descreva sua tattoo ou envie uma imagem de referência.')
+                return
             }
             
 

@@ -29,6 +29,8 @@ function Agendamento() {
             }
 
         const trabalho = formData.get('trabalho')
+        const data = formData.get('data')
+        const horario = formData.get('horario')
             
 
         console.log({

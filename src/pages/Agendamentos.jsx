@@ -27,6 +27,8 @@ function Agendamento() {
                 alert('Descreva sua tattoo ou envie uma imagem de referência.')
                 return
             }
+
+        const trabalho = formData.get('trabalho')
             
 
         console.log({

@@ -11,6 +11,7 @@ import './styles/responsive.css'
 import './styles/sobre.css'
 import './styles/trabalhos.css'
 import './styles/IndexadorImagens.css'
+
 import App from './App.jsx'
 
 

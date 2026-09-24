@@ -114,7 +114,7 @@ function IndexadorImagens({onImagensChange}) {
                             className="indexador-imagem-remover"
                             onClick={() => handleRemoverImagem(index)}
                         >
-                            X
+                            𝓧
                         </button>
 
                         <img

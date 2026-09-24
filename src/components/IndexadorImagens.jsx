@@ -1,23 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 function IndexadorImagens() {
     const [imagens, setImagens] = useState([])
-    const [previews, setPreviews] = useState([])
 
-        useEffect(() => {
-            const novasPreviews = imagens.map((imagem) => ({
-                arquivo: imagem,
-                url: URL.createObjectURL(imagem),
-            }))
-
-            setPreviews(novasPreviews)
-
-            return () => {
-                novasPreviews.forEach((preview) => {
-                    URL.revokeObjectURL(preview.url)
-                })
-            }
-        }, [imagens])
+           
     const handleSelecionatImagens = (event) => {
         const arquivos = Array.from(event.target.files)
 
@@ -75,7 +61,7 @@ function IndexadorImagens() {
                 {previews.map((preview, index) => (
                     <article 
                         className="indexador-imagem-card" 
-                        key={`${preview.name}-${index}`}
+                        key={`${preview.arquivo.name}-${index}`}
                         >
                         <button
                             type="button"
@@ -86,11 +72,11 @@ function IndexadorImagens() {
                         </button>
 
                         <img
-                            src={preview}
+                            src={preview.url}
                             alt={preview.arquivo.name}
                         />
 
-                        <p>{preview.name}</p>
+                        <p>{preview.arquivo.name}</p>
                     </article>
                 ))}
             </div>

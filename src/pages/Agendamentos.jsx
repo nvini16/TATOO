@@ -44,7 +44,7 @@ function Agendamento() {
                 <section>
                 <h2>Escolha o trabalho</h2>
 
-                <select name="trabalho">
+                <select name="trabalho" form="agendamento-form">
                     <option value="">Selecione um trabalho</option>
                     <option value="tattoo-pequena">Tattoo pequena</option>
                     <option value="tattoo-media">Tattoo média</option>
@@ -55,9 +55,9 @@ function Agendamento() {
             <section>
                 <h2>Escolha o horário</h2>
 
-                <input type="date" name="data" />
+                <input type="date" name="data" form="agendamento-form" />
 
-                <select name="horario">
+                <select name="horario" form="agendamento-form">
                     <option value="">Selecione um horário</option>
                     <option value="09:00">09:00</option>
                     <option value="10:00">10:00</option>

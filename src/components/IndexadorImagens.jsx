@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-function IndexadorImagens() {
+function IndexadorImagens({onImagensChange}) {
     const [imagens, setImagens] = useState([])
 
     const imagensRef = useRef([])
@@ -22,13 +22,20 @@ function IndexadorImagens() {
     const handleSelecionatImagens = (event) => {
         const arquivos = Array.from(event.target.files)
 
-        setImagens((imagensAtuais) => [
-            ...imagensAtuais,
-            ...arquivos.map((arquivo) => ({
-                arquivo,
-                url: URL.createObjectURL(arquivo),
+        setImagens((imagensAtuais) => {
+            const novasImagens = [
+                ...imagensAtuais,
+                ...arquivos.map((arquivo) => ({
+                    arquivo,
+                    url: URL.createObjectURL(arquivo),
             })),
-        ])
+        ] 
+
+        onImagensChange(novasImagens)
+
+        return novasImagens
+           
+     })
     };
 
     const handleDragOver = (event) => {
@@ -57,6 +64,12 @@ function IndexadorImagens() {
             if (imagemRemovida) {
                 URL.revokeObjectURL(imagemRemovida.url)
             }
+
+            const novasImagens = imagensAtuais.filter(
+                (_, index) => index !== indexParaRemover
+            )
+
+            onImagensChange(novasImagens)
 
             return imagensAtuais.filter(
                 (_, index) => index !== indexParaRemover

@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom';
 import IndexadorImagens from '../components/IndexadorImagens';
+import { useState } from 'react';
 
 function Agendamento() {
+    const [imagens, setImagens] = useState([])
 
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -75,7 +77,7 @@ function Agendamento() {
                 </div>
 
                 
-                <IndexadorImagens />
+                <IndexadorImagens onImagensChange={setImagens} />
 
                 <div className="agendamento-acoes">
                 <button type="submit">Continuar</button>

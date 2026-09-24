@@ -43,6 +43,7 @@ function Agendamento() {
         const horario = formData.get('horario')
             if (!horario) {
                 alert('Escolha o horário da sua tattoo!')
+                return
             }
             
 

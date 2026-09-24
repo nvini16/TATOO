@@ -9,7 +9,10 @@ function IndexadorImagens() {
 
         setImagens((imagensAtuais) => [
             ...imagensAtuais,
-            ...arquivos,
+            ...arquivos.map(() => ({
+                arquivos,
+                url: URL.createObjectURL(arquivos),
+            })),
         ])
     };
 
@@ -58,7 +61,7 @@ function IndexadorImagens() {
             </div>
 
             <div className="indexador-imagens-lista">
-                {previews.map((preview, index) => (
+                {imagens.map((preview, index) => (
                     <article 
                         className="indexador-imagem-card" 
                         key={`${preview.arquivo.name}-${index}`}

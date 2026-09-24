@@ -29,8 +29,21 @@ function Agendamento() {
             }
 
         const trabalho = formData.get('trabalho')
+            if (!trabalho) {
+                alert('Escolha o trabalho da sua tattoo!')
+                return
+
+            }
         const data = formData.get('data')
+            if (!data) {
+                alert('Escolha uma data para sua tattoo')
+                return
+
+            }
         const horario = formData.get('horario')
+            if (!horario) {
+                alert('Escolha o horário da sua tattoo!')
+            }
             
 
         console.log({

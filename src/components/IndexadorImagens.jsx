@@ -90,7 +90,7 @@ function IndexadorImagens({onImagensChange}) {
                 onDrop={handleDrop}
             >
                 <label htmlFor="selecionar-imagens">
-                    Selecionar imagens
+                    Click para selecionar imagens
                 </label>
 
                 <input 

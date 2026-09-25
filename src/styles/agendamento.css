@@ -142,9 +142,16 @@
     font-size: 36px;
   }
 
+  .agendamento-opcoes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   .agendamento-acoes {
     display: flex;
     flex-direction: column;
     
   }
 }
+

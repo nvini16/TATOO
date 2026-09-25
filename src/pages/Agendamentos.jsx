@@ -106,9 +106,9 @@ function Agendamento() {
 
                 <input type="tel" name="whatsapp" placeholder="Seu WhatsApp" />
 
-                <div className="agendamento-opcao">
                 <textarea name="descricao" placeholder="Conte mais sobre sua tattoo"></textarea>
 
+                <div className="agendamento-opcao">
                     <p>Ou nos mande uma imagem de referência</p>
                 </div>
 

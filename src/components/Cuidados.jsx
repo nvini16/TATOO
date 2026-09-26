@@ -25,7 +25,7 @@ function Cuidados() {
                             </button>
 
                             {itemAberto === 0 && (
-                                <div clasName="cuidado-item-conteudo">
+                                <div className="cuidado-item-conteudo">
                                 <p>
                                     Uma boa noite de sono ajuda seu corpo a estar preparado
                                     para o procedimento.
@@ -38,7 +38,7 @@ function Cuidados() {
                         )}
                         </li>
 
-                        <li className="cuidados-item">
+                        <li className="cuidado-item">
                             <button 
                                 className={`cuidado-item-titulo ${itemAberto === 1 ? 'aberto' : ''}`}
                                 onClick={() => setItemAberto(itemAberto === 1 ? null : 1)}
@@ -48,7 +48,7 @@ function Cuidados() {
                             </button>
 
                             {itemAberto === 1 && (
-                                <div className="cuidado-item-con">
+                                <div className="cuidado-item-conteudo">
                                 <p>
                                     Uma alimentação adequada ajuda a manter seu corpo preparado
                                     durante a sessão.
@@ -71,7 +71,7 @@ function Cuidados() {
                             </button>
 
                             {itemAberto === 2 && (
-                                <div className="cuidado-item-con">
+                                <div className="cuidado-item-conteudo">
                                 <p>
                                     Uma alimentação adequada ajuda a manter seu corpo preparado
                                     durante a sessão.
@@ -84,7 +84,7 @@ function Cuidados() {
                             )}
                         </li>
 
-                        <li className="">
+                        <li className="cuidado-item">
                             <button 
                                 className={`cuidado-item-titulo ${itemAberto === 3 ? 'aberto' : ''}`}
                                 onClick={() => setItemAberto(itemAberto === 3 ? null : 3)}
@@ -183,7 +183,7 @@ function Cuidados() {
                             )}
                         </li>
 
-                        <li className="cuindado-item">
+                        <li className="cuidado-item">
                             <button 
                                 className={`cuidado-item-titulo ${itemAberto === 7 ? 'aberto' : ''}`}
                                 onClick={() => setItemAberto(itemAberto === 7 ? null : 7)}

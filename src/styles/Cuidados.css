@@ -1,5 +1,4 @@
 .cuidados {
-    width: 100%;
     padding: 80px 20px;
     box-sizing: border-box;
     background-color: var(--marsali-tatoo-color-green);
@@ -22,9 +21,9 @@
 }
 
 .cuidados h3 {
-    margin: 0 0 15px;
+    margin: 0 0 20px;
     color: var(--marsali-tatoo-color-green);
-    font-size: 1.8rem;
+    font-size: 2rem;
 }
 
 .cuidados-conteudo {
@@ -42,10 +41,7 @@
     border-radius: 12px;
     box-sizing: border-box;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    transition: 
-        transform 0.3s ease,
-        box-shadow 0.3s ease
-    ;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .cuidados-card:hover {
@@ -59,9 +55,46 @@
 }
 
 .cuidados-card li {
-    margin-bottom: 10px;
+    margin-bottom: 14px;
     font-size: 1.1rem;
-    line-height: 1.5;
+    line-height: 1.6;
+}
+
+.cuidado-item {
+    list-style: none;
+    margin-bottom: 12px;
+}
+
+.cuidado-item-titulo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 16px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--marsali-tatoo-color-green);
+    color: var(--marsali-tatoo-color-white);
+    font-family: inherit;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.cuidado-item-titulo span {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--marsali-tatoo-color-gold);
+
+    transition: transform 0.3s ease;
+
+    transform: rotate(180deg);
+}
+
+.cuidado-item-imagem {
+    width: 100%;
+    min-height: 180px;
+    margin-top: 20px;
+    background-color: var(--marsali-tatoo-color-green);
 }
 
 @media (max-width: 768px) {

@@ -8,7 +8,7 @@ function Cuidados() {
             </p>
 
             <div className="cuidados-conteudo">
-                <article className="">
+                <article className="cuidados-card">
                     <h3>Antes da tatuagem</h3>
                     
                     <ul>
@@ -22,9 +22,14 @@ function Cuidados() {
 
                 <article className="cuidados-card">
                     <h3>Depois da tatuagem</h3>
-                    <p>
-                        Siga os cuidados necessários para uma boa cicatrização.
-                    </p>
+                    
+                    <ul>
+                        <li>Higienize a região conforme a orientação da tatuadora.</li>
+                        <li>Evite coçar ou remover as casquinhas.</li>
+                        <li>Não exponha a tatuagem ao sol durante a cicatrização.</li>
+                        <li>Evite piscina, mar e banhos muitos prolongados.</li>
+                        <li>Mantenha a região hidratada conforme orientação profissinal.</li>
+                    </ul>
                 </article>
             </div>
         </section>

@@ -27,8 +27,8 @@ function Cuidados() {
                         <li>Higienize a região conforme a orientação da tatuadora.</li>
                         <li>Evite coçar ou remover as casquinhas.</li>
                         <li>Não exponha a tatuagem ao sol durante a cicatrização.</li>
-                        <li>Evite piscina, mar e banhos muitos prolongados.</li>
-                        <li>Mantenha a região hidratada conforme orientação profissinal.</li>
+                        <li>Evite piscina, mar e banhos muito prolongados.</li>
+                        <li>Mantenha a região hidratada conforme orientação profissional.</li>
                     </ul>
                 </article>
             </div>

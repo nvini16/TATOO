@@ -67,7 +67,7 @@ function Cuidados() {
                                 onClick={() => setItemAberto(itemAberto === 2 ? null : 2)}
                             >
                                 Beba bastante água.
-                                <span>{itemAberto === 3 ? '-' : '+'}</span>
+                                <span>{itemAberto === 2 ? '-' : '+'}</span>
                             </button>
 
                             {itemAberto === 2 && (
@@ -90,7 +90,7 @@ function Cuidados() {
                                 onClick={() => setItemAberto(itemAberto === 3 ? null : 3)}
                             >
                                 Evite consumir álcool antes da sessão.
-                                <span>{itemAberto === 4 ? '-' : '+'}</span>
+                                <span>{itemAberto === 3 ? '-' : '+'}</span>
                             </button>
 
                             {itemAberto === 3 && (
@@ -114,7 +114,7 @@ function Cuidados() {
                                 onClick={() => setItemAberto(itemAberto === 4 ? null : 4)}
                             >
                                 Não aplique cremes ou produtos irritantes na região.
-                                <span>{itemAberto === 5 ? '-' : '+'}</span>
+                                <span>{itemAberto === 4 ? '-' : '+'}</span>
                             </button>
 
                             {itemAberto === 4 && (

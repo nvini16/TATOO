@@ -115,6 +115,11 @@
   width: 100%;
 }
 
+.agendamento-acoes button:hover {
+  background-color: var(--msrsali-tatoo-color-dark-green); 
+  transform: translateY(-2px);
+}
+
 .agendamento-link {
   text-decoration: none;
   color: var(--marsali-tatoo-color-white);

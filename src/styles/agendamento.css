@@ -113,28 +113,34 @@
   font-weight: 700;
   cursor: pointer;
   width: 100%;
+  transition: 
+    transform 0.3s ease,
+    background-color 0.3s ease;
 }
 
 .agendamento-acoes button:hover {
-  background-color: var(--msrsali-tatoo-color-dark-green); 
-  transform: translateY(-2px);
+  background-color: var(--marsali-tatoo-color-dark-green); 
+  transform: translateY(-3px);
 }
 
 .agendamento-link {
   text-decoration: none;
   color: var(--marsali-tatoo-color-white);
-  padding: 16px 15px;
-
-  
+  padding: 16px 15px;  
 }
-
-/* .agendamento-page button:hover {
-  background-color: var(--marsali-tatoo-color-dark-green);
-} */
 
 .agendamento-page textarea {
   min-height: 160px;
   resize: vertical;
+}
+
+.agendamento-opcao {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  font-weight: 700;
 }
 
 @media (max-width: 768px) {

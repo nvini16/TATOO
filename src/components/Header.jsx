@@ -22,7 +22,7 @@ function Header() {
         <a href="#trabalhos">Trabalhos</a>
         <a href="#cuidados">Cuidados</a>
         <a href="#sobre">Sobre</a>
-      </nav>
+      </nav> 
 
       <Link className="header-cta" to="/Agendamento">
         Agendar horário

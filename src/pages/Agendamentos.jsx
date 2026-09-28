@@ -182,7 +182,8 @@ function Agendamento() {
                 <textarea name="descricao" placeholder="Conte mais sobre sua tattoo"></textarea>
 
                 <div className="agendamento-opcao">
-                    <p>Ou nos mande uma imagem de referência</p>
+                    <p>Ou</p>
+                    <p>nos mande uma imagem de referência</p>
                 </div>
 
                 

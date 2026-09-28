@@ -1,0 +1,144 @@
+:root {
+    --marsali-alert-sucesso: var(--marsali-tatoo-color-gold);
+    --marsali-alert-erro: #c94a4a;
+    --marsali-alert-aviso: #e0a52b;
+    --marsali-alert-info: #5ca9d6;
+}
+
+.alert {
+    width: 100%;
+    padding: 16px;
+    margin: 10px 0;
+    border: 1px solid var(--marsali-tatoo-color-gold);
+    border-radius: 12px;
+    box-sizing: border-box;
+
+    background: var(--marsali-tatoo-color-dark-green);
+    color: var(--marsali-tatoo-color-white);
+
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+
+    position: relative;
+
+}
+
+.alert strong {
+    display: block;
+    margin-bottom: 6px;
+
+    color: var(--marsali-tatoo-color-gold);
+    font-size: 18px;
+}
+
+.alert p {
+    margin: 0;
+
+    color: var(--marsali-tatoo-color-white);
+    line-height: 1.5;
+}
+
+.alert-sucesso {
+    border-color: var(--marsali-tatoo-color-gold);
+}
+
+.alert-sucesso strong {
+    color: var(--marsali-tatoo-color-gold);
+}
+
+.alert-erro {
+    border-color: var(--marsali-alert-erro);
+}
+
+.alert-erro strong {
+    color: var(--marsali-alert-erro);
+}
+
+.alert-aviso {
+    border-color: var(--marsali-alert-aviso);
+}
+
+.alert-aviso strong {
+    color: var(--marsali-alert-aviso);
+}
+
+.alert-info {
+    border-color: var(--marsali-alert-info);
+}
+
+.alert-info strong {
+    color: var(--marsali-alert-info) ;
+}
+
+.alert > svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.alert-content {
+    flex: 1;
+}
+
+.alert > button {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 28px;
+    height: 28px;
+    padding: 0;
+
+    border: 1px solid transparent;
+    border-radius: 6px;
+
+    background-color: transparent;
+    color: var(--marsali-tatoo-color-white);
+
+    cursor: pointer;
+
+    transition: 
+        color 0.2s ease,
+        background-color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.alert > button:hover {
+    color: var(--marsali-tatoo-color-gold);
+    background: var(--marsali-tatoo-color-green);
+    border-color: var(--marsali-tatoo-color-gold);
+    
+}
+
+.alert > button svg {
+    width: 18px;
+    height: 18px;
+}
+
+.alert-content button {
+    margin-top: 12px;
+    padding: 6px 12px;
+
+    border: 1px solid var(--marsali-tatoo-color-gold);
+    border-radius: 6px;
+
+    background: transparent;
+    color: var(--marsali-tatoo-color-gold);
+
+    cursor: pointer;
+    font: inherit;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.alert-content button:hover {
+    background: var(--marsali-tatoo-color-gold);
+    color: var(--marsali-tatoo-color-black);
+}

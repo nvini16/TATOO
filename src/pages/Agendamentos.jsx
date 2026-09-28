@@ -2,8 +2,11 @@ import { Link } from 'react-router-dom';
 import IndexadorImagens from '../components/IndexadorImagens';
 import { useState } from 'react';
 import CalendarioAgendamento from '../components/CalendarioAgendamento';
+import Alert from '../components/Alert';
 
 function Agendamento() {
+    const [mostrarAlert, setMostrarAlert] = useState(true);
+
     const [imagens, setImagens] = useState([])
     const [dataSelecionada, setDataSelecionada] = useState();
 
@@ -53,26 +56,58 @@ function Agendamento() {
 
             const agora = new Date()
             const dataAtual = agora.toISOString().split('T')[0]
-            const horaAtual = agora.toISOString().slice(0, 10)
+            const horaAtual = agora.toTimeString().slice(0, 5)
                 if (data === dataAtual && horario <= horaAtual) {
                     alert('Escolha um horário válido!')
                     return
                     
                 }            
 
-        console.log({
+        const agendamento = { 
             nome,
             whatsapp,
             descricao,
             trabalho,
             data,
-            hoje,
             horario
-        })
+        }
+
+        console.log(agendamento)
     }
 
     return (
+
+        
         <main className="agendamento-page">
+            
+            {mostrarAlert && (
+                <Alert 
+                    tipo="sucesso"
+                    titulo="Sucesso"
+                    mensagem="A operação foi concluída."
+                    fechar={() => setMostrarAlert(false)}
+                /> 
+        )}
+
+                <Alert 
+                tipo="erro"
+                titulo="Erro"
+                mensagem="Não foi possível concluir a operação."
+                fechar={() => alert('Alert fechado')}
+            /> 
+
+            <Alert 
+                tipo="aviso"
+                titulo="Atenção"
+                mensagem="Verifique as informações antes de continuar."
+            /> 
+
+            <Alert 
+                tipo="info"
+                titulo="Informação"
+                mensagem="Esta é uma informação importante."
+            />
+
             <h1>Agende sua tattoo</h1>
 
             <CalendarioAgendamento 

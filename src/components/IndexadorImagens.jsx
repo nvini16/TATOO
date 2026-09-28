@@ -78,7 +78,6 @@ function IndexadorImagens({onImagensChange}) {
                 (_, index) => index !== indexParaRemover
             )
 
-            onImagensChange(novasImagens)
 
             return novasImagens
         })

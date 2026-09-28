@@ -41,10 +41,10 @@ function Header() {
       </button>
 
       <nav className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
-        <a href="#inicio" onClick={closeMenu}>Inicío</a>
-        <a href="#trabalhos" onClick={closeMenu}>Trabalhos</a>
-        <a href="#cuidados" onClick={closeMenu}>Cuidados</a>
-        <a href="#sobre" onClick={closeMenu}>Sobre</a>
+        <a className="mobile-menu-a" href="#inicio" onClick={closeMenu}>Inicío</a>
+        <a className="mobile-menu-a" href="#trabalhos" onClick={closeMenu}>Trabalhos</a>
+        <a className="mobile-menu-a" href="#cuidados" onClick={closeMenu}>Cuidados</a>
+        <a className="mobile-menu-a" href="#sobre" onClick={closeMenu}>Sobre</a>
 
           <Link 
             className="mobile-menu-cta"

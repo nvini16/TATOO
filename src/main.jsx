@@ -12,6 +12,7 @@ import './styles/sobre.css'
 import './styles/trabalhos.css'
 import './styles/IndexadorImagens.css'
 import './styles/Cuidados.css'
+import './styles/CalendarioAgendamento.css'
 
 import App from './App.jsx'
 

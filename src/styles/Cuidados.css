@@ -2,7 +2,8 @@
     padding: 80px 20px;
     box-sizing: border-box;
     background-color: var(--marsali-tatoo-color-transparent-green);
-
+    border-top: 2px solid var(--marsali-tatoo-color-gold);
+    border-bottom: 2px solid var(--marsali-tatoo-color-gold);
 }
 
 .cuidados-introducao {

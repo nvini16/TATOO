@@ -1,26 +1,12 @@
 /* SOBRE  */
 
-/* .sobre {
-  padding: 50px 14px;
-  background-image: 
-    linear-gradient(
-      rgba(17, 16, 16, 0.13),
-      rgba(3, 3, 3, 0.26)
-    ),
-    url('../assets/sobre/sobre-02.png')
-  ;
-  background-color: var(--marsali-tatoo-color-white);
 
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-
-} */
 
 .sobre-header {
   max-width: 760px; 
-  margin: 0 auto 80px;
+  margin: 60px auto 80px;
   text-align: center;
+  padding-top: 100px;
 }
 
 .sobre-label {
@@ -51,9 +37,9 @@
 
   background: linear-gradient(
     90deg,
-    var(--marsali-tatoo-color-green),
+    rgba(255, 255, 255, 0),
     var(--marsali-tatoo-color-gold),
-    var(--marsali-tatoo-color-green)
+    rgba(255, 255, 255, 0)
   );
 
   border-radius: 999px;

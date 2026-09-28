@@ -25,7 +25,7 @@ function Header() {
       </nav> 
 
       <Link className="header-cta" to="/Agendamento">
-        Agendar horário
+        Agendar-se
       </Link>
 
       <button 
@@ -51,7 +51,7 @@ function Header() {
             to="/Agendamento"
             onClick={closeMenu}
           >
-            Agendar horário
+            Agendar-se
           </Link>
       </nav>
 

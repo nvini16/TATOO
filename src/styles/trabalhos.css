@@ -3,7 +3,8 @@
 .trabalhos {
   padding: 80px 40px;
   background-color: var(--marsali-tatoo-color-white);
-  border-top: 1px solid rgba(7, 90, 43, 0.10);
+  border-top: 5px solid var(--marsali-tatoo-color-gold);
+  
 }
 
 .trabalhos-container {

@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom';
 import IndexadorImagens from '../components/IndexadorImagens';
 import { useState } from 'react';
+import CalendarioAgendamento from '../components/CalendarioAgendamento';
 
 function Agendamento() {
     const [imagens, setImagens] = useState([])
+    const [dataSelecionada, setDataSelecionada] = useState();
 
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -75,6 +77,11 @@ function Agendamento() {
     return (
         <main className="agendamento-page">
             <h1>Agende sua tattoo</h1>
+
+            <CalendarioAgendamento 
+                dataSelecionada={dataSelecionada}
+                onSelecionarData={setDataSelecionada}
+            />
 
             <div className="agendamento-center">
                 <section>

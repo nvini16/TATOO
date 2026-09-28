@@ -140,7 +140,7 @@ function Trabalhos() {
           </p>
 
           <h2>
-            Portifólio
+            Portfólio <span className="font-logo">MT</span>
           </h2>
 
           <div className="trabalhos-divider"></div>

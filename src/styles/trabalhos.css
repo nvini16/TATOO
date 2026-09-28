@@ -17,6 +17,14 @@
   text-align: center;
 }
 
+.font-logo {
+  
+  font-family: "Cormorant Garamond", serif;
+  font-optical-sizing: auto;
+  font-weight: weight;
+  font-style: normal;
+}
+
 .trabalhos-label {
   margin: 0 0 12px;
   color: var(--marsali-tatoo-color-gold);

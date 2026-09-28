@@ -45,12 +45,10 @@
 }
 
 .header nav a {
-  color: var(--marsali-tatoo-color-dark-green);
+  color: var(--marsali-tatoo-color-white);
   text-decoration: none;
-  font-size: 16px;
-  font-weight: 600;
-  border: 1px solid var(--marsali-tatoo-color-green);
-  background-color: #ffffffa9;
+  font-size: 19px;
+  font-weight: 700;
   border-radius: 10px;
   padding: 5px;         
   
@@ -60,8 +58,7 @@
 
 .header nav a:hover {
   color: var(--marsali-tatoo-color-gold);
-  transform: translateY(-1px);
-  border: 1px solid var(--marsali-tatoo-color-gold);
+  transform: translateY(-2px);
 }
 
 
@@ -238,6 +235,3 @@
     opacity 0.3s ease;
 }
 
-/* .mobile-menu-button span:hover {
-  background-color: var(--marsali-tatoo-color-green);
-} */

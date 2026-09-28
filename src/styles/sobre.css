@@ -4,11 +4,12 @@
   padding: 50px 14px;
   background-image: 
     linear-gradient(
-      rgba(7, 90, 43, 0.55),
-      rgba(7, 90, 43, 0.55)
+      rgba(17, 16, 16, 0.13),
+      rgba(3, 3, 3, 0.26)
     ),
     url('../assets/sobre/sobre-02.png')
   ;
+  background-color: var(--marsali-tatoo-color-white);
 
   background-size: cover;
   background-position: center;
@@ -17,7 +18,7 @@
 }
 
 .sobre-header {
-  max-width: 760px;
+  max-width: 760px; 
   margin: 0 auto 80px;
   text-align: center;
 }

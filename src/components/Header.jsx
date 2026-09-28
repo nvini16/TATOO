@@ -20,6 +20,7 @@ function Header() {
       <nav className="header-nav">
         <a href="#inicio">Início</a>
         <a href="#trabalhos">Trabalhos</a>
+        <a href="#cuidados">Cuidados</a>
         <a href="#sobre">Sobre</a>
       </nav>
 
@@ -42,6 +43,7 @@ function Header() {
       <nav className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
         <a href="#inicio" onClick={closeMenu}>Inicío</a>
         <a href="#trabalhos" onClick={closeMenu}>Trabalhos</a>
+        <a href="#cuidados" onClick={closeMenu}>Cuidados</a>
         <a href="#sobre" onClick={closeMenu}>Sobre</a>
 
           <Link 

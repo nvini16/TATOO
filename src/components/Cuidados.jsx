@@ -3,7 +3,7 @@ import { useState } from 'react'
 function Cuidados() {
     const [itemAberto, setItemAberto] = useState(null)
     return (
-        <section className="cuidados">
+        <section className="cuidados" id="cuidados">
             <h2>Cuidados</h2>
 
             <p className="cuidados-introducao">
@@ -172,7 +172,7 @@ function Cuidados() {
                             {itemAberto === 6 && (
                                 <div className="cuidado-item-conteudo">
                                 <p>
-                                    Durante a cicatrização, evite manupular a pele para não
+                                    Durante a cicatrização, evite manipular a pele para não
                                     prejudicar o processo de recuperação da tatuagem.
                                 </p>
 
@@ -231,7 +231,6 @@ function Cuidados() {
 
                         <li 
                             className="cuidado-item"
-                            onClick={() => setItemAberto(itemAberto === 9 ? null : 9)}
                         >
                             <button 
                                 className={`cuidado-item-titulo ${itemAberto === 9 ? 'aberto' : ''}`}

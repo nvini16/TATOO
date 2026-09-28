@@ -54,9 +54,10 @@ function Agendamento() {
 
             const agora = new Date()
             const dataAtual = agora.toISOString().split('T')[0]
-            const horaAtual = agora.toISOString().slice(0, 5)
+            const horaAtual = agora.toISOString().slice(0, 10)
                 if (data === dataAtual && horario <= horaAtual) {
                     alert('Escolha um horário válido!')
+                    return
                     
                 }            
 
@@ -64,6 +65,10 @@ function Agendamento() {
             nome,
             whatsapp,
             descricao,
+            trabalho,
+            data,
+            hoje,
+            horario
         })
     }
 

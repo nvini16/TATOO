@@ -30,9 +30,9 @@
             rgba(7, 90, 43, 0.10),
             rgba(7, 90, 43, 0.35),
             rgba(1, 43, 22, 0.85),
-            var(--marsali-tatoo-color-dark-green) 100%
+            var(--marsali-tatoo-color-dark-green) 80%
         ),
-        url('../assets/sobre/sobre-02.png');
+        url('../assets/agendamentos/agendamentos.png');
 
         background-size: cover;
         background-position: center;

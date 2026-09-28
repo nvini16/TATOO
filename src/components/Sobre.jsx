@@ -9,7 +9,7 @@ function Sobre() {
             Sobre a Marsali Tattoo
           </p>
 
-          <h2>
+          <h2> 
             Uma história que começou antes da primeira tatuagem e o início de um sonho.
           </h2>
 

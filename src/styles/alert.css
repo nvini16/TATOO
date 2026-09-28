@@ -110,35 +110,10 @@
 
 .alert > button:hover {
     color: var(--marsali-tatoo-color-gold);
-    background: var(--marsali-tatoo-color-green);
-    border-color: var(--marsali-tatoo-color-gold);
-    
+    transform: translateY(-2px);    
 }
 
 .alert > button svg {
     width: 18px;
     height: 18px;
-}
-
-.alert-content button {
-    margin-top: 12px;
-    padding: 6px 12px;
-
-    border: 1px solid var(--marsali-tatoo-color-gold);
-    border-radius: 6px;
-
-    background: transparent;
-    color: var(--marsali-tatoo-color-gold);
-
-    cursor: pointer;
-    font: inherit;
-
-    transition:
-        background-color 0.2s ease,
-        color 0.2s ease;
-}
-
-.alert-content button:hover {
-    background: var(--marsali-tatoo-color-gold);
-    color: var(--marsali-tatoo-color-black);
 }

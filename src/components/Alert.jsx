@@ -23,12 +23,14 @@ function Alert({ tipo, titulo, mensagem, fechar }) {
             <div className="alert-content">
                 <strong>{titulo}</strong>
                 <p>{mensagem}</p>
+            </div>
+
                 {fechar && (
                     <button type="button" onClick={fechar}>
                         <X />
                     </button>
                 )}
-            </div>
+                
         </div>
     );
 } 

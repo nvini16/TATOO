@@ -7,6 +7,7 @@
     background: rgba(1, 43, 22, 0.9);
     box-sizing: border-box;
     color: var(--marsali-tatoo-color-white);
+    margin-buttom: 10px;
 }
 
 .calendario-agendamento .rdp-root {

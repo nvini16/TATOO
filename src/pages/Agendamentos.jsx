@@ -5,10 +5,17 @@ import CalendarioAgendamento from '../components/CalendarioAgendamento';
 import Alert from '../components/Alert';
 
 function Agendamento() {
-    const [mostrarAlert, setMostrarAlert] = useState(true);
 
     const [imagens, setImagens] = useState([])
     const [dataSelecionada, setDataSelecionada] = useState();
+    const [ alerta, setAlerta] = useState(
+        {
+            mostrar: false,
+            tipo: 'info',
+            titulo: '',
+            mensagem: ''
+        }
+    );
 
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -17,26 +24,46 @@ function Agendamento() {
 
         const nome = formData.get('nome')
             if (!nome) {
-                alert('Acho que se esqueceu de colocar seu nome :(')
-                return
+                setAlerta({
+                    mostrar: true,
+                    tipo: 'aviso',
+                    titulo: 'Nome não informado!',
+                    mensagem: 'Informe seu nome antes de continuar.'
+                });
+                return;
             }
 
         const whatsapp = formData.get('whatsapp')
             if (!whatsapp) {
-                alert('Informe seu Whatsapp!')
-                return
+                setAlerta({
+                    mostrar: true,
+                    tipo: 'aviso',
+                    titulo: 'WhatsApp não informado!',
+                    mensagem: 'Iforme seu WahtsApp antes de continuar.'
+                });
+                return;
             }
 
         const descricao = formData.get('descricao')
             if (!descricao?.trim() && imagens.length === 0) {
-                alert('Descreva sua tattoo ou envie uma imagem de referência.')
-                return
+                setAlerta({
+                    mostrar: true,
+                    tipo: 'aviso',
+                    titulo: 'Referência não informada!',
+                    mensagem: 'Desreva sua tattoo ou envie uma imagem de referência'
+                });
+                return;
             }
 
         const trabalho = formData.get('trabalho')
             if (!trabalho) {
-                alert('Escolha o trabalho da sua tattoo!')
-                return
+                setAlerta({
+                    mostrar: true,
+                    tipo: 'aviso',
+                    titulo: 'Trabalho não selecionado!',
+                    mensagem: 'Escolha o tipo de trabalho da sua tattoo.'
+                });
+                return;
 
             }
         const data = dataSelecionada
@@ -45,12 +72,22 @@ function Agendamento() {
 
             const hoje = new Date().toISOString().split('T')[0]
                 if (data < hoje) {
-                    alert('Escolha uma data a partir de hoje!')
-                    return
+                    setAlerta({
+                        mostrar: true,
+                        tipo: 'aviso',
+                        titulo: 'Data não selecionada!',
+                        mensagem: 'Escolha uma data válida para sua tattoo.'
+                    });
+                    return;
                 }
         const horario = formData.get('horario')
             if (!horario) {
-                alert('Escolha o horário da sua tattoo!')
+                setAlerta({
+                    mostrar: true,
+                    tipo: 'aviso',
+                    titulo: 'Horário não selecionado!',
+                    mensagem: 'Escolha um horário para sua tattoo.'
+                })
                 return
             }
 
@@ -73,6 +110,13 @@ function Agendamento() {
         }
 
         console.log(agendamento)
+
+        setAlerta({
+            mostrar: true,
+            tipo: 'sucesso',
+            titulo: 'Solicitação recebida.',
+            mensagem: 'Seus dados foram preenchidos corretamente.'
+        })
     }
 
     return (
@@ -80,33 +124,19 @@ function Agendamento() {
         
         <main className="agendamento-page">
             
-            {mostrarAlert && (
+            {alerta.mostrar && (
                 <Alert 
-                    tipo="sucesso"
-                    titulo="Sucesso"
-                    mensagem="A operação foi concluída."
-                    fechar={() => setMostrarAlert(false)}
+                    tipo={alerta.tipo}
+                    titulo={alerta.titulo}
+                    mensagem={alerta.mensagem}
+                    fechar={() => 
+                        setAlerta((alertaAtual) => ({
+                            ...alertaAtual,
+                            mostrar: false
+                        }))
+                    }
                 /> 
         )}
-
-                <Alert 
-                tipo="erro"
-                titulo="Erro"
-                mensagem="Não foi possível concluir a operação."
-                fechar={() => alert('Alert fechado')}
-            /> 
-
-            <Alert 
-                tipo="aviso"
-                titulo="Atenção"
-                mensagem="Verifique as informações antes de continuar."
-            /> 
-
-            <Alert 
-                tipo="info"
-                titulo="Informação"
-                mensagem="Esta é uma informação importante."
-            />
 
             <h1>Agende sua tattoo</h1>
 

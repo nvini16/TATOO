@@ -36,7 +36,6 @@ function IndexadorImagens({onImagensChange}) {
             })),
         ] 
 
-        onImagensChange(novasImagens)
 
         return novasImagens
            
@@ -62,7 +61,6 @@ function IndexadorImagens({onImagensChange}) {
                 })),
             ]
 
-            onImagensChange(novasImagens)
 
             return novasImagens
     })

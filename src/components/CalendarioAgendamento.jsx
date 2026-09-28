@@ -5,7 +5,7 @@ import '../styles/CalendarioAgendamento.css';
 
 function CalendarioAgendamento({ dataSelecionada, onSelecionarData }) {
     return (
-        <div className="calendario agendamento">
+        <div className="calendario-agendamento">
             <DayPicker 
                 mode="single"
                 locale={ptBR}

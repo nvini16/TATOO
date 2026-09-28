@@ -9,10 +9,10 @@
     color: var(--marsali-tatoo-color-white);
 }
 
-.calendario-agendamento rdp-root {
+.calendario-agendamento .rdp-root {
     width: 100%;
 
-    --rdo-accent-color: var(--marsali-tatoo-color-gold);
+    --rdp-accent-color: var(--marsali-tatoo-color-gold);
     --rdp-accent-background-color: var(--marsali-tatoo-color-gold);
 
     --rdp-day_button-width: 42px;
@@ -42,6 +42,9 @@
 .calendario-agendamento .rdp-button_next:hover {
     background: var(--marsali-tatoo-color-green);
     border-color: var(--marsali-tatoo-color-gold);
+    width: 36px;
+    height: 36px;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 /* Dias  */
@@ -65,6 +68,13 @@
     cursor: not-allowed;
 }
 
-.calendario-agendamento {
-    background: red !important;
+@media (max-width: 480px) {
+    .calendario-agendamento {
+        padding: 16px;
+    }
+
+    .calendario-agendamento .rdp-day_button {
+        width: 36px;
+        height: 36px;
+    }
 }

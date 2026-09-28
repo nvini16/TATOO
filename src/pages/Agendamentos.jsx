@@ -36,12 +36,9 @@ function Agendamento() {
                 return
 
             }
-        const data = formData.get('data')
-            if (!data) {
-                alert('Escolha uma data para sua tattoo')
-                return
-
-            }
+        const data = dataSelecionada
+            ? dataSelecionada.toLocaleDateString('en-CA')
+            : ''
 
             const hoje = new Date().toISOString().split('T')[0]
                 if (data < hoje) {
@@ -98,7 +95,6 @@ function Agendamento() {
             <section>
                 <h2>Escolha o horário</h2>
 
-                <input type="date" name="data" form="agendamento-form" />
 
                 <select name="horario" form="agendamento-form">
                     <option value="">Selecione um horário</option>
@@ -128,7 +124,7 @@ function Agendamento() {
                 <IndexadorImagens onImagensChange={setImagens} />
 
                 <div className="agendamento-acoes">
-                <button type="submit">Continuar</button>
+                <button type="submit">Agendar</button>
 
                 <button type="button">
                 <Link

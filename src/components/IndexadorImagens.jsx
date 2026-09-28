@@ -6,6 +6,11 @@ function IndexadorImagens({onImagensChange}) {
     const imagensRef = useRef([])
 
     useEffect(() => {
+        onImagensChange(imagens)
+
+    }, [imagens, onImagensChange])
+
+    useEffect(() => {
         imagensRef.current = imagens
     }, [imagens])
 

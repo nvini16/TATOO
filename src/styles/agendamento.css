@@ -123,9 +123,9 @@
   
 }
 
-.agendamento-page button:hover {
+/* .agendamento-page button:hover {
   background-color: var(--marsali-tatoo-color-dark-green);
-}
+} */
 
 .agendamento-page textarea {
   min-height: 160px;

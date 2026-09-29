@@ -39,7 +39,7 @@ function Agendamento() {
                     mostrar: true,
                     tipo: 'aviso',
                     titulo: 'WhatsApp não informado!',
-                    mensagem: 'Iforme seu WahtsApp antes de continuar.'
+                    mensagem: 'Informe seu WhahtsApp antes de continuar.'
                 });
                 return;
             }
@@ -50,7 +50,7 @@ function Agendamento() {
                     mostrar: true,
                     tipo: 'aviso',
                     titulo: 'Referência não informada!',
-                    mensagem: 'Desreva sua tattoo ou envie uma imagem de referência'
+                    mensagem: 'Descreva sua tattoo ou envie uma imagem de referência'
                 });
                 return;
             }

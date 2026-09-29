@@ -70,7 +70,12 @@ function Agendamento() {
             ? dataSelecionada.toLocaleDateString('en-CA')
             : ''
 
-            const hoje = new Date().toISOString().split('T')[0]
+        const agora = new Date();
+        const hoje = [
+            agora.getFullYear(),
+            String(agora.getMonth() + 1).padStart(2, '0'),
+            String(agora.getDate()).padStart(2, '0')
+        ].join('-');
                 if (data < hoje) {
                     setAlerta({
                         mostrar: true,
@@ -91,12 +96,16 @@ function Agendamento() {
                 return
             }
 
-            const agora = new Date()
             const dataAtual = agora.toISOString().split('T')[0]
             const horaAtual = agora.toTimeString().slice(0, 5)
                 if (data === dataAtual && horario <= horaAtual) {
-                    alert('Escolha um horário válido!')
-                    return
+                    setAlerta({
+                        mostrar: true,
+                        tipo: 'aviso',
+                        titulo: 'Horário inválido!',
+                        mensagem: 'Escolha um horário posterior ao horário atual.'
+                    });
+                    return;
                     
                 }            
 

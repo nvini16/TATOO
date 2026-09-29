@@ -14,7 +14,6 @@ import './styles/IndexadorImagens.css'
 import './styles/Cuidados.css'
 import './styles/CalendarioAgendamento.css'
 import './styles/alert.css'
-import './styles/relogioAgendamento.css'
 
 import App from './App.jsx'
 

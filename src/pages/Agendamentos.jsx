@@ -151,7 +151,7 @@ function Agendamento() {
                 <Alert 
                     key={`${alerta.titulo}-${alerta.mensagem}`}
                     tipo={alerta.tipo}
-                    titulo={alerta.titulo}
+                    titulo={alerta.titulo} 
                     mensagem={alerta.mensagem}
                     fechar={() => 
                         setAlerta((alertaAtual) => ({
@@ -164,10 +164,6 @@ function Agendamento() {
 
             <h1>Agende sua tattoo</h1>
 
-            <CalendarioAgendamento 
-                dataSelecionada={dataSelecionada}
-                onSelecionarData={setDataSelecionada}
-            />
 
             <div className="agendamento-center">
                 <section>
@@ -194,6 +190,12 @@ function Agendamento() {
                     <option value="15:00">15:00</option>
                     <option value="16:00">16:00</option>
                 </select>
+
+            <CalendarioAgendamento 
+                dataSelecionada={dataSelecionada}
+                onSelecionarData={setDataSelecionada}
+            />
+            
             </section>
 
             <form id="agendamento-form" onSubmit={handleSubmit}>

@@ -149,6 +149,7 @@ function Agendamento() {
             
             {alerta.mostrar && (
                 <Alert 
+                    key={`${alerta.titulo}-${alerta.mensagem}`}
                     tipo={alerta.tipo}
                     titulo={alerta.titulo}
                     mensagem={alerta.mensagem}

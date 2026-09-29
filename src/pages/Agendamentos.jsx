@@ -39,7 +39,7 @@ function Agendamento() {
                     mostrar: true,
                     tipo: 'aviso',
                     titulo: 'WhatsApp não informado!',
-                    mensagem: 'Informe seu WhahtsApp antes de continuar.'
+                    mensagem: 'Informe seu WhatsApp antes de continuar.'
                 });
                 return;
             }
@@ -80,7 +80,7 @@ function Agendamento() {
                     setAlerta({
                         mostrar: true,
                         tipo: 'aviso',
-                        titulo: 'Data não selecionada!',
+                        titulo: 'Data não Inválida!',
                         mensagem: 'Escolha uma data válida para sua tattoo.'
                     });
                     return;
@@ -196,7 +196,7 @@ function Agendamento() {
 
                 <div className="agendamento-opcao">
                     <p>Ou</p>
-                    <p>nos mande uma imagem de referência</p>
+                    <p>nos mande uma imagem de referência.</p>
                 </div>
 
                 

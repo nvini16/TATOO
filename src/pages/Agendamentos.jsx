@@ -70,6 +70,16 @@ function Agendamento() {
             ? dataSelecionada.toLocaleDateString('en-CA')
             : ''
 
+            if (!data) {
+                setAlerta({
+                    mostrar: true,
+                    tipo: 'aviso',
+                    titulo: 'Data não selecionada!',
+                    mensagem: 'Escolha uma data para sua tattoo.'
+                });
+                return;
+            }
+
         const agora = new Date();
         const hoje = [
             agora.getFullYear(),

@@ -215,14 +215,12 @@ function Agendamento() {
                 <div className="agendamento-acoes">
                 <button type="submit">Agendar</button>
 
-                <button type="button">
                 <Link
                     to="/"
                     className="agendamento-link"
                 >
                     Voltar
                 </Link>
-                </button>
                 </div>
             </form>
             </div>

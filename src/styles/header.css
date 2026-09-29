@@ -173,7 +173,6 @@
   }
   
   .mobile-menu-a {
-    backdrop-filter: blur(20px);
     margin: 0 20px;
     text-align: center;
     justify-content: center;

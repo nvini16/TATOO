@@ -96,7 +96,11 @@ function Agendamento() {
                 return
             }
 
-            const dataAtual = agora.toISOString().split('T')[0]
+            const dataAtual = [
+                agora.getFullYear(),
+                String(agora.getMonth() + 1).padStart(2, '0'),
+                String(agora.getDate()).padStart(2, '0')
+            ].join('-');
             const horaAtual = agora.toTimeString().slice(0, 5)
                 if (data === dataAtual && horario <= horaAtual) {
                     setAlerta({

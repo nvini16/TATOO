@@ -1,8 +1,7 @@
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ScrollReveal from './ScrollReveal';
 
 function Hero() {
-  const navigate = useNavigate();
 
   return (
     <section className="hero" id="inicio">
@@ -31,12 +30,13 @@ function Hero() {
           </p>
 
           <div className="hero-actions">
-            <button
+            <Link
+              className="hero-button"
               type="button"
-              onClick={() => navigate('/Agendamento')}
+              to="/agendamentos"
             >
               Agendar horário
-            </button>
+            </Link>
 
             <a className="hero-secondary-button" href="#trabalhos">
               Ver trabalhos

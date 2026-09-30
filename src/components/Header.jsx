@@ -53,7 +53,10 @@ function Header() {
 
       
 
-      <nav className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
+
+    </header>
+
+     <nav className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
         <a className="mobile-menu-a" href="#inicio" onClick={closeMenu}>Inicío</a>
         <a className="mobile-menu-a" href="#trabalhos" onClick={closeMenu}>Trabalhos</a>
         <a className="mobile-menu-a" href="#cuidados" onClick={closeMenu}>Cuidados</a>
@@ -68,8 +71,6 @@ function Header() {
           </Link>
       </nav>
 
-    </header>
-
     <button 
         type="button"
         className="mobile-menu-button"
@@ -81,6 +82,9 @@ function Header() {
         <span></span>
         <span></span>
       </button>
+
+     
+
     </>
 
   );

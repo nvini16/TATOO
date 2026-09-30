@@ -103,7 +103,7 @@
   display: none;
 }
 
-.header .mobile-menu {
+.mobile-menu {
   display: none;
 }
 
@@ -147,11 +147,12 @@
     gap: 5px;
   }
 
-  .header .mobile-menu {
-    position: absolute;
+  .mobile-menu {
+    position: fixed;
     top: 70px;
     left: 0;
     right: 0;
+    z-index: 1050;
 
     
 
@@ -159,17 +160,19 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 20px;
 
-    padding: 0;
+    padding: 30px;
 
     background: var(--marsali-tatoo-color-white);
 
 
-    border-bottom: 2px solid rgba(220, 190, 36, 0.35);
-    border-top: 2px solid rgba(220, 190, 36, 0.35);
+    border-bottom: 3px solid var(--marsali-tatoo-color-gold);
+    border-top: 3px solid var(--marsali-tatoo-color-gold);
 
     opacity: 0;
     visibility: hidden;
+    font-size: 20px;
     transform: translateY(-10px);
 
     transition: 
@@ -195,29 +198,34 @@
     color: var(--marsali-tatoo-color-gold);
 
     font-size: 17px;
-    font-weight: 600;
+    font-weight: 700;
 
     text-decoration: none;
 
     transition:
       color 0.3s ease,
       background-color 0.3s ease;
-  }
-
-  .mobile-menu-a {
-    color: var(--marsali-tatoo-color-gold);
+      color: var(--marsali-tatoo-color-gold);
   }
 
   .mobile-menu-cta {
     margin-top: 12px;
+    color: var(--marsali-tatoo-color-gold);
     text-align: center;
+    padding: 5px;
+    font-weight: 700;
+    font-size: 23px;
+    border-top: 1px solid var(--marsali-tatoo-color-gold);
+    border-bottom: 1px solid var(--marsali-tatoo-color-gold);
+    text-decoration: none;
+    transition: 
+    transform 0.3s ease;
 
     color: var(--marsali-tatoo-color-gold);
-    border-radius: 6px;
   }
 
   .mobile-menu-cta:hover {
-    color: var(--marsali-tatoo-color-green);
+    transform: translateY(-2px);
   }
 }
 

@@ -54,14 +54,14 @@
   margin: 0 0 32px;
 }
 
-.hero button {
-  background-color: var(--marsali-tatoo-color-green);
-  color: var(--marsali-tatoo-color-white);
-  border: 1px solid var(--marsali-tatoo-color-gold);
-
-  border-radius: 6px;
+.hero .hero-button {
+  background-color: var(--marsali-tatoo-color-gr);
+  color: var(--marsali-tatoo-color-gold);
+  border-top: 1px solid var(--marsali-tatoo-color-gold);
+  border-bottom: 1px solid var(--marsali-tatoo-color-gold);
 
   padding: 14px 28px;
+  text-align: center;
 
   font-family: inherit;
   font-size: 16px;
@@ -76,7 +76,7 @@
     box-shadow 0.3s ease;
 }
 
-.hero button:hover {
+.hero .hero-button:hover {
   background-color: var(--marsali-tatoo-color-dark-green);
   color: var(--marsali-tatoo-color-gold);
 
@@ -94,8 +94,8 @@
   background-color: transparent;
   color: var(--marsali-tatoo-color-green);
 
-  border: 1px solid var(--marsali-tatoo-color-green);
-  border-radius: 6px;
+  border-top: 1px solid var(--marsali-tatoo-color-green);
+  border-bottom: 1px solid var(--marsali-tatoo-color-green);
 
   font-family: inherit;
   font-size: 16px;

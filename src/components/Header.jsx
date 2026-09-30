@@ -1,16 +1,39 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import logo from '../assets/logo/marsali-tatoo-logo-fundo-none.png';
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [headerVisible, setHeaderVisible] = useState(true);
+    useEffect(() => {
+      let lastScrollY = window.scrollY;
+
+      function handleScroll() {
+        const currentScrollY = window.scrollY;
+
+        if (currentScrollY > lastScrollY) {
+          setHeaderVisible(false);
+        } else {
+          setHeaderVisible(true);
+        }
+
+        lastScrollY = currentScrollY;
+      }
+
+      window.addEventListener('scroll', handleScroll);
+
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+      };
+    }, []);
 
   function closeMenu() {
     setMenuOpen(false);
   }
 
   return (
-    <header className="header">
+    <>
+    <header className={`header ${headerVisible ? 'visible' : 'hidden'}`}>
       <div className="header-brand">
         <Link to="/" className="brand" onClick={closeMenu}>
           <img src={logo} alt="Marsali Tattoo Studio" className="brand-logo" />
@@ -28,17 +51,7 @@ function Header() {
         Agendar-se
       </Link>
 
-      <button 
-        type="button"
-        className="mobile-menu-button"
-        onClick={() => setMenuOpen(!menuOpen)}
-        aria-label="Abrir menu"
-        aria-expanded={menuOpen}
-      >
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+      
 
       <nav className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
         <a className="mobile-menu-a" href="#inicio" onClick={closeMenu}>Inicío</a>
@@ -56,6 +69,20 @@ function Header() {
       </nav>
 
     </header>
+
+    <button 
+        type="button"
+        className="mobile-menu-button"
+        onClick={() => setMenuOpen(!menuOpen)}
+        aria-label="Abrir menu"
+        aria-expanded={menuOpen}
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </>
+
   );
 }
 

@@ -27,6 +27,14 @@ function Header() {
       };
     }, []);
 
+    useEffect(() => {
+  document.body.classList.toggle('header-hidden', !headerVisible);
+
+  return () => {
+    document.body.classList.remove('header-hidden');
+  };
+}, [headerVisible]);
+
   function closeMenu() {
     setMenuOpen(false);
   }

@@ -1,12 +1,9 @@
-/* SOBRE  */
-
-
-
 .sobre-header {
   max-width: 760px; 
   margin: 60px auto 80px;
   text-align: center;
-  padding-top: 100px;
+  padding-top: 40px;
+  border-top: 3px solid var(--marsali-tatoo-color-gold);
 }
 
 .sobre-label {

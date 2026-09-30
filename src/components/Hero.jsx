@@ -8,9 +8,11 @@ function Hero() {
       <ScrollReveal>
         <div className="hero-content">
 
-          <p className="hero-label">
+         <div className="div-hero-label">
+           <p className="hero-label">
             MARSALI TATTOO
           </p>
+         </div>
 
           <h1>
             Tatuagem não é só
@@ -33,7 +35,7 @@ function Hero() {
             <Link
               className="hero-button"
               type="button"
-              to="/agendamentos"
+              to="/Agendamento"
             >
               Agendar horário
             </Link>

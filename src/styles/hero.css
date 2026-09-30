@@ -1,5 +1,3 @@
-/* HERO  */
-
 .hero {
   min-height: 100vh;
 
@@ -8,27 +6,27 @@
 
   padding: 30px 40px;
 
-  /* background:
-    linear-gradient(
-      rgba(0, 0, 0, 0.60),
-      rgba(0, 0, 0, 0.70)
-    ),
-    url('../assets/imagem-da-hero.jpg');
 
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat; */
 }
 
 .hero-content {
   max-width: 650px;
 }
 
+.div-hero-label {
+  width: 90px;
+  height: 40px;
+}
+
 .hero-label {
   color: var(--marsali-tatoo-color-gold);
-  font-size: 14px;
+  font-size: 15px;
+  font-weight: 600;
   letter-spacing: 3px;
   text-transform: uppercase;
+  border-top: 1px solid var(--marsali-tatoo-color-gold);
+  border-bottom: 1px solid var(--marsali-tatoo-color-gold);
+  width: 100%;
 }
 
 .hero h1 {
@@ -61,6 +59,7 @@
   border-bottom: 1px solid var(--marsali-tatoo-color-gold);
 
   padding: 14px 28px;
+  text-decoration: none;
   text-align: center;
 
   font-family: inherit;
@@ -72,16 +71,13 @@
   transition: 
     background-color 0.3s ease, 
     color 0.3s ease,
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+    transform 0.3s ease;
 }
 
 .hero .hero-button:hover {
-  background-color: var(--marsali-tatoo-color-dark-green);
   color: var(--marsali-tatoo-color-gold);
 
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(7, 90, 43, 0.18);
 }
 
 .hero-secondary-button {
@@ -92,10 +88,10 @@
   padding: 14px 28px;
 
   background-color: transparent;
-  color: var(--marsali-tatoo-color-green);
+  color: var(--marsali-tatoo-color-gold);
 
-  border-top: 1px solid var(--marsali-tatoo-color-green);
-  border-bottom: 1px solid var(--marsali-tatoo-color-green);
+  border-top: 1px solid var(--marsali-tatoo-color-gold);
+  border-bottom: 1px solid var(--marsali-tatoo-color-gold);
 
   font-family: inherit;
   font-size: 16px;
@@ -111,7 +107,6 @@
 }
 
 .hero-secondary-button:hover {
-  background-color: var(--marsali-tatoo-color-green);
   color: var(--marsali-tatoo-color-gold);
 
   border-color: var(--marsali-tatoo-color-gold);
@@ -145,7 +140,7 @@
     flex-direction: column;
     align-items: stretch;
   }
-    .hero button,
+    .hero .hero-button,
   .hero-secondary-button {
     width: 100%;
     box-sizing: border-box;

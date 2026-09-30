@@ -34,6 +34,11 @@ body {
   background-position: center 85px;
   background-repeat: no-repeat;
   background-size: cover;
+  transition: background-position 0.3s ease;
+}
+
+body.header-hidden {
+  background-position: center 0;
 }
 
 @media (max-width: 768px) {

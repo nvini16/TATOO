@@ -12,6 +12,7 @@ import trabalho11 from '../assets/trabalhos/trabalho-11.jpg'
 import trabalho12 from '../assets/trabalhos/trabalho-12.jpg'
 import trabalho13 from '../assets/trabalhos/trabalho-13.jpg'
 import trabalho14 from '../assets/trabalhos/trabalho-14.png'
+import ScrollReveal from './ScrollReveal';
 import { useState } from 'react';
 
 function Trabalhos() {
@@ -135,66 +136,80 @@ function Trabalhos() {
       <div className="trabalhos-container">
 
         <div className="trabalhos-header">
-          <p className="trabalhos-label">
+          <ScrollReveal>
+            <p className="trabalhos-label">
             Galeria de trabalhos
           </p>
+          </ScrollReveal>
 
-          <h2>
+          <ScrollReveal>
+            <h2>
             Portfólio <span className="font-logo">MT</span>
           </h2>
 
           <div className="trabalhos-divider"></div>
+          </ScrollReveal>
         </div>
 
       </div>
 
       <div className="trabalhos-filtros">
-        <button 
+        <ScrollReveal className="filtro-reveal">
+          <button 
           type="button" 
           className={filtro === 'Todos' ? 'filtro-ativo' : ''}
           onClick={() => setFiltro('Todos')}
         >
           Todos
         </button>
+        </ScrollReveal>
 
-        <button 
+        <ScrollReveal className="filtro-reveal">
+          <button 
           type="button"
           className={filtro === 'Cybertribal' ? 'filtro-ativo' : ''}
           onClick={() => setFiltro('Cybertribal')}
         > 
           Cybertribal
         </button>
+        </ScrollReveal>
 
-        <button 
+        <ScrollReveal className="filtro-reveal">
+          <button 
           type="button"
           className={filtro === 'Fine Line' ? 'filtro-ativo' : ''}
           onClick={() => setFiltro('Fine Line')}
         >
           Fine Line
         </button>
+        </ScrollReveal>
 
-        <button 
+        <ScrollReveal className="filtro-reveal">
+          <button 
           type="button"
           className={filtro === 'Blackwork' ? 'filtro-ativo' : ''}
           onClick={() => setFiltro('Blackwork')}
         >
           Blackwork
         </button>
+        </ScrollReveal>
 
-        <button 
+        <ScrollReveal className="filtro-reveal">
+          <button 
           type="button"
           className={filtro === 'Anime' ? 'filtro-ativo' : ''}
           onClick={() => setFiltro('Anime')}
         >
           Anime
         </button>
-
+        </ScrollReveal>
       </div>
 
       <div className="trabalhos-grid">
 
       {trabalhosFiltrados.map((trabalho) => (
-        <article className="trabalho-card" key={trabalho.id}>
+        <ScrollReveal key={trabalho.id}>
+          <article className="trabalho-card">
           <div className="trabalhos-imagem">
             <img 
               src={trabalho.imagem}
@@ -208,6 +223,7 @@ function Trabalhos() {
             <h3>{trabalho.titulo}</h3>
           </div>
         </article>
+        </ScrollReveal>
       ))}
 
       </div>

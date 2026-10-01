@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-function ScrollReveal({ children }) {
+function ScrollReveal({ children, className = '' }) {
   const elementRef = useRef(null);
 
   useEffect(() => {
@@ -24,8 +24,11 @@ function ScrollReveal({ children }) {
   }, []);
 
   return (
-    <div ref={elementRef} className="scroll-reveal">
-      {children}
+    <div 
+      ref={elementRef} 
+      className={`scroll-reveal ${className}`}
+    >
+        {children}
     </div>
   );
 }

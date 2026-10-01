@@ -52,7 +52,7 @@
 
   font-size: 19px;
   line-height: 1.6;
-
+  
 }
 
 .sobre-bloco {
@@ -64,15 +64,15 @@
   display: flex;
   align-items: stretch;
   gap: 40px;
-
+  
   min-height: 420px;
   padding: 40px;
-
-  border: 1px solid rgba(7, 90, 43, 0.12);
+  
+  border: 2px solid var(--marsali-tatoo-color-gold);
   border-radius: 8px;
-
-  background-color: #ffffff56;
-
+  
+  background-color: #ffffff2e;
+  
   box-shadow: 0 12px 30px rgba(0, 59, 30, 0.06);
 }
 
@@ -89,6 +89,32 @@
   .sobre-principios span {
     width: 100%;
     box-sizing: border-box;
+  }
+
+  .sobre-diferencial {
+    padding: 40px 20px;
+    margin-bottom: 50px;
+  }
+
+  .sobre-diferencial .sobre-conteudo h3 {
+    font-size: 30px;
+
+  }
+
+  .sobre-diferencial .sobre-conteudo p {
+    font-size: 17px;
+  }
+
+  .sobre-essencia {
+    padding: 40px 20px;
+  }
+
+  .sobre-essencia .sobre-conteudo h3 {
+    font-size: 30px;
+  }
+
+  .sobre-essencia- .sobre-principios {
+    gap: 8px;
   }
 }
 
@@ -202,4 +228,29 @@
   max-width: 680px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.sobre-essencia {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 50px 60px;
+
+  text-align: center;
+  border: 1px solid var(--marsali-tatoo-color-gold);
+  border-radius: 8px;
+
+  background-color: var(--marsali-tatoo-color-transparent-green);
+}
+
+.sobre-essencia .sobre-conteudo {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.sobre-essencia .sobre-numero {
+  margin-bottom: 16px;
+}
+
+.sobre-essencia .sobre-principios {
+  justify-content: center;
 }

@@ -84,8 +84,9 @@
   }
 
   .sobre-principios {
-    flex-direction: column;
-    gap: 8px;
+    gap: 2px;
+    border-top: 1px solid var(--marsali-tatoo-color-gold);
+    border-bottom: 1px solid var(--marsali-tatoo-color-gold);
   }
 
   .sobre-principios span {
@@ -189,16 +190,14 @@
 .sobre-principios span {
   flex: 1;
 
-  padding: 12px 16px;
+  padding: 12px 0;
 
   color: var(--marsali-tatoo-color-gold);
   text-align: center;
   font-size: 17px;
   font-weight: 700;
 
-  border-top: 1px solid var(--marsali-tatoo-color-gold);
-  border-bottom: 1px solid var(--marsali-tatoo-color-gold);
-}
+  }
 
 .sobre-diferencial {
   max-width: 900px;

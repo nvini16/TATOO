@@ -44,9 +44,10 @@ function Sobre() {
             </p>
 
             <p>
-               Hoje, possui mais de cinco anos de estudo sobre tatuagem e
-            cerca de um ano de atuação profissional, com mais de 60
-            tatuagens realizadas.
+               Desde 2021, Leticia vem construindo sua trajetória na tatuagem,
+              passando por estudos, cursos e prática. Em julho de 2025,
+              iniciou sua atuação profissional e passou a transformar esse
+              conhecimento em experiência na pele de seus clientes.
             </p>
 
           </div>
@@ -70,15 +71,14 @@ function Sobre() {
 
             <p>
               Para Leticia, tatuar vai além de realizar um desenho.
-            Ela busca dedicar o dia ao cliente, oferecendo atenção,
-            conforto e disponibilidade para ajudar no que for necessário
-            durante a experiência.
+  Cada atendimento é pensado para oferecer atenção, conforto
+  e disponibilidade durante toda a experiência.
             </p>
 
             <p>
                Cada tatuagem é tratada como algo pessoal: uma oportunidade
-            de transformar uma ideia em algo que represente quem está
-            carregando aquela história na pele.
+  de transformar uma ideia em algo que represente a pessoa
+  e a história que ela escolheu carregar na pele.
             </p>
           </div>
         </article>
@@ -89,7 +89,7 @@ function Sobre() {
             <span className="sobre-numero">03</span>
 
             <h3>
-              Mais do que uma tatuagem.
+             Tatuagem com identidade. 
             </h3>
 
             <p>
@@ -104,7 +104,8 @@ function Sobre() {
             </div>
 
             <p>
-              Blackwork e Fina Line, com uma abordagem aprofissional e autoral.
+             Especializada em Blackwork e Fine Line, com uma abordagem
+  profissional, cuidadosa e autoral.
             </p>
           </div>
         </article>

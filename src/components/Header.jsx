@@ -43,9 +43,9 @@ function Header() {
     <>
     <header className={`header ${headerVisible ? 'visible' : 'hidden'}`}>
       <div className="header-brand">
-        <Link to="/" className="brand" onClick={closeMenu}>
+        <a href="/" className="brand" onClick={closeMenu}>
           <img src={logo} alt="Marsali Tattoo Studio" className="brand-logo" />
-        </Link>
+        </a>
       </div>
 
       <nav className="header-nav">

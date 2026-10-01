@@ -214,6 +214,7 @@ function Trabalhos() {
             <img 
               src={trabalho.imagem}
               alt={`Trabalho de tatuagem ${trabalho.id}`}
+              loading="lazy"
             />
           </div>
 

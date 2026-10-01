@@ -6,6 +6,8 @@ function Cuidados() {
         <section className="cuidados" id="cuidados">
             <h2>Cuidados</h2>
 
+            <div className="trabalhos-divider"></div>
+
             <p className="cuidados-introducao">
                 Saiba como preparar sua pele antes da tatuagem e cuidar dela durante a cicatrização.
             </p>

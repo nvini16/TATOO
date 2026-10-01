@@ -1,9 +1,9 @@
 .cuidados {
     padding: 80px 20px;
     box-sizing: border-box;
-    background-color: var(--marsali-tatoo-color-transparent-green);
-    border-top: 2px solid var(--marsali-tatoo-color-gold);
-    border-bottom: 2px solid var(--marsali-tatoo-color-gold);
+    background-color: var(--marsali-tatoo-color-green);
+    border-top: 3px solid var(--marsali-tatoo-color-gold);
+    border-bottom: 3px solid var(--marsali-tatoo-color-gold);
 }
 
 .cuidados-introducao {
@@ -12,6 +12,7 @@
     text-align: center;
     color: var(--marsali-tatoo-color-white);
     font-size: 1.2rem;
+    margin-top: 20px;
     line-height: 1.6;
 }
 
@@ -20,6 +21,22 @@
     text-align: center;
     color: var(--marsali-tatoo-color-gold);
     font-size: 2.5rem;
+}
+
+.trabalhos-divider {
+  width: 64px;
+  height: 4px;
+
+  margin: 20px auto 0;
+
+  background: linear-gradient(
+    90deg,
+        rgba(255, 255, 255, 0),
+    var(--marsali-tatoo-color-gold),
+    rgba(255, 255, 255, 0)
+  );
+
+  border-radius: 999px;
 }
 
 .cuidados h3 {

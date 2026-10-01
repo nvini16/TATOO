@@ -137,10 +137,12 @@
     height: 42px;
 
     padding: 10px;
+    background-color: transparent;
 
-    background-color: var(--marsali-tatoo-color-white);
-    border-radius: 50%;
-    border: none;
+    border-top: 2px solid var(--marsali-tatoo-color-gold);
+    border-bottom: 2px solid var(--marsali-tatoo-color-gold);
+    border-left: none;
+    border-right: none;
 
     cursor: pointer;
     flex-direction: column;
@@ -207,7 +209,6 @@
     transition:
       color 0.3s ease,
       background-color 0.3s ease;
-      color: var(--marsali-tatoo-color-gold);
   }
 
   .mobile-menu-cta {

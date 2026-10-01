@@ -172,3 +172,34 @@
   border-top: 1px solid var(--marsali-tatoo-color-gold);
   border-bottom: 1px solid var(--marsali-tatoo-color-gold);
 }
+
+.sobre-diferencial {
+  max-width: 900px;
+  margin: 0 auto 70px;
+  padding: 50px 60px;
+
+  border-top: 1px solid var(--marsali-tatoo-color-gold);
+  border-bottom: 1px solid var(--marsali-tatoo-color-gold);
+
+  text-align: center;
+}
+
+.sobre-diferencial .sobre-conteudo {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.sobre-diferencial .sobre-numero {
+  margin-bottom: 16px;
+
+}
+
+.sobre-diferencial .sobre-diferencial h3 {
+  margin-bottom: 24px;
+}
+
+.sobre-diferencial .sobre-conteudo p {
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
+}

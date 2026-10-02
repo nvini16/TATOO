@@ -11,7 +11,7 @@ import './styles/responsive.css'
 import './styles/sobre.css'
 import './styles/trabalhos.css'
 import './styles/IndexadorImagens.css'
-import './styles/Cuidados.css'
+import './styles/cuidados.css'
 import './styles/CalendarioAgendamento.css'
 import './styles/alert.css'
 

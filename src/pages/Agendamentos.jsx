@@ -177,12 +177,12 @@ function Agendamento() {
                 </select>
             </section>
 
-            <section>
+            <section> 
                 <h2>Escolha o horário</h2>
 
 
                 <select name="horario" form="agendamento-form">
-                    <option value="">Selecione um horário</option>
+                    <option value="" disabled hidden>Selecione um horário</option>
                     <option value="09:00">09:00</option>
                     <option value="10:00">10:00</option>
                     <option value="11:00">11:00</option>
@@ -210,8 +210,7 @@ function Agendamento() {
                 <textarea name="descricao" placeholder="Conte mais sobre sua tattoo"></textarea>
 
                 <div className="agendamento-opcao">
-                    <p>Ou</p>
-                    <p>nos mande uma imagem de referência.</p>
+                    <p>Ou nos mande uma imagem de referência.</p>
                 </div>
 
                 

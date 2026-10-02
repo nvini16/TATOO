@@ -32,7 +32,7 @@
 
 .indexador-imagens-area:hover {
     border-color: var(--marsali-tatoo-color-gold);
-    background-color: rgba(7, 90, 43, 0.12);
+    background-color: rgba(234, 234, 234, 0.12);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
 
@@ -140,8 +140,8 @@
 
     border: 1px solid var(--marsali-tatoo-color-gold);
     border-radius: 50%;
-    background-color: var(--marsali-tatoo-color-dark-green);
-    color: var(--marsali-tatoo-color-white);
+    background-color: var(--marsali-tatoo-color-white);
+    color: var(--marsali-tatoo-color-gold);
 
     font-size: 14px;
     font-weight: 700;

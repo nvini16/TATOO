@@ -11,8 +11,8 @@
     border-radius: 12px;
     box-sizing: border-box;
 
-    background: var(--marsali-tatoo-color-dark-green);
-    color: var(--marsali-tatoo-color-white);
+    background: rgb(255, 254, 254);
+    color: var(--marsali-tatoo-color-gold);
 
     display: flex;
     align-items: flex-start;
@@ -45,8 +45,9 @@
 .alert p {
     margin: 0;
 
-    color: var(--marsali-tatoo-color-white);
+    color: var(--marsali-tatoo-color-gold);
     line-height: 1.5;
+    font-weight: bold;
 }
 
 .alert-sucesso {
@@ -108,7 +109,7 @@
     border-radius: 6px;
 
     background-color: transparent;
-    color: var(--marsali-tatoo-color-white);
+    color: var(--marsali-tatoo-color-dold);
 
     cursor: pointer;
 
@@ -140,4 +141,19 @@
         transform: translate(-50%, 0);
     }
 
+}
+
+@media(max-width: 480px) {
+    .alert {
+        width: calc(100% - 32px);
+        padding: 12px;
+    }
+
+    .alert strong {
+        font-size: 16px;
+    }
+
+    .alert p {
+        font-size: 14px;
+    }
 }

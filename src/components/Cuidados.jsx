@@ -1,30 +1,39 @@
-import { useState } from 'react'
+import { useState } from 'react';
+import ScrollReveal from './ScrollReveal';
 
 function Cuidados() {
     const [itemAberto, setItemAberto] = useState(null)
     return (
         <section className="cuidados" id="cuidados">
-            <h2>Cuidados</h2>
+            <ScrollReveal>
+                <h2>Cuidados</h2>
 
-            <div className="trabalhos-divider"></div>
+                <div className="trabalhos-divider"></div>
+            </ScrollReveal>
 
-            <p className="cuidados-introducao">
+            <ScrollReveal>
+                <p className="cuidados-introducao">
                 Saiba como preparar sua pele antes da tatuagem e cuidar dela durante a cicatrização.
-            </p>
+                </p>
+            </ScrollReveal>
 
             <div className="cuidados-conteudo">
                 <article className="cuidados-card">
-                    <h3>Antes da tatuagem</h3>
+                    <ScrollReveal>
+                        <h3>Antes da tatuagem</h3>
+                    </ScrollReveal>
                     
                     <ul>
                         <li className="cuidado-item">
-                            <button 
+                            <ScrollReveal className="cuidado-reveal cuidado-reveal-esquerda">
+                                <button 
                                 className={`cuidado-item-titulo ${itemAberto === 0 ? 'aberto' : ''}`}
                                 onClick={() => setItemAberto(itemAberto === 0 ? null : 0)}
                             >
                                 Durma bem na noite anterior.
                                 <span>{itemAberto === 0 ? '-' : '+'}</span>
                             </button>
+                            </ScrollReveal>
 
                             {itemAberto === 0 && (
                                 <div className="cuidado-item-conteudo">
@@ -41,13 +50,15 @@ function Cuidados() {
                         </li>
 
                         <li className="cuidado-item">
-                            <button 
+                            <ScrollReveal className="cuidado-reveal cuidado-reveal-esquerda">
+                                <button 
                                 className={`cuidado-item-titulo ${itemAberto === 1 ? 'aberto' : ''}`}
                                 onClick={() => setItemAberto(itemAberto === 1 ? null : 1)}
                             >
                                 Alimente-se antes do procedimento.
                                 <span>{itemAberto === 1 ? '-' : '+'}</span>
                             </button>
+                            </ScrollReveal>
 
                             {itemAberto === 1 && (
                                 <div className="cuidado-item-conteudo">
@@ -64,13 +75,15 @@ function Cuidados() {
                         </li>
 
                         <li className="cuidado-item">
-                            <button 
+                            <ScrollReveal className="cuidado-reveal cuidado-reveal-esquerda">
+                                <button 
                                 className={`cuidado-item-titulo ${itemAberto === 2 ? 'aberto' : ''}`}
                                 onClick={() => setItemAberto(itemAberto === 2 ? null : 2)}
                             >
                                 Beba bastante água.
                                 <span>{itemAberto === 2 ? '-' : '+'}</span>
                             </button>
+                            </ScrollReveal>
 
                             {itemAberto === 2 && (
                                 <div className="cuidado-item-conteudo">
@@ -87,13 +100,15 @@ function Cuidados() {
                         </li>
 
                         <li className="cuidado-item">
-                            <button 
+                            <ScrollReveal className="cuidado-reveal cuidado-reveal-esquerda">
+                                <button 
                                 className={`cuidado-item-titulo ${itemAberto === 3 ? 'aberto' : ''}`}
                                 onClick={() => setItemAberto(itemAberto === 3 ? null : 3)}
                             >
                                 Evite consumir álcool antes da sessão.
                                 <span>{itemAberto === 3 ? '-' : '+'}</span>
                             </button>
+                            </ScrollReveal>
 
                             {itemAberto === 3 && (
                                 <div className="cuidado-item-conteudo">
@@ -111,13 +126,15 @@ function Cuidados() {
                         </li>
 
                         <li className="cuidado-item">
-                            <button 
+                            <ScrollReveal className="cuidado-reveal cuidado-reveal-esquerda">
+                                <button 
                                 className={`cuidado-item-titulo ${itemAberto === 4 ? 'aberto' : ''}`}
                                 onClick={() => setItemAberto(itemAberto === 4 ? null : 4)}
                             >
                                 Não aplique cremes ou produtos irritantes na região.
                                 <span>{itemAberto === 4 ? '-' : '+'}</span>
                             </button>
+                            </ScrollReveal>
 
                             {itemAberto === 4 && (
                                 <div className="cuidado-item-conteudo">
@@ -136,17 +153,21 @@ function Cuidados() {
                 </article>
 
                 <article className="cuidados-card">
-                    <h3>Depois da tatuagem</h3>
+                    <ScrollReveal>
+                        <h3>Depois da tatuagem</h3>
+                    </ScrollReveal>
                     
                     <ul>
                         <li className="cuidado-item">
-                            <button 
+                           <ScrollReveal className="cuidado-reveal cuidado-reveal-direita">
+                                 <button 
                                 className={`cuidado-item-titulo ${itemAberto === 5 ? 'aberto' : ''}`}
                                 onClick={() => setItemAberto(itemAberto === 5 ? null : 5)}
                             >
                                 Higienize a região conforme a orientação da tatuadora.
                                 <span>{itemAberto === 5 ? '-' : '+'}</span>
                             </button>
+                           </ScrollReveal>
 
                             {itemAberto === 5 && (
                                 <div className="cuidado-item-conteudo">
@@ -163,13 +184,15 @@ function Cuidados() {
                         </li>
 
                         <li className="cuidado-item">
-                            <button 
+                            <ScrollReveal className="cuidado-reveal cuidado-reveal-direita">
+                                <button 
                                 className={`cuidado-item-titulo ${itemAberto === 6 ? 'aberto' : ''}`}
                                 onClick={() => setItemAberto(itemAberto === 6 ? null : 6)}
                             >
                                 Evite coçar ou remover as casquinhas.
                                 <span>{itemAberto === 6 ? '-' : '+'}</span>
                             </button>
+                            </ScrollReveal>
 
                             {itemAberto === 6 && (
                                 <div className="cuidado-item-conteudo">
@@ -186,13 +209,15 @@ function Cuidados() {
                         </li>
 
                         <li className="cuidado-item">
-                            <button 
+                           <ScrollReveal className="cuidado-reveal cuidado-reveal-direita">
+                                 <button 
                                 className={`cuidado-item-titulo ${itemAberto === 7 ? 'aberto' : ''}`}
                                 onClick={() => setItemAberto(itemAberto === 7 ? null : 7)}
                             >
                                 Não exponha a tatuagem ao sol durante a cicatrização.
                                 <span>{itemAberto === 7 ? '-' : '+'}</span>
                             </button>
+                           </ScrollReveal>
 
                             {itemAberto === 7 && (
                                 <div className="cuidado-item-conteudo">
@@ -209,13 +234,15 @@ function Cuidados() {
                         </li>
 
                         <li className="cuidado-item">
-                            <button 
+                           <ScrollReveal className="cuidado-reveal cuidado-reveal-direita">
+                                 <button 
                                 className={`cuidado-item-titulo ${itemAberto === 8 ? 'aberto' : ''}`}
                                 onClick={() => setItemAberto(itemAberto === 8 ? null : 8)}
                             >
                                 Evite piscina, mar e banhos muito prolongados.
                                 <span>{itemAberto === 8 ? '-' : '+'}</span>
                             </button>
+                           </ScrollReveal>
 
                             {itemAberto === 8 && (
                                 <div className="cuidado-item-conteudo">
@@ -234,13 +261,15 @@ function Cuidados() {
                         <li 
                             className="cuidado-item"
                         >
-                            <button 
+                            <ScrollReveal className="cuidado-reveal cuidado-reveal-direita">
+                                <button 
                                 className={`cuidado-item-titulo ${itemAberto === 9 ? 'aberto' : ''}`}
                                 onClick={() => setItemAberto(itemAberto === 9 ? null : 9)}
                             >
                                 Mantenha a região hidratada conforme orientação profissional.
                                 <span>{itemAberto === 9 ? '-' : '+'}</span>
                             </button>
+                            </ScrollReveal>
 
                             {itemAberto === 9 && (
                                 <div className="cuidado-item-conteudo">

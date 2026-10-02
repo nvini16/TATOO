@@ -159,6 +159,68 @@
     display: block;
 }
 
+.cuidado-reveal {
+    opacity: 0;
+    transition: 
+        opacity 0.6s ease,
+        transform 0.6s ease;
+}
+
+.cuidado-reveal-esquerda {
+    transform: translateX(-40px);
+}
+
+.cuidado-reveal-direita {
+    transform: translateX(40px);
+}
+
+.cuidado-reveal.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.cuidados-card:first-child .cuidado-reveal:nth-child(1) {
+    transition-delay: 0s;
+}
+
+.cuidados-card:first-child .cuidado-reveal:nth-child(2) {
+    transition-delay: 0.1s;
+}
+
+.cuidados-card:first-child .cuidado-reveal:nth-child(3) {
+    transition-delay: 0.2s;
+}
+
+.cuidados-card:first-child .cuidado-reveal:nth-child(4) {
+    transition-delay: 0.3s;
+}
+
+.cuidados-card:first-child .cuidado-reveal:nth-child(5) {
+    transition-delay: 0.4s;
+}
+
+.cuidados-card:first-child .cuidado-reveal:nth-child(1) {
+    transition-delay: 0s;
+}
+
+.cuidados-card:first-child .cuidado-reveal:nth-child(2) {
+    transition-delay: 0.1s;
+}
+
+.cuidados-card:first-child .cuidado-reveal:nth-child(3) {
+    transition-delay: 0.2s;
+}
+
+.cuidados-card:first-child .cuidado-reveal:nth-child(4) {
+    transition-delay: 0.3s;
+}
+
+.cuidados-card:first-child .cuidado-reveal:nth-child(5) {
+    transition-delay: 0.4s;
+}
+
+
+
 @media (max-width: 768px) {
     .cuidados-conteudo {
         flex-direction: column;
@@ -171,4 +233,50 @@
     .cuidados h2 {
         margin-bottom: 30px;
     }
+
+    .cuidados-card:first-child .cuidado-reveal:nth-child(1) {
+    transition-delay: 0s;
+}
+
+ .cuidados-card:first-child .cuidado-reveal:nth-child(2) {
+    transition-delay: 0.1s;
+}
+
+ .cuidados-card:first-child .cuidado-reveal:nth-child(3) {
+    transition-delay: 0.2s;
+}
+
+ .cuidados-card:first-child .cuidado-reveal:nth-child(4) {
+    transition-delay: 0.3s;
+}
+
+ .cuidados-card:first-child .cuidado-reveal:nth-child(5) {
+    transition-delay: 0.4s;
+}
+
+ .cuidados-card:first-child .cuidado-reveal:nth-child(1) {
+    transition-delay: 0.5s;
+}
+
+ .cuidados-card:first-child .cuidado-reveal:nth-child(2) {
+    transition-delay: 0.6s;
+}
+
+ .cuidados-card:first-child .cuidado-reveal:nth-child(3) {
+    transition-delay: 0.7s;
+}
+
+ .cuidados-card:first-child .cuidado-reveal:nth-child(4) {
+    transition-delay: 0.8s;
+}
+
+ .cuidados-card:first-child .cuidado-reveal:nth-child(5) {
+    transition-delay: 0.9s;
+}
+
+.cuidado-reveal-direita {
+    transform: translateX(-40px);
+}
+
+
 }

@@ -3,6 +3,8 @@ import IndexadorImagens from '../components/IndexadorImagens';
 import { useState } from 'react';
 import CalendarioAgendamento from '../components/CalendarioAgendamento';
 import Alert from '../components/Alert';
+import ScrollReveal from '../components/ScrollReveal';
+
 
 function Agendamento() {
 
@@ -162,26 +164,36 @@ function Agendamento() {
                 /> 
         )}
 
-            <h1>Agende sua tattoo</h1>
+                 <ScrollReveal>
+                <h1>Agende sua tattoo</h1>
+            </ScrollReveal>
+           <div className="agendamento-contain">
 
 
             <div className="agendamento-center">
                 <section>
-                <h2>Escolha o trabalho</h2>
+                <ScrollReveal>
+                    <h2>Escolha o trabalho</h2>
+                </ScrollReveal>
 
-                <select name="trabalho" form="agendamento-form">
+                <ScrollReveal>
+                    <select name="trabalho" form="agendamento-form">
                     <option value="">Selecione um trabalho</option>
                     <option value="tattoo-pequena">Tattoo pequena</option>
                     <option value="tattoo-media">Tattoo média</option>
                     <option value="tattoo-grande">Tattoo grande</option>
                 </select>
+                </ScrollReveal>
             </section>
 
             <section> 
-                <h2>Escolha o horário</h2>
+                <ScrollReveal>
+                    <h2>Escolha o horário</h2>
+                </ScrollReveal>
 
 
-                <select name="horario" form="agendamento-form">
+                <ScrollReveal>
+                    <select name="horario" form="agendamento-form">
                     <option value="" disabled hidden>Selecione um horário</option>
                     <option value="09:00">09:00</option>
                     <option value="10:00">10:00</option>
@@ -191,43 +203,63 @@ function Agendamento() {
                     <option value="16:00">16:00</option>
                     <option value="17:00">17:00</option>
                 </select>
+                </ScrollReveal>
 
-            <CalendarioAgendamento 
+           <ScrollReveal>
+             <CalendarioAgendamento 
                 dataSelecionada={dataSelecionada}
                 onSelecionarData={setDataSelecionada}
             />
+           </ScrollReveal>
 
 
             </section>
 
             <form id="agendamento-form" onSubmit={handleSubmit}>
-                <h2>Seus dados</h2>
+                <ScrollReveal>
+                    <h2>Seus dados</h2>
+                </ScrollReveal>
 
-                <input type="text" name="nome" placeholder="Seu nome" />
+               <ScrollReveal>
+                 <input type="text" name="nome" placeholder="Seu nome" />
+               </ScrollReveal>
 
-                <input type="tel" name="whatsapp" placeholder="Seu WhatsApp" />
+               <ScrollReveal>
+                 <input type="tel" name="whatsapp" placeholder="Seu WhatsApp" />
+               </ScrollReveal>
 
-                <textarea name="descricao" placeholder="Conte mais sobre sua tattoo"></textarea>
+                <ScrollReveal>
+                    <textarea name="descricao" placeholder="Conte mais sobre sua tattoo"></textarea>
+                </ScrollReveal>
 
-                <div className="agendamento-opcao">
+                <ScrollReveal>
+                    <div className="agendamento-opcao">
                     <p>Ou nos mande uma imagem de referência.</p>
                 </div>
+                </ScrollReveal>
 
                 
-                <IndexadorImagens onImagensChange={setImagens} />
+                <ScrollReveal>
+                    <IndexadorImagens onImagensChange={setImagens} />
+                </ScrollReveal>
 
                 <div className="agendamento-acoes">
-                <button type="submit">Agendar</button>
+                <ScrollReveal>
+                    <button type="submit">Agendar</button>
+                </ScrollReveal>
 
-                <Link
+               <ScrollReveal>
+                 <Link
                     to="/"
                     className="agendamento-link"
                 >
                     Voltar
                 </Link>
+               </ScrollReveal>
                 </div>
             </form>
             </div>
+           </div>
         </main>
     );
 }

@@ -1,4 +1,7 @@
 /* AGENDAMENTOS  */
+.agendamento-contain {
+  width: 100%;
+}
 
 .agendamento-page {
   min-height: 100vh;

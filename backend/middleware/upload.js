@@ -7,7 +7,7 @@ const upload = multer({
         files: 5,
         fileSize: 5 * 1024 * 1024,
     },
-    fileFilter: (res, file, callback) => {
+    fileFilter: (req, file, callback) => {
         if (!file.mimetype.startsWith('image/')) {
             return callback(new Error('Apenas imagens são permitidas.'));
 

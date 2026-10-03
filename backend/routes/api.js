@@ -1,6 +1,7 @@
 const express = require('express');
 const supabase = require('../lib/supabase');
 const upload = require('../middleware/upload');
+const crypto = require('crypto');
 
 
 const router = express.Router();
@@ -23,7 +24,7 @@ router.get('/', async (req, res) => {
 router.post('/clientes', async (req, res) => {
     const { nome, whatsapp } = req.body;
 
-    if (!nome?.trim() || !whatsapp?.trim) {
+    if (!nome?.trim() || !whatsapp?.trim()) {
         return res.status(400).json({
             erro: 'Nome e WhatsApp são obrigatórios.',
         });
@@ -52,7 +53,7 @@ router.post('/clientes', async (req, res) => {
         }
 
         return res.status(500).json({
-            erro: error.massage,
+            erro: error.message,
         });
     }
 
@@ -69,7 +70,6 @@ router.post('/agendamentos', upload.array('imagens', 5), async (req, res) => {
         horario
     } = req.body;
 
-    console.log('Arquivos recebidos:', req.files);
 
     if (!nome?.trim() || !whatsapp?.trim()) {
         return res.status(400).json({
@@ -146,9 +146,30 @@ if (erroAgendamento) {
     console.error('Erro ao criar agendamento:', erroAgendamento);
 
     if (erroAgendamento.code === '23505') {
-        return res.status(404).json({
-            erro: 'Já existe um cliente ativo para essa data.'
+        return res.status(409).json({
+            erro: 'Já existe um agendamento ativo para essa data'
         });
+    }
+
+    for (const arquivo of req.files || []) {
+        const nomeUnico = `${crypto.randomUUID()}-${arquivo.originalmente}`;
+
+        const caminho = `${agendamento.id}/${nomeUnico}`;
+
+        const { error: erroUpload } = await supabase.storage
+            .from('agendamento-imagens')
+            .upload(caminho, arquivo.buffer, {
+                contentType: arquivo.mimetype,
+                upsert: false,
+            });
+
+        if (erroUpload) {
+            console.error('Erro ao enviar imagem:', erroUpload);
+
+            return res.status(500).json({
+                erro: 'Não foi possível enviar uma das imagens.'
+            });
+        }
     }
 
     return res.status(500).json({

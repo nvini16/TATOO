@@ -148,6 +148,31 @@ function Agendamento() {
 
             console.log('Status:', resposta.status);
             console.log('Resposta do backend', textoResposta);
+
+            if (resposta.status === 201) {
+                setAlerta({
+                    mostrar: true,
+                    tipo: 'sucesso',
+                    titulo: 'Agendamento enviado.',
+                    mensagem: 'Sua solicitação foi recebida com sucesso.'
+                });
+            } else if (resposta.status === 409) {
+                setAlerta({
+                    mostrar: true,
+                    tipo: 'erro',
+                    titulo: 'Data indisponível.',
+                    mensagem: 'Já existe um agendamento ativo para essa data. Escolha outro dia.'
+                });
+            } else {
+                setAlerta({
+                    mostrar: true,
+                    tipo: 'erro',
+                    titulo: 'Erro no agendamento.',
+                    mensagem: 'Não foi possível realizar o agendamento. Tente novamente.'
+                });
+            }
+
+
         } catch (erro) {
             console.error('Erro ao enviar agendamento! Tente novamente mais tarde:', erro);
         }

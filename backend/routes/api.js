@@ -151,37 +151,38 @@ if (erroAgendamento) {
         });
     }
 
-    for (const arquivo of req.files || []) {
-        const nomeUnico = `${crypto.randomUUID()}-${arquivo.originalmente}`;
-
-        const caminho = `${agendamento.id}/${nomeUnico}`;
-
-        const { error: erroUpload } = await supabase.storage
-            .from('agendamento-imagens')
-            .upload(caminho, arquivo.buffer, {
-                contentType: arquivo.mimetype,
-                upsert: false,
-            });
-
-        if (erroUpload) {
-            console.error('Erro ao enviar imagem:', erroUpload);
-
-            return res.status(500).json({
-                erro: 'Não foi possível enviar uma das imagens.'
-            });
-        }
-    }
-
     return res.status(500).json({
         erro: 'Não foi possível criar o agendamento.'
     });
-
+    
 }
 
-return res.status(201).json({
+for (const arquivo of req.files || []) {
+    const nomeUnico = `${crypto.randomUUID()}-${arquivo.originalname}`;
+    
+    const caminho = `${agendamento.id}/${nomeUnico}`;
+
+    const { error: erroUpload } = await supabase.storage
+        .from('agendamento-imagens')
+        .upload(caminho, arquivo.buffer, {
+            contentType: arquivo.mimetype,
+            upsert: false,
+        });
+        
+        if (erroUpload) {
+        console.error('Erro ao enviar imagem:', erroUpload);
+        
+        return res.status(500).json({
+            erro: 'Não foi possível enviar uma das imagens.'
+        });
+    }
+}
+
+return res.status(201).json({ 
     mensagem: 'Agendamento criado com sucesso.',
     agendamento
 })
+
 
 });
 

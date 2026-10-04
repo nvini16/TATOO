@@ -19,7 +19,7 @@ function Agendamento() {
         }
     );
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault()
 
         const formData = new FormData(event.currentTarget)
@@ -125,16 +125,32 @@ function Agendamento() {
                     
                 }            
 
-        const agendamento = { 
-            nome,
-            whatsapp,
-            descricao,
-            trabalho,
-            data,
-            horario
-        }
+        const formDataAgendamento = new FormData();
 
-        console.log(agendamento)
+        formDataAgendamento.append('nome', nome);
+        formDataAgendamento.append('whatsapp', whatsapp);
+        formDataAgendamento.append('trabalho', trabalho);
+        formDataAgendamento.append('descricao', descricao);
+        formDataAgendamento.append('data', data);
+        formDataAgendamento.append('horario', horario); 
+
+        imagens.forEach((imagem) => {
+            formDataAgendamento.append('imagens', imagem.arquivo);
+        });
+
+        try {
+            const resposta = await fetch('/api/agendamentos', {
+                method: 'POST',
+                body: formDataAgendamento,
+            });
+
+            const textoResposta = await resposta.text();
+
+            console.log('Status:', resposta.status);
+            console.log('Resposta do backend', textoResposta);
+        } catch (erro) {
+            console.error('Erro ao enviar agendamento! Tente novamente mais tarde:', erro);
+        }
 
         setAlerta({
             mostrar: true,

@@ -177,12 +177,7 @@ function Agendamento() {
             console.error('Erro ao enviar agendamento! Tente novamente mais tarde:', erro);
         }
 
-        setAlerta({
-            mostrar: true,
-            tipo: 'sucesso',
-            titulo: 'Solicitação recebida.',
-            mensagem: 'Seus dados foram preenchidos corretamente.'
-        })
+        
     }
 
     return (

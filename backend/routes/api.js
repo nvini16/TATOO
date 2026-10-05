@@ -92,6 +92,32 @@ router.post('/agendamentos', upload.array('imagens', 5), async (req, res) => {
     const nomeLimpo = nome.trim();
     const whatsappLimpo = whatsapp.trim();
 
+    const { data: agendamentoExistente, error: erroDisponibilidade } = await supabase
+        .from('agendamentos')
+        .select('id')
+        .eq('data', data)
+        .in('status', [
+            'aguardando_sinal',
+            'sinal_pago',
+            'aguardando_confirmacao',
+            'confirmado'
+        ])
+        .maybeSingle();
+
+    if (erroDisponibilidade) {
+        console.error('Erro ao verificar a disponibilidade da data:', erroDisponibilidade);
+
+        return res.status(500).json({
+            erro: 'Não foi possível verificar a disponibilidade da data.'
+        });
+    }
+
+    if (agendamentoExistente) {
+        return res.status(409).json({
+            erro: 'Já existe um agendamento ativo para essa data.'
+        });
+    }
+
     const { data: clienteExistente, error: erroBusca } = await supabase
         .from('clientes')
         .select('id, nome, whatsapp')

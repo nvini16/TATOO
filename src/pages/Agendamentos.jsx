@@ -5,6 +5,8 @@ import CalendarioAgendamento from '../components/CalendarioAgendamento';
 import Alert from '../components/Alert';
 import ScrollReveal from '../components/ScrollReveal';
 
+const API_URL = import.meta.env.VITE_API_URL || '';
+
 
 function Agendamento() {
 
@@ -139,7 +141,7 @@ function Agendamento() {
         });
 
         try {
-            const resposta = await fetch('/api/agendamentos', {
+            const resposta = await fetch(`${API_URL}/api/agendamentos`, {
                 method: 'POST',
                 body: formDataAgendamento,
             });

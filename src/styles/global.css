@@ -29,7 +29,7 @@ body {
       rgba(3, 3, 3, 0.797),
       var(--marsali-tatoo-color-black)
     ),
-  url('../assets/body.webp');
+  url('../assets/body.webp.jpg');
   background-attachment: fixed;
   background-position: center 85px;
   background-repeat: no-repeat;

@@ -202,6 +202,21 @@ for (const arquivo of req.files || []) {
             erro: 'Não foi possível enviar uma das imagens.'
         });
     }
+
+    const { error: erroRegistroImagem } = await supabase
+        .from('agendamento_imagens')
+        .insert({
+            agendamento_id: agendamento.id,
+            caminho: caminho
+        });
+
+    if (erroRegistroImagem) {
+        console.error('Erro ao registrar imagem no banco:', erroRegistroImagem);
+
+        return res.status(500).json({
+            erro: 'A imagem foi enviada, mas não foi possível registrar sua referência.'
+        }); 
+    }
 }
 
 return res.status(201).json({ 

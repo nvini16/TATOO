@@ -34,7 +34,7 @@
       rgba(56, 56, 56, 0.668) 50%,
       var(--marsali-tatoo-color-black)
     ),
-  url('../assets/body.webp');
+  url('../assets/body.webp.jpg');
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;

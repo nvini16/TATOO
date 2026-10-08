@@ -70,6 +70,18 @@ function Agendamento() {
                 return;
 
             }
+
+        const estilo = formData.get('estilo')
+            if (!estilo) {
+                setAlerta({
+                    mostrar: true,
+                    tipo: 'aviso',
+                    titulo: 'Estilo não selecionado!',
+                    mensagem: 'Escolha o estilo da sua tattoo.'
+                });
+                return;
+            }
+
         const data = dataSelecionada
             ? dataSelecionada.toLocaleDateString('en-CA')
             : ''
@@ -132,6 +144,7 @@ function Agendamento() {
         formDataAgendamento.append('nome', nome);
         formDataAgendamento.append('whatsapp', whatsapp);
         formDataAgendamento.append('trabalho', trabalho);
+        formDataAgendamento.append('estilo', estilo);
         formDataAgendamento.append('descricao', descricao);
         formDataAgendamento.append('data', data);
         formDataAgendamento.append('horario', horario); 

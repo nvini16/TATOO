@@ -65,6 +65,7 @@ router.post('/agendamentos', upload.array('imagens', 5), async (req, res) => {
         nome,
         whatsapp,
         trabalho,
+        estilo,
         descricao,
         data,
         horario
@@ -80,6 +81,12 @@ router.post('/agendamentos', upload.array('imagens', 5), async (req, res) => {
     if (!trabalho?.trim()) {
         return res.status(400).json({
             erro: 'O trabalho é obrigatório.'
+        });
+    }
+
+    if (!estilo?.trim()) {
+        return res.status(400).json({
+            erro: 'O estilo é obrigatório.'
         });
     }
 
@@ -161,6 +168,7 @@ const { data: agendamento, error: erroAgendamento } = await supabase
     .insert({
         cliente_id: cliente.id,
         arte: trabalho.trim(),
+        estilo: estilo.trim(),
         descricao: descricao?.trim() || null,
         data,
         horario,

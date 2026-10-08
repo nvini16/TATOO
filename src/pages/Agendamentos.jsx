@@ -25,6 +25,7 @@ function Agendamento() {
         event.preventDefault()
 
         const formData = new FormData(event.currentTarget)
+        console.log('local_corpo no FromData:', formData.get('local_corpo'));
 
         const nome = formData.get('nome')
             if (!nome) {
@@ -82,7 +83,7 @@ function Agendamento() {
                 return;
             }
 
-        const localCorpo = formData.get('local_corpo')
+        const localCorpo = formData.get('local_corpo');
             if (!localCorpo) {
                 setAlerta({
                     mostrar: true,
@@ -160,6 +161,10 @@ function Agendamento() {
         formDataAgendamento.append('descricao', descricao);
         formDataAgendamento.append('data', data);
         formDataAgendamento.append('horario', horario); 
+
+        for (const [chave, valor] of formDataAgendamento.entries()) {
+            console.log('Enviado:', chave, valor);
+        }
 
         imagens.forEach((imagem) => {
             formDataAgendamento.append('imagens', imagem.arquivo);

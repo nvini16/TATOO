@@ -171,6 +171,8 @@ router.post('/agendamentos', upload.array('imagens', 5), async (req, res) => {
 }
 
 const { data: agendamento, error: erroAgendamento } = await supabase
+console.log('BODY RECEBIDO:', req.body);
+console.log('LOCAL_CORPO RECEBIDO:', local_corpo);
     .from('agendamentos')
     .insert({
         cliente_id: cliente.id,

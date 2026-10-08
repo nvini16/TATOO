@@ -216,11 +216,31 @@ function Agendamento() {
 
                 <ScrollReveal>
                     <select name="trabalho" form="agendamento-form">
-                    <option value="">Selecione um trabalho</option>
-                    <option value="tattoo-pequena">Tattoo pequena</option>
-                    <option value="tattoo-media">Tattoo média</option>
-                    <option value="tattoo-grande">Tattoo grande</option>
+                        <option value="">Selecione um trabalho</option>
+                        <option value="tattoo-pequena">Tattoo pequena</option>
+                        <option value="tattoo-media">Tattoo média</option>
+                        <option value="tattoo-grande">Tattoo grande</option>
                 </select>
+                </ScrollReveal>
+
+                <ScrollReveal>
+                    <select name="estilo" form="agendamento-from">
+                        <option value="">Selecione um estilo</option>
+                        <option value="minimalista">Minimalista</option>
+                        <option value="fine-line">Fine Line</option>
+                        <option value="lettering">Lettering</option>
+                        <option value="old-school">Old School</option>
+                        <option value="blackwork-simples">Blackwork Simples</option>
+                        <option value="blackwork-detalhado">Blackwork Detalhado</option>
+                        <option value="blackwork-pesado">Blackwork Pesado</option>
+                        <option value="ornamental">Ornamental</option>
+                        <option value="pontilhismo">Pontilhismo</option>
+                        <option value="black-grey">Black & Grey</option>
+                        <option value="realismo-pb">Realismo P&B</option>
+                        <option value="colorida">Colorida</option>
+                        <option value="autoral-exclusiva">Autoral Exclusiva</option>
+                        <option value="cover-up">Cover-up</option>
+                    </select>
                 </ScrollReveal>
             </section>
 
@@ -232,15 +252,15 @@ function Agendamento() {
 
                 <ScrollReveal>
                     <select name="horario" form="agendamento-form">
-                    <option value="" disabled hidden>Selecione um horário</option>
-                    <option value="09:00">09:00</option>
-                    <option value="10:00">10:00</option>
-                    <option value="11:00">11:00</option>
-                    <option value="14:00">14:00</option>
-                    <option value="15:00">15:00</option>
-                    <option value="16:00">16:00</option>
-                    <option value="17:00">17:00</option>
-                </select>
+                        <option value="" disabled hidden>Selecione um horário</option>
+                        <option value="09:00">09:00</option>
+                        <option value="10:00">10:00</option>
+                        <option value="11:00">11:00</option>
+                        <option value="14:00">14:00</option>
+                        <option value="15:00">15:00</option>
+                        <option value="16:00">16:00</option>
+                        <option value="17:00">17:00</option>
+                    </select>
                 </ScrollReveal>
 
            <ScrollReveal>
@@ -267,7 +287,7 @@ function Agendamento() {
                </ScrollReveal>
 
                 <ScrollReveal>
-                    <textarea name="descricao" placeholder="Conte mais sobre sua tattoo"></textarea>
+                    <textarea name="descricao" placeholder="Descreva sua ideia"></textarea>
                 </ScrollReveal>
 
                 <ScrollReveal>

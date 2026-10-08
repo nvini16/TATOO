@@ -66,6 +66,7 @@ router.post('/agendamentos', upload.array('imagens', 5), async (req, res) => {
         whatsapp,
         trabalho,
         estilo,
+        local_corpo,
         descricao,
         data,
         horario
@@ -87,6 +88,12 @@ router.post('/agendamentos', upload.array('imagens', 5), async (req, res) => {
     if (!estilo?.trim()) {
         return res.status(400).json({
             erro: 'O estilo é obrigatório.'
+        });
+    }
+
+    if (!local_corpo?.trim()) {
+        return res.status(400).json({
+            erro: 'O local do corpo é obrigatório.'
         });
     }
 
@@ -169,6 +176,7 @@ const { data: agendamento, error: erroAgendamento } = await supabase
         cliente_id: cliente.id,
         arte: trabalho.trim(),
         estilo: estilo.trim(),
+        local_corpo: local_corpo.trim(),
         descricao: descricao?.trim() || null,
         data,
         horario,

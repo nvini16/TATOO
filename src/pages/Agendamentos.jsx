@@ -82,6 +82,17 @@ function Agendamento() {
                 return;
             }
 
+        const localCorpo = formData.get('local_corpo')
+            if (!localCorpo) {
+                setAlerta({
+                    mostrar: true,
+                    tipo: 'aviso',
+                    titulo: 'Local não selecionado!',
+                    mensagem: 'Escolha o local do corpo ara sua tattoo.'
+                });
+                return;
+            }
+
         const data = dataSelecionada
             ? dataSelecionada.toLocaleDateString('en-CA')
             : ''
@@ -145,6 +156,7 @@ function Agendamento() {
         formDataAgendamento.append('whatsapp', whatsapp);
         formDataAgendamento.append('trabalho', trabalho);
         formDataAgendamento.append('estilo', estilo);
+        formDataAgendamento.append('local_corpo');
         formDataAgendamento.append('descricao', descricao);
         formDataAgendamento.append('data', data);
         formDataAgendamento.append('horario', horario); 
@@ -255,6 +267,33 @@ function Agendamento() {
                         <option value="cover-up">Cover-up</option>
                     </select>
                 </ScrollReveal>
+
+                <ScrollReveal>
+                    <h2>Escolha o local da tattoo</h2>
+                </ScrollReveal>
+
+                <ScrollReveal>
+                    <select name="local_corpo" form="agendamento-form">
+                        <option value="">Selecione o local</option>
+                        <option value="braco">Braço</option>
+                        <option value="antebraco">Antebraço</option>
+                        <option value="biceps">Bíceps</option>
+                        <option value="triceps">Tríceps</option>
+                        <option value="ombro">Ombro</option>
+                        <option value="peito">Peito</option>
+                        <option value="costas">Costas</option>
+                        <option value="abdomen">Abdomen</option>
+                        <option value="costela">Costela</option>
+                        <option value="coxa">Coxa</option>
+                        <option value="panturrilha">Panturrilha</option>
+                        <option value="joelho">Joelho</option>
+                        <option value="cotovelo">Cotovelo</option>
+                        <option value="mao">Mão</option>
+                        <option value="pe">Pé</option>
+                        <option value="pescoco">Pescoço</option>
+                        <option value="cabeca-rosto">Cabeça/Rosto</option>
+                    </select>
+                </ScrollReveal>
             </section>
 
             <section> 
@@ -265,7 +304,7 @@ function Agendamento() {
 
                 <ScrollReveal>
                     <select name="horario" form="agendamento-form">
-                        <option value="" disabled hidden>Selecione um horário</option>
+                        <option value="">Selecione um horário</option>
                         <option value="09:00">09:00</option>
                         <option value="10:00">10:00</option>
                         <option value="11:00">11:00</option>

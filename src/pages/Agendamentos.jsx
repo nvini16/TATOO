@@ -88,7 +88,7 @@ function Agendamento() {
                     mostrar: true,
                     tipo: 'aviso',
                     titulo: 'Local não selecionado!',
-                    mensagem: 'Escolha o local do corpo ara sua tattoo.'
+                    mensagem: 'Escolha o local do corpo para sua tattoo.'
                 });
                 return;
             }
@@ -156,7 +156,7 @@ function Agendamento() {
         formDataAgendamento.append('whatsapp', whatsapp);
         formDataAgendamento.append('trabalho', trabalho);
         formDataAgendamento.append('estilo', estilo);
-        formDataAgendamento.append('local_corpo');
+        formDataAgendamento.append('local_corpo', localCorpo);
         formDataAgendamento.append('descricao', descricao);
         formDataAgendamento.append('data', data);
         formDataAgendamento.append('horario', horario); 

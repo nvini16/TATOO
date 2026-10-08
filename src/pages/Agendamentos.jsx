@@ -224,7 +224,7 @@ function Agendamento() {
                 </ScrollReveal>
 
                 <ScrollReveal>
-                    <select name="estilo" form="agendamento-from">
+                    <select name="estilo" form="agendamento-form">
                         <option value="">Selecione um estilo</option>
                         <option value="minimalista">Minimalista</option>
                         <option value="fine-line">Fine Line</option>

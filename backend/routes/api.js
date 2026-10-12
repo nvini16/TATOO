@@ -60,6 +60,22 @@ router.post('/clientes', async (req, res) => {
     res.status(201).json(data);
 })
 
+router.get('/agendamentos', async (req, res) => { const { data, error } = await supabase
+    .from('agendamentos')
+    .select('*')
+    .order('data', { ascending: true });
+
+    if (error) {
+        console.error('Erro ao consultar agendamentos:', error);
+
+        return res.status(500).json({
+            erro: 'Não foi possível consultar os agendamentos.',
+        })
+    }
+
+    res.json(data);
+});
+
 router.post('/agendamentos', upload.array('imagens', 5), async (req, res) => {
     const {
         nome,
@@ -170,9 +186,14 @@ router.post('/agendamentos', upload.array('imagens', 5), async (req, res) => {
     cliente = novoCliente;
 }
 
-const { data: agendamento, error: erroAgendamento } = await supabase
-console.log('BODY RECEBIDO:', req.body);
+console.log('BODY RECEBIDO:', {
+    temLocalCorpo:
+Boolean(req.body.local_corpo),
+    localCorpo: req.body.local_corpo
+});
 console.log('LOCAL_CORPO RECEBIDO:', local_corpo);
+
+const { data: agendamento, error: erroAgendamento } = await supabase
     .from('agendamentos')
     .insert({
         cliente_id: cliente.id,

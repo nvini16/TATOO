@@ -25,7 +25,6 @@ function Agendamento() {
         event.preventDefault()
 
         const formData = new FormData(event.currentTarget)
-        console.log('local_corpo no FromData:', formData.get('local_corpo'));
 
         const nome = formData.get('nome')
             if (!nome) {
@@ -79,17 +78,6 @@ function Agendamento() {
                     tipo: 'aviso',
                     titulo: 'Estilo não selecionado!',
                     mensagem: 'Escolha o estilo da sua tattoo.'
-                });
-                return;
-            }
-
-        const localCorpo = formData.get('local_corpo');
-            if (!localCorpo) {
-                setAlerta({
-                    mostrar: true,
-                    tipo: 'aviso',
-                    titulo: 'Local não selecionado!',
-                    mensagem: 'Escolha o local do corpo para sua tattoo.'
                 });
                 return;
             }
@@ -157,7 +145,6 @@ function Agendamento() {
         formDataAgendamento.append('whatsapp', whatsapp);
         formDataAgendamento.append('trabalho', trabalho);
         formDataAgendamento.append('estilo', estilo);
-        formDataAgendamento.append('local_corpo', localCorpo);
         formDataAgendamento.append('descricao', descricao);
         formDataAgendamento.append('data', data);
         formDataAgendamento.append('horario', horario); 
@@ -273,32 +260,7 @@ function Agendamento() {
                     </select>
                 </ScrollReveal>
 
-                <ScrollReveal>
-                    <h2>Escolha o local da tattoo</h2>
-                </ScrollReveal>
-
-                <ScrollReveal>
-                    <select name="local_corpo" form="agendamento-form">
-                        <option value="">Selecione o local</option>
-                        <option value="braco">Braço</option>
-                        <option value="antebraco">Antebraço</option>
-                        <option value="biceps">Bíceps</option>
-                        <option value="triceps">Tríceps</option>
-                        <option value="ombro">Ombro</option>
-                        <option value="peito">Peito</option>
-                        <option value="costas">Costas</option>
-                        <option value="abdomen">Abdomen</option>
-                        <option value="costela">Costela</option>
-                        <option value="coxa">Coxa</option>
-                        <option value="panturrilha">Panturrilha</option>
-                        <option value="joelho">Joelho</option>
-                        <option value="cotovelo">Cotovelo</option>
-                        <option value="mao">Mão</option>
-                        <option value="pe">Pé</option>
-                        <option value="pescoco">Pescoço</option>
-                        <option value="cabeca-rosto">Cabeça/Rosto</option>
-                    </select>
-                </ScrollReveal>
+               
             </section>
 
             <section> 

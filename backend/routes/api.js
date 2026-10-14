@@ -2,11 +2,12 @@ const express = require('express');
 const supabase = require('../lib/supabase');
 const upload = require('../middleware/upload');
 const crypto = require('crypto');
+const requireAdmin = require('../middleware/requireAdmin');
 
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
+router.get('/', requireAdmin, async (req, res) => {
     const { data, error } = await supabase
         .from('clientes')
         .select('*');
@@ -21,7 +22,7 @@ router.get('/', async (req, res) => {
         res.json(data);
     });
 
-router.post('/clientes', async (req, res) => {
+router.post('/clientes', requireAdmin, async (req, res) => {
     const { nome, whatsapp } = req.body;
 
     if (!nome?.trim() || !whatsapp?.trim()) {
@@ -60,7 +61,7 @@ router.post('/clientes', async (req, res) => {
     res.status(201).json(data);
 })
 
-router.get('/agendamentos', async (req, res) => { const { data, error } = await supabase
+router.get('/agendamentos', requireAdmin, async (req, res) => { const { data, error } = await supabase
     .from('agendamentos')
     .select('*')
     .order('data', { ascending: true });

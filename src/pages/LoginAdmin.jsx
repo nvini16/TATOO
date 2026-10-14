@@ -73,11 +73,14 @@ function LoginAdmin() {
             setMensagem(
                 'Link de acesso enviado. Confira seu e-mail e clique no link para entrar.'
             );
-        } catch (error) {
-            setErro(
-                'Não foi possível enviar o link de acesso. Confira o e-mail e tente novamente.'
-            );
-        } finally {
+       } catch (error) {
+    alert('O catch foi executado!');
+    console.error('Erro ao enviar link de acesso:', error);
+
+    setErro(
+        error.message || 'Não foi possível enviar o link de acesso.'
+    );
+} finally {
             setCarregando(false);
         }
     }

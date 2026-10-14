@@ -22,13 +22,20 @@ async function requireAdmin(req, res, next) {
         });
     }
 
-    const adminEmail = process.env.ADMIN_EMAIL;
+    const adminEmail = process.env.ADMIN_EMAIL?.trim().toLowerCase();
 
-    if (
-        !adminEmail || user.email?.toLowerCase() !== adminEmail.trim().toLowerCase()
-    ) {
+    const adminEmails = (process.env.ADMIN_EMAILS || '')
+        .split(',')
+        .map((email) => email.trim().toLowerCase())
+        .filter(Boolean);
+
+    const emailUsuario = user.email?.trim().toLowerCase();
+
+    const emailAutorizado = Boolean(adminEmail && emailUsuario === adminEmail) || Boolean(emailUsuario && adminEmails.includes(emailUsuario));
+
+    if (!emailAutorizado) {
         return res.status(403).json({
-            erro: 'Acesso restrito à administradora.',
+            erro: 'Acesso restrito à administradora.'
         });
     }
 

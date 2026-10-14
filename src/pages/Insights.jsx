@@ -51,7 +51,7 @@ function Insights() {
                 setTotalAgendamentos(agendamentos.length);
             } catch (error) {
                 setErro(
-                    error.mesage
+                    error.message
                 );
             } finally {
                 setCarregando(false);

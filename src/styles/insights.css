@@ -1,0 +1,89 @@
+.insights-page {
+    min-height: 100vh;
+    padding: 40px;
+    color: var(--marsali-tatoo-color-white);
+}
+
+.insights-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--marsali-tatoo-color-transparent-white);
+}
+
+.insights-header h1 {
+    margin: 0 0 8px;
+    color: var(--marsali-tatoo-color-gold);
+    font-size: 2.4rem;
+}
+
+.insights-header p {
+    margin: 0;
+    color: #c5c5c5;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.insights-overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+@media (max-width: 600px) {
+    .insights-page {
+        padding: 24px 16px;
+    }
+
+    .insights-header {
+        align-items: flex-start;
+        margin-bottom: 24px;
+        padding-bottom: 20px;
+    }
+
+    .insights-header h1 {
+        font-size: 2rem;
+    }
+
+    .insights-overview {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* TOTAL AGENDAMENTOS   */
+
+.insights-card {
+    padding: 24px;
+    background-color: 
+        var(--marsali-tatoo-color-dark-green);
+    border: 1px solid
+        var(--marsali-tatoo-color-transparent-gold);
+    border-radius: 12px;
+    transition: border-color 0.3s ease;
+}
+
+.insights-card:hover {
+    border-color: var(--marsali-tatoo-color-gold);
+}
+
+.insights-card h2 {
+    margin: 0 0 20px;
+    color: var(--marsali-tatoo-color-white);
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.insights-card-value {
+    margin: 0 0 12px;
+    color: var(--marsali-tatoo-color-gold);
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.insights-card-description {
+    color: #b5b5b5;
+    font-size: 0.85rem;
+}

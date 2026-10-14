@@ -15,6 +15,7 @@ import './styles/Cuidados.css'
 import './styles/CalendarioAgendamento.css'
 import './styles/alert.css'
 import './styles/loginAdmin.css'
+import './styles/insights.css'
 
 import App from './App.jsx'
 

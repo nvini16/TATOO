@@ -22,7 +22,7 @@ async function requireAdmin(req, res, next) {
         });
     }
 
-    const adminEmail = process.env.ADMIM_EMAIL;
+    const adminEmail = process.env.ADMIN_EMAIL;
 
     if (
         !adminEmail || user.email?.toLowerCase() !== adminEmail.trim().toLowerCase()

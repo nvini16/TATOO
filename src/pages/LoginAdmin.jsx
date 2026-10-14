@@ -1,33 +1,68 @@
-import { useState } from 'react';
-import { Link, useNavigate } from  'react-router-dom';
+
+import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 
 function LoginAdmin() {
     const [email, setEmail] = useState('');
-
     const [carregando, setCarregando] = useState(false);
     const [mensagem, setMensagem] = useState('');
     const [erro, setErro] = useState('');
 
-    const [codigo, setCodigo] = useState('');
-    const [codigoEnviado, setCodigoEnviado] = useState(false);
-
     const navigate = useNavigate();
 
-    
-async function handleSubmit(event) {
-    event.preventDefault();
+    useEffect(() => {
+        let ativo = true;
 
-    setCarregando(true);
-    setMensagem('');
-    setErro('');
+        async function verificarSessao() {
+            const { data: { session }, error } =
+                await supabase.auth.getSession();
 
-    try {
-        if (!codigoEnviado) {
+            if (!ativo) return;
+
+            if (error) {
+                setErro('Não foi possível verificar a sessão.');
+                return;
+            }
+
+            if (session) {
+                navigate('/Insights', { replace: true });
+            }
+        }
+
+        verificarSessao();
+
+        const { data: { subscription } } =
+            supabase.auth.onAuthStateChange((_event, session) => {
+                if (session) {
+                    navigate('/Insights', { replace: true });
+                }
+            });
+
+        return () => {
+            ativo = false;
+            subscription.unsubscribe();
+        };
+    }, [navigate]);
+
+    async function handleSubmit(event) {
+        event.preventDefault();
+
+        setCarregando(true);
+        setMensagem('');
+        setErro('');
+
+        try {
+            const redirectUrl = new URL(
+                'LoginAdmin',
+                window.location.origin + import.meta.env.BASE_URL
+            ).toString();
+
             const { error } = await supabase.auth.signInWithOtp({
                 email: email.trim(),
                 options: {
                     shouldCreateUser: false,
+                    emailRedirectTo: redirectUrl,
                 },
             });
 
@@ -35,33 +70,17 @@ async function handleSubmit(event) {
                 throw error;
             }
 
-            setCodigoEnviado(true);
-            setMensagem('Código solicitado. Confira seu e-mail.');
-        } else {
-            const { error } = await supabase.auth.verifyOtp({
-                email: email.trim(),
-                token: codigo.trim(),
-                type: 'email',
-            });
-
-            if (error) {
-                throw error;
-            }
-
-            navigate('/Insights')
-
-            setMensagem('Autenticação concluída com sucesso.');
+            setMensagem(
+                'Link de acesso enviado. Confira seu e-mail e clique no link para entrar.'
+            );
+        } catch (error) {
+            setErro(
+                'Não foi possível enviar o link de acesso. Confira o e-mail e tente novamente.'
+            );
+        } finally {
+            setCarregando(false);
         }
-    } catch (error) {
-        setErro(
-            codigoEnviado
-                ? 'Código inválido ou expirado. Confira e tente novamente.'
-                : 'Não foi possível solicitar o código. Tente novamente.'
-        );
-    } finally {
-        setCarregando(false);
     }
-}
 
     return (
         <main className="login-admin-page">
@@ -90,35 +109,22 @@ async function handleSubmit(event) {
                         required
                     />
 
-                    {codigoEnviado && (
-                        <>
-                            <label htmlFor="admin-code">
-                                Código de acesso
-                            </label>
-
-                            <input 
-                                id="admin-code"
-                                type="text" 
-                                inputMode="numeric"
-                                autoComplete="one-time-code"
-                                value={codigo}
-                                onChange={(event) => setCodigo(
-                                    event.target.value.replace(/\D/g, '').slice(0, 8)
-                                )
-                            }
-                            placeholder="Digite os 8 dígitos"
-                            maxLength={8}
-                            required
-                            />
-                        </>
-                    )}
-
-                    <button type="submit" disabled={carregando || (codigoEnviado && codigo.length !== 8)}>
-                       {carregando ? 'Aguarde...' : codigoEnviado ? 'Confirmar código' : 'Enviar código'}
+                    <button
+                        type="submit"
+                        disabled={carregando}
+                    >
+                        {carregando
+                            ? 'Enviando...'
+                            : 'Enviar link de acesso'}
                     </button>
 
-                    {mensagem && <p role="status">{mensagem}</p>}
-                    {erro && <p role="alert">{erro}</p>}
+                    {mensagem && (
+                        <p role="status">{mensagem}</p>
+                    )}
+
+                    {erro && (
+                        <p role="alert">{erro}</p>
+                    )}
                 </form>
 
                 <Link to="/">Voltar</Link>
@@ -127,4 +133,5 @@ async function handleSubmit(event) {
     );
 }
 
-export default LoginAdmin
+export default LoginAdmin;
+

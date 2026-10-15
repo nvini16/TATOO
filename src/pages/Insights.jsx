@@ -3,7 +3,7 @@ import { supabase } from '../lib/supabase';
 
 function Insights() {
 
-    const [totalAgendamentos, setTotalAgendamentos] = useState(null);
+    const [agendamentos, setAgendamentos] = useState(null);
     const [carregando, setCarregando] = useState(false);
     const [erro, setErro] = useState(null);
 
@@ -46,9 +46,10 @@ function Insights() {
                     );
                 }
 
-                const agendamentos = await resposta.json();
+                const dadosAgendamentos = await resposta.json();
 
-                setTotalAgendamentos(agendamentos.length);
+                setAgendamentos(dadosAgendamentos);
+
             } catch (error) {
                 setErro(
                     error.message
@@ -80,14 +81,14 @@ function Insights() {
                     <h2>Total de agendamentos</h2>
 
                     <p className="insights-card-value">
-                        {carregando ? 'Carregando...' : totalAgendamentos ?? '-'}
+                        {carregando ? 'Carregando...' : agendamentos?.length ?? '_'}
                     </p>
                     <span className="insights-card-description">
                         {erro
                             ? erro 
                             : carregando
                                 ? 'Consultando o backend...'
-                                : totalAgendamentos !== null
+                                : agendamentos !== null
                                     ? 'Agendamentos registrados no sistema'
                                     : 'Nanhum dado carregado'}
                     </span>

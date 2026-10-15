@@ -2,6 +2,7 @@
     min-height: 100vh;
     padding: 40px;
     color: var(--marsali-tatoo-color-white);
+    background-color: var(--marsali-tatoo-color-white);
 }
 
 .insights-header {
@@ -37,7 +38,7 @@
     .insights-page {
         padding: 24px 16px;
     }
-
+    
     .insights-header {
         align-items: flex-start;
         margin-bottom: 24px;
@@ -58,9 +59,9 @@
 .insights-card {
     padding: 24px;
     background-color: 
-        var(--marsali-tatoo-color-dark-green);
+    var(--marsali-tatoo-color-dark-green);
     border: 1px solid
-        var(--marsali-tatoo-color-transparent-gold);
+    var(--marsali-tatoo-color-transparent-gold);
     border-radius: 12px;
     transition: border-color 0.3s ease;
 }
@@ -78,7 +79,7 @@
 
 .insights-card-value {
     margin: 0 0 12px;
-    color: var(--marsali-tatoo-color-gold);
+    color: var(--marsali-tatoo-color-gol);
     font-size: 2.5rem;
     font-weight: 700;
 }

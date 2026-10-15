@@ -58,6 +58,9 @@ function LoginAdmin() {
                 window.location.origin + import.meta.env.BASE_URL
             ).toString();
 
+            console.log('Destino do login, irmão.', redirectUrl);
+
+            console.log('Solicitando link para:', email.trim());
             const { error } = await supabase.auth.signInWithOtp({
                 email: email.trim(),
                 options: {
@@ -80,7 +83,7 @@ function LoginAdmin() {
     setErro(
         error.message || 'Não foi possível enviar o link de acesso.'
     );
-} finally {
+} finally { 
             setCarregando(false);
         }
     }

@@ -36,7 +36,7 @@ async function requireAdmin(req, res, next) {
     if (!emailAutorizado) {
         return res.status(403).json({
             erro: 'Acesso restrito à administradora.'
-        });
+        });  
     }
 
     req.admin = user;

@@ -74,9 +74,9 @@
 .login-admin-content button {
     margin-top: 8px;
     padding: 13px;
-    border: 1px solid var(--marsali-tatoo-color-green);
-    border-radius: 4px;
-    background: var(--marsali-tatoo-color-green);
+    border: none;
+    border-top: 1px solid var(--marsali-tatoo-color-green);
+    border-bottom: 1px solid var(--marsali-tatoo-color-green);
     color: var(--marsali-tatoo-color-white);
     font: inherit;
 }

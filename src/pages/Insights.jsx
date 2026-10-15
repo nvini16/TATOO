@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabase';
+import { useNavigate } from 'react-router-dom';
 
 function Insights() {
 
+    const navigate = useNavigate();
     const [agendamentos, setAgendamentos] = useState(null);
     const [carregando, setCarregando] = useState(false);
     const [erro, setErro] = useState(null);
@@ -19,9 +21,9 @@ function Insights() {
                 } = await supabase.auth.getSession();
 
                 if (erroSessao || !session) {
-                    throw new Error(
-                        'Sessão não encontrada. Faça login novamente.'
-                    );
+                    await supabase.auth.signOut();
+                    navigate('/LoginAdmin', { replace: true });
+                    return;
                 }
 
                 const API_URL = import.meta.env.VITE_API_URL || '';
@@ -36,9 +38,9 @@ function Insights() {
 
                 if (!resposta.ok) {
                     if (resposta.status === 401 || resposta.status === 403) {
-                        throw new Error(
-                            'Acesso não autorizado. Verifique sua sessão administrativa.'
-                        );
+                        await supabase.auth.signOut();
+                        navigate('/LoginAdmin', { replace: true });
+                        return;
                     }
 
                     throw new Error(

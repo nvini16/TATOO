@@ -24,19 +24,13 @@ function LoginAdmin() {
                 setErro('Não foi possível verificar a sessão.');
                 return;
             }
-
-            if (session) {
-                navigate('/Insights', { replace: true });
-            }
         }
 
         verificarSessao();
 
         const { data: { subscription } } =
-            supabase.auth.onAuthStateChange((_event, session) => {
-                if (session) {
-                    navigate('/Insights', { replace: true });
-                }
+            supabase.auth.onAuthStateChange(() => {
+                // A autorização aministrativa será verificada antes do redirecionamento
             });
 
         return () => {

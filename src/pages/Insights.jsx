@@ -21,8 +21,12 @@ function Insights() {
                 } = await supabase.auth.getSession();
 
                 if (erroSessao || !session) {
-                    await supabase.auth.signOut();
-                    navigate('/LoginAdmin', { replace: true });
+                    try {
+                        await supabase.auth.signOut();
+                    } finally {
+                        navigate('/LoginAdmin', { replace: true });
+                    }
+
                     return;
                 }
 
@@ -38,8 +42,12 @@ function Insights() {
 
                 if (!resposta.ok) {
                     if (resposta.status === 401 || resposta.status === 403) {
-                        await supabase.auth.signOut();
-                        navigate('/LoginAdmin', { replace: true });
+                        try {
+                            await supabase.auth.signOut();
+                        } finally {
+                            navigate('/LoginAdmin', { replace: true });
+                        }
+
                         return;
                     }
 
@@ -62,7 +70,7 @@ function Insights() {
         }
 
         carregarAgendamentos();
-    }, []);
+    }, [navigate]);
     return (
         <main className="insights-page">
             <header className="insights-header">

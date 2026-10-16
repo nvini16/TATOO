@@ -17,7 +17,7 @@ function AgendamentosAtivos({ agendamentos, carregando, erro }) {
             'confirmado',
         ];
 
-        valor = agendamentos.filter((agendamentos) => statusAtivos.includes(agendamentos.status)).length;
+        valor = agendamentos.filter((agendamento) => statusAtivos.includes(agendamento.status)).length;
         descricao = 'Agendamentos em andamento';
     }
 

@@ -12,7 +12,7 @@ function AgendamentosCancelados({ agendamentos, carregando, erro }) {
         descricao = erro;
 
     } else if (Array.isArray(agendamentos)) {
-        valor = agendamentos.filter((agendamentos) => agendamentos.status === 'cancelado').length;
+        valor = agendamentos.filter((agendamento) => agendamento.status === 'cancelado').length;
         descricao = 'Agendamentos cancelados';
     }
 

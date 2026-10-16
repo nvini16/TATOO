@@ -10,7 +10,7 @@ function AgendamentosConcluidos({ agendamentos, carregando, erro }) {
     } else if (erro) {
         descricao = erro;
     } else if (Array.isArray(agendamentos)) {
-        valor = agendamentos.filter((agendamentos) => agendamentos.status === 'concluido').length;
+        valor = agendamentos.filter((agendamento) => agendamento.status === 'concluido').length;
 
         descricao = 'Atendimentos concluídos';
     }

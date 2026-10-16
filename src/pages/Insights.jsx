@@ -63,6 +63,12 @@ function Insights() {
 
                 const dadosAgendamentos = await resposta.json();
 
+                if (!Array.isArray(dadosAgendamentos)) {
+                    throw new Error(
+                        'A API retornou um formato inválido de agendamentos.'
+                    )
+                }
+
                 setAgendamentos(dadosAgendamentos);
 
             } catch (error) {

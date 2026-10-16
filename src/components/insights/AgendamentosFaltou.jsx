@@ -8,7 +8,7 @@ function AgendamentosFaltou({ agendamentos, carregando, erro }) {
         valor = 'Carregando...';
         descricao = 'Consultando agendamentos...';
     } else if (erro) {
-        decsricao = erro;
+        descricao = erro;
     } else if (Array.isArray(agendamentos)) {
         valor = agendamentos.filter((agendamentos) => agendamentos.status === 'faltou').length;
 

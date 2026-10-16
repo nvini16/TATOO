@@ -130,12 +130,6 @@ function Insights() {
                     carregando={carregando}
                     erro={erro}
                 />
-
-                <TaxaComparecimento 
-                    agendamentos={agendamentos}
-                    carregando={carregando}
-                    erro={erro}
-                />
             </section>
         </main>
     );

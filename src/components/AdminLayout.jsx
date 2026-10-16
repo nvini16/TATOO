@@ -9,7 +9,7 @@ import {
     Users,
     X,
 } from 'lucide-react';
-import './AdminLayout.css';
+import '../styles/adminLayout.css';
 
 const itensMenu = [
     {

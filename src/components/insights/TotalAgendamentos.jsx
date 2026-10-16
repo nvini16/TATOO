@@ -9,7 +9,7 @@ function TotalAgendamentos({ agendamentos, carregando, erro }) {
         descricao = 'Consultando agendamentos...';
     } else if (erro) {
         descricao = erro;
-    } else if (agendamentos !== null) {
+    } else if (Array.isArray(agendamentos)) {
         valor = agendamentos.length;
         descricao = 'Agendamentos registrados';
     }

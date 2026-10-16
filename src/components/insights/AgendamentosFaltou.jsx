@@ -10,7 +10,7 @@ function AgendamentosFaltou({ agendamentos, carregando, erro }) {
     } else if (erro) {
         descricao = erro;
     } else if (Array.isArray(agendamentos)) {
-        valor = agendamentos.filter((agendamentos) => agendamentos.status === 'faltou').length;
+        valor = agendamentos.filter((agendamento) => agendamento.status === 'faltou').length;
 
         descricao = 'Registros de faltas';
     }

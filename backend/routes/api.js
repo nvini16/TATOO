@@ -7,6 +7,12 @@ const requireAdmin = require('../middleware/requireAdmin');
 
 const router = express.Router();
 
+router.get('/admin/verify', requireAdmin, (req, res) => {
+    res.status(200).json({
+        autorizado: true,
+    });
+});
+
 router.get('/', requireAdmin, async (req, res) => {
     const { data, error } = await supabase
         .from('clientes')

@@ -11,33 +11,90 @@ function LoginAdmin() {
 
     const navigate = useNavigate();
 
-    useEffect(() => {
-        let ativo = true;
+    
+useEffect(() => {
+    let ativo = true;
 
-        async function verificarSessao() {
-            const { data: { session }, error } =
-                await supabase.auth.getSession();
+    async function verificarAcesso(session) {
+        if (!session) return;
+
+        setErro('');
+        setMensagem('');
+
+        try {
+            const API_URL = import.meta.env.VITE_API_URL || '';
+
+            const resposta = await fetch(
+                `${API_URL}/api/admin/verify`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${session.access_token}`,
+                    },
+                }
+            );
 
             if (!ativo) return;
 
-            if (error) {
-                setErro('Não foi possível verificar a sessão.');
+            if (resposta.status === 401 || resposta.status === 403) {
+                await supabase.auth.signOut();
+
+                if (ativo) {
+                    setErro(
+                        'Este e-mail não tem autorização para acessar o painel administrativo.'
+                    );
+                }
+
                 return;
             }
+
+            if (!resposta.ok) {
+                throw new Error(
+                    'Não foi possível verificar a autorização administrativa.'
+                );
+            }
+
+            navigate('/Insights', { replace: true });
+        } catch (error) {
+            if (ativo) {
+                setErro(
+                    error.message ||
+                    'Erro ao verificar o acesso administrativo.'
+                );
+            }
+        } finally {}
+    }
+
+    async function verificarSessao() {
+        const { data: { session }, error } =
+            await supabase.auth.getSession();
+
+        if (!ativo) return;
+
+        if (error) {
+            setErro('Não foi possível verificar a sessão.');
+            return;
         }
 
-        verificarSessao();
+        if (session) {
+            await verificarAcesso(session);
+        }
+    }
 
-        const { data: { subscription } } =
-            supabase.auth.onAuthStateChange(() => {
-                // A autorização aministrativa será verificada antes do redirecionamento
-            });
+    verificarSessao();
 
-        return () => {
-            ativo = false;
-            subscription.unsubscribe();
-        };
-    }, [navigate]);
+    const { data: { subscription } } =
+        supabase.auth.onAuthStateChange((evento, session) => {
+            if (evento === 'SIGNED_IN' && session) {
+                void verificarAcesso(session);
+            }
+        });
+
+    return () => {
+        ativo = false;
+        subscription.unsubscribe();
+    };
+}, [navigate]);
+
 
     async function handleSubmit(event) {
         event.preventDefault();
@@ -52,9 +109,6 @@ function LoginAdmin() {
                 window.location.origin + import.meta.env.BASE_URL
             ).toString();
 
-            console.log('Destino do login, irmão.', redirectUrl);
-
-            console.log('Solicitando link para:', email.trim());
             const { error } = await supabase.auth.signInWithOtp({
                 email: email.trim(),
                 options: {
@@ -71,7 +125,6 @@ function LoginAdmin() {
                 'Link de acesso enviado. Confira seu e-mail e clique no link para entrar.'
             );
        } catch (error) {
-    alert('O catch foi executado!');
     console.error('Erro ao enviar link de acesso:', error);
 
     setErro(

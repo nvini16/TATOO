@@ -6,9 +6,9 @@ import AgendamentosAtivos from '../components/insights/AgendamentosAtivos';
 import AgendamentosCancelados from '../components/insights/AgendamentosCancelados';
 import AgendamentosConcluidos from '../components/insights/AgendamentosConcluidos';
 import AgendamentosFaltou from '../components/insights/AgendamentosFaltou';
+import TaxaComparecimento from '../components/insights/TaxaComparecimento';
 
 function Insights() {
-
     const navigate = useNavigate();
     const [agendamentos, setAgendamentos] = useState(null);
     const [carregando, setCarregando] = useState(false);
@@ -66,15 +66,12 @@ function Insights() {
                 if (!Array.isArray(dadosAgendamentos)) {
                     throw new Error(
                         'A API retornou um formato inválido de agendamentos.'
-                    )
+                    );
                 }
 
                 setAgendamentos(dadosAgendamentos);
-
             } catch (error) {
-                setErro(
-                    error.message
-                );
+                setErro(error.message);
             } finally {
                 setCarregando(false);
             }
@@ -82,47 +79,53 @@ function Insights() {
 
         carregarAgendamentos();
     }, [navigate]);
+
     return (
         <main className="insights-page">
             <header className="insights-header">
                 <div>
                     <h1>Insights</h1>
-
                     <p>
-                        Acompanhe o desenpenho e a rotina do estúdio.
+                        Acompanhe o desempenho e a rotina do estúdio.
                     </p>
                 </div>
             </header>
 
-            <section 
+            <section
                 className="insights-overview"
                 aria-label="Visão geral do estúdio"
             >
-                <TotalAgendamentos 
+                <TotalAgendamentos
                     agendamentos={agendamentos}
                     carregando={carregando}
                     erro={erro}
                 />
 
-                <AgendamentosAtivos 
+                <AgendamentosAtivos
                     agendamentos={agendamentos}
                     carregando={carregando}
                     erro={erro}
                 />
 
-                <AgendamentosCancelados 
+                <AgendamentosCancelados
                     agendamentos={agendamentos}
                     carregando={carregando}
                     erro={erro}
                 />
 
-                <AgendamentosConcluidos 
+                <AgendamentosConcluidos
                     agendamentos={agendamentos}
                     carregando={carregando}
                     erro={erro}
                 />
 
-                <AgendamentosFaltou 
+                <AgendamentosFaltou
+                    agendamentos={agendamentos}
+                    carregando={carregando}
+                    erro={erro}
+                />
+
+                <TaxaComparecimento
                     agendamentos={agendamentos}
                     carregando={carregando}
                     erro={erro}

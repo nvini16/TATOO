@@ -9,7 +9,7 @@ function TotalAgendamentos({ agendamentos, carregando, erro }) {
         descricao = 'Consultando agendamentos...';
     } else if (erro) {
         descricao = erro;
-    } else if (agenamentos !== null) {
+    } else if (agendamentos !== null) {
         valor = agendamentos.length;
         descricao = 'Agendamentos registrados';
     }
@@ -23,4 +23,4 @@ function TotalAgendamentos({ agendamentos, carregando, erro }) {
     );
 }
 
-export default TotalAgendamentos;
+export default TotalAgendamentos; 

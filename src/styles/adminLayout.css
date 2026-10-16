@@ -1,0 +1,198 @@
+.admin-layout {
+    min-height: 100vh;
+    color: var(--marsali-tatoo-color-white, #fff);
+}
+
+.admin-sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    width: 252px;
+    padding: 28px 18px;
+    box-sizing: border-box;
+    background: #061b12;
+    border-right: 1px solid rgba(220, 189, 36, 0.2);
+}
+
+.admin-sidebar-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 4px 8px 28px;
+    border-bottom: 1px solid rgba(245, 245, 245, 0.12);
+}
+
+.admin-brand-mark {
+    display: grid;
+    flex: 0 0 42px;
+    width: 42px;
+    height: 42px;
+    place-items: center;
+    border-radius: 10px;
+    background: var(--marsali-tatoo-color-gold, #dcbd24);
+    color: #061b12;
+    font-family: Georgia, serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.admin-sidebar-brand div {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.admin-sidebar-brand strong {
+    color: #fff;
+    font-size: 1.05rem;
+    letter-spacing: 0.12em;
+}
+
+.admin-sidebar-brand div > span {
+    color: #aebbb3;
+    font-family: Arial, sans-serif;
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+}
+
+.admin-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 24px;
+}
+
+.admin-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    width: 100%;
+    min-height: 46px;
+    padding: 0 13px;
+    box-sizing: border-box;
+    border: 1px solid transparent;
+    border-radius: 9px;
+    background: transparent;
+    color: #d5ddd7;
+    font: inherit;
+    font-size: 1rem;
+    text-align: left;
+    text-decoration: none;
+    transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease;
+}
+
+.admin-nav-item.active,
+.admin-nav-item[aria-current="page"] {
+    border-color: rgba(220, 189, 36, 0.25);
+    background: rgba(220, 189, 36, 0.1);
+    color: var(--marsali-tatoo-color-gold, #dcbd24);
+}
+
+.admin-nav-item:not(:disabled):hover {
+    background: rgba(255, 255, 255, 0.07);
+    color: #fff;
+}
+
+.admin-nav-item-disabled {
+    cursor: not-allowed;
+    opacity: 0.58;
+}
+
+.admin-nav-soon {
+    margin-left: auto;
+    color: #aebbb3;
+    font-family: Arial, sans-serif;
+    font-size: 0.62rem;
+}
+
+.admin-layout-content {
+    min-height: 100vh;
+    margin-left: 252px;
+}
+
+.admin-mobile-menu {
+    display: none;
+}
+
+@media (max-width: 760px) {
+    .admin-sidebar {
+        display: none;
+    }
+
+    .admin-layout-content {
+        margin-left: 0;
+        padding-left: 56px;
+        box-sizing: border-box;
+    }
+
+    .admin-mobile-menu {
+        position: fixed;
+        inset: 50% auto auto 10px;
+        z-index: 200;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        transform: translateY(-50%);
+    }
+
+    .admin-mobile-nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 9px;
+        padding: 9px 6px;
+        border: 1px solid rgba(220, 189, 36, 0.28);
+        border-radius: 30px;
+        background: rgba(6, 27, 18, 0.96);
+        box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+        backdrop-filter: blur(10px);
+    }
+
+    .admin-mobile-fab,
+    .admin-mobile-nav-item {
+        display: grid;
+        flex: 0 0 42px;
+        width: 42px;
+        height: 42px;
+        place-items: center;
+        padding: 0;
+        border: 1px solid transparent;
+        border-radius: 50%;
+        background: #10291d;
+        color: #e8e9e5;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease;
+    }
+
+    .admin-mobile-fab {
+        border-color: rgba(220, 189, 36, 0.45);
+        background: var(--marsali-tatoo-color-gold, #dcbd24);
+        color: #061b12;
+        box-shadow: 0 5px 18px rgba(0, 0, 0, 0.3);
+    }
+
+    .admin-mobile-nav-item.active,
+    .admin-mobile-nav-item[aria-current="page"] {
+        border-color: var(--marsali-tatoo-color-gold, #dcbd24);
+        background: rgba(220, 189, 36, 0.15);
+        color: var(--marsali-tatoo-color-gold, #dcbd24);
+    }
+
+    .admin-mobile-nav-item:disabled {
+        cursor: not-allowed;
+        opacity: 0.38;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .admin-nav-item,
+    .admin-mobile-fab,
+    .admin-mobile-nav-item {
+        transition: none;
+    }
+}

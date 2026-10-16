@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabase';
 import { useNavigate } from 'react-router-dom';
 import TotalAgendamentos from '../components/insights/TotalAgendamentos';
+import AgendamentosAtivos from '../components/insights/AgendamentosAtivos';
 
 function Insights() {
 
@@ -89,6 +90,12 @@ function Insights() {
                 aria-label="Visão geral do estúdio"
             >
                 <TotalAgendamentos 
+                    agendamentos={agendamentos}
+                    carregando={carregando}
+                    erro={erro}
+                />
+
+                <AgendamentosAtivos 
                     agendamentos={agendamentos}
                     carregando={carregando}
                     erro={erro}

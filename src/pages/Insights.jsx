@@ -3,6 +3,9 @@ import { supabase } from '../lib/supabase';
 import { useNavigate } from 'react-router-dom';
 import TotalAgendamentos from '../components/insights/TotalAgendamentos';
 import AgendamentosAtivos from '../components/insights/AgendamentosAtivos';
+import AgendamentosCancelados from '../components/insights/AgendamentosCancelados';
+import AgendamentosConcluidos from '../components/insights/AgendamentosConcluidos';
+import AgendamentosFaltou from '../components/insights/AgendamentosFaltou';
 
 function Insights() {
 
@@ -96,6 +99,24 @@ function Insights() {
                 />
 
                 <AgendamentosAtivos 
+                    agendamentos={agendamentos}
+                    carregando={carregando}
+                    erro={erro}
+                />
+
+                <AgendamentosCancelados 
+                    agendamentos={agendamentos}
+                    carregando={carregando}
+                    erro={erro}
+                />
+
+                <AgendamentosConcluidos 
+                    agendamentos={agendamentos}
+                    carregando={carregando}
+                    erro={erro}
+                />
+
+                <AgendamentosFaltou 
                     agendamentos={agendamentos}
                     carregando={carregando}
                     erro={erro}

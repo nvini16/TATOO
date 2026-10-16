@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabase';
 import { useNavigate } from 'react-router-dom';
+import TotalAgendamentos from '../components/insights/TotalAgendamentos';
 
 function Insights() {
 
@@ -87,22 +88,11 @@ function Insights() {
                 className="insights-overview"
                 aria-label="Visão geral do estúdio"
             >
-                <article className="insights-card">
-                    <h2>Total de agendamentos</h2>
-
-                    <p className="insights-card-value">
-                        {carregando ? 'Carregando...' : agendamentos?.length ?? '_'}
-                    </p>
-                    <span className="insights-card-description">
-                        {erro
-                            ? erro 
-                            : carregando
-                                ? 'Consultando o backend...'
-                                : agendamentos !== null
-                                    ? 'Agendamentos registrados no sistema'
-                                    : 'Nanhum dado carregado'}
-                    </span>
-                </article>
+                <TotalAgendamentos 
+                    agendamentos={agendamentos}
+                    carregando={carregando}
+                    erro={erro}
+                />
             </section>
         </main>
     );

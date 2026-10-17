@@ -41,8 +41,7 @@
 .agendamentos-admin-card:hover {
     border-color: var(--marsali-tatoo-color-gold);
     background-color: var(--marsali-tatoo-color-green);
-    transform: scale(1.1);
-    margin-left: 24px;
+    transform: translateY(-3px);
 }
 
 .agendamentos-admin-card h2 {
@@ -106,8 +105,9 @@
     padding: 28px;
     background-color: var(--marsali-tatoo-color-dark-green);
     color: var(--marsali-tatoo-color-white);
-    border: 1px solid var(--marsali-tatoo-transparent-gold);
+    border: 1px solid var(--marsali-tatoo-color-transparent-gold);
     border-radius: 14px;
+    border-sizing: border-box;
 }
 
 .agendamentos-admin-modal-header {
@@ -181,7 +181,7 @@
     font-weight: 600;
 }
 
-.agendamentos-admin-form-edicao input:not([type="checked"]),
+.agendamentos-admin-form-edicao input:not([type="checkbox"]),
 .agendamentos-admin-form-edicao textarea,
 .agendamentos-admin-form-edicao select {
     width: 100%;
@@ -218,14 +218,14 @@
     box-shadow: 0 0 0 3px rgba(229, 233, 3, 0.91);
 }
 
-.agendamentos-admin-form-edicao input[type="checked"] {
+.agendamentos-admin-form-edicao input[type="checkbox"] {
     width: 18px;
     height: 18px;
     accent-color: var(--marsali-tatoo-color-gold);
     cursor: pointer;
 }
 
-.agendamentos-admin-form-edicao label:has(input[type="checked"]) {
+.agendamentos-admin-form-edicao label:has(input[type="checkbox"]) {
     flex-direction: row;
     align-items: center;
     gap: 12px;

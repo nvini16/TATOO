@@ -291,6 +291,160 @@ async function salvarEdicao() {
             </header>
 
             <div className="agendamentos-admin-modal-conteudo">
+                {editando && (
+                    <form
+                        className="agendamentos-admin-form-edicao"
+                        onSubmit={(event) => {
+                            event.preventDefault();
+                            salvarEdicao();
+                        }}
+                    >
+                        <label>
+                            Nome do cliente
+
+                            <input
+                                name="nome"
+                                value={formEdicao.nome}
+                                onChange={atualizarCampo}
+                                required
+                            />
+                        </label>
+
+                        <label>
+                            WhatsApp
+
+                            <input 
+                                name="whatsapp"
+                                value={formEdicao.whatsapp}
+                                onChange={atualizarCampo}
+                                required
+                            />
+                        </label>
+
+                        <label>
+                            Arte
+
+                            <input 
+                                name="arte"
+                                value={formEdicao.arte}
+                                onChange={atualizarCampo}
+                                required
+                            />
+                        </label>
+
+                        <label>
+                            Estilo
+
+                            <input 
+                                name="estilo"
+                                value={formEdicao.estilo}
+                                onChange={atualizarCampo}
+                                required
+                            />
+                        </label>
+
+                        <label>
+                            Descrição
+
+                            <input 
+                                name="descricao"
+                                value={formEdicao.descricao}
+                                onChange={atualizarCampo}
+                                required
+                            />
+                        </label>
+
+                        <label>
+                            Data
+
+                            <input 
+                                name="data"
+                                type="data"
+                                value={formEdicao.data}
+                                onChange={atualizarCampo}
+                                required
+                            />
+                        </label>
+
+                        <label>
+                            Horario
+
+                            <input 
+                                   name="time"
+                                type="horario"
+                                value={formEdicao.horario}
+                                onChange={atualizarCampo}
+                                required
+                            />
+                        </label>
+
+                        <label>
+                            Status
+
+                            <select 
+                                name="status"
+                                value={formEdicao.status}
+                                onChange={atualizarCampo}
+                                required
+                            >
+                        <option value="aguardando_sinal">Aguardando sinal</option>
+                        <option value="sinal_pago">Sinal pago</option>
+                        <option value="aguardando_confirmacao">Aguardando confirmação</option>
+                        <option value="confirmado">Confirmado</option>
+                        <option value="concluido">Concluído</option>
+                        <option value="cancelado">Cancelado</option>
+                        <option value="faltou">Faltou</option>
+                            </select> 
+                        </label>
+
+                        <label>
+                            Valor do sinal (R$)
+
+                            <input 
+                                name="valor_sinal"
+                                type="number"
+                                min="0"
+                                step="0.01"
+                                value={formEdicao.valor_sinal}
+                                onChange={atualizarCampo}
+                            />
+                        </label>
+
+                        <label>
+                            <input 
+                                type="checkbox"
+                                name="pagamento_sinal"
+                                checked={formEdicao.pagamento_sinal}
+                                onChange={atualizarCampo}
+                            />
+                                Sinal pago
+                        </label>
+
+                        <div
+                            className="agendamentos-admin-form-acoes"
+                        >
+                            <button
+                                type="submit"
+                                disabled={salvando}
+                            >
+                                {salvando ? 'Salvando...' : 'Salvar salvar alterações'}
+                            </button>
+
+                            <button
+                                type="button"
+                                onClick={() => setEditando(false)}
+                                disabled={salvando}
+                            >
+                                Cancelar
+                            </button>
+                        </div>
+
+                    </form>
+                )}
+
+                {!editando && (
+                    <>
+
                 <p>
                     <strong>Data:</strong>{' '}
                     {formatarData(agendamentoSelecionado.data)}
@@ -340,12 +494,14 @@ async function salvarEdicao() {
                     <strong>Valor do sinal:</strong>{' '}
                     {agendamentoSelecionado.valor_sinal != null
                         ? Number(agendamentoSelecionado.valor_sinal)
-                            .toLocaleString('pt-BR', {
-                                style: 'currency',
-                                currency: 'BRL',
-                            })
+                        .toLocaleString('pt-BR', {
+                            style: 'currency',
+                            currency: 'BRL',
+                        })
                         : 'Não informado'}
                 </p>
+                        </>
+                    )}
             </div>
 
             {!editando && (

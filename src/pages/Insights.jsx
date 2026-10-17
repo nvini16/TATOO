@@ -82,7 +82,6 @@ function Insights() {
     }, [navigate]);
 
     return (
-        <>
 
         <AdminLayout>
             <main className="insights-page">
@@ -137,7 +136,6 @@ function Insights() {
             </section>
         </main>
         </AdminLayout>
-        </>
     );
 }
 

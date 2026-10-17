@@ -3,6 +3,7 @@ import Home from './pages/Home';
 import Agendamento from './pages/Agendamentos';
 import LoginAdmin from './pages/LoginAdmin';
 import Insights from './pages/Insights';
+import AgendamentosAdmin from './pages/AgendamentosAdmin';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/Agendamento" element={<Agendamento />} />
         <Route path="/LoginAdmin" element={<LoginAdmin/>} />
         <Route path="/Insights" element={<Insights/>} />
+        <Route path="/AgendamentosAdmin" element={<AgendamentosAdmin/>} />
       </Routes>
     </BrowserRouter>
   )

@@ -1,0 +1,98 @@
+.agendamentos-admin-page {
+    min-height: 100vh;
+    padding: 40px;
+    background-color: var(--marsali-tatoo-color-white);
+    color: var(--marsali-tatoo-color-dark-green);
+}
+
+.agendamentos-admin-header {
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--marsali-tatoo-color-transparent-gold);
+}
+
+.agendamentos-admin-header h1 {
+    margin: 0 0 8px;
+    color: var(--marsali-tatoo-color-gold);
+    font-size: 2.4rem;
+}
+
+.agendamentos-admin-header p {
+    margin: 0;
+    color: #666;
+    line-height: 1.6;
+}
+
+.agendamentos-admin-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+    gap: 20px;
+}
+
+.agendamentos-admin-card {
+    padding: 24px;
+    background-color: var(--marsali-tatoo-color-dark-green);
+    color: var(--marsali-tatoo-color-white);
+    border: 1px solid var(--marsali-tatoo-color-transparent-gold);
+    border-radius: 12px;
+    transition: border-color 0.3s ease, transform 0.3s ease, background-color 0.3s ease, margin 0.3s ease;
+}
+
+.agendamentos-admin-card:hover {
+    border-color: var(--marsali-tatoo-color-gold);
+    background-color: var(--marsali-tatoo-color-green);
+    transform: scale(1.1);
+    margin-left: 24px;
+}
+
+.agendamentos-admin-card h2 {
+    margin: 0 0 20px;
+    color: var(--marsali-tatoo-color-gold);
+    font-size: 1.6rem;
+}
+
+.agendamentos-admin-card p {
+    margin: 0 0 12px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.agendamentos-admin-card p:last-child {
+    margin-bottom: 0;
+}
+
+.agendamentos-admin-card strong {
+    color: var(--marsali-tatoo-color-gold);
+}
+
+.agendamentos-admin-card-topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.agendamentos-admin-horario {
+    padding: 6px 12px;
+    border-top: 1px solid var(--marsali-tatoo-color-gold);
+    border-bottom: 1px solid var(--marsali-tatoo-color-gold);
+    color: var(--marsali-tatoo-color-gold);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+@media (max-width: 600px) {
+    .agendamentos-admin-page {
+        padding: 24px 16px;
+    }
+
+    .agendamentos-admin-header h1 {
+        font-size: 2rem;
+    }
+
+    .agendamentos-admin-grid {
+        grid-template-columns: 1fr;
+    }
+}

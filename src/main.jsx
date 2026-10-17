@@ -18,7 +18,7 @@ import './styles/loginAdmin.css'
 import './styles/insights.css'
 import './styles/adminMenu.css'
 import './styles/adminLayout.css';
-import './styles/aminAgendamentos.css'
+import './styles/adminAgendamentos.css'
 
 import App from './App.jsx'
 

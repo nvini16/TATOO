@@ -67,9 +67,10 @@ router.post('/clientes', requireAdmin, async (req, res) => {
     res.status(201).json(data);
 })
 
-router.get('/agendamentos', requireAdmin, async (req, res) => { const { data, error } = await supabase
+router.get('/agendamentos', requireAdmin, async (req, res) => { 
+    const { data, error } = await supabase
     .from('agendamentos')
-    .select('*')
+    .select('*, clientes(nome, whatsapp)')
     .order('data', { ascending: true });
 
     if (error) {

@@ -1,0 +1,22 @@
+.admin-layout {
+    min-height: 100vh;
+}
+
+.admin-layout-content {
+    min-width: 0;
+    min-height: 100vh;
+    margin-left: 240px;
+    transition: margin-left 0.3s ease;
+}
+
+.admin-layout.menu-recolhido .admin-layout-content {
+    margin-left: 72px;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .admin-layout-content,
+    .admin-layout.menu-recolhido .admin-layout-content {
+        margin-left: 0;
+    }
+}

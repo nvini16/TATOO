@@ -7,6 +7,7 @@ import AgendamentosCancelados from '../components/insights/AgendamentosCancelado
 import AgendamentosConcluidos from '../components/insights/AgendamentosConcluidos';
 import AgendamentosFaltou from '../components/insights/AgendamentosFaltou';
 import TaxaComparecimento from '../components/insights/TaxaComparecimento';
+import AdminLayout from '../components/AdminLayout';
 
 function Insights() {
     const navigate = useNavigate();
@@ -81,7 +82,10 @@ function Insights() {
     }, [navigate]);
 
     return (
-        <main className="insights-page">
+        <>
+
+        <AdminLayout>
+            <main className="insights-page">
             <header className="insights-header">
                 <div>
                     <h1>Insights</h1>
@@ -132,6 +136,8 @@ function Insights() {
                 />
             </section>
         </main>
+        </AdminLayout>
+        </>
     );
 }
 

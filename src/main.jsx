@@ -16,6 +16,8 @@ import './styles/CalendarioAgendamento.css'
 import './styles/alert.css'
 import './styles/loginAdmin.css'
 import './styles/insights.css'
+import './styles/adminMenu.css'
+import "./styles/adminLayout.css";
 
 import App from './App.jsx'
 

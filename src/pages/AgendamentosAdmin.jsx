@@ -20,6 +20,8 @@ function AgendamentosAdmin() {
     const [carregando, setCarregando] = useState(true);
     const [erro, setErro] = useState(null);
 
+    const [agendamentoSelecionado, setAgendamentosSelecionado] = useState(null);
+
     useEffect(() => {
         async function carregarAgendamentos() {
             setCarregando(true);
@@ -136,10 +138,112 @@ function AgendamentosAdmin() {
                                     <strong>Status:</strong>{' '}
                                     {agendamento.status}
                                 </p>
+
+                                <button
+                                    type="button"
+                                    className="agendamentos-admin-detalhes-btn"
+                                    onClick={() => setAgendamentoSelecionado(agendamento)}
+                                >
+                                    Mais detalhes
+                                </button>
                             </article>
                         ))}
                     </section>
+
+                    
                 )}
+
+                
+{agendamentoSelecionado && (
+    <div
+        className="agendamento-admin-modal-overlay"
+        onClick={() => setAgendamentoSelecionado(null)}
+    >
+        <section
+            className="agendamento-admin-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="agendamento-modal-titulo"
+            onClick={(event) => event.stopPropagation()}
+        >
+            <header className="agendamento-admin-modal-header">
+                <h2 id="agendamento-modal-titulo">
+                    Detalhes do agendamento
+                </h2>
+
+                <button
+                    type="button"
+                    aria-label="Fechar detalhes"
+                    onClick={() => setAgendamentoSelecionado(null)}
+                >
+                    ×
+                </button>
+            </header>
+
+            <div className="agendamento-admin-modal-conteudo">
+                <p>
+                    <strong>Data:</strong>{' '}
+                    {formatarData(agendamentoSelecionado.data)}
+                </p>
+
+                <p>
+                    <strong>Horário:</strong>{' '}
+                    {agendamentoSelecionado.horario?.slice(0, 5) || 'Não informado'}
+                </p>
+
+                <p>
+                    <strong>Cliente:</strong>{' '}
+                    {agendamentoSelecionado.clientes?.nome || 'Não informado'}
+                </p>
+
+                <p>
+                    <strong>WhatsApp:</strong>{' '}
+                    {agendamentoSelecionado.clientes?.whatsapp || 'Não informado'}
+                </p>
+
+                <p>
+                    <strong>Arte:</strong>{' '}
+                    {agendamentoSelecionado.arte || 'Não informada'}
+                </p>
+
+                <p>
+                    <strong>Estilo:</strong>{' '}
+                    {agendamentoSelecionado.estilo || 'Não informado'}
+                </p>
+
+                <p>
+                    <strong>Descrição:</strong>{' '}
+                    {agendamentoSelecionado.descricao || 'Sem descrição'}
+                </p>
+
+                <p>
+                    <strong>Status:</strong>{' '}
+                    {agendamentoSelecionado.status}
+                </p>
+
+                <p>
+                    <strong>Sinal pago:</strong>{' '}
+                    {agendamentoSelecionado.pagamento_sinal ? 'Sim' : 'Não'}
+                </p>
+
+                <p>
+                    <strong>Valor do sinal:</strong>{' '}
+                    {agendamentoSelecionado.valor_sinal != null
+                        ? Number(agendamentoSelecionado.valor_sinal)
+                            .toLocaleString('pt-BR', {
+                                style: 'currency',
+                                currency: 'BRL',
+                            })
+                        : 'Não informado'}
+                </p>
+            </div>
+        </section>
+    </div>
+)}
+
+
+
+                
             </main>
         </AdminLayout>
     );

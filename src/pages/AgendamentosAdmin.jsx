@@ -16,11 +16,118 @@ function formatarData(data) {
 function AgendamentosAdmin() {
     const navigate = useNavigate();
 
+    const API_URL = import.meta.env.VITE_API_URL || '';
+
     const [agendamentos, setAgendamentos] = useState([]);
     const [carregando, setCarregando] = useState(true);
     const [erro, setErro] = useState(null);
 
     const [agendamentoSelecionado, setAgendamentoSelecionado] = useState(null);
+
+    const [editando, setEditando] = useState(false);
+    const [salvando, setSalvando] = useState(false);
+    const [formEdicao, setFormEdicao] = useState({
+        nome: '',
+        whatsapp: '',
+        arte: '',
+        estilo: '',
+        descricao: '',
+        data: '',
+        horario: '',
+        status: 'aguardando_sinal',
+        pagamento_sinal: false,
+        valor_sinal: '',
+    });
+
+    function iniciarEdicao() {
+        if (!agendamentoSelecionado) return;
+
+        setFromEdicao({
+            nome: agendamentoSelecionado.clientes?.nome ?? '',
+            whatsapp: agendamentoSelecionado.clientes?.whatsapp ?? '',
+            arte: agendamentoSelecionado.arte ?? '',
+            estilo: agendamentoSelecionado.estilo ?? '',
+            descricao: agendamentoSelecionado.descriao ?? '',
+            data: agendamentoSelecionado.data?.slice(0,10) ?? '',
+            horario: agendamentoSelecionado.horario?.slice(0,5) ?? '',
+            status: agendamentoSelecionado.status ?? 'aguardando_sinal',
+            pagamento_sinal: agendamentoSelecionado.pagamento_sinal ?? false,
+            valor_sinal: agendamentoSelecionado.valor_sinal ?? '',
+        });
+
+        setEditando(true);
+    }
+
+    function atualizarCampo(event) {
+        const { name, value, type, checked } = event.target;
+
+        setFromEdicao((anterior) => ({
+            ...anterior,
+            [name]: type === 'checkbox' ? checked : value,
+        }));
+    }
+
+    
+async function salvarEdicao() {
+  if (!agendamentoSelecionado || salvando) return;
+
+  setSalvando(true);
+  setErro(null);
+
+  try {
+    const { data: { session }, error: erroSessao } =
+      await supabase.auth.getSession();
+
+    if (erroSessao || !session) {
+      throw new Error('Sua sessão expirou. Entre novamente.');
+    }
+
+    const resposta = await fetch(
+      `${API_URL}/api/agendamentos/${agendamentoSelecionado.id}`,
+      {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${session.access_token}`,
+        },
+        body: JSON.stringify({
+          ...formEdicao,
+          valor_sinal:
+            formEdicao.valor_sinal === ''
+              ? null
+              : Number(formEdicao.valor_sinal),
+        }),
+      }
+    );
+
+    const resultado = await resposta.json();
+
+    if (!resposta.ok) {
+      throw new Error(
+        resultado.erro ||
+        resultado.mensagem ||
+        'Não foi possível atualizar o agendamento.'
+      );
+    }
+
+    const atualizado = resultado.agendamento;
+
+    setAgendamentos((anteriores) =>
+      anteriores.map((item) =>
+        item.id === atualizado.id ? atualizado : item
+      )
+    );
+
+    setAgendamentoSelecionado(atualizado);
+    setEditando(false);
+  } catch (erro) {
+    setErro(erro.message || 'Erro ao salvar as alterações.');
+  } finally {
+    setSalvando(false);
+  }
+}
+
+
 
     useEffect(() => {
         async function carregarAgendamentos() {
@@ -38,8 +145,6 @@ function AgendamentosAdmin() {
                     navigate('/LoginAdmin', { replace: true });
                     return;
                 }
-
-                const API_URL = import.meta.env.VITE_API_URL || '';
 
                 const resposta = await fetch(
                     `${API_URL}/api/agendamentos`,
@@ -142,7 +247,12 @@ function AgendamentosAdmin() {
                                 <button
                                     type="button"
                                     className="agendamentos-admin-detalhes-btn"
-                                    onClick={() => setAgendamentoSelecionado(agendamento)}
+                                    onClick={() => {
+                                        setEditando(false);
+                                        setErro(null);
+
+                                        setAgendamentoSelecionado(agendamento);
+                                    }}
                                 >
                                     Mais detalhes
                                 </button>
@@ -237,6 +347,19 @@ function AgendamentosAdmin() {
                         : 'Não informado'}
                 </p>
             </div>
+
+            {!editando && (
+                <div
+                    className="agendamentos-admin-modal-acoes"
+                >
+                    <button
+                        type="button"
+                        onClick={iniciarEdicao}
+                    >
+                        Editar agendamento
+                    </button>
+                </div>
+            )}
         </section>
     </div>
 )}

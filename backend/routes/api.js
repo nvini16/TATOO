@@ -84,7 +84,6 @@ router.get('/agendamentos', requireAdmin, async (req, res) => {
     res.json(data);
 });
 
-JavaScript
 
 router.patch('/agendamentos/:id', requireAdmin, async (req, res) => {
     const id = Number(req.params.id);
@@ -118,33 +117,27 @@ router.patch('/agendamentos/:id', requireAdmin, async (req, res) => {
         'faltou'
     ];
 
-    const statusAtivos = [
-        'aguardando_sinal',
-        'sinal_pago',
-        'aguardando_confirmacao',
-        'confirmado'
-    ];
+    const valorInvalido =
+        valor_sinal !== null &&
+        valor_sinal !== undefined &&
+        (
+            valor_sinal === '' ||
+            !Number.isFinite(Number(valor_sinal)) ||
+            Number(valor_sinal) < 0
+        );
 
     if (
         typeof nome !== 'string' || !nome.trim() ||
         typeof whatsapp !== 'string' || !whatsapp.trim() ||
         typeof arte !== 'string' || !arte.trim() ||
         typeof estilo !== 'string' || !estilo.trim() ||
-        !data ||
+        typeof data !== 'string' ||
         !/^\d{4}-\d{2}-\d{2}$/.test(data) ||
-        !horario ||
+        typeof horario !== 'string' ||
         !/^\d{2}:\d{2}(:\d{2})?$/.test(horario) ||
         !statusPermitidos.includes(status) ||
         typeof pagamento_sinal !== 'boolean' ||
-        (
-            valor_sinal !== null &&
-            valor_sinal !== undefined &&
-            (
-                valor_sinal === '' ||
-                !Number.isFinite(Number(valor_sinal)) ||
-                Number(valor_sinal) < 0
-            )
-        )
+        valorInvalido
     ) {
         return res.status(400).json({
             erro: 'Dados inválidos. Confira os campos e tente novamente.'
@@ -152,89 +145,47 @@ router.patch('/agendamentos/:id', requireAdmin, async (req, res) => {
     }
 
     try {
-        const { data: atual, error: erroBusca } = await supabase
-            .from('agendamentos')
-            .select('id, cliente_id')
-            .eq('id', id)
-            .maybeSingle();
-
-        if (erroBusca) {
-            console.error('Erro ao consultar agendamento:', erroBusca);
-            return res.status(500).json({
-                erro: 'Não foi possível consultar o agendamento.'
-            });
-        }
-
-        if (!atual) {
-            return res.status(404).json({
-                erro: 'Agendamento não encontrado.'
-            });
-        }
-
-        if (statusAtivos.includes(status)) {
-            const { data: conflito, error: erroConflito } = await supabase
-                .from('agendamentos')
-                .select('id')
-                .eq('data', data)
-                .in('status', statusAtivos)
-                .neq('id', id)
-                .limit(1);
-
-            if (erroConflito) {
-                console.error('Erro ao verificar disponibilidade:', erroConflito);
-                return res.status(500).json({
-                    erro: 'Não foi possível verificar a disponibilidade.'
-                });
+        const { data: atualizado, error } = await supabase.rpc(
+            'editar_agendamento_admin',
+            {
+                p_id: id,
+                p_nome: nome.trim(),
+                p_whatsapp: whatsapp.trim(),
+                p_arte: arte.trim(),
+                p_estilo: estilo.trim(),
+                p_descricao: descricao ?? null,
+                p_data: data,
+                p_horario: horario,
+                p_status: status,
+                p_pagamento_sinal: pagamento_sinal,
+                p_valor_sinal:
+                    valor_sinal === '' || valor_sinal == null
+                        ? null
+                        : Number(valor_sinal)
             }
+        );
 
-            if (conflito.length > 0) {
+        if (error) {
+            console.error('Erro ao editar agendamento:', error);
+
+            if (error.code === '23505') {
                 return res.status(409).json({
                     erro: 'Já existe outro agendamento ativo para essa data.'
                 });
             }
-        }
 
-        const { error: erroCliente } = await supabase
-            .from('clientes')
-            .update({
-                nome: nome.trim(),
-                whatsapp: whatsapp.trim()
-            })
-            .eq('id', atual.cliente_id);
+            if (error.message?.includes('Agendamento não encontrado')) {
+                return res.status(404).json({
+                    erro: 'Agendamento não encontrado.'
+                });
+            }
 
-        if (erroCliente) {
-            console.error('Erro ao atualizar cliente:', erroCliente);
-            return res.status(500).json({
-                erro: 'Não foi possível atualizar os dados do cliente.'
-            });
-        }
-
-        const { data: atualizado, error: erroAtualizacao } = await supabase
-            .from('agendamentos')
-            .update({
-                arte: arte.trim(),
-                estilo: estilo.trim(),
-                descricao: typeof descricao === 'string' && descricao.trim()
-                    ? descricao.trim()
-                    : null,
-                data,
-                horario,
-                status,
-                pagamento_sinal,
-                valor_sinal: valor_sinal === '' || valor_sinal == null
-                    ? null
-                    : Number(valor_sinal)
-            })
-            .eq('id', id)
-            .select('*, clientes(nome, whatsapp)')
-            .single();
-
-        if (erroAtualizacao) {
-            console.error('Erro ao atualizar agendamento:', erroAtualizacao);
-
-            if (erroAtualizacao.code === '23505') {
-                return res.status(409).json({
-                    erro: 'Já existe outro agendamento ativo para essa data.'
+            if (
+                error.message?.includes('Dados inválidos') ||
+                error.message?.includes('ID do agendamento inválido')
+            ) {
+                return res.status(400).json({
+                    erro: error.message
                 });
             }
 
@@ -243,9 +194,27 @@ router.patch('/agendamentos/:id', requireAdmin, async (req, res) => {
             });
         }
 
+        const { data: completo, error: erroConsulta } = await supabase
+            .from('agendamentos')
+            .select('*, clientes(nome, whatsapp)')
+            .eq('id', id)
+            .single();
+
+        if (erroConsulta) {
+            console.error(
+                'Agendamento atualizado, mas não foi possível recarregar os dados:',
+                erroConsulta
+            );
+
+            return res.status(200).json({
+                mensagem: 'Agendamento atualizado, mas não foi possível recarregar todos os dados.',
+                agendamento: atualizado
+            });
+        }
+
         return res.status(200).json({
             mensagem: 'Agendamento atualizado com sucesso.',
-            agendamento: atualizado
+            agendamento: completo
         });
     } catch (error) {
         console.error('Erro inesperado ao editar agendamento:', error);

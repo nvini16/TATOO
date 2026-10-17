@@ -84,6 +84,181 @@ router.get('/agendamentos', requireAdmin, async (req, res) => {
     res.json(data);
 });
 
+JavaScript
+
+router.patch('/agendamentos/:id', requireAdmin, async (req, res) => {
+    const id = Number(req.params.id);
+
+    if (!Number.isSafeInteger(id) || id <= 0) {
+        return res.status(400).json({
+            erro: 'ID do agendamento inválido.'
+        });
+    }
+
+    const {
+        nome,
+        whatsapp,
+        arte,
+        estilo,
+        descricao,
+        data,
+        horario,
+        status,
+        pagamento_sinal,
+        valor_sinal
+    } = req.body;
+
+    const statusPermitidos = [
+        'aguardando_sinal',
+        'sinal_pago',
+        'aguardando_confirmacao',
+        'confirmado',
+        'concluido',
+        'cancelado',
+        'faltou'
+    ];
+
+    const statusAtivos = [
+        'aguardando_sinal',
+        'sinal_pago',
+        'aguardando_confirmacao',
+        'confirmado'
+    ];
+
+    if (
+        typeof nome !== 'string' || !nome.trim() ||
+        typeof whatsapp !== 'string' || !whatsapp.trim() ||
+        typeof arte !== 'string' || !arte.trim() ||
+        typeof estilo !== 'string' || !estilo.trim() ||
+        !data ||
+        !/^\d{4}-\d{2}-\d{2}$/.test(data) ||
+        !horario ||
+        !/^\d{2}:\d{2}(:\d{2})?$/.test(horario) ||
+        !statusPermitidos.includes(status) ||
+        typeof pagamento_sinal !== 'boolean' ||
+        (
+            valor_sinal !== null &&
+            valor_sinal !== undefined &&
+            (
+                valor_sinal === '' ||
+                !Number.isFinite(Number(valor_sinal)) ||
+                Number(valor_sinal) < 0
+            )
+        )
+    ) {
+        return res.status(400).json({
+            erro: 'Dados inválidos. Confira os campos e tente novamente.'
+        });
+    }
+
+    try {
+        const { data: atual, error: erroBusca } = await supabase
+            .from('agendamentos')
+            .select('id, cliente_id')
+            .eq('id', id)
+            .maybeSingle();
+
+        if (erroBusca) {
+            console.error('Erro ao consultar agendamento:', erroBusca);
+            return res.status(500).json({
+                erro: 'Não foi possível consultar o agendamento.'
+            });
+        }
+
+        if (!atual) {
+            return res.status(404).json({
+                erro: 'Agendamento não encontrado.'
+            });
+        }
+
+        if (statusAtivos.includes(status)) {
+            const { data: conflito, error: erroConflito } = await supabase
+                .from('agendamentos')
+                .select('id')
+                .eq('data', data)
+                .in('status', statusAtivos)
+                .neq('id', id)
+                .limit(1);
+
+            if (erroConflito) {
+                console.error('Erro ao verificar disponibilidade:', erroConflito);
+                return res.status(500).json({
+                    erro: 'Não foi possível verificar a disponibilidade.'
+                });
+            }
+
+            if (conflito.length > 0) {
+                return res.status(409).json({
+                    erro: 'Já existe outro agendamento ativo para essa data.'
+                });
+            }
+        }
+
+        const { error: erroCliente } = await supabase
+            .from('clientes')
+            .update({
+                nome: nome.trim(),
+                whatsapp: whatsapp.trim()
+            })
+            .eq('id', atual.cliente_id);
+
+        if (erroCliente) {
+            console.error('Erro ao atualizar cliente:', erroCliente);
+            return res.status(500).json({
+                erro: 'Não foi possível atualizar os dados do cliente.'
+            });
+        }
+
+        const { data: atualizado, error: erroAtualizacao } = await supabase
+            .from('agendamentos')
+            .update({
+                arte: arte.trim(),
+                estilo: estilo.trim(),
+                descricao: typeof descricao === 'string' && descricao.trim()
+                    ? descricao.trim()
+                    : null,
+                data,
+                horario,
+                status,
+                pagamento_sinal,
+                valor_sinal: valor_sinal === '' || valor_sinal == null
+                    ? null
+                    : Number(valor_sinal)
+            })
+            .eq('id', id)
+            .select('*, clientes(nome, whatsapp)')
+            .single();
+
+        if (erroAtualizacao) {
+            console.error('Erro ao atualizar agendamento:', erroAtualizacao);
+
+            if (erroAtualizacao.code === '23505') {
+                return res.status(409).json({
+                    erro: 'Já existe outro agendamento ativo para essa data.'
+                });
+            }
+
+            return res.status(500).json({
+                erro: 'Não foi possível atualizar o agendamento.'
+            });
+        }
+
+        return res.status(200).json({
+            mensagem: 'Agendamento atualizado com sucesso.',
+            agendamento: atualizado
+        });
+    } catch (error) {
+        console.error('Erro inesperado ao editar agendamento:', error);
+
+        return res.status(500).json({
+            erro: 'Ocorreu um erro inesperado ao editar o agendamento.'
+        });
+    }
+});
+
+
+
+
 router.post('/agendamentos', upload.array('imagens', 5), async (req, res) => {
     const {
         nome,

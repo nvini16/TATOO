@@ -20,7 +20,7 @@ function AgendamentosAdmin() {
     const [carregando, setCarregando] = useState(true);
     const [erro, setErro] = useState(null);
 
-    const [agendamentoSelecionado, setAgendamentosSelecionado] = useState(null);
+    const [agendamentoSelecionado, setAgendamentoSelecionado] = useState(null);
 
     useEffect(() => {
         async function carregarAgendamentos() {
@@ -156,17 +156,17 @@ function AgendamentosAdmin() {
                 
 {agendamentoSelecionado && (
     <div
-        className="agendamento-admin-modal-overlay"
+        className="agendamentos-admin-modal-overlay"
         onClick={() => setAgendamentoSelecionado(null)}
     >
         <section
-            className="agendamento-admin-modal"
+            className="agendamentos-admin-modal"
             role="dialog"
             aria-modal="true"
             aria-labelledby="agendamento-modal-titulo"
             onClick={(event) => event.stopPropagation()}
         >
-            <header className="agendamento-admin-modal-header">
+            <header className="agendamentos-admin-modal-header">
                 <h2 id="agendamento-modal-titulo">
                     Detalhes do agendamento
                 </h2>
@@ -180,7 +180,7 @@ function AgendamentosAdmin() {
                 </button>
             </header>
 
-            <div className="agendamento-admin-modal-conteudo">
+            <div className="agendamentos-admin-modal-conteudo">
                 <p>
                     <strong>Data:</strong>{' '}
                     {formatarData(agendamentoSelecionado.data)}

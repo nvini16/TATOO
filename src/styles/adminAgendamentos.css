@@ -83,6 +83,103 @@
     font-weight: 600;
 }
 
+/* MOLDAL */
+
+.agendamentos-admin-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.72);
+    overflow-y: auto;
+    
+}
+
+.agendamentos-admin-modal {
+    width: 100%;
+    max-width: 620px;
+    overflow-y: auto;
+    max-height: calc(100vh - 40px);
+    padding: 28px;
+    background-color: var(--marsali-tatoo-color-dark-green);
+    color: var(--marsali-tatoo-color-white);
+    border: 1px solid var(--marsali-tatoo-transparent-gold);
+    border-radius: 14px;
+}
+
+.agendamentos-admin-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--marsali-tatoo-color-transparent-gold);
+}
+
+.agendamentos-admin-modal-header h2 {
+    margin: 0;
+    color: var(--marsali-tatoo-color-gold);
+    font-size: 1.5rem;
+}
+
+.agendamentos-admin-modal-header button {
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    border-top: 1px solid var(--marsali-tatoo-color-gold);
+    border-bottom: 1px solid var(--marsali-tatoo-color-gold);
+    border-left: none;
+    border-right: none;
+    background-color: transparent;
+    color: var(--marsali-tatoo-color-gold);
+    font-size: 1.6rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, border-radius 0.3s ease
+}
+
+.agendamentos-admin-modal-header button:hover {
+    background-color: var(--marsali-tatoo-color-gold);
+    color: var(--marsali-tatoo-color-dark-green);
+    border-radius: 5px;
+}
+
+.agendamentos-admin-modal-conteudo p {
+    margin: 0;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+.agendamentos-admin-modal-conteudo p:last-child {
+    border-bottom: none;
+}
+
+.agendamentos-admin-modal-conteudo strong {
+    color: var(--marsali-tatoo-color-gold);
+}
+
+@media (max-width: 600px) {
+    .agendamentos-admin-modal-overlay {
+        align-items: flex-start;
+        padding: 12px;
+    }
+
+    .agendamentos-admin-modal {
+        max-height: calc(100vh - 24px);
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .agendamentos-admin-modal-header h2 {
+        font-size: 1.25rem;
+    }
+}
+
 @media (max-width: 600px) {
     .agendamentos-admin-page {
         padding: 24px 16px;

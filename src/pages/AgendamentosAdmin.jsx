@@ -42,7 +42,7 @@ function AgendamentosAdmin() {
     function iniciarEdicao() {
         if (!agendamentoSelecionado) return;
 
-        setFromEdicao({
+        setFormEdicao({
             nome: agendamentoSelecionado.clientes?.nome ?? '',
             whatsapp: agendamentoSelecionado.clientes?.whatsapp ?? '',
             arte: agendamentoSelecionado.arte ?? '',

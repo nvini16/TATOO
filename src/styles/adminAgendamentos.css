@@ -163,6 +163,75 @@
     color: var(--marsali-tatoo-color-gold);
 }
 
+/* FORMULARIOOO DE EDIÇÃO PARCEIRO */
+
+.agendamentos-admin-form-edicao {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+.agendamentos-admin-form-edicao label {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: var(--marsali-tatoo-color-gold);
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.agendamentos-admin-form-edicao input:not([type="checked"]),
+.agendamentos-admin-form-edicao textarea,
+.agendamentos-admin-form-edicao select {
+    width: 100%;
+    min-width: 0;
+    padding: 12px 14px;
+    box-sizing: border-box;
+
+    background-color: var(--marsali-tatoo-color-dark-green);
+    color: var(--marsali-tatoo-color-white);
+
+    border-top: 1px solid var(--marsali-tatoo-color-gold);
+    border-bottom: 1px solid var(--marsali-tatoo-color-gold);
+    border-left: none;
+    border-right: none;
+    border-radius: 8px;
+
+    font: inherit;
+    font-weight: 400;
+
+    outline: none;
+    transition: border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.agendamentos-admin-form-edicao textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+.agendamentos-admin-form-edicao input:focus-visible,
+.agendamentos-admin-form-edicao textarea:focus-visible,
+.agendamentos-admin-form-edicao select:focus-visible {
+    border-color: var(--marsali-tatoo-color-gold);
+    box-shadow: 0 0 0 3px rgba(229, 233, 3, 0.91);
+}
+
+.agendamentos-admin-form-edicao input[type="checked"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--marsali-tatoo-color-gold);
+    cursor: pointer;
+}
+
+.agendamentos-admin-form-edicao label:has(input[type="checked"]) {
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+}
+
 @media (max-width: 600px) {
     .agendamentos-admin-modal-overlay {
         align-items: flex-start;

@@ -244,9 +244,9 @@ async function salvarEdicao() {
                                     {agendamento.status}
                                 </p>
 
-                                <button
+                               <div className="agendamentos-admin-card-btn">
+                                 <button
                                     type="button"
-                                    className="agendamentos-admin-detalhes-btn"
                                     onClick={() => {
                                         setEditando(false);
                                         setErro(null);
@@ -256,6 +256,7 @@ async function salvarEdicao() {
                                 >
                                     Mais detalhes
                                 </button>
+                               </div>
                             </article>
                         ))}
                     </section>

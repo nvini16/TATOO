@@ -8,7 +8,7 @@
 .agendamentos-admin-header {
     margin-bottom: 32px;
     padding-bottom: 24px;
-    border-bottom: 1px solid var(--marsali-tatoo-color-transparent-gold);
+    border-bottom: 1px solid var(--marsali-tatoo-color-gold);
 }
 
 .agendamentos-admin-header h1 {
@@ -80,6 +80,16 @@
     color: var(--marsali-tatoo-color-gold);
     font-size: 1rem;
     font-weight: 600;
+}
+
+.agendamentos-admin-card-btn button {
+    border-top: 1px solid var(--marsali-tatoo-color-gold);
+    border-bottom: 1px solid var(--marsali-tatoo-color-gold);
+    border-left: none;
+    border-right: none;
+    background-color: transparent;
+    padding: 5px;
+    color: var(--marsali-tatoo-color-gold)
 }
 
 /* MOLDAL */
@@ -163,6 +173,22 @@
     color: var(--marsali-tatoo-color-gold);
 }
 
+.agendamentos-admin-modal-acoes {
+    text-align: center;
+    border-top: 1px solid var(--marsali-tatoo-color-gold);
+    padding-top: 20px;
+}
+
+.agendamentos-admin-modal-acoes button {
+    border-top: 1px solid var(--marsali-tatoo-color-gold);
+    border-bottom: 1px solid var(--marsali-tatoo-color-gold);
+    border-left: none;
+    border-right: none;
+    background-color: transparent;
+    color: var(--marsali-tatoo-color-gold);
+    padding: 5px;
+}
+
 /* FORMULARIOOO DE EDIÇÃO PARCEIRO */
 
 .agendamentos-admin-form-edicao {
@@ -230,6 +256,24 @@
     align-items: center;
     gap: 12px;
     cursor: pointer;
+}
+
+.agendamentos-admin-form-acoes {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    border-top: 1px solid var(--marsali-tatoo-color-gold);
+    padding-top: 20px;
+}
+
+.agendamentos-admin-form-acoes button {
+    border-top: 1px solid var(--marsali-tatoo-color-gold);
+    border-bottom: 1px solid var(--marsali-tatoo-color-gold);
+    border-left: none;
+    border-right: none;
+    background-color: transparent;
+    padding: 5px;
+    color: var(--marsali-tatoo-color-gold)
 }
 
 @media (max-width: 600px) {

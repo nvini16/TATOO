@@ -47,4 +47,32 @@ body.header-hidden {
   }
 }
 
- 
+/* BARRA DE ROLAGEM SCROLLL GLOBAL, BB */
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: 
+    var(--marsali-tatoo-color-gold)
+    var(--marsali-tatoo-color-dark-green);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background:
+    var(--marsali-tatoo-color-dark-green);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color:
+    var(--marsali-tatoo-color-gold);
+  border: 2px solid var(--marsali-tatoo-color-dark-green);
+  border-radius: 10px;
+}
+
+::webkit-scrollbar-thumb:hover {
+  background-color: var(--marsali-tatoo-color-white);
+}

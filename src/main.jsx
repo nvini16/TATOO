@@ -19,6 +19,7 @@ import './styles/insights.css'
 import './styles/adminMenu.css'
 import './styles/adminLayout.css';
 import './styles/adminAgendamentos.css'
+import './styles/clientesAdmin.css'
 
 import App from './App.jsx'
 

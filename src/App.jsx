@@ -4,6 +4,7 @@ import Agendamento from './pages/Agendamentos';
 import LoginAdmin from './pages/LoginAdmin';
 import Insights from './pages/Insights';
 import AgendamentosAdmin from './pages/AgendamentosAdmin';
+import ClientesAdmin from './pages/ClientesAdmin';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/LoginAdmin" element={<LoginAdmin/>} />
         <Route path="/Insights" element={<Insights/>} />
         <Route path="/AgendamentosAdmin" element={<AgendamentosAdmin/>} />
+        <Route path="/ClientesAdmin" element={<ClientesAdmin/>} />
       </Routes>
     </BrowserRouter>
   )

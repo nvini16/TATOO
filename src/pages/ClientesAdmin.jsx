@@ -285,7 +285,7 @@ function ClientesAdmin() {
                       <button
                         type="button"
                         title="Clique aqui para visitar o perfil."
-                        onClick={() => navigate(`/ClientesAdmin/${cliente.id}`)}
+                        onClick={() => navigate(`/ClientePerfil/${cliente.id}`)}
                       >
                         Visitar perfil
                       </button>

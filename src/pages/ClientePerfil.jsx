@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import AdminLayout from '../components/AdminLayout';
 
 function ClientePerfil() {
+    const { id } = useParams();
     return (
         <AdminLayout>
             <main className="cliente-perfil-page">

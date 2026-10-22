@@ -5,6 +5,7 @@ import LoginAdmin from './pages/LoginAdmin';
 import Insights from './pages/Insights';
 import AgendamentosAdmin from './pages/AgendamentosAdmin';
 import ClientesAdmin from './pages/ClientesAdmin';
+import ClientePerfil from './pages/ClientePerfil';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/Insights" element={<Insights/>} />
         <Route path="/AgendamentosAdmin" element={<AgendamentosAdmin/>} />
         <Route path="/ClientesAdmin" element={<ClientesAdmin/>} />
+        <Route path="/ClientePerfil/:id" element={<ClientePerfil/>} />
       </Routes>
     </BrowserRouter>
   )

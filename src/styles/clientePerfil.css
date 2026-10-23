@@ -1,3 +1,65 @@
+
 .cliente-perfil-page {
-    background-color: blue;
+  min-height: 100vh;
+  padding: 40px;
+  box-sizing: border-box;
+  background-color: var(--marsali-tatoo-color-white);
+  color: var(--marsali-tatoo-color-dark-green);
 }
+
+.cliente-perfil-page > h1 {
+  margin: 0 0 32px;
+  padding-bottom: 20px;
+  color: var(--marsali-tatoo-color-gold);
+  font-size: 2.4rem;
+  border-bottom: 1px solid var(--marsali-tatoo-color-gold);
+}
+
+.cliente-perfil-page > section,
+.cliente-perfil-page > section:not(.cliente-historico) {
+  margin-bottom: 28px;
+}
+
+.cliente-perfil-page > section:not(.cliente-historico) {
+  padding: 24px;
+  background-color: var(--marsali-tatoo-color-dark-green);
+  color: var(--marsali-tatoo-color-white);
+  border: 1px solid var(--marsali-tatoo-color-transparent-gold);
+  border-radius: 12px;
+}
+
+.cliente-perfil-page > section:not(.cliente-historico) h2 {
+  margin: 0 0 20px;
+  color: var(--marsali-tatoo-color-gold);
+  font-size: 1.4rem;
+}
+
+.cliente-perfil-page > section:not(.cliente-historico) p {
+  margin: 0 0 12px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.cliente-perfil-page > section:not(.cliente-historico) p:last-child {
+  margin-bottom: 0;
+}
+
+.cliente-perfil-page > section:not(.cliente-historico) strong {
+  color: var(--marsali-tatoo-color-gold);
+}
+
+@media (max-width: 768px) {
+  .cliente-perfil-page {
+    padding: 24px 16px;
+  }
+
+  .cliente-perfil-page > h1 {
+    font-size: 2rem;
+  }
+
+  .cliente-perfil-page > section:not(.cliente-historico) {
+    padding: 18px;
+  }
+}
+
+

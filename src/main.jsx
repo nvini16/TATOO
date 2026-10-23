@@ -20,6 +20,7 @@ import './styles/adminMenu.css'
 import './styles/adminLayout.css';
 import './styles/adminAgendamentos.css'
 import './styles/clientesAdmin.css'
+import './styles/clientePerfil.css'
 import './styles/clienteHistorico.css'
 
 import App from './App.jsx'

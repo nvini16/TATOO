@@ -1,0 +1,81 @@
+
+.cliente-historico {
+  margin-top: 36px;
+}
+
+.cliente-historico > h2 {
+  margin: 0 0 24px;
+  padding-bottom: 14px;
+  color: var(--marsali-tatoo-color-gold);
+  font-size: 1.7rem;
+  border-bottom: 1px solid var(--marsali-tatoo-color-gold);
+}
+
+.cliente-historico-lista {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+  gap: 20px;
+}
+
+.cliente-historico-item {
+  min-width: 0;
+  padding: 24px;
+  background-color: var(--marsali-tatoo-color-dark-green);
+  color: var(--marsali-tatoo-color-white);
+  border: 1px solid var(--marsali-tatoo-color-transparent-gold);
+  border-radius: 12px;
+  overflow-wrap: anywhere;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.cliente-historico-item:hover {
+  transform: translateY(-3px);
+  border-color: var(--marsali-tatoo-color-gold);
+}
+
+.cliente-historico-item h3 {
+  margin: 0 0 20px;
+  padding-bottom: 12px;
+  color: var(--marsali-tatoo-color-gold);
+  font-size: 1.25rem;
+  border-bottom: 1px solid var(--marsali-tatoo-color-transparent-gold);
+}
+
+.cliente-historico-item p {
+  margin: 0 0 12px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.cliente-historico-item p:last-child {
+  margin-bottom: 0;
+}
+
+.cliente-historico-item strong {
+  color: var(--marsali-tatoo-color-gold);
+}
+
+@media (max-width: 768px) {
+  .cliente-historico {
+    margin: 28px;
+  }
+
+  .cliente-historico > h2 {
+    font-size: 1.4rem;
+  }
+
+  .cliente-historico-item {
+    padding: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cliente-historico-item {
+    transition: none;
+  }
+
+  .cliente-historico-item:hover {
+    transform: none;
+  }
+}
+

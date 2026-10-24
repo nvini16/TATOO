@@ -226,7 +226,7 @@ function IndexadorImagens({ onImagensChange }) {
     return (
         <section className="indexador-imagens">
             <h2>Imagens da tattoo</h2>
-            <p>Até {LIMITE_IMAGENS} imagens. Elas são otimizadas no seu dispositivo antes do envio.</p>
+            <p>Até {LIMITE_IMAGENS} imagens. Elas são otimizadas automaticamente no seu dispositivo antes do envio.</p>
 
             <div
                 className="indexador-imagens-area"

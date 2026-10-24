@@ -141,9 +141,7 @@ router.get('/clientes/:id/referencias', requireAdmin, async (req, res) => {
                         caminho: imagem.caminho,
                         criado_em: imagem.criado_em,
                         url: data.signedUrl,
-                        arte: agendamento?.arte ?? null,
-                        data: agendamento?.data ?? null,
-                        horario: agendamento?.horario ?? null
+                        arte: agendamento?.arte ?? null
                     };
                 })
             );

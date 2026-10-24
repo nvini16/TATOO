@@ -1,5 +1,15 @@
 import { useState } from 'react';
 import ScrollReveal from './ScrollReveal';
+import cuidado3857 from '../assets/cuidados/3857.webp';
+import cuidado3858 from '../assets/cuidados/3858.webp';
+import cuidado3859 from '../assets/cuidados/3859.webp';
+import cuidado3860 from '../assets/cuidados/3860.webp';
+import cuidado3861 from '../assets/cuidados/3861.webp';
+import cuidado3862 from '../assets/cuidados/3862.webp';
+import cuidado3863 from '../assets/cuidados/3863.webp';
+import cuidado3864 from '../assets/cuidados/3864.webp';
+import cuidado3865 from '../assets/cuidados/3865.webp';
+import cuidado3866 from '../assets/cuidados/3866.webp';
 
 function Cuidados() {
     const [itemAberto, setItemAberto] = useState(null)
@@ -43,7 +53,7 @@ function Cuidados() {
                                 </p>
 
                                 <div className="cuidado-item-imagem">
-                                    {/* Imagem  */}
+                                    <img src={cuidado3857} alt="Pessoa descansando antes da tatuagem" loading="lazy" />
                                 </div>
                             </div>
                         )}
@@ -68,7 +78,7 @@ function Cuidados() {
                                 </p>
 
                                 <div className="cuidado-item-imagem">
-                                    {/* Imagem  */}
+                                    <img src={cuidado3858} alt="Alimentação antes do procedimento" loading="lazy" />
                                 </div>
                             </div>
                             )}
@@ -93,7 +103,7 @@ function Cuidados() {
                                 </p>
 
                                 <div className="cuidado-item-imagem">
-                                    {/* Imagem  */}
+                                    <img src={cuidado3859} alt="Pessoa bebendo água" loading="lazy" />
                                 </div>
                             </div>
                             )}
@@ -118,7 +128,7 @@ function Cuidados() {
                                 </p>
 
                             <div className="cuidado-item-imagem">
-                                {/* Imagem  */}
+                                <img src={cuidado3860} alt="Evitar álcool antes da sessão" loading="lazy" />
                             </div>
                         </div>
                             )}
@@ -144,7 +154,7 @@ function Cuidados() {
                                 </p>
 
                                 <div className="cuidado-item-imagem">
-                                    {/* Imagem  */}
+                                    <img src={cuidado3861} alt="Cuidados com produtos aplicados na pele antes da tatuagem" loading="lazy" />
                                 </div>
                             </div>
                             )}
@@ -177,7 +187,7 @@ function Cuidados() {
                                 </p>
 
                                 <div className="cuidado-item-imagem">
-                                    {/* Imagem  */}
+                                    <img src={cuidado3862} alt="Higienização da tatuagem" loading="lazy" />
                                 </div>
                             </div>
                             )}
@@ -202,7 +212,7 @@ function Cuidados() {
                                 </p>
 
                                 <div className="cuidado-item-imagem">
-                                    {/* Imagem  */}
+                                    <img src={cuidado3863} alt="Evitar coçar a tatuagem durante a cicatrização" loading="lazy" />
                                 </div>
                             </div>
                             )}
@@ -227,7 +237,7 @@ function Cuidados() {
                                 </p>
 
                                 <div className="cuidado-item-imagem">
-                                    {/* Imagem  */}
+                                    <img src={cuidado3864} alt="Proteção da tatuagem contra o sol" loading="lazy" />
                                 </div>
                             </div>
                             )}
@@ -252,7 +262,7 @@ function Cuidados() {
                                 </p>
 
                                 <div className="cuidado-item-imagem">
-                                    {/* Imagem  */}
+                                    <img src={cuidado3865} alt="Evitar piscina e mar durante a cicatrização" loading="lazy" />
                                 </div>
                             </div>
                             )}
@@ -279,7 +289,7 @@ function Cuidados() {
                                 </p>
 
                                 <div className="cuidado-item-imagem">
-                                    {/* Imagem  */}
+                                    <img src={cuidado3866} alt="Hidratação da tatuagem conforme orientação profissional" loading="lazy" />
                                 </div>
                             </div>
                             )}

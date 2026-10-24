@@ -13,7 +13,7 @@ function ClienteReferencias({clienteId}) {
 
         async function carregarReferencias() {
             setCarregando(true);
-            setErro;
+            setErro('');
             setReferencias([]);
 
             try {

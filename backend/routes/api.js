@@ -100,7 +100,7 @@ router.get('/clientes/:id/referencias', requireAdmin, async (req, res) => {
             .select('id, arte, data')
             .eq('cliente_id', id);
         
-        if (erroAgendamentos.length) {
+        if (erroAgendamentos) {
             throw erroAgendamentos;
         }
 

@@ -78,8 +78,11 @@
 .footer-contato-item {
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: center;
+  gap: 5px;
   color: var(--marsali-tatoo-color-white);
+  text-decoration: none;
+  font-weight: 700;
 }
 
 .footer-contato-item svg {

@@ -97,7 +97,7 @@ router.get('/clientes/:id/referencias', requireAdmin, async (req, res) => {
     try {
         const { data: agendamentos, error: erroAgendamentos } = await supabase 
             .from('agendamentos')
-            .select('id, arte, data')
+            .select('id, arte, data, horario')
             .eq('cliente_id', id);
         
         if (erroAgendamentos) {
@@ -142,7 +142,8 @@ router.get('/clientes/:id/referencias', requireAdmin, async (req, res) => {
                         criado_em: imagem.criado_em,
                         url: data.signedUrl,
                         arte: agendamento?.arte ?? null,
-                        data: agendamento?.data ?? null
+                        data: agendamento?.data ?? null,
+                        horario: agendamento?.horario ?? null
                     };
                 })
             );

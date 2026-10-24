@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { MessageCircle } from 'lucide-react';
 import logo from '../assets/logo/marsali-tatoo-logo-fundo-none.png';
 
 function Footer() {
@@ -11,12 +10,12 @@ function Footer() {
         <section className="footer-marca">
           <div className="footer-marca-alinhar">
             <img
-            src={logo}
-            alt="Marsali Tattoo Studio"
-            className="footer-logo"
-          />
+              src={logo}
+              alt="Marsali Tattoo Studio"
+              className="footer-logo"
+            />
 
-          <h2>Marsali Tattoo</h2>
+            <h2>Marsali Tattoo</h2>
           </div>
         </section>
 
@@ -33,12 +32,13 @@ function Footer() {
         <section className="footer-contato">
           <h3>Contato e redes sociais</h3>
 
-          <div className="footer-contato-item">
-            <MessageCircle size={20} aria-hidden="true" />
-            <span>WhatsApp</span>
-          </div>
-
-          <div className="footer-contato-item">
+          <a
+            className="footer-contato-item"
+            href="https://www.instagram.com/marsalitattoo/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Abrir Instagram da Marsali Tattoo em uma nova aba"
+          >
             <svg
               className="footer-instagram-icone"
               width="20"
@@ -56,8 +56,8 @@ function Footer() {
               <circle cx="12" cy="12" r="4" />
               <circle cx="17.5" cy="6.5" r="0.75" fill="currentColor" stroke="none" />
             </svg>
-            <span>Instagram</span>
-          </div>
+            <span>@marsalitattoo</span>
+          </a>
         </section>
       </div>
 

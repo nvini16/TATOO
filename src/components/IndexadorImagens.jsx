@@ -71,8 +71,8 @@ async function otimizarImagem(arquivo) {
             throw new Error('A imagem continua maior que 5 MB após a otimização.');
         }
 
-        // Mantém o original quando ele já é menor e está dentro do limite.
-        if (arquivo.size <= TAMANHO_MAXIMO && blob.size >= arquivo.size && largura === imagem.naturalWidth) {
+        // Evita converter quando o WebP não reduz o tamanho do arquivo.
+        if (arquivo.size <= TAMANHO_MAXIMO && blob.size >= arquivo.size) {
             return arquivo;
         }
 

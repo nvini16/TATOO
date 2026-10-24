@@ -6,7 +6,6 @@ function AdminMenu({menuAberto, setMenuAberto}) {
         { nome: 'Insights', rota: '/Insights', icone: '◉' },
         { nome: 'Agendamentos', rota: '/AgendamentosAdmin', icone: '▦' },
         { nome: 'Clientes', rota: '/ClientesAdmin', icone: '♙' },
-        { nome: 'Configurações', rota: '/ConfiguracoesAdmin', icone: '⚙' },
     ];
 
     return (

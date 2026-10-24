@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import AdminLayout from '../components/AdminLayout';
 import ClienteHistorico from '../components/clientePerfil/ClienteHistorico';
+import ClienteReferencias from '../components/clientePerfil/ClienteReferencias';
 
 function ClientePerfil() {
 const { id } = useParams();
@@ -146,6 +147,8 @@ return (
         </section>
 
         <ClienteHistorico agendamentos={agendamentos} />
+
+        <ClienteReferencias clienteId={id} />
       </>
     )}
   </main>

@@ -84,6 +84,81 @@ router.get('/agendamentos', requireAdmin, async (req, res) => {
     res.json(data);
 });
 
+router.get('/clientes/:id/referencias', requireAdmin, async (req, res) => {
+    const {id} = req.params;
+    const uuidValido = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
+    if (!uuidValido.test(id)) {
+        return res.status(400).json({
+            erro: 'Identificador do cliente inválido.'
+        });
+    }
+
+    try {
+        const { data: agendamentos, error: erroAgendamentos } = await supabase 
+            .from('agendamentos')
+            .select('id, arte, data')
+            .eq('cliente_id', id);
+        
+        if (erroAgendamentos.length) {
+            throw erroAgendamentos;
+        }
+
+        if (!agendamentos.length) {
+            return res.json([]);
+        }
+
+        const idsAgendamentos = agendamentos.map(
+            (agendamento) => agendamento.id
+        );
+
+        const {data: imagens, error: erroImagens} = await supabase
+            .from('agendamento_imagens')
+            .select('id, agendamento_id, caminho, criado_em')
+            .in('agendamento_id', idsAgendamentos);
+
+            if (erroImagens) {
+                throw erroImagens;
+            }
+
+            const imagensComUrl = await Promise.all(
+                imagens.map(async (imagem) => {
+                    const {data, error} = await supabase.storage
+                        .from('agendamento-imagens')
+                        .createSignedUrl(imagem.caminho, 3600);
+
+                    if (error) {
+                        throw error;
+                    }
+
+                    const agendamento = agendamentos.find(
+                        (item) => item.id === imagem.agendamento_id
+                    );
+
+                    return {
+                        id: imagem.id,
+                        agendamento_id: imagem.agendamento_id,
+                        caminho: imagem.caminho,
+                        criado_em: imagem.criado_em,
+                        url: data.signedUrl,
+                        arte: agendamento?.arte ?? null,
+                        data: agendamento?.data ?? null
+                    };
+                })
+            );
+
+            return res.json(imagensComUrl);
+    } catch (error) {
+        console.error(
+            'Erro ao consultar referências do cliente:', error
+        );
+
+        return res.status(500).json({
+            erro: 'Não foi possível carregar as imagens de referência.'
+        });
+    }
+});
+
 
 router.patch('/agendamentos/:id', requireAdmin, async (req, res) => {
     const id = Number(req.params.id);

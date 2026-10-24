@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import {
     CheckCircle2,
     XCircle,
@@ -14,10 +15,24 @@ const icones = {
 }
 
 function Alert({ tipo, titulo, mensagem, fechar }) {
+    const [visivel, setVisivel] = useState(true);
+
+    useEffect(() => {
+        setVisivel(true);
+        const temporizador = setTimeout(() => {
+            setVisivel(false);
+            fechar?.();
+        }, 5000);
+
+        return () => clearTimeout(temporizador);
+    }, [tipo, titulo, mensagem, fechar]);
+
     const tipoSeguro = icones[tipo] ? tipo : 'info';
     const Icone = icones[tipoSeguro];
+    if (!visivel) return null;
+
     return (
-        <div className={`alert alert-${tipoSeguro}`}>
+        <div role="status" className={`alert alert-${tipoSeguro}`}>
             <Icone />
 
             <div className="alert-content">
@@ -26,7 +41,7 @@ function Alert({ tipo, titulo, mensagem, fechar }) {
             </div>
 
                 {fechar && (
-                    <button type="button" onClick={fechar}>
+                    <button type="button" aria-label="Fechar notificação" onClick={() => { setVisivel(false); fechar(); }}>
                         <X />
                     </button>
                 )}

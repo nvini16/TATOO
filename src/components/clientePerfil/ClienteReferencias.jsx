@@ -78,11 +78,21 @@ function ClienteReferencias({ clienteId }) {
         };
     }, [clienteId, API_URL]);
 
-    function formatarData(data) {
-        if (!data) return 'Data não informada';
+    function formatarDataHora(criadoEm) {
+        if (!criadoEm) return null;
 
-        const [ano, mes, dia] = data.split('-');
-        return `${dia}/${mes}/${ano}`;
+        const data = new Date(criadoEm);
+
+        if (Number.isNaN(data.getTime())) return null;
+
+        return {
+            data: data.toLocaleDateString('pt-BR'),
+            horario: data.toLocaleTimeString('pt-BR', {
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: false,
+            }),
+        };
     }
 
     function alternarReferencia(id) {
@@ -110,6 +120,7 @@ function ClienteReferencias({ clienteId }) {
                     <div className="cliente-referencias-lista">
                         {referencias.map((referencia) => {
                             const ativa = referenciaAtiva === referencia.id;
+                            const dataHora = formatarDataHora(referencia.criado_em);
 
                             return (
                                 <button
@@ -134,10 +145,10 @@ function ClienteReferencias({ clienteId }) {
                                             {referencia.arte || 'Arte não informada'}
                                         </span>
                                         <span className="cliente-referencia-data">
-                                            Data: {formatarData(referencia.data)}
+                                            Data: {dataHora?.data || 'Não informada'}
                                         </span>
                                         <span className="cliente-referencia-horario">
-                                            Horário: {referencia.horario?.slice(0, 5) || 'Não informado'}
+                                            Horário: {dataHora?.horario || 'Não informado'}
                                         </span>
                                     </span>
                                 </button>

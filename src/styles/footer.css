@@ -132,3 +132,20 @@
     transition: none;
   }
 }
+
+
+/* Faz o footer ocupar toda a largura da tela na página de agendamento */
+.agendamento-page > .footer {
+  width: calc(100% + 80px);
+  margin-left: -40px;
+  margin-right: -40px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .agendamento-page > .footer {
+    width: calc(100% + 40px);
+    margin-left: -20px;
+    margin-right: -20px;
+  }
+}

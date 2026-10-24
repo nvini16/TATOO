@@ -3,7 +3,7 @@ import path from 'node:path';
 import sharp from 'sharp';
 
 const pastaEntrada = 'src/assets/cuidadosImgBruto';
-const pastaSaida = 'src/assets/cuidados';
+const pastaSaida = 'src/assets/cuidadoss';
 
 await fs.mkdir(pastaSaida, { recursive: true });
 

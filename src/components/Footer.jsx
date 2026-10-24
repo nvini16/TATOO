@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { MessageCircle } from 'lucide-react';
 import logo from '../assets/logo/marsali-tatoo-logo-fundo-none.png';
 
 function Footer() {
@@ -31,6 +32,17 @@ function Footer() {
 
         <section className="footer-contato">
           <h3>Contato e redes sociais</h3>
+
+          <a
+            className="footer-contato-item"
+            href="https://wa.me/5513997429761"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Conversar com a Marsali Tattoo pelo WhatsApp em uma nova aba"
+          >
+            <MessageCircle size={20} aria-hidden="true" />
+            <span>WhatsApp</span>
+          </a>
 
           <a
             className="footer-contato-item"

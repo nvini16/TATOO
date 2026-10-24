@@ -1,12 +1,13 @@
-import {useEffect, useState} from 'react';
-import {supabase} from '../../lib/supabase';
+import { useEffect, useState } from 'react';
+import { supabase } from '../../lib/supabase';
 
-function ClienteReferencias({clienteId}) {
+function ClienteReferencias({ clienteId }) {
     const API_URL = import.meta.env.VITE_API_URL || '';
 
     const [referencias, setReferencias] = useState([]);
     const [carregando, setCarregando] = useState(true);
     const [erro, setErro] = useState('');
+    const [referenciaAtiva, setReferenciaAtiva] = useState(null);
 
     useEffect(() => {
         let ativo = true;
@@ -15,6 +16,7 @@ function ClienteReferencias({clienteId}) {
             setCarregando(true);
             setErro('');
             setReferencias([]);
+            setReferenciaAtiva(null);
 
             try {
                 const {
@@ -23,13 +25,12 @@ function ClienteReferencias({clienteId}) {
                 } = await supabase.auth.getSession();
 
                 if (erroSessao || !session) {
-                    throw new Error(
-                        'Sessão administrativa não encontrada.'
-                    );
+                    throw new Error('Sessão administrativa não encontrada.');
                 }
 
                 const resposta = await fetch(
-                    `${API_URL}/api/clientes/${clienteId}/referencias`, {
+                    `${API_URL}/api/clientes/${clienteId}/referencias`,
+                    {
                         headers: {
                             Authorization: `Bearer ${session.access_token}`,
                         },
@@ -38,7 +39,6 @@ function ClienteReferencias({clienteId}) {
 
                 if (!resposta.ok) {
                     const dadosErro = await resposta.json().catch(() => ({}));
-
                     throw new Error(
                         dadosErro.erro || 'Não foi possível carregar as referências.'
                     );
@@ -70,7 +70,7 @@ function ClienteReferencias({clienteId}) {
             carregarReferencias();
         } else {
             setCarregando(false);
-            setErro('Identificador do cliente não informado');
+            setErro('Identificador do cliente não informado.');
         }
 
         return () => {
@@ -78,12 +78,23 @@ function ClienteReferencias({clienteId}) {
         };
     }, [clienteId, API_URL]);
 
+    function formatarData(data) {
+        if (!data) return 'Data não informada';
+
+        const [ano, mes, dia] = data.split('-');
+        return `${dia}/${mes}/${ano}`;
+    }
+
+    function alternarReferencia(id) {
+        setReferenciaAtiva((atual) => (atual === id ? null : id));
+    }
+
     return (
         <section className="cliente-referencias">
             <h2>Imagens de referência</h2>
 
             {carregando && (
-                <p role="status">Carregando referência...</p>
+                <p role="status">Carregando referências...</p>
             )}
 
             {!carregando && erro && (
@@ -91,29 +102,52 @@ function ClienteReferencias({clienteId}) {
             )}
 
             {!carregando && !erro && referencias.length === 0 && (
-                <p>Este cliente ainda não possuí imagens de referência.</p>
+                <p>Este cliente ainda não possui imagens de referência.</p>
             )}
 
             {!carregando && !erro && referencias.length > 0 && (
-                <div className="cliente-referencias-lista">
-                    {referencias.map((referencia) => (
-                        <article className="cliente-referencia-card" key={referencia.id}>
-                            <img src={referencia.url} alt={`Referência para ${referencia.arte || 'o agendamento'}`} />
+                <>
+                    <div className="cliente-referencias-lista">
+                        {referencias.map((referencia) => {
+                            const ativa = referenciaAtiva === referencia.id;
 
-                            <div>
-                                <p>
-                                    <strong>Arte:</strong>{''}
-                                    {referencia.arte || 'Não informada'}
-                                </p>
+                            return (
+                                <button
+                                    className={`cliente-referencia-card${ativa ? ' cliente-referencia-card--ativa' : ''}`}
+                                    key={referencia.id}
+                                    type="button"
+                                    aria-pressed={ativa}
+                                    aria-label={`Mostrar informações da referência ${referencia.arte || 'do agendamento'}`}
+                                    onClick={() => alternarReferencia(referencia.id)}
+                                >
+                                    <img
+                                        className="cliente-referencia-imagem"
+                                        src={referencia.url}
+                                        alt={referencia.arte
+                                            ? `Referência de ${referencia.arte}`
+                                            : 'Imagem de referência do agendamento'}
+                                        loading="lazy"
+                                    />
 
-                                <p>
-                                    <strong>Data do agendamento:</strong>{''}
-                                    {referencia.data ? new Date(`${referencia.data}T12:00:00`).toLocaleDateString('pt-BR') : 'Não informada'}
-                                </p>
-                            </div>
-                        </article>
-                    ))}
-                </div>
+                                    <span className="cliente-referencia-degrade">
+                                        <span className="cliente-referencia-arte">
+                                            {referencia.arte || 'Arte não informada'}
+                                        </span>
+                                        <span className="cliente-referencia-data">
+                                            Data: {formatarData(referencia.data)}
+                                        </span>
+                                        <span className="cliente-referencia-horario">
+                                            Horário: {referencia.horario?.slice(0, 5) || 'Não informado'}
+                                        </span>
+                                    </span>
+                                </button>
+                            );
+                        })}
+                    </div>
+                    <p className="cliente-referencias-instrucao">
+                        Selecione uma imagem para visualizar os detalhes.
+                    </p>
+                </>
             )}
         </section>
     );

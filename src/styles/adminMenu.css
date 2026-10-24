@@ -27,7 +27,7 @@
     width: 48px;
     height: 48px;
     flex-shrink: 0;
-    color: rgb(220, 189, 36);
+    color: rgb(233, 197, 14);
     font-size: 25px;
     background: transparent;
     border: none;
@@ -36,7 +36,7 @@
 }
 
 .admin-menu-toggle:hover {
-    background: #075a2b;
+    background: none;
 }
 
 .admin-menu-links {
@@ -60,8 +60,8 @@
 
 .admin-menu-link:hover,
 .admin-menu-link.ativo {
-    color: rgb(220, 189, 36);
-    background: #075a2b;
+    color: rgb(240, 204, 19);
+    background: #075a2bc6;
 }
 
 .admin-menu-icone {
@@ -69,11 +69,11 @@
     align-items: center;
     justify-content: center;
     min-width: 24px;
-    font-size: 21px;
+    font-size: 25px;
 }
 
 .admin-menu-texto {
-    font-size: 15px;
+    font-size: 20px;
     white-space: nowrap;
 }
 
@@ -99,7 +99,7 @@
         height: 56px;
         padding: 0;
         overflow: visible;
-        background: #012b16;
+        background: #012b16ba;
         border: 1px solid rgb(220, 189, 36);
         border-radius: 50%;
         box-shadow: 0 4px 14px rgb(0 0 0 / 30%);
@@ -145,4 +145,10 @@
     .admin-menu.recolhido .admin-menu-texto {
         display: inline;
     }
+
+    .admin-menu-link:hover,
+    .admin-menu-link.ativo {
+    color: rgb(245, 205, 8);
+    background: #075a2bba;
+}
 }

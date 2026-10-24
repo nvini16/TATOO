@@ -9,13 +9,15 @@ function Footer() {
     <footer className="footer">
       <div className="footer-conteudo">
         <section className="footer-marca">
-          <img
+          <div className="footer-marca-alinhar">
+            <img
             src={logo}
             alt="Marsali Tattoo Studio"
             className="footer-logo"
           />
 
           <h2>Marsali Tattoo</h2>
+          </div>
         </section>
 
         <nav className="footer-navegacao" aria-label="Navegação do rodapé">

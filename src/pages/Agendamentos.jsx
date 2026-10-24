@@ -202,7 +202,7 @@ function Agendamento() {
 
     return (
 
-        
+            <> 
         <main className="agendamento-page">
             
             {alerta.mostrar && (
@@ -338,8 +338,9 @@ function Agendamento() {
             </form>
             </div>
            </div>
-           <Footer />
         </main>
+           <Footer />
+        </>
     );
 }
 

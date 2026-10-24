@@ -9,11 +9,17 @@ function Home() {
   return (
     <main>
       <Header />
+      
       <Hero />
+      
       <Trabalhos />
+      
       <Cuidados />
+      
       <Sobre />
+      
       <Footer />
+      
     </main>
   );
 }

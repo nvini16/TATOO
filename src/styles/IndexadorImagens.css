@@ -85,7 +85,7 @@
     border: 1px solid rgba(220, 190, 36, 0.35);
     border-radius: 12px;
 
-    background-color: rgba(245, 245, 245, 0.04);
+    background-color: #fff;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 
     transition: 
@@ -100,7 +100,7 @@
     border-color: var(--marsali-tatoo-color-gold);
 
     box-shadow: 
-        0 12 28px rgba(0, 0, 0, 0.18)
+        0 12px 28px rgba(0, 0, 0, 0.18),
         0 0 12px rgba(220, 190, 36, 0.12);
 }
 
@@ -113,16 +113,25 @@
 
 .indexador-imagem-card p {
     margin: 0;
-    padding: 12px;
-
-    color: var(--marsali-tatoo-color-white);
-
+    padding: 14px 12px 6px;
+    color: var(--marsali-tatoo-color-dark-gold);
+    background-color: #fff;
     font-size: 15px;
-    font-weight: 600;
+    font-weight: 700;
+    line-height: 1.5;
+    text-align: center;
+    overflow-wrap: anywhere;
+}
 
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+.indexador-imagem-card small {
+    display: block;
+    padding: 0 12px 14px;
+    color: var(--marsali-tatoo-color-dark-gold);
+    background-color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.4;
+    text-align: center;
 }
 
 .indexador-imagem-remover {

@@ -47,7 +47,7 @@ function AgendamentosAdmin() {
             whatsapp: agendamentoSelecionado.clientes?.whatsapp ?? '',
             arte: agendamentoSelecionado.arte ?? '',
             estilo: agendamentoSelecionado.estilo ?? '',
-            descricao: agendamentoSelecionado.descriao ?? '',
+            descricao: agendamentoSelecionado.descricao ?? '',
             data: agendamentoSelecionado.data?.slice(0,10) ?? '',
             horario: agendamentoSelecionado.horario?.slice(0,5) ?? '',
             status: agendamentoSelecionado.status ?? 'aguardando_sinal',
@@ -61,7 +61,7 @@ function AgendamentosAdmin() {
     function atualizarCampo(event) {
         const { name, value, type, checked } = event.target;
 
-        setFromEdicao((anterior) => ({
+        setFormEdicao((anterior) => ({
             ...anterior,
             [name]: type === 'checkbox' ? checked : value,
         }));
@@ -360,7 +360,7 @@ async function salvarEdicao() {
 
                             <input 
                                 name="data"
-                                type="data"
+                                type="date"
                                 value={formEdicao.data}
                                 onChange={atualizarCampo}
                                 required
@@ -371,8 +371,8 @@ async function salvarEdicao() {
                             Horario
 
                             <input 
-                                   name="time"
-                                type="horario"
+                                   name="horario"
+                                type="time"
                                 value={formEdicao.horario}
                                 onChange={atualizarCampo}
                                 required
@@ -428,7 +428,7 @@ async function salvarEdicao() {
                                 type="submit"
                                 disabled={salvando}
                             >
-                                {salvando ? 'Salvando...' : 'Salvar salvar alterações'}
+                                {salvando ? 'Salvando...' : 'Salvar alterações'}
                             </button>
 
                             <button

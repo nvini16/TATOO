@@ -63,3 +63,63 @@
 }
 
 
+
+/* Ação de contato sempre acessível no perfil do cliente */
+.cliente-perfil-contato-fixo {
+  position: fixed;
+  right: 28px;
+  bottom: 28px;
+  z-index: 1100;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 54px;
+  padding: 0 20px;
+  border: 1px solid var(--marsali-tatoo-color-gold);
+  border-radius: 999px;
+  background: var(--marsali-tatoo-color-dark-green);
+  color: var(--marsali-tatoo-color-white);
+  box-shadow: 0 6px 20px rgb(0 0 0 / 25%);
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.cliente-perfil-contato-fixo svg {
+  flex-shrink: 0;
+  color: var(--marsali-tatoo-color-gold);
+}
+
+.cliente-perfil-contato-fixo:hover,
+.cliente-perfil-contato-fixo:focus-visible {
+  background: var(--marsali-tatoo-color-gold);
+  color: var(--marsali-tatoo-color-dark-green);
+  transform: translateY(-2px);
+}
+
+.cliente-perfil-contato-fixo:hover svg,
+.cliente-perfil-contato-fixo:focus-visible svg {
+  color: var(--marsali-tatoo-color-dark-green);
+}
+
+@media (max-width: 768px) {
+  .cliente-perfil-contato-fixo {
+    right: 16px;
+    bottom: 24px;
+    min-height: 52px;
+    padding: 0 16px;
+    font-size: 0.95rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cliente-perfil-contato-fixo {
+    transition: none;
+  }
+
+  .cliente-perfil-contato-fixo:hover,
+  .cliente-perfil-contato-fixo:focus-visible {
+    transform: none;
+  }
+}

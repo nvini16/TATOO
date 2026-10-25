@@ -6,7 +6,7 @@ function RedefinirSenha() {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
     const [confirmarSenha, setConfirmarSenha] = useState('');
-    const [modoRedefinicao, setModoRedefinicao] = useState('');
+    const [modoRedefinicao, setModoRedefinicao] = useState(false);
     const [carregando, setCarregando] = useState(false);
     const [mensagem, setMensagem] = useState('');
     const [erro, setErro] = useState('');

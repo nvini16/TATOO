@@ -4,7 +4,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 
 function LoginAdmin() {
-    const [email, setEmail] = useState('');
+    const [email, setEmail] = useState(''); 
+    const [senha, setSenha] = useState(''); 
     const [carregando, setCarregando] = useState(false);
     const [mensagem, setMensagem] = useState('');
     const [erro, setErro] = useState('');
@@ -104,33 +105,21 @@ useEffect(() => {
         setErro('');
 
         try {
-            const redirectUrl = new URL(
-                'LoginAdmin',
-                window.location.origin + import.meta.env.BASE_URL
-            ).toString();
-
-            const { error } = await supabase.auth.signInWithOtp({
+            const {error} = await supabase.auth.signInWithPassword({
                 email: email.trim(),
-                options: {
-                    shouldCreateUser: false,
-                    emailRedirectTo: redirectUrl,
-                },
+                password: senha,
             });
 
             if (error) {
                 throw error;
             }
+        } catch (error) {
+            console.error('Erro ao entrar no painel administrativo:', error);
 
-            setMensagem(
-                'Link de acesso enviado. Confira seu e-mail e clique no link para entrar.'
+            setErro(
+                error.message || 'Não foi possível realizar o login.'
             );
-       } catch (error) {
-    console.error('Erro ao enviar link de acesso:', error);
-
-    setErro(
-        error.message || 'Não foi possível enviar o link de acesso.'
-    );
-} finally { 
+        } finally {
             setCarregando(false);
         }
     }
@@ -162,13 +151,27 @@ useEffect(() => {
                         required
                     />
 
+                    <label htmlFor="admin-senha">
+                        Senha
+                    </label>
+
+                    <input 
+                        id="admin-senha"
+                        type="password"
+                        value={senha}
+                        onChange={(event) => setSenha(event.target.value)}
+                        placeholder="Digite sua senha administrativa"
+                        autoComplete="current-password"
+                        require 
+                    />
+
                     <button
                         type="submit"
                         disabled={carregando}
                     >
                         {carregando
-                            ? 'Enviando...'
-                            : 'Enviar link de acesso'}
+                            ? 'Entrando...'
+                            : 'Entrar'}
                     </button>
 
                     {mensagem && (

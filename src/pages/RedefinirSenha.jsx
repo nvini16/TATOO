@@ -128,7 +128,7 @@ function RedefinirSenha() {
                             </label>
 
                             <input 
-                                type="text" 
+                                type="email" 
                                 id="recuperacao-email"
                                 value={email}
                                 onChange={(event) => setEmail(event.target.value)}

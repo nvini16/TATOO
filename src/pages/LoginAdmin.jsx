@@ -162,7 +162,7 @@ useEffect(() => {
                         onChange={(event) => setSenha(event.target.value)}
                         placeholder="Digite sua senha administrativa"
                         autoComplete="current-password"
-                        require 
+                        required
                     />
 
                     <button

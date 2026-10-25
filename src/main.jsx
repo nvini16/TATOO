@@ -24,6 +24,7 @@ import './styles/clientesAdmin.css'
 import './styles/clientePerfil.css'
 import './styles/clienteReferencias.css'
 import './styles/clienteHistorico.css'
+import './styles/redefinirSenha.css'
 
 import App from './App.jsx'
 

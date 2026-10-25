@@ -62,7 +62,7 @@ useEffect(() => {
                     'Erro ao verificar o acesso administrativo.'
                 );
             }
-        } finally {}
+        }
     }
 
     async function verificarSessao() {
@@ -182,6 +182,12 @@ useEffect(() => {
                         <p role="alert">{erro}</p>
                     )}
                 </form>
+
+                <p>
+                    <Link to="/RedefinirSenha">
+                        Esqueci minha senha
+                    </Link>
+                </p>
 
                 <Link to="/">Voltar</Link>
             </section>

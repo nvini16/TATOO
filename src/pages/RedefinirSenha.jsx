@@ -168,7 +168,7 @@ function RedefinirSenha() {
                             </label>
 
                             <input 
-                                type="text"
+                                type="password"
                                 id="confirmar-senha"
                                 value={confirmarSenha}
                                 onChange={(event) => setConfirmarSenha(event.target.value)}

@@ -6,6 +6,7 @@ import Insights from './pages/Insights';
 import AgendamentosAdmin from './pages/AgendamentosAdmin';
 import ClientesAdmin from './pages/ClientesAdmin';
 import ClientePerfil from './pages/ClientePerfil';
+import RedefinirSenha from './pages/RedefinirSenha';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/AgendamentosAdmin" element={<AgendamentosAdmin/>} />
         <Route path="/ClientesAdmin" element={<ClientesAdmin/>} />
         <Route path="/ClientePerfil/:id" element={<ClientePerfil/>} />
+        <Route path="/RedefinirSenha" element={<RedefinirSenha/>} />
       </Routes>
     </BrowserRouter>
   )

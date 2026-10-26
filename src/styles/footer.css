@@ -5,6 +5,7 @@
   box-sizing: border-box;
   padding: 48px 6% 0;
   color: var(--marsali-tatoo-color-white);
+  border-top: 3px solid var(--marsali-tatoo-color-gold);
   background: var(--marsali-tatoo-color-dark-green);
 }
 

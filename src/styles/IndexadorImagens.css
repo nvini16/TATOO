@@ -16,7 +16,7 @@
     box-sizing: border-box;
     padding: 32px;
     border: 1px dashed var(--marsali-tatoo-color-gold);
-    border-radius: 12px;
+    border-radius: 30px;
     background-color: rgba(245, 245, 245, 0.04);
 
     display: flex;

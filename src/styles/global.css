@@ -41,6 +41,11 @@ body.header-hidden {
   background-position: center 0;
 }
 
+body::selection {
+  background-color: var(--marsali-tatoo-color-gold);
+  color: var(--marsali-tatoo-color-white);
+}
+
 @media (max-width: 768px) {
   body {
     background-position: center 95px;

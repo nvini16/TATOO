@@ -2,6 +2,11 @@
   margin-top: 36px;
 }
 
+.cliente-referencias::selection {
+      background-color: var(--marsali-tatoo-color-gold);
+    color: var(--marsali-tatoo-color-white);
+}
+
 .cliente-referencias > h2 {
   margin: 0 0 24px;
   padding-bottom: 14px;

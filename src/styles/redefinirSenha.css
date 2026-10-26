@@ -4,6 +4,11 @@
     transition: color 0.3s ease;
 }
 
+.login-admin-link-redefinicao::selection {
+        background-color: var(--marsali-tatoo-color-gold);
+    color: var(--marsali-tatoo-color-white);
+}
+
 .login-admin-link-redefinicao:hover {
     color: var(--marsali-tatoo-color-gold);
 }

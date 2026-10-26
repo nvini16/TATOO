@@ -7,6 +7,11 @@
   color: var(--marsali-tatoo-color-dark-green);
 }
 
+.cliente-perfil-page::selection {
+      background-color: var(--marsali-tatoo-color-gold);
+    color: var(--marsali-tatoo-color-white);
+}
+
 .cliente-perfil-page > h1 {
   margin: 0 0 32px;
   padding-bottom: 20px;

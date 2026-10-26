@@ -13,6 +13,11 @@
         );
 }
 
+.login-admin-page::selection {
+        background-color: var(--marsali-tatoo-color-gold);
+    color: var(--marsali-tatoo-color-white);
+}
+
 .login-admin-content {
     width: 100%;
     max-width: 420px;

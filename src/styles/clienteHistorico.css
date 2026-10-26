@@ -3,6 +3,11 @@
   margin-top: 36px;
 }
 
+.cliente-historico::selection {
+      background-color: var(--marsali-tatoo-color-gold);
+    color: var(--marsali-tatoo-color-white);
+}
+
 .cliente-historico > h2 {
   margin: 0 0 24px;
   padding-bottom: 14px;

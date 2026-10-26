@@ -5,6 +5,11 @@
     background-color: var(--marsali-tatoo-color-white);
 }
 
+.insights-page::selection {
+        background-color: var(--marsali-tatoo-color-gold);
+    color: var(--marsali-tatoo-color-white);
+}
+
 .insights-header {
     display: flex;
     align-items: center;

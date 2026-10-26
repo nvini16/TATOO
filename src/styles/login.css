@@ -7,6 +7,11 @@
   overflow: hidden;
 }
 
+.login-page::selection {
+      background-color: var(--marsali-tatoo-color-gold);
+    color: var(--marsali-tatoo-color-white);
+}
+
 .login-content {
   width: 50%;
   min-height: 100vh;

@@ -30,8 +30,8 @@
       background-image: 
   linear-gradient(
     
-    rgba(97, 97, 97, 0.985),
-      rgba(56, 56, 56, 0.668) 50%,
+    rgba(132, 129, 129, 0.867),
+      rgba(24, 23, 23, 0.849) 50%,
       var(--marsali-tatoo-color-black)
     ),
   url('../assets/body.webp.jpeg');

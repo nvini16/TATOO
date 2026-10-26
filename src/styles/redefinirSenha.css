@@ -1,0 +1,9 @@
+.login-admin-link-redefinicao {
+    color: var(--marsali-tatoo-color-white);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.login-admin-link-redefinicao:hover {
+    color: var(--marsali-tatoo-color-gold);
+}

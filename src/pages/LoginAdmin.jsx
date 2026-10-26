@@ -184,7 +184,7 @@ useEffect(() => {
                 </form>
 
                 <p>
-                    <Link to="/RedefinirSenha">
+                    <Link to="/RedefinirSenha" className="login-admin-link-redefinicao">
                         Esqueci minha senha
                     </Link>
                 </p>

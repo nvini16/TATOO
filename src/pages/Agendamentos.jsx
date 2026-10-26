@@ -266,7 +266,7 @@ function Agendamento() {
 
             <section> 
                 <ScrollReveal>
-                    <h2>Escolha o horário</h2>
+                    <h2>Escolha a data e horário</h2>
                 </ScrollReveal>
 
 
@@ -307,7 +307,7 @@ function Agendamento() {
                </ScrollReveal>
 
                 <ScrollReveal>
-                    <textarea name="descricao" placeholder="Descreva sua ideia"></textarea>
+                    <textarea name="descricao" placeholder="Descreva sua ideia..."></textarea>
                 </ScrollReveal>
 
                 <ScrollReveal>

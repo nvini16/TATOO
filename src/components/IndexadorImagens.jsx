@@ -225,7 +225,7 @@ function IndexadorImagens({ onImagensChange }) {
 
     return (
         <section className="indexador-imagens">
-            <h2>Imagens da tattoo</h2>
+            <h2>Imagem(ns) da tattoo</h2>
             <p>Até {LIMITE_IMAGENS} imagens. Elas são otimizadas automaticamente no seu dispositivo antes do envio.</p>
 
             <div
@@ -235,7 +235,7 @@ function IndexadorImagens({ onImagensChange }) {
                 aria-busy={otimizando}
             >
                 <label htmlFor="selecionar-imagens">
-                    {otimizando ? 'Otimizando imagens...' : 'Clique para selecionar ou arraste as imagens'}
+                    {otimizando ? 'Otimizando suas imagens...' : 'Clique aqui para selecionar ou arraste as imagens'}
                 </label>
 
                 <input

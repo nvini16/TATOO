@@ -91,7 +91,7 @@ router.get('/agendamentos/datas-ocupadas', async (req, res) => {
     const datas = [...new Set(
         (data || [])
             .map((agendamento) => agendamento.data)
-            .filter((data) => typeof data === 'string' && /^\\d{4}-\\d{2}-\\d{2}$/.test(data))
+            .filter((data) => typeof data === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(data))
     )];
 
     return res.status(200).json({ datas });

@@ -49,7 +49,7 @@ function CalendarioAgendamento({ dataSelecionada, onSelecionarData }) {
                     !resultado ||
                     !Array.isArray(resultado.datas) ||
                     !resultado.datas.every(
-                        (data) => typeof data === 'string' && /^\\d{4}-\\d{2}-\\d{2}$/.test(data)
+                        (data) => typeof data === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(data)
                     )
                 ) {
                     throw new Error('A resposta de disponibilidade está inválida.');

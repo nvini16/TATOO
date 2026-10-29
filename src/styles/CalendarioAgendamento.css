@@ -79,3 +79,94 @@
         height: 36px;
     }
 }
+
+/* Datas já ocupadas: destaque visual e indicação de indisponibilidade. */
+.calendario-agendamento .calendario-dia-ocupado .rdp-day_button,
+.calendario-agendamento .rdp-day_button.calendario-dia-ocupado {
+    color: #ffffff;
+    background-color: #8f3030;
+    border: 1px solid #d66a6a;
+    text-decoration: line-through;
+    cursor: not-allowed;
+    opacity: 1;
+}
+
+.calendario-agendamento .calendario-dia-ocupado .rdp-day_button:hover,
+.calendario-agendamento .rdp-day_button.calendario-dia-ocupado:hover {
+    background-color: #8f3030;
+}
+
+.calendario-agendamento .calendario-status {
+    margin: 0 0 12px;
+    color: var(--marsali-tatoo-color-white);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.calendario-agendamento .calendario-erro {
+    margin-bottom: 16px;
+    padding: 12px;
+    border: 1px solid #d66a6a;
+    border-radius: 8px;
+    color: var(--marsali-tatoo-color-white);
+    background: rgb(143 48 48 / 18%);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.calendario-agendamento .calendario-erro p {
+    margin: 0 0 10px;
+}
+
+.calendario-agendamento .calendario-tentar-novamente {
+    padding: 8px 12px;
+    border: 1px solid var(--marsali-tatoo-color-gold);
+    border-radius: 6px;
+    color: var(--marsali-tatoo-color-gold);
+    background: transparent;
+    cursor: pointer;
+}
+
+.calendario-agendamento .calendario-tentar-novamente:hover {
+    color: var(--marsali-tatoo-color-black);
+    background: var(--marsali-tatoo-color-gold);
+}
+
+.calendario-agendamento .calendario-legenda {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 16px;
+    margin-top: 16px;
+    color: var(--marsali-tatoo-color-white);
+    font-size: 12px;
+}
+
+.calendario-agendamento .calendario-legenda > span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.calendario-agendamento .calendario-legenda-marcador {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    flex: 0 0 12px;
+    border: 1px solid var(--marsali-tatoo-color-gold);
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+
+.calendario-agendamento .calendario-legenda-marcador.ocupado {
+    background: #8f3030;
+    border-color: #d66a6a;
+}
+
+.calendario-agendamento .calendario-legenda-marcador.disponivel {
+    background: transparent;
+}
+
+.calendario-agendamento .calendario-legenda-marcador.selecionado {
+    background: var(--marsali-tatoo-color-gold);
+}
+

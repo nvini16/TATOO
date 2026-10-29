@@ -112,8 +112,54 @@ function ClientePerfil() {
     (numeroWhatsApp.length === 10 || numeroWhatsApp.length === 11) ||
     (numeroWhatsApp.startsWith('55') &&
       (numeroWhatsApp.length === 12 || numeroWhatsApp.length === 13));
+
+  const agora = new Date();
+
+  const proximoAgendamento = agendamentos
+    .filter((agendamento) => {
+      if (agendamento.status === 'cancelado') {
+        return false;
+      }
+
+      if (!agendamento.data || !agendamento.horario) {
+        return false;
+      }
+
+      const dataHora = new Date(
+        `${agendamento.data}T${agendamento.horario}`
+      );
+
+      return !Number.isNaN(dataHora.getTime()) && dataHora > agora;
+    })
+    .sort((a, b) => {
+      const dataA = `${a.data}T${a.horario}`;
+      const dataB = `${b.data}T${b.horario}`;
+
+      return dataA.localeCompare(dataB);
+    })[0];
+
+  const nomeCliente = cliente?.nome || 'cliente';
+
+  let mensagem = `Olá, ${nomeCliente}! Tudo bem?
+
+Aqui é a Letícia, da Marsali Tattoo. Gostaria de conversar com você.
+
+Podemos conversar por aqui?`;
+
+  if (proximoAgendamento) {
+    const [ano, mes, dia] = proximoAgendamento.data.split('-');
+    const dataFormatada = `${dia}/${mes}/${ano}`;
+    const horarioFormatado = proximoAgendamento.horario.slice(0, 5);
+
+    mensagem = `Olá, ${nomeCliente}! Tudo bem?
+
+Aqui é a Letícia, da Marsali Tattoo. Estou entrando em contato sobre seu agendamento do dia ${dataFormatada}, às ${horarioFormatado}.
+
+Podemos conversar por aqui?`;
+  }
+
   const linkWhatsApp = whatsappValido
-    ? `https://wa.me/${numeroInternacional}`
+    ? `https://wa.me/${numeroInternacional}?text=${encodeURIComponent(mensagem)}`
     : '';
 
   return (

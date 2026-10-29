@@ -67,6 +67,36 @@ router.post('/clientes', requireAdmin, async (req, res) => {
     res.status(201).json(data);
 })
 
+router.get('/agendamentos/datas-ocupadas', async (req, res) => {
+    const statusAtivos = [
+        'aguardando_sinal',
+        'sinal_pago',
+        'aguardando_confirmacao',
+        'confirmado'
+    ];
+
+    const { data, error } = await supabase
+        .from('agendamentos')
+        .select('data')
+        .in('status', statusAtivos);
+
+    if (error) {
+        console.error('Erro ao consultar datas ocupadas:', error);
+
+        return res.status(500).json({
+            erro: 'Não foi possível consultar a disponibilidade do calendário.'
+        });
+    }
+
+    const datas = [...new Set(
+        (data || [])
+            .map((agendamento) => agendamento.data)
+            .filter((data) => typeof data === 'string' && /^\\d{4}-\\d{2}-\\d{2}$/.test(data))
+    )];
+
+    return res.status(200).json({ datas });
+});
+
 router.get('/agendamentos', requireAdmin, async (req, res) => { 
     const { data, error } = await supabase
     .from('agendamentos')

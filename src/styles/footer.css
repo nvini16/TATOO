@@ -111,7 +111,7 @@
   }
 
   .footer-conteudo {
-    grid-template-columns: minmax(0, 1fr);
+    grid-template-columns: minmax(2, 1fr);
     gap: 28px;
     padding-bottom: 28px;
   }

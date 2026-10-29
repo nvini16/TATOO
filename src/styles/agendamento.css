@@ -157,9 +157,9 @@ select[name="horario"] {
 
   font-size: 16px;
 
+  border-top: 2px solid var(--marsali-tatoo-color-gold);
   padding: 12px 24px;
-  border: 3px solid var(--marsali-tatoo-color-gold);
-  border-radius: 8px;
+  border-bottom: 2px solid var(--marsali-tatoo-color-gold);
   background: transparent;
   color: var(--marsali-tatoo-color-white);
 

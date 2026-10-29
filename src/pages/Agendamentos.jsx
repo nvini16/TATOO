@@ -322,10 +322,6 @@ function Agendamento() {
                 </ScrollReveal>
 
                 <div className="agendamento-acoes">
-                <ScrollReveal>
-                    <button type="submit">Agendar</button>
-                </ScrollReveal>
-
                <ScrollReveal>
                  <Link
                     to="/"
@@ -334,6 +330,11 @@ function Agendamento() {
                     Voltar
                 </Link>
                </ScrollReveal>
+               
+                <ScrollReveal>
+                    <button type="submit">Agendar</button>
+                </ScrollReveal>
+
                 </div>
             </form>
             </div>

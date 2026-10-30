@@ -40,7 +40,7 @@ function Hero() {
       </div>
 
       <ScrollReveal>
-        <div className="hero-cont">
+        <div className="hero-content">
           <div className="div-hero-label">
             <p className="hero-label">
               MARSALI TATTOO
@@ -55,7 +55,7 @@ function Hero() {
 
           <h2>É uma história na pele.</h2>
 
-          <p>Arte, identidade e experiências personalisadas
+          <p>Arte, identidade e experiências personalizadas
             para transformar ideias em tatuagens.
           </p>
 

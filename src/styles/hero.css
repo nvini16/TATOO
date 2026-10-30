@@ -1,160 +1,343 @@
+/* CENÁRIO PRINCIPAL */
 .hero {
-  min-height: 100vh;
-
+  position: relative;
+  isolation: isolate;
   display: flex;
   align-items: center;
+  min-height: 100vh;
+  padding: 60px 40px;
+  box-sizing: border-box;
+  overflow: hidden;
+  background: #fff;
+  color: var(--marsali-tatoo-color-dark-green);
+}
 
-  padding: 30px 40px;
+/* CAMADAS GERAIS */
+.hero-cenario {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
 
+.hero-nuvens {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: #012b16;
+  animation: hero-nuvens-entrada 1.4s ease-out both;
+}
 
+.hero-nuvens img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.hero-estatua {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: 2%;
+  width: min(54%, 760px);
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-estatua img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center top;
+
+  /* FAZER O HÉRCULES SER REVELADO DE CIMA PRA BAIXOO */
+  clip-path: inset(0 0 100% 0);
+  animation: hero-estatua-revelar 1.8s cubic-bezier(.2, .7, .2, 1) 0.8s forwards;
+}
+
+/* 3 CAMADAS BRANCAS */
+.hero-camadas-brancas {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hero-formas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.hero-forma {
+  fill: #fff;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: hero-forma-subir 1.5s cubic-bezier(.2, .7, .2, 1) both;
+}
+
+.hero-forma-1 {
+  animation-delay: 0.45s;
+}
+
+.hero-forma-2 {
+  animation-delay: 0.7s;
+}
+
+.hero-forma-3 {
+  animation-delay: 0.95s;
+}
+
+/* CONTEÚDO E TIPOGRAFIA */
+.hero > .scroll-reveal {
+  position: relative;
+  z-index: 4;
+  width: 100%;
 }
 
 .hero-content {
+  width: 100%;
   max-width: 650px;
 }
 
 .div-hero-label {
-  width: 90px;
-  height: 40px;
+  width: 190px;
+  min-height: 40px;
 }
 
 .hero-label {
-  color: var(--marsali-tatoo-color-gold);
-  font-size: 15px;
-  font-weight: 600;
-  letter-spacing: 3px;
-  text-transform: uppercase;
+  display: inline-block;
+  width: 100%;
+  margin: 0;
+  padding: 8px 0;
+  box-sizing: border-box;
+
+  color: var(--marsali-tatoo-color-green);
   border-top: 1px solid var(--marsali-tatoo-color-gold);
   border-bottom: 1px solid var(--marsali-tatoo-color-gold);
-  width: 100%;
+
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
 }
 
 .hero h1 {
-  color: var(--marsali-tatoo-color-white);
+  margin: 20px 0;
+  color: var(--marsali-tatoo-color-dark-green);
   font-size: 64px;
   line-height: 1.05;
-  margin: 20px 0;
   font-weight: 700;
 }
 
+.hero h1 span {
+  color: var(--marsali-tatoo-color-green);
+}
+
 .hero h2 {
-  color: var(--marsali-tatoo-color-white);
-  font-size: 32px;
   margin: 0 0 24px;
+  color: var(--marsali-tatoo-color-dark-green);
+  font-size: 32px;
+  line-height: 1.2;
   font-weight: 500;
 }
 
 .hero-content > p:not(.hero-label) {
-  color: var(--marsali-tatoo-color-white);
+  max-width: 560;
+  margin: 0 0 32px;
+  color: var(--marsali-tatoo-color-dark-green);
   font-size: 18px;
   line-height: 1.6;
-  max-width: 560px;
-  margin: 0 0 32px;
 }
 
-.hero .hero-button {
-  background-color: var(--marsali-tatoo-color-gr);
-  color: var(--marsali-tatoo-color-gold);
-  border-top: 1px solid var(--marsali-tatoo-color-gold);
-  border-bottom: 1px solid var(--marsali-tatoo-color-gold);
-
-  padding: 14px 28px;
-  text-decoration: none;
-  text-align: center;
-
-  font-family: inherit;
-  font-size: 16px;
-  font-weight: 700;
-
-  cursor: pointer;
-
-  transition: 
-    background-color 0.3s ease, 
-    color 0.3s ease,
-    transform 0.3s ease;
-}
-
-.hero .hero-button:hover {
-  color: var(--marsali-tatoo-color-gold);
-
-  transform: translateY(-2px);
-}
-
-.hero-secondary-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 14px 28px;
-
-  background-color: transparent;
-  color: var(--marsali-tatoo-color-gold);
-
-  border-top: 1px solid var(--marsali-tatoo-color-gold);
-  border-bottom: 1px solid var(--marsali-tatoo-color-gold);
-
-  font-family: inherit;
-  font-size: 16px;
-  font-weight: 700;
-
-  text-decoration: none;
-
-  transition:
-    background-color 0.3s ease,
-    color 0.3s ease,
-    border-color 0.3s ease,
-    transform 0.3s ease;
-}
-
-.hero-secondary-button:hover {
-  color: var(--marsali-tatoo-color-gold);
-
-  border-color: var(--marsali-tatoo-color-gold);
-
-  transform: translateY(-2px);
-}
-
+/* OS BOTÕES */
 .hero-actions {
   display: flex;
   align-items: center;
   gap: 16px;
 }
 
+.hero .hero-button,
+.hero .hero-secondary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 14px 28px;
 
+  border-top: solid 1px var(--marsali-tatoo-color-gold);
+  border-bottom: solid 1px var(--marsali-tatoo-color-gold);
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
 
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
 
-.hero button:focus-visible {
-  outline: 2px solid var(--marsali-tatoo-color-white);
+.hero .hero-button {
+  background-color: var(--marsali-tatoo-color-dark-green);
+  color: var(--marsali-tatoo-color-gold);
+}
+
+.hero .hero-secondary-button {
+  background-color: transparent;
+  color: var(--marsali-tatoo-color-dark-green);
+}
+
+.hero .hero-button:hover {
+  background-color: var(--marsali-tatoo-color-green);
+  transform: translateY(-2px);
+}
+
+.hero .hero-secondary-button:hover {
+  background-color: var(--marsali-tatoo-color-dark-green);
+  color: var(--marsali-tatoo-color-gold);
+  transform: translateY(-2px);
+}
+
+.hero .hero-button:focus-visible,
+.hero .hero-secondary-button:focus-visible {
+  outline: 2px solid var(--marsali-tatoo-color-gold);
   outline-offset: 4px;
 }
 
-@media (max-width: 767px) {
-  .hero h1 {
-    font-size: 44px;
+/* ANIMATIONES */
+@keyframes hero-nuvens-entrada {
+  from {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
+@keyframes hero-estatua-revelar {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
 
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes hero-forma-subir {
+  from {
+    transform: translateY(100px);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* RESPOSIVIDADE SEMPRE */
 @media (max-width: 767px) {
+  .hero {
+    min-height: 100svh;
+    padding: 48px 24px;
+    align-items: center;
+  }
+
+  .hero-nuvens img {
+    object-position: 65% center;
+  }
+
+  .hero-estatua {
+    right: -12%;
+    width: 82%;
+    height: 78%;
+    opacity: 0.95;
+  }
+
+  .hero-content {
+    max-width: 100%;
+  }
+
+  .hero-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+  }
+
+  .hero h1 {
+    max-width: 540px;
+    font-size: clamp(36px, 9vw, 48px);
+    line-height: 1.08;
+  }
+
+  .hero h2 {
+    max-width: 420px;
+    font-size: clamp(23px, 6vw, 28px);
+  }
+
+  .hero-content > p:not(.hero-label) {
+    max-width: 440px;
+    font-size: 16px;
+  }
+
   .hero-actions {
     flex-direction: column;
     align-items: stretch;
+    gap: 12px;
+    max-width: 360px;
   }
-    .hero .hero-button,
-  .hero-secondary-button {
+
+  .hero .hero-button,
+  .hero .hero-secondary-button {
     width: 100%;
-    box-sizing: border-box;
+  }
+
+  .hero-formas {
+    width: 150%;
+    max-width: none;
+    transform: translateY(-16px);
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 380px) {
+  .hero {
+    padding-right: 18px;
+    padding-left: 18px;
+  }
+
+  .hero h1 {
+    font-size: 34px;
+  }
+
   .hero h2 {
-    font-size: 26px;
+    font-size: 22px;
+  }
+
+  .hero-content > p:not(.hero-label) {
+    font-size: 15px;
   }
 }
 
-@media (max-width: 767px) {
-  .hero-content > p:not(.hero-label) {
-    font-size: 16px;
+/* SEGUE A REGRA DE MOVIMENTOS REDUZIDOS */
+@media (prefers-reduced-motion: reduce) {
+  .hero-nuvens,
+  .hero-estatua img,
+  .hero-forma {
+    animation: none;
+  }
+
+  .hero-forma {
+    transform: none;
   }
 }

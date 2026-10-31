@@ -251,7 +251,7 @@
 
 @keyframes hero-forma-subir {
   from {
-    transform: translateY(100px);
+    transform: translateY(100vh);
   }
 
   to {

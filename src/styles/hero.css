@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   min-height: 100vh;
-  padding: 60px 40px;
+  padding: 60px 90px;
   box-sizing: border-box;
   overflow: hidden;
   background: #fff;
@@ -58,12 +58,12 @@
   max-width: none;
   object-fit: contain;
   object-position: center top;
-  transform: scale(1.7);
+  transform: scale(1.7) translateY(200px);
   transform-origin: center 12%;
 
   /* Revela a estátua de cima para baixo */
   clip-path: inset(0 0 100% 0);
-  animation: hero-estatua-revelar 1.8s cubic-bezier(.2, .7, .2, 1) 0.8s forwards;
+  animation: hero-estatua-revelar 9.90s cubic-bezier(.2, .7, .2, 1) 0.8s forwards;
 }
 
 /* 3 CAMADAS BRANCAS */
@@ -274,9 +274,14 @@
 
   .hero-estatua {
     right: -12%;
-    width: 82%;
-    height: 78%;
+    width: 100%;
+    height: 100%;
     opacity: 0.95;
+  }
+
+  .hero-estatua img {
+      transform: scale(1.7) translateY(300px);
+  transform-origin: center 12%;
   }
 
   .hero-content {

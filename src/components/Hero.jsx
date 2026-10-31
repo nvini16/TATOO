@@ -29,7 +29,7 @@ function Hero() {
 
             <path 
               className="hero-forma hero-forma-3"
-              d="M0,540 C180,600 430,760 900,900 L0,900 Z"
+              d="M0,540 C180,600 430,760 720,850 C980,900 1200,900 1440,900 L0,900 Z"
             />
 
             <path 

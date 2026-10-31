@@ -49,6 +49,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  animation: hero-estatua-entrada 2.4s cubic-bezier(.2, .7, .2, 1) 2.45s both;
 }
 
 .hero-estatua img {
@@ -61,9 +62,7 @@
   transform: scale(1.7) translateY(200px);
   transform-origin: center 12%;
 
-  /* Revela a estátua de cima para baixo */
-  clip-path: inset(0 0 100% 0);
-  animation: hero-estatua-revelar 9.90s cubic-bezier(.2, .7, .2, 1) 0.8s forwards;
+  /* A entrada é animada no contêiner para preservar escala e enquadramento */
 }
 
 /* 3 CAMADAS BRANCAS */
@@ -240,13 +239,13 @@
   }
 }
 
-@keyframes hero-estatua-revelar {
+@keyframes hero-estatua-entrada {
   from {
-    clip-path: inset(0 0 100% 0);
+    transform: translateX(110%);
   }
 
   to {
-    clip-path: inset(0 0 0 0);
+    transform: translateX(0);
   }
 }
 
@@ -350,13 +349,13 @@
 /* Respeita a preferência por movimentos reduzidos */
 @media (prefers-reduced-motion: reduce) {
   .hero-nuvens,
-  .hero-estatua img,
+  .hero-estatua,
   .hero-forma {
     animation: none;
   }
 
-  .hero-estatua img {
-    clip-path: none;
+  .hero-estatua {
+    transform: none;
   }
 
   .hero-forma {

@@ -59,7 +59,7 @@
   object-fit: contain;
   object-position: center center;
 
-  /* FAZER O HÉRCULES SER REVELADO DE CIMA PRA BAIXOO */
+  /* Revela a estátua de cima para baixo */
   clip-path: inset(0 0 100% 0);
   animation: hero-estatua-revelar 1.8s cubic-bezier(.2, .7, .2, 1) 0.8s forwards;
 }
@@ -87,15 +87,19 @@
   animation: hero-forma-subir 1.5s cubic-bezier(.2, .7, .2, 1) both;
 }
 
+/* Sombras sutis nas bordas para separar as escamas */
 .hero-forma-1 {
+  filter: drop-shadow(0 -7px 5px rgba(1, 43, 22, 0.22));
   animation-delay: 0.45s;
 }
 
 .hero-forma-2 {
+  filter: drop-shadow(0 -6px 4px rgba(1, 43, 22, 0.19));
   animation-delay: 0.7s;
 }
 
 .hero-forma-3 {
+  filter: drop-shadow(0 -5px 3px rgba(1, 43, 22, 0.16));
   animation-delay: 0.95s;
 }
 
@@ -215,7 +219,7 @@
   outline-offset: 4px;
 }
 
-/* ANIMATIONES */
+/* ANIMAÇÕES */
 @keyframes hero-nuvens-entrada {
   from {
     opacity: 0;
@@ -248,7 +252,7 @@
   }
 }
 
-/* RESPOSIVIDADE SEMPRE */
+/* RESPONSIVIDADE */
 @media (max-width: 767px) {
   .hero {
     min-height: 100svh;
@@ -330,12 +334,16 @@
   }
 }
 
-/* SEGUE A REGRA DE MOVIMENTOS REDUZIDOS */
+/* Respeita a preferência por movimentos reduzidos */
 @media (prefers-reduced-motion: reduce) {
   .hero-nuvens,
   .hero-estatua img,
   .hero-forma {
     animation: none;
+  }
+
+  .hero-estatua img {
+    clip-path: none;
   }
 
   .hero-forma {

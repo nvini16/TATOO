@@ -40,7 +40,13 @@ function Hero() {
         </div>
 
         <div className="hero-estatua">
-          <img src={estatua} alt="Estátua artística da identidade visual Marsali Tatoo" />
+          <img
+            src={estatua}
+            alt="Estátua artística da identidade visual Marsali Tatoo"
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
+          />
         </div>
       </div>
 

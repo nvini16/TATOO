@@ -41,8 +41,8 @@
 .hero-estatua {
   position: absolute;
   z-index: 2;
-  top: 0;
-  right: -2%;
+  top: 100px;
+  left: 20%;
   width: min(72%, 1000px);
   height: 100%;
   display: flex;
@@ -53,11 +53,11 @@
 
 .hero-estatua img {
   display: block;
-  width: 125%;
-  height: 125%;
+  width: 300%;
+  height: 800%;
   max-width: none;
   object-fit: contain;
-  object-position: center center;
+  object-position:center;
 
   /* Revela a estátua de cima para baixo */
   clip-path: inset(0 0 100% 0);

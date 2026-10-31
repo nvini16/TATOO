@@ -103,6 +103,11 @@
   animation-delay: 0.95s;
 }
 
+.hero-forma-4 {
+  filter: drop-shadow(0 -5px 3px rgba(1, 43, 22, 0.16));
+  animation-delay: 0.95s;
+}
+
 /* CONTEÚDO E TIPOGRAFIA */
 .hero > .scroll-reveal {
   position: relative;

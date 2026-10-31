@@ -268,7 +268,7 @@
   }
 
   .hero-nuvens img {
-    object-position: 65% center;
+    object-position: 100% center;
   }
 
   .hero-estatua {
@@ -279,8 +279,11 @@
   }
 
   .hero-estatua img {
-      transform: scale(1.7) translateY(300px);
+    transform: scale(1.7) translateY(230px);
+    object-fit: contain;
   transform-origin: center 12%;
+  width: 500px;
+  height: 900px;
   }
 
   .hero-content {

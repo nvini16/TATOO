@@ -1,0 +1,221 @@
+/* Tela de login dos clientes */
+.login-cliente-page {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    min-height: 100svh;
+    width: 100%;
+    padding: 48px 24px;
+    background-color: var(--marsali-tatoo-color-black, #101010);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: var(--marsali-tatoo-color-white, #fff);
+    overflow: hidden;
+}
+
+.login-cliente-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0.82) 0%,
+            rgba(0, 0, 0, 0.66) 50%,
+            rgba(0, 0, 0, 0.78) 100%
+        );
+}
+
+.login-cliente-home-link {
+    position: absolute;
+    top: 28px;
+    left: 32px;
+    color: rgba(255, 255, 255, 0.86);
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: color 180ms ease;
+}
+
+.login-cliente-home-link:hover,
+.login-cliente-home-link:focus-visible {
+    color: var(--marsali-tatoo-color-gold, #c7a66a);
+}
+
+.login-cliente-content {
+    width: min(100%, 390px);
+    margin: auto;
+    text-align: center;
+}
+
+.login-cliente-logo {
+    display: block;
+    width: min(190px, 55vw);
+    max-height: 150px;
+    object-fit: contain;
+    margin: 0 auto 28px;
+}
+
+.login-cliente-content h1 {
+    margin: 0 0 10px;
+    color: var(--marsali-tatoo-color-white, #fff);
+    font-size: clamp(1.8rem, 5vw, 2.35rem);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+}
+
+.login-cliente-description {
+    margin: 0 0 34px;
+    color: rgba(255, 255, 255, 0.76);
+    font-size: 0.96rem;
+    line-height: 1.6;
+}
+
+.login-cliente-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 23px;
+    text-align: left;
+}
+
+.login-cliente-field {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.login-cliente-field label {
+    color: var(--marsali-tatoo-color-gold, #c7a66a);
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+}
+
+.login-cliente-field input {
+    width: 100%;
+    min-height: 46px;
+    padding: 10px 2px;
+    border: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.48);
+    border-radius: 0;
+    outline: none;
+    background: transparent;
+    color: #fff;
+    font: inherit;
+    font-size: 0.96rem;
+    transition: border-color 180ms ease;
+}
+
+.login-cliente-field input::placeholder {
+    color: rgba(255, 255, 255, 0.48);
+}
+
+.login-cliente-field input:focus {
+    border-bottom-color: var(--marsali-tatoo-color-gold, #c7a66a);
+}
+
+.login-cliente-field input:focus-visible {
+    box-shadow: 0 1px 0 var(--marsali-tatoo-color-gold, #c7a66a);
+}
+
+.login-cliente-error {
+    margin: -7px 0 0;
+    color: #ffaaa5;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.login-cliente-button {
+    width: 100%;
+    min-height: 48px;
+    margin-top: 8px;
+    padding: 12px 20px;
+    border: 1px solid var(--marsali-tatoo-color-green, #496b4d);
+    border-radius: 2px;
+    background: var(--marsali-tatoo-color-green, #496b4d);
+    color: #fff;
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition:
+        background-color 180ms ease,
+        border-color 180ms ease,
+        opacity 180ms ease;
+}
+
+.login-cliente-button:hover:not(:disabled) {
+    border-color: var(--marsali-tatoo-color-dark-green, #304b35);
+    background: var(--marsali-tatoo-color-dark-green, #304b35);
+}
+
+.login-cliente-button:focus-visible {
+    outline: 2px solid var(--marsali-tatoo-color-gold, #c7a66a);
+    outline-offset: 4px;
+}
+
+.login-cliente-button:disabled {
+    opacity: 0.65;
+    cursor: wait;
+}
+
+.login-cliente-register {
+    margin: 28px 0 0;
+    color: rgba(255, 255, 255, 0.76);
+    font-size: 0.88rem;
+    line-height: 1.7;
+}
+
+.login-cliente-register a {
+    color: var(--marsali-tatoo-color-gold, #c7a66a);
+    text-decoration: none;
+    transition: color 180ms ease;
+}
+
+.login-cliente-register a:hover,
+.login-cliente-register a:focus-visible {
+    color: #fff;
+    text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+    .login-cliente-page {
+        padding: 88px 26px 48px;
+        background-position: 58% center;
+    }
+
+    .login-cliente-overlay {
+        background: rgba(0, 0, 0, 0.76);
+    }
+
+    .login-cliente-home-link {
+        top: 24px;
+        left: 24px;
+    }
+
+    .login-cliente-content {
+        width: min(100%, 360px);
+    }
+
+    .login-cliente-logo {
+        width: min(165px, 52vw);
+        margin-bottom: 24px;
+    }
+
+    .login-cliente-description {
+        margin-bottom: 29px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .login-cliente-home-link,
+    .login-cliente-field input,
+    .login-cliente-button,
+    .login-cliente-register a {
+        transition: none;
+    }
+}

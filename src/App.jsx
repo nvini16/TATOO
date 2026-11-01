@@ -7,6 +7,8 @@ import AgendamentosAdmin from './pages/AgendamentosAdmin';
 import ClientesAdmin from './pages/ClientesAdmin';
 import ClientePerfil from './pages/ClientePerfil';
 import RedefinirSenha from './pages/RedefinirSenha';
+import CadastroCliente from './pages/CadastroCliente';
+
 
 function App() {
   return (
@@ -20,6 +22,7 @@ function App() {
         <Route path="/ClientesAdmin" element={<ClientesAdmin/>} />
         <Route path="/ClientePerfil/:id" element={<ClientePerfil/>} />
         <Route path="/RedefinirSenha" element={<RedefinirSenha/>} />
+        <Route path="/CadastroCliente" element={<CadastroCliente/>} />
       </Routes>
     </BrowserRouter>
   )

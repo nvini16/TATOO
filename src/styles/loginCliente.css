@@ -88,24 +88,24 @@
 }
 
 .login-cliente-field label {
-    color: var(--marsali-tatoo-color-gold, #c7a66a);
-    font-size: 0.82rem;
-    letter-spacing: 0.08em;
+    color: var(--marsali-tatoo-color-white, #fff);
+    font-size: 13px;
+    letter-spacing: 0.4px;
 }
 
 .login-cliente-field input {
     width: 100%;
-    min-height: 46px;
-    padding: 10px 2px;
-    border: 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.48);
-    border-radius: 0;
-    outline: none;
+    box-sizing: border-box;
+    padding: 12px 4px;
+    color: var(--marsali-tatoo-color-white, #fff);
     background: transparent;
-    color: #fff;
-    font: inherit;
-    font-size: 0.96rem;
-    transition: border-color 180ms ease;
+    border: none;
+    font-size: 14px;
+    outline: none;
+    border-radius: 2px;
+    transition:
+        border-color 0.3s ease,
+        background-color 0.3s ease;
 }
 
 .login-cliente-field input::placeholder {
@@ -113,11 +113,8 @@
 }
 
 .login-cliente-field input:focus {
-    border-bottom-color: var(--marsali-tatoo-color-gold, #c7a66a);
-}
-
-.login-cliente-field input:focus-visible {
-    box-shadow: 0 1px 0 var(--marsali-tatoo-color-gold, #c7a66a);
+    border-bottom: 1px solid var(--marsali-tatoo-color-gold, #c7a66a);
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
 .login-cliente-error {

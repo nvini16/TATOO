@@ -140,7 +140,7 @@ function CadastroCliente() {
 
                             <input
                                 id="cadastro-senha" 
-                                type="text" 
+                                type="password" 
                                 value={senha}
                                 onChange={(event) => setSenha(event.target.value)}
                                 placeholder="Mínimo 6 caracteres"
@@ -157,7 +157,7 @@ function CadastroCliente() {
 
                             <input 
                                 id="cadastro-confirmar-senha"
-                                type="text" 
+                                type="password" 
                                 value={confirmarSenha}
                                 onChange={(event) => setConfirmarSenha(event.target.value)}
                                 placeholder="Digite sua senha novamente"

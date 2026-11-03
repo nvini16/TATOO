@@ -55,9 +55,15 @@ function Header() {
         <a href="#sobre">Sobre</a>
       </nav> 
 
-      <Link className="header-cta" to="/Agendamento">
-        Agendar-se
-      </Link>
+      <div className="header-actions">
+        <Link className="header-login" to="/LoginCliente">
+          Entrar
+        </Link>
+
+        <Link className="header-cta" to="/Agendamento">
+          Agendar-se
+        </Link>
+      </div>
 
       
 
@@ -69,6 +75,14 @@ function Header() {
         <a className="mobile-menu-a" href="#trabalhos" onClick={closeMenu}>Trabalhos</a>
         <a className="mobile-menu-a" href="#cuidados" onClick={closeMenu}>Cuidados</a>
         <a className="mobile-menu-a" href="#sobre" onClick={closeMenu}>Sobre</a>
+
+          <Link
+            className="mobile-menu-login"
+            to="/LoginCliente"
+            onClick={closeMenu}
+          >
+            Entrar
+          </Link>
 
           <Link 
             className="mobile-menu-cta"

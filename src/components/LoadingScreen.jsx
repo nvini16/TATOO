@@ -45,6 +45,9 @@ function LoadingScreen({ shouldExit, onAnimationComplete, onExit }) {
       elapsed += duration;
     });
 
+
+    logo.getBoundingClientRect(); // Force reflow to apply the initial styles before starting the animation.
+
     let frameId;
     frameId = window.requestAnimationFrame(() => {
       paths.forEach((path) => {

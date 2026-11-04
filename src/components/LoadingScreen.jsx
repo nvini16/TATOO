@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 const DRAW_DURATION = 4200;
 const COMPLETE_HOLD = 650;
 
-function LoadingScreen({ onComplete }) {
+function LoadingScreen({ shouldExit, onAnimationComplete, onExit }) {
   const logoRef = useRef(null);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ function LoadingScreen({ onComplete }) {
         path.style.opacity = '1';
       });
 
-      const timeout = window.setTimeout(() => onComplete?.(), COMPLETE_HOLD);
+      const timeout = window.setTimeout(() => onAnimationComplete?.(), COMPLETE_HOLD);
       return () => window.clearTimeout(timeout);
     }
 
@@ -54,7 +54,7 @@ function LoadingScreen({ onComplete }) {
     });
 
     const timeout = window.setTimeout(
-      () => onComplete?.(),
+      () => onAnimationComplete?.(),
       DRAW_DURATION + COMPLETE_HOLD
     );
 
@@ -62,10 +62,21 @@ function LoadingScreen({ onComplete }) {
       window.cancelAnimationFrame(frameId);
       window.clearTimeout(timeout);
     };
-  }, [onComplete]);
+  }, [onAnimationComplete]);
+
+  useEffect(() => {
+    if (!shouldExit) return undefined;
+
+    const reducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
+    const timeout = window.setTimeout(onExit, reducedMotion ? 0 : 700);
+
+    return () => window.clearTimeout(timeout);
+  }, [shouldExit, onExit]);
 
   return (
-    <div className="marsali-loading-screen" aria-label="Carregando Marsali Tattoo">
+    <div className={`marsali-loading-screen${shouldExit ? " is-exiting" : ""}`} aria-label="Carregando Marsali Tattoo">
       <svg
         ref={logoRef}
         className="marsali-loading-logo"
@@ -99,6 +110,19 @@ function LoadingScreen({ onComplete }) {
           justify-content: center;
           overflow: hidden;
           background: #000;
+          opacity: 1;
+          transition: opacity 700ms ease;
+        }
+
+        .marsali-loading-screen.is-exiting {
+          opacity: 0;
+          pointer-events: none;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .marsali-loading-screen {
+            transition: none;
+          }
         }
 
         .marsali-loading-logo {

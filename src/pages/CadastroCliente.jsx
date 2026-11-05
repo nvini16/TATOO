@@ -178,7 +178,7 @@ function CadastroCliente() {
                             <div className="cadastro-password-wrapper">
                                 <input 
                                 id="cadastro-confirmar-senha"
-                                type="password" 
+                                type={mostrarConfirmacao ? 'text' : 'password'}
                                 value={confirmarSenha}
                                 onChange={(event) => setConfirmarSenha(event.target.value)}
                                 placeholder="Digite sua senha novamente"

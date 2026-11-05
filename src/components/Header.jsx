@@ -1,10 +1,14 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import logo from '../assets/logo/marsali-tatoo-logo-fundo-none.png';
+import { supabase } from '../lib/supabase';
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [headerVisible, setHeaderVisible] = useState(true);
+
+  const [usuarioAutenticado, setUsuarioAutenticado] = useState(false);
+  const [authVerificada, setAuthVerificada] = useState(false);
     useEffect(() => {
       let lastScrollY = window.scrollY;
 
@@ -39,6 +43,19 @@ function Header() {
     setMenuOpen(false);
   }
 
+  useEffect(() => {
+    const { data: { subscription }} = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setUsuarioAutenticado(Boolean(session));
+          setAuthVerificada(true);
+      }
+    );
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
+
   return (
     <>
     <header className={`header ${headerVisible ? 'visible' : 'hidden'}`}>
@@ -56,9 +73,11 @@ function Header() {
       </nav> 
 
       <div className="header-actions">
-        <Link className="header-login" to="/LoginCliente">
-          Entrar
-        </Link>
+        {authVerificada && !usuarioAutenticado && (
+          <Link className="header-login" to="/LoginCliente">
+            Entrar
+          </Link>
+        )}
 
         <Link className="header-cta" to="/Agendamento">
           Agendar-se
@@ -76,13 +95,15 @@ function Header() {
         <a className="mobile-menu-a" href="#cuidados" onClick={closeMenu}>Cuidados</a>
         <a className="mobile-menu-a" href="#sobre" onClick={closeMenu}>Sobre</a>
 
-          <Link
+          {authVerificada && !usuarioAutenticado && (
+            <Link
             className="mobile-menu-login"
             to="/LoginCliente"
             onClick={closeMenu}
-          >
-            Entrar
-          </Link>
+            >
+              Entrar
+            </Link>
+          )}
 
           <Link 
             className="mobile-menu-cta"

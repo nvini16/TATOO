@@ -227,6 +227,44 @@
     opacity: 0.75;
   }
 
+  .cadastro-login-link a:active {
+    opacity: 0.5;
+  }
+
+  .cadastro-password-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .cadastro-password-wrapper input {
+    padding-right: 75px;
+  }
+
+  .cadastro-form .cadastro-password-toggle {
+    position: absolute;
+    right: 4px;
+    top: 50px;
+    transform: translateY(-50px);
+    width: auto;
+    margin: 0;
+    padding: 4px 6px;
+    color: var(--marsali-tatoo-color-gold);
+    background: transparent;
+    border: none;
+    border-radius: 2px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0;
+    cursor: pointer;
+  }
+
+  .cadastro-form .cadastro-password-toggle:hover:not(:disabled) {
+    color: var(--marsali-tatoo-color-white);
+    background: transparent;
+  }
+
   @media (max-width: 767px) {
     .cadastro-page {
       align-items: flex-start;

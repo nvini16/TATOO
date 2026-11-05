@@ -11,6 +11,9 @@ function CadastroCliente() {
     const [senha, setSenha] = useState('');
     const [confirmarSenha, setConfirmarSenha] = useState('');
 
+    const [mostrarSenha, setMostrarSenha] = useState(false);
+    const [mostrarConfirmacao, setMostrarConfirmacao] = useState(false);
+
     const [carregando, setCarregando] = useState(false);
     const [mensagem, setMensagem] = useState('');
     const [erro, setErro] = useState('');
@@ -25,6 +28,11 @@ function CadastroCliente() {
 
         if (senha.length < 6) {
             setErro('A senha precisa ter pelo menos 6 caracteres.');
+            return;
+        }
+
+        if (senha.length > 72) {
+            setErro('A senha não pode ter mais de 72 caracteres.');
             return;
         }
 
@@ -138,16 +146,28 @@ function CadastroCliente() {
                                 Senha
                             </label>
 
-                            <input
+                            <div className="cadastro-password-wrapper">
+                                <input
                                 id="cadastro-senha" 
-                                type="password" 
+                                type={mostrarSenha ? 'text' : 'password'} 
                                 value={senha}
                                 onChange={(event) => setSenha(event.target.value)}
                                 placeholder="Mínimo 6 caracteres"
                                 autoComplete="new-password"
                                 minLength={6}
+                                maxLength={72}
                                 required
                             />
+
+                            <button 
+                                type="button"
+                                className="cadastro-password-toggle"
+                                onClick={() => setMostrarSenha(!mostrarSenha)}
+                                aria-label={mostrarSenha ? 'Ocultar senha' : 'Mostrar senha'}
+                            >
+                                {mostrarSenha ? 'Ocultar' : 'Mostrar'}
+                            </button>
+                            </div>
                         </div>
 
                         <div className="cadastro-field">
@@ -155,7 +175,8 @@ function CadastroCliente() {
                                 Confirmar senha
                             </label>
 
-                            <input 
+                            <div className="cadastro-password-wrapper">
+                                <input 
                                 id="cadastro-confirmar-senha"
                                 type="password" 
                                 value={confirmarSenha}
@@ -163,8 +184,19 @@ function CadastroCliente() {
                                 placeholder="Digite sua senha novamente"
                                 autoComplete="new-password"
                                 minLength={6}
+                                maxLength={72}
                                 required
                             />
+
+                            <button 
+                                type="button"
+                                className="cadastro-password-toggle"
+                                onClick={() => setMostrarConfirmacao(!mostrarConfirmacao)}
+                                aria-label={mostrarConfirmacao ? 'Ocultar senha' : 'Mostrar senha'}
+                            >
+                                {mostrarConfirmacao ? 'Ocultar' : 'Mostrar'}
+                            </button>
+                            </div>
                         </div>
 
                         <button

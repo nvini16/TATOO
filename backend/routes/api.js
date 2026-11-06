@@ -3,6 +3,7 @@ const supabase = require('../lib/supabase');
 const upload = require('../middleware/upload');
 const crypto = require('crypto');
 const requireAdmin = require('../middleware/requireAdmin');
+const normalizarWhatsapp = require('../utils/normalizarWhatsapp');
 
 
 const router = express.Router();
@@ -38,7 +39,16 @@ router.post('/clientes', requireAdmin, async (req, res) => {
     }
 
     const nomeLimpo = nome.trim();
-    const whatsappLimpo = whatsapp.trim();
+
+    let whatsappLimpo;
+
+    try {
+        whatsappLimpo = normalizarWhatsapp(whatsapp);
+    } catch (error) {
+        return res.status(400).json({
+            erro: error.message
+        });
+    }
 
     const { data, error } = await supabase
         .from('clientes')

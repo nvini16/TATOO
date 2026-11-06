@@ -5,7 +5,7 @@ function normalizarWhatsapp(telefone) {
 
     const entrada = telefone.trim();
 
-    if (!/^\+?[\d\s().-]$/.test(entrada)) {
+    if (!/^\+?[\d\s().-]+$/.test(entrada)) {
         throw new Error('Whatsapp contém caracteres inválidos.');
     }
 

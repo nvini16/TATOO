@@ -39,16 +39,7 @@ router.post('/clientes', requireAdmin, async (req, res) => {
     }
 
     const nomeLimpo = nome.trim();
-
-    let whatsappLimpo;
-
-    try {
-        whatsappLimpo = normalizarWhatsapp(whatsapp);
-    } catch (error) {
-        return res.status(400).json({
-            erro: error.message
-        });
-    }
+    const whatsappLimpo = whatsapp.trim();
 
     const { data, error } = await supabase
         .from('clientes')
@@ -379,7 +370,16 @@ router.post('/agendamentos', upload.array('imagens', 5), async (req, res) => {
     }
 
     const nomeLimpo = nome.trim();
-    const whatsappLimpo = whatsapp.trim();
+
+    let whatsappLimpo;
+
+    try {
+        whatsappLimpo = normalizarWhatsapp(whatsapp);
+    } catch (error) {
+        return res.status(400).json({
+            erro: error.message
+        });
+    }
 
     const { data: agendamentoExistente, error: erroDisponibilidade } = await supabase
         .from('agendamentos')

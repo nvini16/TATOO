@@ -32,14 +32,26 @@ router.get('/', requireAdmin, async (req, res) => {
 router.post('/clientes', requireAdmin, async (req, res) => {
     const { nome, whatsapp } = req.body;
 
-    if (!nome?.trim() || !whatsapp?.trim()) {
+    if (
+        typeof nome !== 'string' || !nome.trim() ||
+        typeof whatsapp !== 'string' || !whatsapp.trim()
+    ) {
         return res.status(400).json({
             erro: 'Nome e WhatsApp são obrigatórios.',
         });
     }
 
     const nomeLimpo = nome.trim();
-    const whatsappLimpo = whatsapp.trim();
+
+    let whatsappLimpo;
+
+    try {
+        whatsappLimpo = normalizarWhatsapp(whatsapp);
+    } catch (error) {
+        return res.status(400).json({
+            erro: error.message
+        });
+    }
 
     const { data, error } = await supabase
         .from('clientes')

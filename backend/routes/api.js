@@ -491,15 +491,15 @@ router.post('/agendamentos', upload.array('imagens', 5), async (req, res) => {
         });
     }
 
-    if (!trabalho?.trim()) {
+    if (!textoValido(trabalho, 1000)) {
         return res.status(400).json({
-            erro: 'O trabalho é obrigatório.'
+            erro: 'O trabalho é obrigatório e deve ter até 1.000 caracteres.'
         });
     }
 
-    if (!estilo?.trim()) {
+    if (!textoValido(estilo, 50)) {
         return res.status(400).json({
-            erro: 'O estilo é obrigatório.'
+            erro: 'O estilo é obrigatório e deve ter até 50 caracteres.'
         });
     }
 

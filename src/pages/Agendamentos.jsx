@@ -154,14 +154,8 @@ function Agendamento() {
             formDataAgendamento.append('imagens', imagem.arquivo);
         });
 
-        // try {
-        //     const resposta = await fetch(`${API_URL}/api/agendamentos`, {
-        //         method: 'POST',
-        //         body: formDataAgendamento,
-        //     });
-
-            
-            const resposta  = await fetch(`${API_URL}/api/agendamentos`, {
+        try {
+            const resposta = await fetch(`${API_URL}/api/agendamentos`, {
                 method: 'POST',
                 body: formDataAgendamento,
             });

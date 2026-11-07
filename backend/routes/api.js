@@ -8,6 +8,119 @@ const normalizarWhatsapp = require('../utils/normalizarWhatsapp');
 
 const router = express.Router();
 
+function textoValido(valor, tamanhoMaximo) {
+    return (
+        typeof valor === 'string' &&
+        valor.trim().length > 0 &&
+        valor.trim().length <= tamanhoMaximo
+    );
+}
+
+function dataValida(data) {
+    if (typeof data !== 'string') return false;
+
+    const formato = /^\d{4}-\d{2}-\d{2}$/;
+
+    if (!formato.test(data)) return false;
+
+    const [ano, mes, dia] = data.split('-').map(Number);
+
+    const dataConvertida = new Date(Date.UTC(ano, mes -1, dia));
+
+    return (
+        dataConvertida.getUTCFullYear() === ano &&
+        dataConvertida.getUTCMonth() === mes -1 &&
+        dataConvertida.getUTCDate() === dia
+    );
+}
+
+const HORARIOS_PERMITIDOS = [
+    '09:00',
+    '10:00',
+    '11:00',
+    '14:00',
+    '15:00',
+    '16:00',
+    '17:00'
+];
+
+function horarioValido(horario) {
+    return (
+        typeof horario === 'string' &&
+
+    HORARIOS_PERMITIDOS.includes(horario)
+    );
+}
+
+function dataHoraAtualSP() {
+    const partes = new Intl.DateTimeFormat('en-CA', {
+        timeZone: 'America/Sao_Paulo',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        hourCycle: 'h23'
+    }).formatToParts(new Date());
+
+    const valores = {};
+
+    for (const parte of partes) {
+        valores[parte.type] = parte.value;
+    }
+
+    return {
+        data: `${valores.year}-${valores.month}-${valores.day}`,
+        horario: `${valores.hour}:${valores.minute}`
+    };
+}
+
+function agendamentoNoFuturo(data, horario) {
+    const atual = dataHoraAtualSP();
+
+    if (data < atual.data) {
+        return false;
+    }
+
+    if (data === atual.data && horario <= atual.horario) {
+        return false;
+    }
+
+    return true;
+}
+
+console.log('Teste de texto:', {
+    valido: textoValido('Nathanael', 100),
+    vazio: textoValido('', 100),
+    numero: textoValido(123, 100)
+});
+
+console.log('Teste de data:', {
+    valida: dataValida('2026-11-07'),
+    inexistente: dataValida('2026-02-30'),
+    formatoInvalido: dataValida('07/11/2026')
+});
+
+console.log('Teste de horario:', {
+    permitido: horarioValido('09:00'),
+    outroPermitido: horarioValido('17:00'),
+    naoPermitido: horarioValido('12:00'),
+    formatoInvalido: horarioValido('9:00'),
+    numero: horarioValido(900)
+});
+
+console.log('Data e hora de São Paulo:', dataHoraAtualSP());
+
+const agoraSP = dataHoraAtualSP();
+
+console.log('Teste de agendamento futuro:', {
+    dataPassada: agendamentoNoFuturo('2000-01-01',
+        '09:00'),
+    horarioAtual: agendamentoNoFuturo(agoraSP.data, agoraSP.horario),
+    dataFutura: agendamentoNoFuturo('2099-12-31',
+        '09:00')
+});
+
 router.get('/admin/verify', requireAdmin, (req, res) => {
     res.status(200).json({
         autorizado: true,
@@ -366,12 +479,15 @@ router.post('/agendamentos', upload.array('imagens', 5), async (req, res) => {
     } = req.body;
 
 
-    if (
-        typeof nome !== 'string' || !nome.trim() ||
-        typeof whatsapp !== 'string' || !whatsapp.trim()
-    ) {
+    if (!textoValido(nome, 50)) {
         return res.status(400).json({
-            erro: 'Nome e WhatsApp são obrigatórios.'
+            erro: 'O nome é obrigatório e deve ter até 50 caracteres.'
+        });
+    }
+
+    if (typeof whatsapp !== 'string' || !whatsapp.trim()) {
+        return res.status(400).json({
+            erro: 'O WhatsApp é obrigatório.'
         });
     }
 

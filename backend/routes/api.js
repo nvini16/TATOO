@@ -245,7 +245,6 @@ router.patch('/agendamentos/:id', requireAdmin, async (req, res) => {
 
     if (
         typeof nome !== 'string' || !nome.trim() ||
-        typeof whatsapp !== 'string' || !whatsapp.trim() ||
         typeof arte !== 'string' || !arte.trim() ||
         typeof estilo !== 'string' || !estilo.trim() ||
         typeof data !== 'string' ||
@@ -261,13 +260,23 @@ router.patch('/agendamentos/:id', requireAdmin, async (req, res) => {
         });
     }
 
+    let whatsappLimpo;
+
+    try {
+        whatsappLimpo = normalizarWhatsapp(whatsapp);
+    } catch (error) {
+        return res.status(400).json({
+            erro: error.message
+        });
+    }
+
     try {
         const { data: atualizado, error } = await supabase.rpc(
             'editar_agendamento_admin',
             {
                 p_id: id,
                 p_nome: nome.trim(),
-                p_whatsapp: whatsapp.trim(),
+                p_whatsapp: whatsappLimpo,
                 p_arte: arte.trim(),
                 p_estilo: estilo.trim(),
                 p_descricao: descricao ?? null,

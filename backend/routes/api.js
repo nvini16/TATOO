@@ -503,9 +503,42 @@ router.post('/agendamentos', upload.array('imagens', 5), async (req, res) => {
         });
     }
 
-    if (!data || !horario) {
+    if (
+        descricao !== undefined &&
+        descricao !== null &&
+        typeof descricao !== 'string'
+    ) {
         return res.status(400).json({
-            erro: 'Data e horário são obrigatórios.'
+            erro: 'A descrição deve ser um texto válido.'
+        });
+    }
+
+    if (typeof descricao === 'string' &&
+        descricao.trim().length > 1000) {
+            return res.status(400).json({
+                erro: 'A descrição deve ter até 1.000 caracteres.'
+            });
+        }
+
+        const descricaoLimpa = typeof descricao === 'string' && descricao.trim()
+            ? descricao.trim() : null;
+
+
+    if (!dataValida(data)) {
+        return res.status(400).json({
+            erro: 'A data informada é inválida.'
+        });
+    }
+
+    if (!horarioValido(horario)) {
+        return res.status(400).json({
+            erro: 'O horário informado não é permitido.'
+        });
+    }
+
+    if (!agendamentoNoFuturo(data, horario)) {
+        return res.status(400).json({
+            erro: 'O agendamento deve ser realizado para uma data e horário futuros.'
         });
     }
 
@@ -591,7 +624,7 @@ const { data: agendamento, error: erroAgendamento } = await supabase
         cliente_id: cliente.id,
         arte: trabalho.trim(),
         estilo: estilo.trim(),
-        descricao: descricao?.trim() || null,
+        descricao: descricaoLimpa,
         data,
         horario,
     })

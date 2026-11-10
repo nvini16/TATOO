@@ -8,7 +8,10 @@ const criarAgendamento = require('../services/criarAgendamento');
 
 function criarSupabaseSimulado({
     erroUpload = null,
-    erroRegistroImagem = null
+    erroRegistroImagem = null,
+    erroExclusaoReferencias = null,
+    erroRemocaoStorage = null,
+    erroExclusaoAgendamento = null
 } = {}) {
     const chamadas = {
         exclusoes: [],
@@ -56,7 +59,14 @@ function criarSupabaseSimulado({
             then(resolve, reject) {
                 if (operacao === 'delete') {
                     chamadas.exclusoes.push(tabela);
-                    return Promise.resolve({ data: null, error: null }).then(resolve, reject);
+
+                    const erroExclusao = tabela === 'agendamento_imagens'
+                        ? erroExclusaoReferencias
+                        : tabela === 'agendamentos'
+                            ? erroExclusaoAgendamento
+                            : null;
+
+                    return Promise.resolve({ data: null, error: erroExclusao }).then(resolve, reject);
                 }
 
                 if (tabela === 'agendamento_imagens' && operacao === 'insert') {
@@ -86,7 +96,7 @@ function criarSupabaseSimulado({
                     },
                     async remove(caminhos) {
                         chamadas.arquivosRemovidos.push(caminhos);
-                        return { data: caminhos, error: null };
+                        return { data: null, error: erroRemocaoStorage };
                     }
                 };
             }
@@ -150,4 +160,52 @@ test('remove arquivo e agendamento quando falha o registro da imagem', async () 
     assert.equal(supabase.chamadas.arquivosRemovidos[0].length, 1);
     assert.ok(supabase.chamadas.exclusoes.includes('agendamento_imagens'));
     assert.ok(supabase.chamadas.exclusoes.includes('agendamentos'));
+});
+
+test('registra as falhas quando a própria compensação não consegue concluir a limpeza', async () => {
+    const erros = {
+        upload: new Error('Falha original no upload'),
+        referencias: new Error('Falha ao excluir referências'),
+        storage: new Error('Falha ao remover arquivos'),
+        agendamento: new Error('Falha ao excluir agendamento')
+    };
+
+    const supabase = criarSupabaseSimulado({
+        erroUpload: erros.upload,
+        erroExclusaoReferencias: erros.referencias,
+        erroRemocaoStorage: erros.storage,
+        erroExclusaoAgendamento: erros.agendamento
+    });
+
+    const consoleErrorOriginal = console.error;
+    const registrosConsole = [];
+
+    console.error = (...args) => registrosConsole.push(args);
+
+    try {
+        await assert.rejects(
+            criarAgendamento(dadosAgendamento, supabase),
+            erro => {
+                assert.match(erro.message, /Não foi possível enviar uma das imagens/);
+                assert.equal(erro.originalError, erros.upload);
+                assert.equal(erro.falhasCompensacao.length, 3);
+
+                const etapas = erro.falhasCompensacao.map(falha => falha.etapa);
+
+                assert.ok(etapas.includes('remover referências das imagens'));
+                assert.ok(etapas.includes('remover arquivos do Storage'));
+                assert.ok(etapas.includes('excluir agendamento recém-criado'));
+
+                return true;
+            }
+        );
+
+        assert.ok(supabase.chamadas.exclusoes.includes('agendamento_imagens'));
+        assert.ok(supabase.chamadas.exclusoes.includes('agendamentos'));
+        assert.deepEqual(supabase.chamadas.arquivosRemovidos, []);
+        assert.equal(registrosConsole.length, 1);
+        assert.match(registrosConsole[0][0], /compensação do agendamento não foi concluída integralmente/i);
+    } finally {
+        console.error = consoleErrorOriginal;
+    }
 });

@@ -435,7 +435,7 @@ router.patch('/agendamentos/:id', requireAdmin, async (req, res) => {
 
 
 
-router.post('/agendamentos', upload.array('imagens', 5), async (req, res) => {
+router.post('/agendamentos', upload.array('imagens', 5), upload.validarConteudo, async (req, res) => {
     const {
         nome,
         whatsapp,

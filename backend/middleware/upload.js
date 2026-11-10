@@ -12,7 +12,7 @@ const tiposPermitidos = new Set([
 const upload = multer({
     storage, limits: {
         files: 5,
-        sileSize: 5 * 1024 * 1024,
+        fileSize: 5 * 1024 * 1024,
         fields: 10,
         parts: 15,
         fieldSize: 10 * 1024

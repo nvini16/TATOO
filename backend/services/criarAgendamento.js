@@ -179,7 +179,7 @@ async function criarAgendamento({
                         etapa: 'remover arquivos do Storage',
                         agendamentoId: agendamento.id,
                         caminhos: caminhosEnviados,
-                        erro
+                        erro: error
                     });
                 }
             } catch (error) {
@@ -187,7 +187,7 @@ async function criarAgendamento({
                     etapa: 'remover arquivos do Storage',
                     agendamentoId: agendamento.id,
                     caminhos: caminhosEnviados,
-                    erro
+                    erro: error
                 });
             }
         }
@@ -203,14 +203,14 @@ async function criarAgendamento({
                 falhasCompensacao.push({
                     etapa: 'excluir agendamento recém-criado',
                     agendamentoId: agendamento.id,
-                    erro
+                    erro: error
                 });
             }
         } catch (error) {
             falhasCompensacao.push({
                 etapa: 'excluir agendamento recém-criado',
                 agendamentoId: agendamento.id,
-                erro
+                erro: error
             });
         }
 

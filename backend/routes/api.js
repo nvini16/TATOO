@@ -89,38 +89,6 @@ function agendamentoNoFuturo(data, horario) {
     return true;
 }
 
-console.log('Teste de texto:', {
-    valido: textoValido('Nathanael', 100),
-    vazio: textoValido('', 100),
-    numero: textoValido(123, 100)
-});
-
-console.log('Teste de data:', {
-    valida: dataValida('2026-11-07'),
-    inexistente: dataValida('2026-02-30'),
-    formatoInvalido: dataValida('07/11/2026')
-});
-
-console.log('Teste de horario:', {
-    permitido: horarioValido('09:00'),
-    outroPermitido: horarioValido('17:00'),
-    naoPermitido: horarioValido('12:00'),
-    formatoInvalido: horarioValido('9:00'),
-    numero: horarioValido(900)
-});
-
-console.log('Data e hora de São Paulo:', dataHoraAtualSP());
-
-const agoraSP = dataHoraAtualSP();
-
-console.log('Teste de agendamento futuro:', {
-    dataPassada: agendamentoNoFuturo('2000-01-01',
-        '09:00'),
-    horarioAtual: agendamentoNoFuturo(agoraSP.data, agoraSP.horario),
-    dataFutura: agendamentoNoFuturo('2099-12-31',
-        '09:00')
-});
-
 router.get('/admin/verify', requireAdmin, (req, res) => {
     res.status(200).json({
         autorizado: true,

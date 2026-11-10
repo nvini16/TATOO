@@ -19,9 +19,13 @@ const upload = multer({
     },
     fileFilter: (req, file, callback) => {
         if (!tiposPermitidos.has(file.mimetype)) {
-            return callback(
-                new Error('Formato não permitido. Envie JPEG, PNG, WebP ou GIF.')
-            );
+           const erroFormato = new Error(
+            'Formato não permitido. Envie JPEG, PNG, WebP ou GIF.'
+           );
+
+           erroFormato.code = 'INVALID_FILE_TYPE';
+
+           return callback(erroFormato);
         }
 
         callback(null, true);

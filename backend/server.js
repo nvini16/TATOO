@@ -41,7 +41,7 @@ app.use((error, req, res, next) => {
   const errosMulter = {
     LIMIT_FILE_COUNT: 'Envie no máximo 5 imagens.',
     LIMIT_PART_COUNT: 'A requisição contém partes demais.',
-    LIMIT_FIELD_COUNT: 'A requisição contém campos demias.',
+    LIMIT_FIELD_COUNT: 'A requisição contém campos demais.',
     LIMIT_FIELD_VALUE: 'Um dos campos enviados excede o tamanho permitido.',
     LIMIT_UNEXPECTED_FILE: 'Campo de arquivo inesperado.'
   };

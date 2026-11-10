@@ -20,9 +20,9 @@ async function criarAgendamento({
     data,
     horario,
     arquivos = []
-}) {
+}, supabaseClient = supabase) {
     // 1. Buscar cliente existente.
-    const { data: clienteExistente, error: erroBusca } = await supabase
+    const { data: clienteExistente, error: erroBusca } = await supabaseClient
         .from('clientes')
         .select('id, nome, whatsapp')
         .eq('nome', nome)
@@ -42,7 +42,7 @@ async function criarAgendamento({
     let cliente = clienteExistente;
 
     if (!cliente) {
-        const { data: novoCliente, error: erroCadastro } = await supabase
+        const { data: novoCliente, error: erroCadastro } = await supabaseClient
             .from('clientes')
             .insert({
                 nome,
@@ -64,7 +64,7 @@ async function criarAgendamento({
     }
 
     // 3. Criar agendamento.
-    const { data: agendamento, error: erroAgendamento } = await supabase
+    const { data: agendamento, error: erroAgendamento } = await supabaseClient
         .from('agendamentos')
         .insert({
             cliente_id: cliente.id,
@@ -103,7 +103,7 @@ async function criarAgendamento({
             const nomeUnico = `${crypto.randomUUID()}-${arquivo.originalname}`;
             const caminho = `${agendamento.id}/${nomeUnico}`;
 
-            const { error: erroUpload } = await supabase.storage
+            const { error: erroUpload } = await supabaseClient.storage
                 .from('agendamento-imagens')
                 .upload(caminho, arquivo.buffer, {
                     contentType: arquivo.mimetype,
@@ -122,7 +122,7 @@ async function criarAgendamento({
             // Registrar imediatamente para permitir a compensação.
             caminhosEnviados.push(caminho);
 
-            const { error: erroRegistroImagem } = await supabase
+            const { error: erroRegistroImagem } = await supabaseClient
                 .from('agendamento_imagens')
                 .insert({
                     agendamento_id: agendamento.id,
@@ -147,7 +147,7 @@ async function criarAgendamento({
 
         // 6. Remover referências de imagens vinculadas ao novo agendamento.
         try {
-            const { error } = await supabase
+            const { error } = await supabaseClient
                 .from('agendamento_imagens')
                 .delete()
                 .eq('agendamento_id', agendamento.id);
@@ -170,7 +170,7 @@ async function criarAgendamento({
         // 7. Remover arquivos enviados ao Storage nesta operação.
         if (caminhosEnviados.length > 0) {
             try {
-                const { error } = await supabase.storage
+                const { error } = await supabaseClient.storage
                     .from('agendamento-imagens')
                     .remove(caminhosEnviados);
 
@@ -194,7 +194,7 @@ async function criarAgendamento({
 
         // 8. Excluir somente o agendamento criado nesta operação.
         try {
-            const { error } = await supabase
+            const { error } = await supabaseClient
                 .from('agendamentos')
                 .delete()
                 .eq('id', agendamento.id);

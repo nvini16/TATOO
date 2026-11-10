@@ -96,45 +96,141 @@ async function criarAgendamento({
     }
 
     // 4. Enviar imagens e registrar suas referências.
-    for (const arquivo of arquivos) {
-        const nomeUnico = `${crypto.randomUUID()}-${arquivo.originalname}`;
-        const caminho = `${agendamento.id}/${nomeUnico}`;
+    const caminhosEnviados = [];
 
-        const { error: erroUpload } = await supabase.storage
-            .from('agendamento-imagens')
-            .upload(caminho, arquivo.buffer, {
-                contentType: arquivo.mimetype,
-                upsert: false
+    try {
+        for (const arquivo of arquivos) {
+            const nomeUnico = `${crypto.randomUUID()}-${arquivo.originalname}`;
+            const caminho = `${agendamento.id}/${nomeUnico}`;
+
+            const { error: erroUpload } = await supabase.storage
+                .from('agendamento-imagens')
+                .upload(caminho, arquivo.buffer, {
+                    contentType: arquivo.mimetype,
+                    upsert: false
+                });
+
+            if (erroUpload) {
+                throw criarErro(
+                    500,
+                    'Não foi possível enviar uma das imagens.',
+                    'Erro ao enviar imagem:',
+                    erroUpload
+                );
+            }
+
+            // Registrar imediatamente para permitir a compensação.
+            caminhosEnviados.push(caminho);
+
+            const { error: erroRegistroImagem } = await supabase
+                .from('agendamento_imagens')
+                .insert({
+                    agendamento_id: agendamento.id,
+                    caminho
+                });
+
+            if (erroRegistroImagem) {
+                throw criarErro(
+                    500,
+                    'A imagem foi enviada, mas não foi possível registrar sua referência.',
+                    'Erro ao registrar imagem no banco:',
+                    erroRegistroImagem
+                );
+            }
+        }
+
+        // 5. Retornar agendamento criado.
+        return agendamento;
+
+    } catch (erroOriginal) {
+        const falhasCompensacao = [];
+
+        // 6. Remover referências de imagens vinculadas ao novo agendamento.
+        try {
+            const { error } = await supabase
+                .from('agendamento_imagens')
+                .delete()
+                .eq('agendamento_id', agendamento.id);
+
+            if (error) {
+                falhasCompensacao.push({
+                    etapa: 'remover referências das imagens',
+                    agendamentoId: agendamento.id,
+                    erro: error
+                });
+            }
+        } catch (error) {
+            falhasCompensacao.push({
+                etapa: 'remover referências das imagens',
+                agendamentoId: agendamento.id,
+                erro: error
             });
+        }
 
-        if (erroUpload) {
-            throw criarErro(
-                500,
-                'Não foi possível enviar uma das imagens.',
-                'Erro ao enviar imagem:',
-                erroUpload
+        // 7. Remover arquivos enviados ao Storage nesta operação.
+        if (caminhosEnviados.length > 0) {
+            try {
+                const { error } = await supabase.storage
+                    .from('agendamento-imagens')
+                    .remove(caminhosEnviados);
+
+                if (error) {
+                    falhasCompensacao.push({
+                        etapa: 'remover arquivos do Storage',
+                        agendamentoId: agendamento.id,
+                        caminhos: caminhosEnviados,
+                        erro
+                    });
+                }
+            } catch (error) {
+                falhasCompensacao.push({
+                    etapa: 'remover arquivos do Storage',
+                    agendamentoId: agendamento.id,
+                    caminhos: caminhosEnviados,
+                    erro
+                });
+            }
+        }
+
+        // 8. Excluir somente o agendamento criado nesta operação.
+        try {
+            const { error } = await supabase
+                .from('agendamentos')
+                .delete()
+                .eq('id', agendamento.id);
+
+            if (error) {
+                falhasCompensacao.push({
+                    etapa: 'excluir agendamento recém-criado',
+                    agendamentoId: agendamento.id,
+                    erro
+                });
+            }
+        } catch (error) {
+            falhasCompensacao.push({
+                etapa: 'excluir agendamento recém-criado',
+                agendamentoId: agendamento.id,
+                erro
+            });
+        }
+
+        if (falhasCompensacao.length > 0) {
+            console.error(
+                'A compensação do agendamento não foi concluída integralmente:',
+                {
+                    agendamentoId: agendamento.id,
+                    caminhosEnviados,
+                    falhas: falhasCompensacao
+                }
             );
         }
 
-        const { error: erroRegistroImagem } = await supabase
-            .from('agendamento_imagens')
-            .insert({
-                agendamento_id: agendamento.id,
-                caminho
-            });
-
-        if (erroRegistroImagem) {
-            throw criarErro(
-                500,
-                'A imagem foi enviada, mas não foi possível registrar sua referência.',
-                'Erro ao registrar imagem no banco:',
-                erroRegistroImagem
-            );
+        if (erroOriginal && typeof erroOriginal === 'object') {
+            erroOriginal.falhasCompensacao = falhasCompensacao;
         }
+
+        throw erroOriginal;
     }
-
-    // 5. Retornar agendamento criado.
-    return agendamento;
 }
 
 module.exports = criarAgendamento;

@@ -164,14 +164,14 @@ test('remove arquivo e agendamento quando falha o registro da imagem', async () 
 
 test('registra as falhas quando a própria compensação não consegue concluir a limpeza', async () => {
     const erros = {
-        upload: new Error('Falha original no upload'),
+        registro: new Error('Falha original no registro da imagem'),
         referencias: new Error('Falha ao excluir referências'),
         storage: new Error('Falha ao remover arquivos'),
         agendamento: new Error('Falha ao excluir agendamento')
     };
 
     const supabase = criarSupabaseSimulado({
-        erroUpload: erros.upload,
+        erroRegistroImagem: erros.registro,
         erroExclusaoReferencias: erros.referencias,
         erroRemocaoStorage: erros.storage,
         erroExclusaoAgendamento: erros.agendamento
@@ -186,8 +186,8 @@ test('registra as falhas quando a própria compensação não consegue concluir 
         await assert.rejects(
             criarAgendamento(dadosAgendamento, supabase),
             erro => {
-                assert.match(erro.message, /Não foi possível enviar uma das imagens/);
-                assert.equal(erro.originalError, erros.upload);
+                assert.match(erro.message, /não foi possível registrar sua referência/i);
+                assert.equal(erro.originalError, erros.registro);
                 assert.equal(erro.falhasCompensacao.length, 3);
 
                 const etapas = erro.falhasCompensacao.map(falha => falha.etapa);
@@ -202,7 +202,7 @@ test('registra as falhas quando a própria compensação não consegue concluir 
 
         assert.ok(supabase.chamadas.exclusoes.includes('agendamento_imagens'));
         assert.ok(supabase.chamadas.exclusoes.includes('agendamentos'));
-        assert.deepEqual(supabase.chamadas.arquivosRemovidos, []);
+        assert.equal(supabase.chamadas.arquivosRemovidos.length, 1);
         assert.equal(registrosConsole.length, 1);
         assert.match(registrosConsole[0][0], /compensação do agendamento não foi concluída integralmente/i);
     } finally {

@@ -1,7 +1,7 @@
 const express = require('express');
 const supabase = require('../lib/supabase');
 const upload = require('../middleware/upload');
-const crypto = require('crypto');
+const criarAgendamento = require('../services/criarAgendamento');
 const requireAdmin = require('../middleware/requireAdmin');
 const normalizarWhatsapp = require('../utils/normalizarWhatsapp');
 
@@ -548,114 +548,35 @@ router.post('/agendamentos', upload.array('imagens', 5), upload.validarConteudo,
         });
     }
 
-    const { data: clienteExistente, error: erroBusca } = await supabase
-        .from('clientes')
-        .select('id, nome, whatsapp')
-        .eq('nome', nomeLimpo)
-        .eq('whatsapp', whatsappLimpo)
-        .maybeSingle();
+    try {
+        const agendamento = await criarAgendamento({
+            nome: nomeLimpo,
+            whatsapp: whatsappLimpo,
+            trabalho: trabalho.trim(),
+            estilo: estilo.trim(),
+            descricao: descricaoLimpa,
+            data,
+            horario,
+            arquivos: req.files || []
+        });
 
-    if (erroBusca) {
-        console.error('Erro ao buscar cliente:', erroBusca);
+        return res.status(201).json({
+            mensagem: 'Agendamento criado com sucesso.',
+            agendamento
+        });
 
-        return res.status(500).json({
-            erro: 'Não foi possível verificar o cadastro do cliente.'
+    } catch (error) {
+        console.error(
+            error.contexto || 'Erro inesperado ao criar agendamento:',
+            error.originalError || error
+        );
+
+        return res.status(error.statusCode || 500).json({
+            erro: error.statusCode
+                ? error.message
+                : 'Ocorreu um erro interno ao criar o agendamento.'
         });
     }
-
-    let cliente = clienteExistente;
-
-    if (!cliente) {
-        const { data: novoCliente, error: erroCadastro } = await supabase
-            .from('clientes')
-            .insert({
-                nome: nomeLimpo,
-                whatsapp: whatsappLimpo
-            })
-            .select('id, nome, whatsapp')
-            .single();
-
-    if (erroCadastro) {
-        console.error('Erro ao cadastrar cliente:', erroCadastro);
-
-        return res.status(500).json({
-            erro: 'Não foi possível cadastrar o cliente.'
-        });
-    }
-
-    cliente = novoCliente;
-}
-
-const { data: agendamento, error: erroAgendamento } = await supabase
-    .from('agendamentos')
-    .insert({
-        cliente_id: cliente.id,
-        arte: trabalho.trim(),
-        estilo: estilo.trim(),
-        descricao: descricaoLimpa,
-        data,
-        horario,
-    })
-    .select()
-    .single();
-
-if (erroAgendamento) {
-    console.error('Erro ao criar agendamento:', erroAgendamento);
-
-    if (erroAgendamento.code === '23505') {
-        return res.status(409).json({
-            erro: 'Já existe um agendamento ativo para essa data'
-        });
-    }
-
-    return res.status(500).json({
-        erro: 'Não foi possível criar o agendamento.'
-    });
-    
-}
-
-for (const arquivo of req.files || []) {
-    const nomeUnico = `${crypto.randomUUID()}-${arquivo.originalname}`;
-    
-    const caminho = `${agendamento.id}/${nomeUnico}`;
-
-    const { error: erroUpload } = await supabase.storage
-        .from('agendamento-imagens')
-        .upload(caminho, arquivo.buffer, {
-            contentType: arquivo.mimetype,
-            upsert: false,
-        });
-        
-        if (erroUpload) {
-        console.error('Erro ao enviar imagem:', erroUpload);
-        
-        return res.status(500).json({
-            erro: 'Não foi possível enviar uma das imagens.'
-        });
-    }
-
-    const { error: erroRegistroImagem } = await supabase
-        .from('agendamento_imagens')
-        .insert({
-            agendamento_id: agendamento.id,
-            caminho: caminho
-        });
-
-    if (erroRegistroImagem) {
-        console.error('Erro ao registrar imagem no banco:', erroRegistroImagem);
-
-        return res.status(500).json({
-            erro: 'A imagem foi enviada, mas não foi possível registrar sua referência.'
-        }); 
-    }
-}
-
-return res.status(201).json({ 
-    mensagem: 'Agendamento criado com sucesso.',
-    agendamento
-})
-
-
 });
 
 

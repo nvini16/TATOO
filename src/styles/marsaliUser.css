@@ -7,7 +7,7 @@
 
 
 .mu-header {
-    width: 100%;
+    /* width: 100%; */
     background: var(--marsali-tatoo-color-dark-green);
     color: var(--marsali-tatoo-color-white);
     padding: 30px 24px;
@@ -381,7 +381,7 @@
 
 /* Responsividade */
 
-@media (max-width: 600px) {
+@media (max-width: 760px) {
     .mu-header {
         padding: 24px 18px;
     }

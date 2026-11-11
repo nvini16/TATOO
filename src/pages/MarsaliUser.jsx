@@ -59,7 +59,7 @@ function MarsaliUser() {
                 <p role="alert">{erro}</p>
                 <Link to="/LoginCliente">Entrar na minha conta</Link>
                 <br />
-                <link to="/">Voltar</link>
+                <Link to="/">Voltar</Link>
             </main>
         );
     }

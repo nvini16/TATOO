@@ -4,9 +4,16 @@ const upload = require('../middleware/upload');
 const criarAgendamento = require('../services/criarAgendamento');
 const requireAdmin = require('../middleware/requireAdmin');
 const normalizarWhatsapp = require('../utils/normalizarWhatsapp');
+const requireCliente = require('../middleware/requireCliente');
 
 
 const router = express.Router();
+
+router.get('/cliente/perfil', requireCliente, (req, res) => {
+    return res.status(200).json({
+        cliente: req.cliente,
+    });
+});
 
 function textoValido(valor, tamanhoMaximo) {
     return (

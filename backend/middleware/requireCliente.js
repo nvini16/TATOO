@@ -13,7 +13,7 @@ async function requireCliente(req, res, next) {
 
     if (!token) {
         return res.status(401).json({
-            erro: 'Token de autenticação não encontrado.',
+            erro: 'Token de autenticação não encontrada.',
         });
     }
 

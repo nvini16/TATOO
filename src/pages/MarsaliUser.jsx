@@ -54,6 +54,15 @@ function MarsaliUser() {
 
     if (carregando) {
         return (
+            <main className="marsali-usr-page">
+                <h1>MarsaliUser</h1>
+                <p>Carregando seu espaço...</p>
+            </main>
+        );
+    }
+    
+    if (erro) {
+        return (
             <main className="marsali-user-page">
                 <h1>MarsaliUser</h1>
                 <p role="alert">{erro}</p>
@@ -63,6 +72,17 @@ function MarsaliUser() {
             </main>
         );
     }
+
+    if (!perfil) {
+        return (
+            <main className="marsali-user-page">
+                <h1>MarsaliUser</h1>
+                <p>Não foi possível localizar os dados do perfil.</p>
+                <Link to="/">Voltar</Link>
+            </main>
+        );
+    }
+    
     return (
         <>
         <main className="marsali-user-page">

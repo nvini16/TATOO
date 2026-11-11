@@ -13,7 +13,7 @@ async function requireCliente(req, res, next) {
 
     if (!token) {
         return res.status(401).json({
-            erro: 'Token de autenticação não encontrada.',
+            erro: 'Token de autenticação não informado.',
         });
     }
 
@@ -45,7 +45,7 @@ async function requireCliente(req, res, next) {
 
     if (!cliente) {
         return res.status(404).json({
-            erro: 'Perfil de cliente não informado.',
+            erro: 'Perfil de cliente não encontrado.',
         });
     }
 

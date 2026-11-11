@@ -3,7 +3,7 @@ const supabase = require('../lib/supabase');
 async function requireCliente(req, res, next) {
     const authorization = req.headers.authorization;
 
-    if (!authorization?.startsWith('Bearer')) {
+    if (!authorization?.startsWith('Bearer ')) {
         return res.status(401).json({
             erro: 'Autenticação necessária.',
         });
@@ -13,7 +13,7 @@ async function requireCliente(req, res, next) {
 
     if (!token) {
         return res.status(401).json({
-            erro: 'Token de autenticação não informado.',
+            erro: 'Token de autenticação não encontrado.',
         });
     }
 
@@ -55,4 +55,4 @@ async function requireCliente(req, res, next) {
     return next();
 }
 
-module.exports = requireCliente;
+module.exports = requireCliente; 

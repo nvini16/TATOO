@@ -181,7 +181,7 @@
 .mu-welcome h2 {
     margin: 5px 0 7px;
     color: var(--marsali-tatoo-color-dark-green);
-    font-size: 25px;
+    font-size: 30px;
     font-weight: 600;
 }
 
@@ -227,8 +227,9 @@
 }
 
 .mu-card-icon {
-    width: 37px;
-    height: 37px;
+    width: 40px;
+    height: 40px;
+    margin: 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -239,15 +240,15 @@
 }
 
 .mu-card-icon svg {
-    width: 19px;
-    height: 19px;
+    width: 23px;
+    height: 23px;
     stroke-width: 1.7;
 }
 
 .mu-card-title {
     color: var(--marsali-tatoo-color-dark-green);
-    font-size: 14px;
-    font-weight: 650;
+    font-size: 20px;
+    font-weight: 700;
 }
 
 .mu-card-description {
@@ -304,7 +305,7 @@
     margin: 0;
     color: var(--marsali-tatoo-color-black);
     opacity: 0.65;
-    font-size: 13px;
+    font-size: 15px;
     line-height: 1.6;
 }
 

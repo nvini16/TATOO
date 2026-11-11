@@ -54,7 +54,7 @@ function MarsaliUser() {
 
     if (carregando) {
         return (
-            <main className="marsali-usr-page">
+            <main className="marsali-user-page">
                 <h1>MarsaliUser</h1>
                 <p>Carregando seu espaço...</p>
             </main>

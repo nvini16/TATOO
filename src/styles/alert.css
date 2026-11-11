@@ -109,7 +109,7 @@
     border-radius: 6px;
 
     background-color: transparent;
-    color: var(--marsali-tatoo-color-dold);
+    color: var(--marsali-tatoo-color-gold);
 
     cursor: pointer;
 
@@ -145,7 +145,7 @@
 
 @media(max-width: 480px) {
     .alert {
-        width: calc(100% - 32px);
+        width: calc(100% -32px);
         padding: 12px;
     }
 

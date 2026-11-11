@@ -25,6 +25,7 @@ import './styles/clientePerfil.css'
 import './styles/clienteReferencias.css'
 import './styles/clienteHistorico.css'
 import './styles/redefinirSenha.css'
+import './styles/marsaliUser.css'
 
 import App from './App.jsx'
 import LoadingScreen from './components/LoadingScreen.jsx'

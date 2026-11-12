@@ -335,47 +335,6 @@ function MarsaliUser() {
         };
     }, [abaAtiva, referenciasCarregadas, tentativasReferencias]);
 
-    if (carregando) {
-        return (
-            <main className="marsali-user-page">
-                <p>Carregando seu estúdio...</p>
-            </main>
-        );
-    }
-
-    if (erro) {
-        return (
-            <main className="marsali-user-page">
-                <h1>Meu estúdio</h1>
-                <p role="alert">{erro}</p>
-                <Link to="/LoginCliente">Entrar na minha conta</Link>
-                <br />
-                <Link to="/">Início</Link>
-            </main>
-        );
-    }
-
-    if (!perfil) {
-        return (
-            <main className="marsali-user-page">
-                <h1>Meu estúdio</h1>
-                <p>Não foi possível localizar seus dados</p>
-                <Link to="/">Início</Link>
-            </main>
-        );
-    }
-
-    const primeiroNome = perfil.nome?.trim().split('')[0] || 'Cliente';
-
-    const iniciais = perfil.nome
-        ?.trim()
-        .split(/\s+/)
-        .slice(0, 2)
-        .map(parte => parte[0])
-        .join('')
-        .toUpperCase() || 'C';
-
-
     const estilosReferencia = useMemo(() => [...new Set(
         referencias.map(item => item.estilo).filter(Boolean)
     )].sort((a, b) => a.localeCompare(b, 'pt-BR')), [referencias]);
@@ -431,6 +390,47 @@ function MarsaliUser() {
         dataAtendimentoReferencia,
         ordemReferencias
     ]);
+
+    if (carregando) {
+        return (
+            <main className="marsali-user-page">
+                <p>Carregando seu estúdio...</p>
+            </main>
+        );
+    }
+
+    if (erro) {
+        return (
+            <main className="marsali-user-page">
+                <h1>Meu estúdio</h1>
+                <p role="alert">{erro}</p>
+                <Link to="/LoginCliente">Entrar na minha conta</Link>
+                <br />
+                <Link to="/">Início</Link>
+            </main>
+        );
+    }
+
+    if (!perfil) {
+        return (
+            <main className="marsali-user-page">
+                <h1>Meu estúdio</h1>
+                <p>Não foi possível localizar seus dados</p>
+                <Link to="/">Início</Link>
+            </main>
+        );
+    }
+
+    const primeiroNome = perfil.nome?.trim().split('')[0] || 'Cliente';
+
+    const iniciais = perfil.nome
+        ?.trim()
+        .split(/\s+/)
+        .slice(0, 2)
+        .map(parte => parte[0])
+        .join('')
+        .toUpperCase() || 'C';
+
 
     function limparFiltrosReferencias() {
         setBuscaReferencias('');

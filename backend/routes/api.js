@@ -595,6 +595,54 @@ router.post('/agendamentos', upload.array('imagens', 5), upload.validarConteudo,
         });
     }
 
+    let clienteId = null;
+
+    const authorization = re.headers.authorization;
+
+    if (authorization) {
+        if (!authorization.startsWith('Bearer')) {
+            return res.status(401).json({
+                erro: 'Formato de autenticação inválido.'
+            });
+        }
+
+        const token = authorization.slice(7).trim();
+
+        const {
+            data: { user },
+            erro: erroAuth
+        } = await supabase.auth.getUser(token);
+
+        if (erroAuth || !user) {
+            return res.status(401).json({
+                erro: 'Sessão inválida ou expirada.'
+            });
+        }
+
+        const {
+            data: cliente,
+            error: erroCliente
+        } = await supabase
+            .from('clientes')
+            .select('id')
+            .eq('auth_user_id', user.id)
+            .maybeSingle();
+
+        if (erroCliente) {
+            return res.status(500).json({
+                erro: 'Não foi possível indentificar seu perfil.'
+            });
+        }
+
+        if (!cliente) {
+            return res.status(404).json({
+                erro: 'Perfil de cliente mão encontrado.'
+            });
+        }
+
+        clienteId = cliente.id;
+    }
+
     try {
         const agendamento = await criarAgendamento({
             nome: nomeLimpo,
@@ -604,7 +652,8 @@ router.post('/agendamentos', upload.array('imagens', 5), upload.validarConteudo,
             descricao: descricaoLimpa,
             data,
             horario,
-            arquivos: req.files || []
+            arquivos: req.files || [],
+            clienteId
         });
 
         return res.status(201).json({

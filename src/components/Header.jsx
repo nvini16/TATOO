@@ -73,10 +73,15 @@ function Header() {
       </nav> 
 
       <div className="header-actions">
-        {authVerificada && !usuarioAutenticado && (
+        {authVerificada && (usuarioAutenticado ? (
+          <Link className="header-login" to="/MarsaliUser">
+            Meu perfil
+          </Link>
+        ) : (
           <Link className="header-login" to="/LoginCliente">
             Entrar
           </Link>
+        )
         )}
 
         <Link className="header-cta" to="/Agendamento">
@@ -90,19 +95,21 @@ function Header() {
     </header>
 
      <nav className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
-        <Link className="mobile-menu-a" to="/Header.jsx" onClick={closeMenu}>Inicío</Link>
+        <a className="mobile-menu-a" href="#inicio" onClick={closeMenu}>Inicío</a>
         <a className="mobile-menu-a" href="#trabalhos" onClick={closeMenu}>Trabalhos</a>
         <a className="mobile-menu-a" href="#cuidados" onClick={closeMenu}>Cuidados</a>
         <a className="mobile-menu-a" href="#sobre" onClick={closeMenu}>Sobre</a>
 
-          {authVerificada && !usuarioAutenticado && (
-            <Link
-            className="mobile-menu-login"
-            to="/LoginCliente"
-            onClick={closeMenu}
-            >
+          {authVerificada && (
+            usuarioAutenticado ? (
+              <Link className="mobile-menu-login" to="/MarsaliUser" onClick={closeMenu}>
+                Perfil
+              </Link>
+          ) : (
+            <Link className="mobile-menu-login" to="/LoginCliente" onClick={coleMenu}>
               Entrar
             </Link>
+            )
           )}
 
           <Link 

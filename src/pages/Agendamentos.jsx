@@ -5,6 +5,7 @@ import CalendarioAgendamento from '../components/CalendarioAgendamento';
 import Alert from '../components/Alert';
 import ScrollReveal from '../components/ScrollReveal';
 import Footer from '../components/Footer';
+import { supabase } from '../lib/supabase';
 
 const API_URL = import.meta.env.VITE_API_URL || '';
 
@@ -128,6 +129,7 @@ function Agendamento() {
                 String(agora.getMonth() + 1).padStart(2, '0'),
                 String(agora.getDate()).padStart(2, '0')
             ].join('-');
+
             const horaAtual = agora.toTimeString().slice(0, 5)
                 if (data === dataAtual && horario <= horaAtual) {
                     setAlerta({
@@ -155,8 +157,17 @@ function Agendamento() {
         });
 
         try {
+            const {
+                data: { session }
+            } = await supabase.auth.getSession();
+
             const resposta = await fetch(`${API_URL}/api/agendamentos`, {
                 method: 'POST',
+                headers: session
+                    ? {
+                        Authorization: `Bearer ${session.access_token}`
+                    }
+                    : {},
                 body: formDataAgendamento,
             });
 

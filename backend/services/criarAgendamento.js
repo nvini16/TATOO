@@ -19,48 +19,52 @@ async function criarAgendamento({
     descricao,
     data,
     horario,
-    arquivos = []
+    arquivos = [],
+    clienteId = null
 }, supabaseClient = supabase) {
-    // 1. Buscar cliente existente.
-    const { data: clienteExistente, error: erroBusca } = await supabaseClient
-        .from('clientes')
-        .select('id, nome, whatsapp')
-        .eq('nome', nome)
-        .eq('whatsapp', whatsapp)
-        .maybeSingle();
+    
+    let cliente;
 
-    if (erroBusca) {
-        throw criarErro(
-            500,
-            'Não foi possível verificar o cadastro do cliente.',
-            'Erro ao buscar cliente:',
-            erroBusca
-        );
-    }
-
-    // 2. Cadastrar cliente, caso não exista.
-    let cliente = clienteExistente;
-
-    if (!cliente) {
-        const { data: novoCliente, error: erroCadastro } = await supabaseClient
+    // Cliente autenticado: utilizar o perfil indentificado pela sessão. 
+    if (clienteId) {
+        cliente = { id: clienteId };
+    } else {
+        // Visitante público: manter o comportamento addUncaughtExceptionCaptureCallback. 
+        const { data: clienteExistente, error: erroBusca} = await supabaseCliente
             .from('clientes')
-            .insert({
-                nome,
-                whatsapp
-            })
             .select('id, nome, whatsapp')
-            .single();
+            .eq('whatsapp', whatsapp)
+            .maybeSingle();
 
-        if (erroCadastro) {
+        if (erroBusca) {
             throw criarErro(
                 500,
-                'Não foi possível cadastrar o cliente.',
-                'Erro ao cadastrar cliente:',
-                erroCadastro
+                'Não foi possível verificar o cadastro do cliete.',
+                'Erro ao buscar clinete:',
+                erroBusca
             );
         }
 
-        cliente = novoCliente;
+        cliente = clienteExistente;
+
+        if (!cliente) {
+            const { data: novoCliente, erro: erroCadastro } = await supabaseClient
+                .from('clientes')
+                .insert({nome, whatsapp})
+                .select('id, nome, whatsapp')
+                .single();
+
+            if (erroCadastro) {
+                throw criarErro(
+                    500,
+                    'Não foi possível cadastrar o cliente.',
+                    'Erro ao cadastrar cliente:',
+                    erroCadastro
+                );
+            }
+
+            cliente = novoCliente;
+        }
     }
 
     // 3. Criar agendamento.

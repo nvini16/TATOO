@@ -44,6 +44,8 @@ function MarsaliUser() {
     const [erroAgenda, setErroAgenda] = useState('');
     const [agendaCarregada, setAgendaCarregada] = useState(false);
 
+    const [tentativaAgenda, setTentativaAgenda] = useState(0);
+
     useEffect(() => {
         async function carregarPerfil() {
             try {
@@ -152,7 +154,7 @@ function MarsaliUser() {
         return () => {
             ativo = false;
         };
-    }, [abaAtiva, agendaCarregada])
+    }, [abaAtiva, agendaCarregada, tentativaAgenda])
 
     if (carregando) {
         return (
@@ -290,7 +292,7 @@ function MarsaliUser() {
 
                                 <button
                                     type="button"
-                                    onClick={() => {setAgendaCarregada(false);}}
+                                    onClick={() => setTentativaAgenda(atual => atual + 1)}
                                 >
                                     Tentar novamente
                                 </button>

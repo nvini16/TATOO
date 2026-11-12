@@ -39,6 +39,11 @@ function MarsaliUser() {
     const [erro, setErro] = useState('');
     const [abaAtiva, setAbaAtiva] = useState('inicio');
 
+    const [agendamentos, setAgendamentos] = useState([]);
+    const [carregandoAgenda, setCarregandoAgenda] = useState(false);
+    const [erroAgenda, setErroAgenda] = useState('');
+    const [agendaCarregada, setAgendaCarregada] = useState(false);
+
     useEffect(() => {
         async function carregarPerfil() {
             try {
@@ -84,6 +89,70 @@ function MarsaliUser() {
 
         carregarPerfil();
     }, []);
+
+    useEffect(() => {
+        if (abaAtiva !== 'agenda' || agendaCarregada) return;
+
+        let ativo = true;
+
+        async function carregarAgenda() {
+            setCarregandoAgenda(true);
+            setErroAgenda('');
+
+            try {
+                const {
+                    data: { session },
+                    error: erroSessao
+                } = await supabase.auth.getSession();
+
+                if (erroSessao) throw erroSessao;
+
+                if (!session?.access_token) {
+                    throw new Error('Sua sessão expirou. Entre novamente.');
+                }
+
+                const resposta = await fetch(
+                    `${API_URL}/api/cliente/agendamentos`, {
+                        headers: {
+                            Authorization: `Bearer ${session.access_token}`
+                        }
+                    }
+                );
+
+                const resultado = await resposta.json().catch(() => ({}));
+
+                if (!resposta.ok) {
+                    throw new Error(
+                        resultado.erro || 'Não foi possível carregar sua agenda.'
+                    );
+                }
+
+                if (ativo) {
+                    setAgendamentos(resultado.agendamentos || []);
+
+                    setAgendaCarregada(true);
+                }
+            } catch (erro) {
+                console.error('Erro ao carregar agenda:', erro);
+
+                if (ativo) {
+                    setErroAgenda(
+                        erro.message || 'Ocorreu um arro ao consultar sua agenda.'
+                    );
+                }
+            } finally {
+                if (ativo) {
+                    setAgendaCarregada(false);
+                }
+            }
+        }
+
+        carregarAgenda();
+
+        return () => {
+            ativo = false;
+        };
+    }, [abaAtiva, agendaCarregada])
 
     if (carregando) {
         return (
@@ -131,30 +200,127 @@ function MarsaliUser() {
 
     function renderizarConteudo() {
         switch (abaAtiva) {
-            case 'agenda':
+            case 'agenda': {
+                const statusAtivos = [
+                    'aguardando_sinal',
+                    'sinal_pago',
+                    'aguardando_confirmacao',
+                    'confirmado'
+                ];
+
+                const proximosAtendimentos = agendamentos.filter(
+                    item => statusAtivos.includes(item.status)
+                );
+
+                const historico = agendamentos.filter(
+                    item => !statusAtivos.includes(item.status)
+                );
+
+                const nomesStatus = {
+                    aguardando_sinal: 'Aguardando sinal',
+                    sinal_pago: 'Sinal pago',
+                    aguardando_confirmacao: 'Aguardando confirmação',
+                    confirmado: 'Confirmado',
+                    concluido: 'Concluído',
+                    cancelado: 'Cancelado',
+                    faltou: 'Não compareceu'
+                };
+
+                function formatarData(data) {
+                    if (!data) return 'Data não informada';
+
+                    const [ano, mes, dia] = data.split('-');
+
+                    return `${dia}/${mes}/${ano}`;
+                }
+
+                function renderizarAgendamento(item) {
+                    return (
+                        <article 
+                            className="mu-profile-card"
+                            key={item.id}
+                        >
+                            <div className="mu-profile-field">
+                                <span>Trabalho</span>
+                                <strong>{item.arte}</strong>
+                            </div>
+
+                            <div className="mu-profile-field">
+                                <span>Estilo</span>
+                                <strong>{item.estilo || 'Não informado'}</strong>
+                            </div>
+
+                            <div className="mu-profile-field">
+                                <span>Data</span>
+
+                                <strong>{formatarData(item.data)}</strong>
+                            </div>
+
+                            <div className="mu-profile-field">
+                                <span>Horário</span>
+                                <strong>{item.horario?.slice(0, 5) || 'Não informado'}</strong>
+                            </div>
+
+                            <div className="mu-profile-field">
+                                <span>Status</span>
+                                <strong>{nomesStatus[item.status] || 'Status desconhecido'}</strong>
+                            </div>
+                        </article>
+                    );
+                }
                 return (
                     <section className="mu-section">
                         <div className="mu-section-heading">
                             <div>
                                 <span className="mu-eyebrow">SEU ATENDIMENTO</span>
-
+                                
                                 <h2>Minha agenda</h2>
                             </div>
 
                             <CalendarDays />
                         </div>
 
-                        <div className="mu-empty-state">
+                        {carregandoAgenda && (
+                            <p>Carregando seus agendamentos...</p>
+                        )}
 
-                            <CalendarClock />
+                        {erroAgenda && (
+                            <div role="alert">
+                                <p>{erroAgenda}</p>
 
-                            <h3>Sua agenda</h3>
-                            <p>
-                                Acompanhe seus agendamentos e consulte agendamentos anteriores em um só lugar.
-                            </p>
-                        </div>
+                                <button
+                                    type="button"
+                                    onClick={() => {setAgendaCarregada(false);}}
+                                >
+                                    Tentar novamente
+                                </button>
+                            </div>
+                        )}
+
+                        {!carregandoAgenda && !erroAgenda && agendaCarregada && (
+                            <>
+                                <h3>Próximos atendimentos</h3>
+                                
+                                {proximosAtendimentos.length > 0 ? (proximosAtendimentos.map(renderizarAgendamento)) : (
+                                    <div className="mu-empty-state">
+                                        <CalendarClock />
+                                        <p>Você não possuí próximos agendamentos.</p>
+                                    </div>
+                                )}
+
+                                <h3>Histórico</h3>
+
+                                {historico.length > 0 ? (historico.map(renderizarAgendamento)) : (
+                                    <div className="mu-empty-state">
+                                        <Clock3 />
+                                        <p>Seus atendimentos anteriores aparecerão aqui.</p>
+                                    </div>
+                                )}
+                            </>
+                        )}
                     </section>
                 );
+            }
 
                 case 'referencias':
                     return (

@@ -669,3 +669,145 @@
         animation: none;
     }
 }
+
+/* Busca avançada da aba Referências do cliente */
+.mu-reference-filters {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin: 0 0 22px;
+    padding: 18px;
+    border: 1px solid rgba(184, 150, 85, 0.35);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.72);
+}
+
+.mu-reference-filters label {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    min-width: 0;
+}
+
+.mu-reference-filters label > span,
+.mu-reference-period legend {
+    color: var(--marsali-tatoo-color-dark-green, #244c3d);
+    font-size: 0.84rem;
+    font-weight: 600;
+}
+
+.mu-reference-filters input,
+.mu-reference-filters select {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 42px;
+    padding: 9px 11px;
+    border: 1px solid rgba(36, 76, 61, 0.22);
+    border-radius: 7px;
+    background: #fff;
+    color: #202820;
+    font: inherit;
+}
+
+.mu-reference-filters input:focus-visible,
+.mu-reference-filters select:focus-visible,
+.mu-reference-filter-actions button:focus-visible {
+    outline: 2px solid var(--marsali-tatoo-color-gold, #b89655);
+    outline-offset: 2px;
+}
+
+.mu-reference-filter-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 13px;
+}
+
+.mu-reference-period {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px;
+    min-width: 0;
+    margin: 0;
+    padding: 10px;
+    border: 1px solid rgba(36, 76, 61, 0.22);
+    border-radius: 7px;
+}
+
+.mu-reference-period legend {
+    padding: 0 5px;
+}
+
+.mu-reference-filter-actions {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 14px;
+}
+
+.mu-reference-filter-actions > label {
+    flex: 1;
+    max-width: 320px;
+}
+
+.mu-reference-filter-actions button {
+    min-height: 42px;
+    padding: 9px 16px;
+    border: 1px solid var(--marsali-tatoo-color-dark-green, #244c3d);
+    border-radius: 7px;
+    background: transparent;
+    color: var(--marsali-tatoo-color-dark-green, #244c3d);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.mu-reference-filter-actions button:hover:not(:disabled) {
+    background: var(--marsali-tatoo-color-dark-green, #244c3d);
+    color: #fff;
+}
+
+.mu-reference-filter-actions button:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+}
+
+.mu-reference-count {
+    margin: 0 0 12px;
+    color: #59645d;
+    font-size: 0.9rem;
+}
+
+.mu-reference-no-results {
+    padding: 20px;
+    border: 1px dashed rgba(36, 76, 61, 0.3);
+    border-radius: 9px;
+    color: #59645d;
+    text-align: center;
+}
+
+@media (max-width: 640px) {
+    .mu-reference-filters {
+        padding: 13px;
+    }
+
+    .mu-reference-filter-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .mu-reference-period {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .mu-reference-filter-actions {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .mu-reference-filter-actions > label {
+        max-width: none;
+    }
+
+    .mu-reference-filter-actions button {
+        width: 100%;
+    }
+}

@@ -55,6 +55,85 @@ router.get('/cliente/agendamentos', requireCliente, async (req, res) => {
     }
 });
 
+router.get('/cliente/referencias', requireCliente, async (req, res) => {
+    try {
+        const { data: agendamentos, error: erroAgendamentos } = await supabase
+            .from('agendamentos')
+            .select('id, arte, estilo, data, horario, status')
+            .eq('cliente_id', req.cliente.id);
+
+        if (erroAgendamentos) {
+            throw erroAgendamentos;
+        }
+
+        if (!agendamentos || agendamentos.length === 0) {
+            return res.status(200).json({
+                referencias: []
+            });
+        }
+
+        const idsAgendamentos = agendamentos.map(
+            agendamento => agendamento.id
+        );
+
+        const { data: imagens, error: erroImagens } = await supabase
+            .from('agendamento_imagens')
+            .select('id, agendamento_id, caminho, criado_em')
+            .in('agendamento_id', idsAgendamentos)
+            .order('criado_em', { ascending: false });
+
+        if (erroImagens) {
+            throw erroImagens;
+        }
+
+        if (!imagens || imagens.length === 0) {
+            return res.status(200).json({
+                referencias: []
+            });
+        }
+
+        const referencias = await Promise.all(
+            imagens.map(async imagem => {
+                const { data, error } = await supabase.storage
+                    .from('agendamento-imagens')
+                    .createSignedUrl(imagem.caminho, 3600);
+
+                    if (error) {
+                        throw error;
+                    }
+
+                    const agendamento = agendamentos.find(
+                        item => item.id === imagem.agendamento_id
+                    );
+
+                    return {
+                        id: imagem.id,
+                        agendamento_id: imagem.agendamento_id,
+                        criado_em: imagem.criado_em,
+                        url: data.signedUrl,
+                        arte: agendamentos?.arte ?? null,
+                        estilo: agendamento?.estilo ?? null,
+                        data: agendamento?.data ?? null,
+                        horario: agendamento?.horario ?? null,
+                        status: agendamento?.status ?? null
+                    };
+            })
+        );
+
+        return res.status(200).json({
+            referencias
+        });
+    } catch (error) {
+        console.error(
+            'Erro ao consultar referências do cliente:', error
+        );
+
+        return res.status(500).json({
+            erro: 'Não foi possível carregar suas referências.'
+        });
+    }
+});
+
 function textoValido(valor, tamanhoMaximo) {
     return (
         typeof valor === 'string' &&

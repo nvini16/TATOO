@@ -16,7 +16,7 @@ function Header() {
         const currentScrollY = window.scrollY;
 
         if (currentScrollY > lastScrollY) {
-          setHeaderVisible(false);
+          setHeaderVisible(false); 
         } else {
           setHeaderVisible(true);
         }
@@ -66,7 +66,7 @@ function Header() {
       </div>
 
       <nav className="header-nav">
-        <a href="#inicio">Início</a>
+        <Link to="/Header.jsx">Início</Link>
         <a href="#trabalhos">Trabalhos</a>
         <a href="#cuidados">Cuidados</a>
         <a href="#sobre">Sobre</a>
@@ -90,7 +90,7 @@ function Header() {
     </header>
 
      <nav className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
-        <a className="mobile-menu-a" href="#inicio" onClick={closeMenu}>Inicío</a>
+        <Link className="mobile-menu-a" to="/Header.jsx" onClick={closeMenu}>Inicío</Link>
         <a className="mobile-menu-a" href="#trabalhos" onClick={closeMenu}>Trabalhos</a>
         <a className="mobile-menu-a" href="#cuidados" onClick={closeMenu}>Cuidados</a>
         <a className="mobile-menu-a" href="#sobre" onClick={closeMenu}>Sobre</a>

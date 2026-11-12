@@ -25,7 +25,6 @@ import './styles/clienteReferencias.css'
 import './styles/clienteHistorico.css'
 import './styles/redefinirSenha.css'
 import './styles/marsaliUser.css'
-import './styles/perfilUser.css'
 
 import Root from './Root.jsx'
 

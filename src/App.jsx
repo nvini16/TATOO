@@ -10,7 +10,6 @@ import ClientePerfil from './pages/ClientePerfil';
 import RedefinirSenha from './pages/RedefinirSenha';
 import CadastroCliente from './pages/CadastroCliente';
 import MarsaliUser from './pages/MarsaliUser';
-import PerfilUser from './pages/PerfilUser';
 
 function App() {
   return (
@@ -27,7 +26,6 @@ function App() {
         <Route path="/RedefinirSenha" element={<RedefinirSenha />} />
         <Route path="/CadastroCliente" element={<CadastroCliente />} />
         <Route path="/MarsaliUser" element={<MarsaliUser />} />
-        <Route path="/PerfilUser" element={<PerfilUser />} />
       </Routes>
     </BrowserRouter>
   );

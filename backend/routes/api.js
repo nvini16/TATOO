@@ -15,6 +15,46 @@ router.get('/cliente/perfil', requireCliente, (req, res) => {
     });
 });
 
+router.get('/cliente/agendamentos', requireCliente, async (req, res) => {
+    try {
+        const { data, error } = await supabase
+            .from('agendamentos')
+            .select(`
+                id,
+                arte,
+                estilo,
+                descricao,
+                data,
+                horario,
+                status,
+                pagamento_sinal,
+                valor_sinal,
+                criado_em
+                `)
+            .eq('cliente_id', req.cliente.id)
+            .order('data', { ascending: true })
+            .order('horario', { ascending: true });
+        
+        if (error) {
+            console.error('Erro ao consultar agenda do cliente:', error);
+
+            return res.status(500).json({
+                erro: 'Não foi possível carregar seus agendamentos.'
+            });
+        }
+
+        return res.status(200).json({
+            agendamentos: data || []
+        });
+    } catch (error) {
+        console.error('Erro inesperado ao consultar agenda:', error);
+
+        return res.status(500).json({
+            erro: 'Ocorreu um erro ao carregar sua agenda.'
+        });
+    }
+});
+
 function textoValido(valor, tamanhoMaximo) {
     return (
         typeof valor === 'string' &&

@@ -5,7 +5,6 @@ import CalendarioAgendamento from '../components/CalendarioAgendamento';
 import Alert from '../components/Alert';
 import ScrollReveal from '../components/ScrollReveal';
 import Footer from '../components/Footer';
-import Header from '../components/Header';
 
 const API_URL = import.meta.env.VITE_API_URL || '';
 
@@ -204,7 +203,6 @@ function Agendamento() {
     return (
 
             <> 
-            <Header />
         <main className="agendamento-page">
             
             {alerta.mostrar && (

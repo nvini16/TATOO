@@ -1,6 +1,5 @@
 import { useEffect, useState  } from "react";
 import { Link } from 'react-router-dom';
-import Header from '../components/Header';
 import {
     LayoutDashboard,
     CalendarDays,
@@ -292,7 +291,6 @@ function MarsaliUser() {
 
     return (
         <>
-        <Header />
         <main className="marsali-user-page">
             <header className="mu-header">
                 <div className="mu-header-content">

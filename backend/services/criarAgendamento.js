@@ -30,9 +30,10 @@ async function criarAgendamento({
         cliente = { id: clienteId };
     } else {
         // Visitante público: manter o comportamento addUncaughtExceptionCaptureCallback. 
-        const { data: clienteExistente, error: erroBusca} = await supabaseCliente
+        const { data: clienteExistente, error: erroBusca} = await supabaseClient
             .from('clientes')
             .select('id, nome, whatsapp')
+            .eq('nome', nome)
             .eq('whatsapp', whatsapp)
             .maybeSingle();
 
@@ -48,7 +49,7 @@ async function criarAgendamento({
         cliente = clienteExistente;
 
         if (!cliente) {
-            const { data: novoCliente, erro: erroCadastro } = await supabaseClient
+            const { data: novoCliente, error: erroCadastro } = await supabaseClient
                 .from('clientes')
                 .insert({nome, whatsapp})
                 .select('id, nome, whatsapp')

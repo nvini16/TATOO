@@ -597,10 +597,10 @@ router.post('/agendamentos', upload.array('imagens', 5), upload.validarConteudo,
 
     let clienteId = null;
 
-    const authorization = re.headers.authorization;
+    const authorization = req.headers.authorization;
 
     if (authorization) {
-        if (!authorization.startsWith('Bearer')) {
+        if (!authorization.startsWith('Bearer ')) {
             return res.status(401).json({
                 erro: 'Formato de autenticação inválido.'
             });
@@ -610,7 +610,7 @@ router.post('/agendamentos', upload.array('imagens', 5), upload.validarConteudo,
 
         const {
             data: { user },
-            erro: erroAuth
+            error: erroAuth
         } = await supabase.auth.getUser(token);
 
         if (erroAuth || !user) {

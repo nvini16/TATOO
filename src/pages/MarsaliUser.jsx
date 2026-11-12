@@ -1,4 +1,4 @@
-import { useEffect, useState  } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from 'react-router-dom';
 import {
     LayoutDashboard,
@@ -33,6 +33,107 @@ const abas = [
     }
 ];
 
+
+const STATUS_REFERENCIA_LABELS = {
+    aguardando_sinal: 'Aguardando sinal',
+    sinal_pago: 'Sinal pago',
+    aguardando_confirmacao: 'Aguardando confirmação',
+    confirmado: 'Confirmado',
+    concluido: 'Concluído',
+    cancelado: 'Cancelado',
+    faltou: 'Não compareceu'
+};
+
+function normalizarReferencia(valor) {
+    return String(valor ?? '')
+        .normalize('NFD')
+        .replace(/[\\u0300-\\u036f]/g, '')
+        .toLocaleLowerCase('pt-BR')
+        .replace(/\\s+/g, ' ')
+        .trim();
+}
+
+function dataLocalReferencia(valor) {
+    if (!valor) return '';
+
+    const data = new Date(valor);
+    if (Number.isNaN(data.getTime())) return '';
+
+    const ano = data.getFullYear();
+    const mes = String(data.getMonth() + 1).padStart(2, '0');
+    const dia = String(data.getDate()).padStart(2, '0');
+
+    return `${ano}-${mes}-${dia}`;
+}
+
+function interpretarDataReferencia(termo) {
+    const texto = termo.trim();
+    let ano, mes, dia;
+
+    if (/^\\d{4}-\\d{2}-\\d{2}$/.test(texto)) {
+        [ano, mes, dia] = texto.split('-').map(Number);
+    } else if (/^\\d{2}\\/\\d{2}\\/\\d{4}$/.test(texto)) {
+        [dia, mes, ano] = texto.split('/').map(Number);
+    } else {
+        return null;
+    }
+
+    const data = new Date(Date.UTC(ano, mes - 1, dia));
+    if (
+        data.getUTCFullYear() !== ano ||
+        data.getUTCMonth() !== mes - 1 ||
+        data.getUTCDate() !== dia
+    ) return null;
+
+    return `${ano}-${String(mes).padStart(2, '0')}-${String(dia).padStart(2, '0')}`;
+}
+
+function referenciaAtendeTermo(item, termo) {
+    const busca = normalizarReferencia(termo);
+    if (!busca) return true;
+
+    const statusEncontrado = Object.entries(STATUS_REFERENCIA_LABELS).find(
+        ([valor, label]) =>
+            normalizarReferencia(valor) === busca ||
+            normalizarReferencia(label) === busca
+    );
+
+    if (statusEncontrado) {
+        return item.status === statusEncontrado[0];
+    }
+
+    const data = interpretarDataReferencia(termo);
+    if (data) {
+        return (
+            dataLocalReferencia(item.criado_em) === data ||
+            item.data === data
+        );
+    }
+
+    const campos = [
+        item.arte,
+        item.estilo,
+        item.status,
+        STATUS_REFERENCIA_LABELS[item.status],
+        item.criado_em,
+        dataLocalReferencia(item.criado_em),
+        item.data,
+        item.horario
+    ];
+
+    return campos.some(campo =>
+        normalizarReferencia(campo).includes(busca)
+    );
+}
+
+function referenciaAtendeBusca(item, texto) {
+    return texto
+        .split('/')
+        .map(termo => termo.trim())
+        .filter(Boolean)
+        .every(termo => referenciaAtendeTermo(item, termo));
+}
+
 function MarsaliUser() {
     const [perfil, setPerfil] = useState(null);
     const [carregando, setCarregando] = useState(true);
@@ -52,6 +153,14 @@ function MarsaliUser() {
     const [referenciasCarregadas, setReferenciasCarregadas] = useState(false);
     const [tentativasReferencias, setTentativasReferencias] = useState(0);
     const [referenciaSelecionada, setReferenciaSelecionada] = useState(null);
+    const [buscaReferencias, setBuscaReferencias] = useState('');
+    const [estiloReferencia, setEstiloReferencia] = useState('');
+    const [statusReferencia, setStatusReferencia] = useState('');
+    const [envioInicio, setEnvioInicio] = useState('');
+    const [envioFim, setEnvioFim] = useState('');
+    const [dataAtendimentoReferencia, setDataAtendimentoReferencia] = useState('');
+    const [ordemReferencias, setOrdemReferencias] = useState('recentes');
+
 
     useEffect(() => {
         async function carregarPerfil() {
@@ -266,6 +375,74 @@ function MarsaliUser() {
         .join('')
         .toUpperCase() || 'C';
 
+
+    const estilosReferencia = useMemo(() => [...new Set(
+        referencias.map(item => item.estilo).filter(Boolean)
+    )].sort((a, b) => a.localeCompare(b, 'pt-BR')), [referencias]);
+
+    const statusReferenciaDisponiveis = useMemo(() => [...new Set(
+        referencias.map(item => item.status).filter(Boolean)
+    )].sort((a, b) =>
+        (STATUS_REFERENCIA_LABELS[a] || a).localeCompare(
+            STATUS_REFERENCIA_LABELS[b] || b, 'pt-BR'
+        )
+    ), [referencias]);
+
+    const referenciasFiltradas = useMemo(() => {
+        const resultado = referencias.filter(item => {
+            if (!referenciaAtendeBusca(item, buscaReferencias)) return false;
+
+            if (
+                estiloReferencia &&
+                normalizarReferencia(item.estilo) !== normalizarReferencia(estiloReferencia)
+            ) return false;
+
+            if (statusReferencia && item.status !== statusReferencia) return false;
+
+            const dataEnvio = dataLocalReferencia(item.criado_em);
+            if (envioInicio && (!dataEnvio || dataEnvio < envioInicio)) return false;
+            if (envioFim && (!dataEnvio || dataEnvio > envioFim)) return false;
+            if (dataAtendimentoReferencia && item.data !== dataAtendimentoReferencia) return false;
+
+            return true;
+        });
+
+        return resultado.sort((a, b) => {
+            const dataA = new Date(a.criado_em || '').getTime();
+            const dataB = new Date(b.criado_em || '').getTime();
+            const validaA = Number.isFinite(dataA);
+            const validaB = Number.isFinite(dataB);
+
+            if (!validaA && !validaB) return 0;
+            if (!validaA) return 1;
+            if (!validaB) return -1;
+
+            return ordemReferencias === 'antigas'
+                ? dataA - dataB
+                : dataB - dataA;
+        });
+    }, [
+        referencias,
+        buscaReferencias,
+        estiloReferencia,
+        statusReferencia,
+        envioInicio,
+        envioFim,
+        dataAtendimentoReferencia,
+        ordemReferencias
+    ]);
+
+    function limparFiltrosReferencias() {
+        setBuscaReferencias('');
+        setEstiloReferencia('');
+        setStatusReferencia('');
+        setEnvioInicio('');
+        setEnvioFim('');
+        setDataAtendimentoReferencia('');
+        setOrdemReferencias('recentes');
+        setReferenciaSelecionada(null);
+    }
+
     function abrirAba(aba) {
         setAbaAtiva(aba);
     }
@@ -430,30 +607,143 @@ function MarsaliUser() {
                 !erroReferencias &&
                 referenciasCarregadas && (
                     <>
-                        {referencias.length > 0 ? (
-                            <div className="mu-reference-grid">
-                                {referencias.map(item => (
-                                    <button
-                                        type="button"
-                                        className="mu-reference-item"
-                                        key={item.id}
-                                        onClick={() => setReferenciaSelecionada(item)}
-                                        aria-label={`Visualizar referência: ${item.arte || 'Imagem'}`}
+                        <div className="mu-reference-filters">
+                            <label className="mu-reference-search">
+                                <span>Buscar referências</span>
+                                <input
+                                    type="search"
+                                    value={buscaReferencias}
+                                    onChange={evento => setBuscaReferencias(evento.target.value)}
+                                    placeholder="Ex.: dragão/old school/confirmado"
+                                />
+                            </label>
+
+                            <div className="mu-reference-filter-grid">
+                                <label>
+                                    <span>Estilo</span>
+                                    <select
+                                        value={estiloReferencia}
+                                        onChange={evento => setEstiloReferencia(evento.target.value)}
                                     >
-                                        <img
-                                            src={item.url}
-                                            alt={item.arte || 'Imagem de referência'}
-                                            loading="lazy"
+                                        <option value="">Todos os estilos</option>
+                                        {estilosReferencia.map(estilo => (
+                                            <option key={estilo} value={estilo}>{estilo}</option>
+                                        ))}
+                                    </select>
+                                </label>
+
+                                <label>
+                                    <span>Status</span>
+                                    <select
+                                        value={statusReferencia}
+                                        onChange={evento => setStatusReferencia(evento.target.value)}
+                                    >
+                                        <option value="">Todos os status</option>
+                                        {statusReferenciaDisponiveis.map(status => (
+                                            <option key={status} value={status}>
+                                                {STATUS_REFERENCIA_LABELS[status] || status}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </label>
+
+                                <fieldset className="mu-reference-period">
+                                    <legend>Período de envio</legend>
+                                    <label>
+                                        <span>De</span>
+                                        <input
+                                            type="date"
+                                            value={envioInicio}
+                                            max={envioFim || undefined}
+                                            onChange={evento => setEnvioInicio(evento.target.value)}
                                         />
-                                    </button>
-                                ))}
+                                    </label>
+                                    <label>
+                                        <span>Até</span>
+                                        <input
+                                            type="date"
+                                            value={envioFim}
+                                            min={envioInicio || undefined}
+                                            onChange={evento => setEnvioFim(evento.target.value)}
+                                        />
+                                    </label>
+                                </fieldset>
+
+                                <label>
+                                    <span>Data do atendimento</span>
+                                    <input
+                                        type="date"
+                                        value={dataAtendimentoReferencia}
+                                        onChange={evento => setDataAtendimentoReferencia(evento.target.value)}
+                                    />
+                                </label>
                             </div>
+
+                            <div className="mu-reference-filter-actions">
+                                <label>
+                                    <span>Ordenar por envio</span>
+                                    <select
+                                        value={ordemReferencias}
+                                        onChange={evento => setOrdemReferencias(evento.target.value)}
+                                    >
+                                        <option value="recentes">Mais recentes primeiro</option>
+                                        <option value="antigas">Mais antigas primeiro</option>
+                                    </select>
+                                </label>
+
+                                <button
+                                    type="button"
+                                    onClick={limparFiltrosReferencias}
+                                    disabled={
+                                        !buscaReferencias &&
+                                        !estiloReferencia &&
+                                        !statusReferencia &&
+                                        !envioInicio &&
+                                        !envioFim &&
+                                        !dataAtendimentoReferencia &&
+                                        ordemReferencias === 'recentes'
+                                    }
+                                >
+                                    Limpar filtros
+                                </button>
+                            </div>
+                        </div>
+
+                        {referencias.length > 0 ? (
+                            referenciasFiltradas.length > 0 ? (
+                                <>
+                                    <p className="mu-reference-count" aria-live="polite">
+                                        {referenciasFiltradas.length === 1
+                                            ? '1 referência encontrada'
+                                            : `${referenciasFiltradas.length} referências encontradas`}
+                                    </p>
+                                    <div className="mu-reference-grid">
+                                        {referenciasFiltradas.map(item => (
+                                            <button
+                                                type="button"
+                                                className="mu-reference-item"
+                                                key={item.id}
+                                                onClick={() => setReferenciaSelecionada(item)}
+                                                aria-label={`Visualizar referência: ${item.arte || 'Imagem'}`}
+                                            >
+                                                <img
+                                                    src={item.url}
+                                                    alt={item.arte || 'Imagem de referência'}
+                                                    loading="lazy"
+                                                />
+                                            </button>
+                                        ))}
+                                    </div>
+                                </>
+                            ) : (
+                                <div className="mu-reference-no-results" role="status">
+                                    Nenhuma referência corresponde aos critérios informados.
+                                </div>
+                            )
                         ) : (
                             <div className="mu-empty-state">
                                 <Image />
-
                                 <h3>Suas imagens</h3>
-
                                 <p>
                                     Suas imagens de referência aparecerão aqui
                                     quando você realizar um agendamento com anexos.

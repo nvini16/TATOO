@@ -92,8 +92,6 @@ function termoCorresponde(termo, referencia) {
         referencia.estilo,
     ];
 
-    const statusNormalizado = normalizarTexto(referencia.status);
-    const statusLabel = normalizarTexto(obterStatusLabel(referencia.status));
     const statusConhecido = Object.entries(STATUS_LABELS).some(
         ([valor, label]) =>
             normalizarTexto(valor) === busca ||
@@ -291,10 +289,14 @@ function ClienteReferencias({ clienteId }) {
         });
 
         return filtradas.sort((a, b) => {
-            const dataA = new Date(a.criado_em || 0).getTime();
-            const dataB = new Date(b.criado_em || 0).getTime();
-            const valorA = Number.isNaN(dataA) ? 0 : dataA;
-            const valorB = Number.isNaN(dataB) ? 0 : dataB;
+            const valorA = new Date(a.criado_em || '').getTime();
+            const valorB = new Date(b.criado_em || '').getTime();
+            const validoA = Number.isFinite(valorA);
+            const validoB = Number.isFinite(valorB);
+
+            if (!validoA && !validoB) return 0;
+            if (!validoA) return 1;
+            if (!validoB) return -1;
 
             return ordenacao === 'antigas'
                 ? valorA - valorB

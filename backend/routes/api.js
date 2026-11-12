@@ -111,7 +111,7 @@ router.get('/cliente/referencias', requireCliente, async (req, res) => {
                         agendamento_id: imagem.agendamento_id,
                         criado_em: imagem.criado_em,
                         url: data.signedUrl,
-                        arte: agendamentos?.arte ?? null,
+                        arte: agendamento?.arte ?? null,
                         estilo: agendamento?.estilo ?? null,
                         data: agendamento?.data ?? null,
                         horario: agendamento?.horario ?? null,

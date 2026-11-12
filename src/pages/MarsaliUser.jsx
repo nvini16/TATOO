@@ -46,6 +46,13 @@ function MarsaliUser() {
 
     const [tentativaAgenda, setTentativaAgenda] = useState(0);
 
+    const [referencias, setReferencias] = useState([]);
+    const [carregandoReferencias, setCarregandoReferencias] = useState(false);
+    const [erroReferencias, setErroReferencias] = useState('');
+    const [referenciasCarregadas, setReferenciasCarregadas] = useState(false);
+    const [tentativasReferencias, setTentativasReferencias] = useState(0);
+    const [referenciaSelecionada, setReferenciaSelecionada] = useState(null);
+
     useEffect(() => {
         async function carregarPerfil() {
             try {
@@ -154,7 +161,70 @@ function MarsaliUser() {
         return () => {
             ativo = false;
         };
-    }, [abaAtiva, agendaCarregada, tentativaAgenda])
+    }, [abaAtiva, agendaCarregada, tentativaAgenda]);
+
+    useEffect(() => {
+        if (abaAtiva !== 'referencias' || referenciasCarregadas) return;
+
+        let ativo = true;
+
+        async function carregarReferencias() {
+            setCarregandoReferencias(true);
+            setErroReferencias('');
+
+            try {
+                const {
+                    data: { session },
+                    error: erroSessao
+                } = await supabase.auth.getSession();
+
+                if (erroSessao) throw erroSessao;
+
+                if (!session?.access_token) {
+                    throw new Error('Sua sessão expirou. Entre novamente.');
+                }
+
+                const resposta = await fetch(
+                    `${API_URL}/api/cliente/referencias`, {
+                        headers: {
+                            Authorization: `Bearer ${session.access_token}`
+                        }
+                    }
+                );
+
+                const resultado = await resposta.json().catch(() => ({}));
+
+                if (!resposta.ok) {
+                    throw new Error(
+                        resultado.erro || 'Não foi possível carregar suas referências.'
+                    );
+                }
+
+                if (ativo) {
+                    setReferencias(resultado.referencias || []);
+                    setReferenciasCarregadas(true);
+                }
+            } catch (erro) {
+                console.error('Erro ao carregar referências:', erro);
+
+                if (ativo) {
+                    setErroReferencias(
+                        erro.message || 'Ocorreu um erro ao carregar suas imagens.'
+                    );
+                }
+            } finally {
+                if (ativo) {
+                    setCarregandoReferencias(false);
+                }
+            }
+        }
+
+        carregarReferencias();
+
+        return () => {
+            ativo = false;
+        };
+    }, [abaAtiva, referenciasCarregadas, tentativasReferencias]);
 
     if (carregando) {
         return (
@@ -325,29 +395,146 @@ function MarsaliUser() {
             }
 
                 case 'referencias':
-                    return (
+    return (
+        <section className="mu-section">
+            <div className="mu-section-heading">
+                <div>
+                    <span className="mu-eyebrow">SUA COLEÇÃO</span>
+                    <h2>Minhas referências</h2>
+                </div>
 
+                <Image />
+            </div>
 
-                        <section className="mu-section">
-                            <div className="mu-section-heading">
-                                <div>
-                                    <span className="mu-eyebrow">SUA COLEÇÃO</span>
+            {carregandoReferencias && (
+                <p>Carregando suas referências...</p>
+            )}
 
-                                    <h2>Minhas referências</h2>
-                                </div>
+            {erroReferencias && (
+                <div role="alert">
+                    <p>{erroReferencias}</p>
 
-                                <Image />
+                    <button
+                        type="button"
+                        onClick={() => {
+                            setReferenciasCarregadas(false);
+                            setTentativaReferencias(atual => atual + 1);
+                        }}
+                    >
+                        Tentar novamente
+                    </button>
+                </div>
+            )}
+
+            {!carregandoReferencias &&
+                !erroReferencias &&
+                referenciasCarregadas && (
+                    <>
+                        {referencias.length > 0 ? (
+                            <div className="mu-reference-grid">
+                                {referencias.map(item => (
+                                    <button
+                                        type="button"
+                                        className="mu-reference-item"
+                                        key={item.id}
+                                        onClick={() => setReferenciaSelecionada(item)}
+                                        aria-label={`Visualizar referência: ${item.arte || 'Imagem'}`}
+                                    >
+                                        <img
+                                            src={item.url}
+                                            alt={item.arte || 'Imagem de referência'}
+                                            loading="lazy"
+                                        />
+                                    </button>
+                                ))}
                             </div>
-
+                        ) : (
                             <div className="mu-empty-state">
-
-                                <image />
+                                <Image />
 
                                 <h3>Suas imagens</h3>
-                                <p>Veja suas referências e imagens em um só lugar.</p>
+
+                                <p>
+                                    Suas imagens de referência aparecerão aqui
+                                    quando você realizar um agendamento com anexos.
+                                </p>
                             </div>
-                        </section>
-                    );
+                        )}
+                    </>
+                )}
+
+            {referenciaSelecionada && (
+                <div className="mu-reference-overlay">
+                    <section
+                        className="mu-reference-viewer"
+                        role="dialog"
+                        aria-modal="true"
+                        aria-label="Detalhes da referência"
+                    >
+                        <button
+                            type="button"
+                            className="mu-reference-close"
+                            onClick={() => setReferenciaSelecionada(null)}
+                            aria-label="Fechar visualização"
+                        >
+                            ×
+                        </button>
+
+                        <img
+                            src={referenciaSelecionada.url}
+                            alt={referenciaSelecionada.arte || 'Imagem de referência'}
+                        />
+
+                        <div className="mu-reference-details">
+                            <h3>
+                                {referenciaSelecionada.arte || 'Sem título'}
+                            </h3>
+
+                            <p>
+                                <strong>Enviada em:</strong>{' '}
+                                {referenciaSelecionada.criado_em
+                                    ? new Date(referenciaSelecionada.criado_em)
+                                        .toLocaleString('pt-BR')
+                                    : 'Não informado'}
+                            </p>
+
+                            <p>
+                                <strong>Estilo:</strong>{' '}
+                                {referenciaSelecionada.estilo || 'Não informado'}
+                            </p>
+
+                            <p>
+                                <strong>Data do atendimento:</strong>{' '}
+                                {referenciaSelecionada.data
+                                    ? referenciaSelecionada.data.split('-').reverse().join('/')
+                                    : 'Não informado'}
+                            </p>
+
+                            <p>
+                                <strong>Horário:</strong>{' '}
+                                {referenciaSelecionada.horario?.slice(0, 5) || 'Não informado'}
+                            </p>
+
+                            <p>
+                                <strong>Status:</strong>{' '}
+                                {({
+                                    aguardando_sinal: 'Aguardando sinal',
+                                    sinal_pago: 'Sinal pago',
+                                    aguardando_confirmacao: 'Aguardando confirmação',
+                                    confirmado: 'Confirmado',
+                                    concluido: 'Concluído',
+                                    cancelado: 'Cancelado',
+                                    faltou: 'Não compareceu'
+                                })[referenciaSelecionada.status] || 'Não informado'}
+                            </p>
+                        </div>
+                    </section>
+                </div>
+            )}
+        </section>
+    );
+
+
 
                     case 'perfil':
                         return (

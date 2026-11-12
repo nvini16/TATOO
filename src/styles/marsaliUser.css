@@ -490,3 +490,182 @@
 }
 
 
+/* Galeria de referências */
+
+.mu-reference-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.mu-reference-item {
+    position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    background: #e9e9e9;
+    cursor: pointer;
+}
+
+.mu-reference-item img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.35s ease;
+}
+
+.mu-reference-item:hover img {
+    transform: scale(1.06);
+}
+
+.mu-reference-item:focus-visible,
+.mu-reference-close:focus-visible {
+    outline: 2px solid var(--marsali-tatoo-color-gold);
+    outline-offset: 4px;
+}
+
+/* Visualização ampliada */
+
+.mu-reference-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(0, 0, 0, 0.78);
+    backdrop-filter: blur(4px);
+}
+
+.mu-reference-viewer {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 720px;
+    max-height: 90vh;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #111;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.35);
+    animation: mu-reference-entry 0.22s ease;
+}
+
+.mu-reference-viewer > img {
+    display: block;
+    width: 100%;
+    max-height: 55vh;
+    object-fit: contain;
+    background: #080808;
+}
+
+.mu-reference-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 2;
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.65);
+    color: #fff;
+    font-size: 25px;
+    line-height: 1;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.mu-reference-close:hover {
+    background: rgba(0, 0, 0, 0.9);
+}
+
+/* Informações da referência */
+
+.mu-reference-details {
+    padding: 22px 24px;
+    overflow-y: auto;
+    background: #151515;
+    color: #fff;
+}
+
+.mu-reference-details h3 {
+    margin: 0 0 16px;
+    color: var(--marsali-tatoo-color-gold);
+    font-size: 19px;
+    font-weight: 600;
+}
+
+.mu-reference-details p {
+    margin: 9px 0;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.mu-reference-details strong {
+    color: #fff;
+    font-weight: 600;
+}
+
+@keyframes mu-reference-entry {
+    from {
+        opacity: 0;
+        transform: scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Galeria em dispositivos móveis */
+
+@media (max-width: 760px) {
+    .mu-reference-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 9px;
+    }
+
+    .mu-reference-overlay {
+        padding: 12px;
+    }
+
+    .mu-reference-viewer {
+        max-height: 92vh;
+    }
+
+    .mu-reference-viewer > img {
+        max-height: 45vh;
+    }
+
+    .mu-reference-details {
+        padding: 18px;
+    }
+
+    .mu-reference-details h3 {
+        font-size: 17px;
+    }
+
+    .mu-reference-details p {
+        font-size: 12px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .mu-reference-item img,
+    .mu-reference-close {
+        transition: none;
+    }
+
+    .mu-reference-viewer {
+        animation: none;
+    }
+}

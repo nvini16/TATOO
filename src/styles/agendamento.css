@@ -8,6 +8,7 @@
   min-height: 100vh;
   color: var(--marsali-tatoo-color-white);
   padding: 80px 40px;
+  margin-top: 100px;
   display: flex;
   flex-direction: column;
   justify-content: center;

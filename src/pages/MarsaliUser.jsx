@@ -142,7 +142,7 @@ function MarsaliUser() {
                 }
             } finally {
                 if (ativo) {
-                    setAgendaCarregada(false);
+                    setCarregandoAgenda(false);
                 }
             }
         }

@@ -719,6 +719,22 @@ router.post('/agendamentos', upload.array('imagens', 5), upload.validarConteudo,
             });
         }
 
+        const { error: erroAtualizacaoWhatsapp } = await supabase
+            .from('clientes')
+            .update({ whatsapp: whatsappLimpo })
+            .eq('id', cliente.id);
+
+        if (erroAtualizacaoWhatsapp) {
+            console.error(
+                'Erro ao atualizar WhatsApp do perfil do cliente:',
+                erroAtualizacaoWhatsapp
+            );
+
+            return res.status(500).json({
+                erro: 'Não foi possível atualizar o WhatsApp do seu perfil.'
+            });
+        }
+
         clienteId = cliente.id;
     }
 

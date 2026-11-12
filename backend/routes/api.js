@@ -113,10 +113,6 @@ router.get('/cliente/referencias', requireCliente, async (req, res) => {
                         url: data.signedUrl,
                         arte: agendamento?.arte ?? null,
                         estilo: agendamento?.estilo ?? null,
-                        status: agendamento?.status ?? null,
-                        data: agendamento?.data ?? null,
-                        horario: agendamento?.horario ?? null,
-                        estilo: agendamento?.estilo ?? null,
                         data: agendamento?.data ?? null,
                         horario: agendamento?.horario ?? null,
                         status: agendamento?.status ?? null
@@ -351,7 +347,7 @@ router.get('/clientes/:id/referencias', requireAdmin, async (req, res) => {
     try {
         const { data: agendamentos, error: erroAgendamentos } = await supabase 
             .from('agendamentos')
-            .select('id, arte, estilo, status, data, horario')
+            .select('id, arte, data, horario')
             .eq('cliente_id', id);
         
         if (erroAgendamentos) {

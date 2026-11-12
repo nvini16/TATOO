@@ -47,9 +47,9 @@ const STATUS_REFERENCIA_LABELS = {
 function normalizarReferencia(valor) {
     return String(valor ?? '')
         .normalize('NFD')
-        .replace(/[\\u0300-\\u036f]/g, '')
+        .replace(/[\u0300-\u036f]/g, '')
         .toLocaleLowerCase('pt-BR')
-        .replace(/\\s+/g, ' ')
+        .replace(/\s+/g, ' ')
         .trim();
 }
 
@@ -70,9 +70,9 @@ function interpretarDataReferencia(termo) {
     const texto = termo.trim();
     let ano, mes, dia;
 
-    if (/^\\d{4}-\\d{2}-\\d{2}$/.test(texto)) {
+    if (/^\d{4}-\d{2}-\d{2}$/.test(texto)) {
         [ano, mes, dia] = texto.split('-').map(Number);
-    } else if (/^\\d{2}\\/\\d{2}\\/\\d{4}$/.test(texto)) {
+    } else if (/^\d{2}\/\d{2}\/\d{4}$/.test(texto)) {
         [dia, mes, ano] = texto.split('/').map(Number);
     } else {
         return null;

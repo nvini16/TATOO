@@ -1,0 +1,7 @@
+.perfil-conteudo {
+    margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+    color: var(--marsali-tatoo-color-white);
+    background: var(--marsali-tatoo-color-white);
+}

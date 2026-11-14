@@ -106,7 +106,7 @@ Site desenvolvido para apresentação de seu trabalho profissional.
 
 ## Perfil e autenticação de clientes
 
-<badge>Concluído e publicado</badge>
+**Status: concluído e publicado**
 
 A etapa de Perfil e Autenticação de Clientes foi integrada à branch `main` por meio do Pull Request [#4](https://github.com/nvini16/TATOO/pull/4) e publicada no site público.
 

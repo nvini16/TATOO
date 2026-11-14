@@ -70,26 +70,181 @@ A versão atual possui:
 
 ## Estrutura do projeto
 
+A estrutura atual do repositório está organizada da seguinte forma:
+
 ```text
-src/
-├── assets/
-│   ├── logo/
-│   └── foto-do-braco-do-login.jpg
+TATOO/
 │
-├── components/
-│   ├── Header.jsx
-│   ├── Hero.jsx
-│   ├── Sobre.jsx
-│   └── Trabalhos.jsx
+├── .github/
+│   └── workflows/
+│       └── deploy.yml
 │
-├── pages/
-│   ├── Home.jsx
-│   ├── Login.jsx
-│   └── Cadastro.jsx
+├── backend/
+│   ├── lib/
+│   │   └── supabase.js
+│   ├── middleware/
+│   │   ├── requireAdmin.js
+│   │   ├── requireCliente.js
+│   │   └── upload.js
+│   ├── routes/
+│   │   └── api.js
+│   ├── services/
+│   │   └── criarAgendamento.js
+│   ├── tests/
+│   │   └── criarAgendamento.test.js
+│   ├── utils/
+│   │   └── normalizarWhatsapp.js
+│   ├── images.jpg
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── server.js
+│   ├── teste-upload.js
+│   └── vercel.json
 │
-├── App.jsx
-├── index.css
-└── main.jsx
+├── scripts/
+│   └── otimizar-imagem.mjs
+│
+├── src/
+│   ├── assets/
+│   │   ├── agendamentos/
+│   │   │   └── agendamentos.png
+│   │   ├── autoral/
+│   │   │   ├── 20250813_153605.png
+│   │   │   ├── 20251018_150246.jpg
+│   │   │   ├── 20251230_184714.png
+│   │   │   ├── 20251230_184723.png
+│   │   │   ├── IMG_20260303_195541_822.jpg
+│   │   │   ├── IMG_20260414_221922_977.jpg
+│   │   │   ├── IMG_20260830_194256_986.png
+│   │   │   └── file_000000008f40820e9fac7b2a3812bcbc.jpg
+│   │   ├── cuidados/
+│   │   │   ├── 3857.webp
+│   │   │   ├── 3858.webp
+│   │   │   ├── 3859.webp
+│   │   │   ├── 3860.webp
+│   │   │   ├── 3861.webp
+│   │   │   ├── 3862.webp
+│   │   │   ├── 3863.webp
+│   │   │   ├── 3864.webp
+│   │   │   ├── 3865.webp
+│   │   │   ├── 3866.webp
+│   │   │   ├── 3867.webp
+│   │   │   └── 3868.webp
+│   │   ├── hero/
+│   │   │   ├── estatua-sem-fundo.png
+│   │   │   └── fundo-nuvens.png
+│   │   ├── login-image/
+│   │   │   └── image-login.jpg
+│   │   ├── logo/
+│   │   │   └── marsali-tatoo-logo-fundo-none.png
+│   │   ├── sobre/
+│   │   │   ├── sobre-01.jpg
+│   │   │   └── sobre-02.png
+│   │   ├── svg/
+│   │   │   ├── border.png.png
+│   │   │   └── svg-img.svg
+│   │   ├── trabalhos/
+│   │   │   └── otimizadas/
+│   │   │       ├── reserve.webp
+│   │   │       ├── trabalho-1.webp
+│   │   │       ├── trabalho-2.webp
+│   │   │       ├── trabalho-3.webp
+│   │   │       ├── trabalho-4.webp
+│   │   │       ├── trabalho-5.webp
+│   │   │       ├── trabalho-6.webp
+│   │   │       ├── trabalho-7.webp
+│   │   │       ├── trabalho-8.webp
+│   │   │       ├── trabalho-9.webp
+│   │   │       ├── trabalho-10.webp
+│   │   │       ├── trabalho-11.webp
+│   │   │       ├── trabalho-12.webp
+│   │   │       ├── trabalho-13.webp
+│   │   │       └── trabalho-14.webp
+│   │   └── body.webp.jpeg
+│   │
+│   ├── components/
+│   │   ├── clientePerfil/
+│   │   │   ├── ClienteHistorico.jsx
+│   │   │   └── ClienteReferencias.jsx
+│   │   ├── insights/
+│   │   │   ├── AgendamentosAtivos.jsx
+│   │   │   ├── AgendamentosCancelados.jsx
+│   │   │   ├── AgendamentosConcluidos.jsx
+│   │   │   ├── AgendamentosFaltou.jsx
+│   │   │   ├── IndicadorCard.jsx
+│   │   │   ├── TaxaComparecimento.jsx
+│   │   │   └── TotalAgendamentos.jsx
+│   │   ├── AdminLayout.jsx
+│   │   ├── AdminMenu.jsx
+│   │   ├── Alert.jsx
+│   │   ├── CalendarioAgendamento.jsx
+│   │   ├── Cuidados.jsx
+│   │   ├── Footer.jsx
+│   │   ├── Header.jsx
+│   │   ├── Hero.jsx
+│   │   ├── IndexadorImagens.jsx
+│   │   ├── LoadingScreen.jsx
+│   │   ├── ScrollReveal.jsx
+│   │   ├── Sobre.jsx
+│   │   └── Trabalhos.jsx
+│   │
+│   ├── lib/
+│   │   └── supabase.js
+│   │
+│   ├── pages/
+│   │   ├── Agendamentos.jsx
+│   │   ├── AgendamentosAdmin.jsx
+│   │   ├── CadastroCliente.jsx
+│   │   ├── ClientePerfil.jsx
+│   │   ├── ClientesAdmin.jsx
+│   │   ├── Home.jsx
+│   │   ├── Insights.jsx
+│   │   ├── LoginAdmin.jsx
+│   │   ├── LoginCliente.jsx
+│   │   ├── MarsaliUser.jsx
+│   │   └── RedefinirSenha.jsx
+│   │
+│   ├── styles/
+│   │   ├── CalendarioAgendamento.css
+│   │   ├── Cuidados.css
+│   │   ├── IndexadorImagens.css
+│   │   ├── adminAgendamentos.css
+│   │   ├── adminLayout.css
+│   │   ├── adminMenu.css
+│   │   ├── agendamento.css
+│   │   ├── alert.css
+│   │   ├── animations.css
+│   │   ├── cadastro.css
+│   │   ├── clienteHistorico.css
+│   │   ├── clientePerfil.css
+│   │   ├── clienteReferencias.css
+│   │   ├── clientesAdmin.css
+│   │   ├── footer.css
+│   │   ├── global.css
+│   │   ├── header.css
+│   │   ├── hero.css
+│   │   ├── insights.css
+│   │   ├── login.css
+│   │   ├── loginAdmin.css
+│   │   ├── loginCliente.css
+│   │   ├── marsaliUser.css
+│   │   ├── redefinirSenha.css
+│   │   ├── responsive.css
+│   │   ├── sobre.css
+│   │   └── trabalhos.css
+│   │
+│   ├── App.jsx
+│   ├── Root.jsx
+│   └── main.jsx
+│
+├── .gitignore
+├── README.md
+├── eslint.config.js
+├── index.html
+├── package-lock.json
+├── package.json
+├── reference.html
+└── vite.config.js
 ```
 
 ## Executando o projeto

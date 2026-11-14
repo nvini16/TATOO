@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 
 import fundoCadastro from '../assets/login-image/image-login.jpg';
@@ -18,7 +18,16 @@ function CadastroCliente() {
     const [mensagem, setMensagem] = useState('');
     const [erro, setErro] = useState('');
 
+    const location = useLocation();
     const navigate = useNavigate();
+
+    const rotaRetorno = location.state?.from;
+    const destinoAposCadastro =
+        typeof rotaRetorno === 'string' &&
+        rotaRetorno.startsWith('/') &&
+        !rotaRetorno.startsWith('//')
+            ? rotaRetorno
+            : '/Agendamento';
 
     async function handleSubmit(event) {
         event.preventDefault();
@@ -59,7 +68,7 @@ function CadastroCliente() {
             }
 
             if (data.session) {
-                navigate('/Agendamento', { replace: true });
+                navigate(destinoAposCadastro, { replace: true });
                 return;
             }
 
@@ -81,14 +90,14 @@ function CadastroCliente() {
         <>
             <main className="cadastro-page">
                 <div className="cadastro-image">
-                    <img 
-                        src={fundoCadastro} 
-                        alt="Imagem de fundo" 
+                    <img
+                        src={fundoCadastro}
+                        alt="Imagem de fundo"
                         aria-hidden="true"
                     />
                 </div>
 
-                <Link 
+                <Link
                     to="/"
                     className="cadastro-home-link"
                 >
@@ -113,9 +122,9 @@ function CadastroCliente() {
                                 Nome
                             </label>
 
-                            <input 
+                            <input
                                 id="cadastro-nome"
-                                type="text" 
+                                type="text"
                                 value={nome}
                                 onChange={(event) => setNome(event.target.value)}
                                 placeholder="Digite seu nome"
@@ -130,9 +139,9 @@ function CadastroCliente() {
                                 E-mail
                             </label>
 
-                            <input 
+                            <input
                                 id="cadastro-email"
-                                type="email" 
+                                type="email"
                                 value={email}
                                 onChange={(event) => setEmail(event.target.value)}
                                 placeholder="seuemail@exemplo.com"
@@ -148,25 +157,25 @@ function CadastroCliente() {
 
                             <div className="cadastro-password-wrapper">
                                 <input
-                                id="cadastro-senha" 
-                                type={mostrarSenha ? 'text' : 'password'} 
-                                value={senha}
-                                onChange={(event) => setSenha(event.target.value)}
-                                placeholder="Mínimo 6 caracteres"
-                                autoComplete="new-password"
-                                minLength={6}
-                                maxLength={72}
-                                required
-                            />
+                                    id="cadastro-senha"
+                                    type={mostrarSenha ? 'text' : 'password'}
+                                    value={senha}
+                                    onChange={(event) => setSenha(event.target.value)}
+                                    placeholder="Mínimo 6 caracteres"
+                                    autoComplete="new-password"
+                                    minLength={6}
+                                    maxLength={72}
+                                    required
+                                />
 
-                            <button 
-                                type="button"
-                                className="cadastro-password-toggle"
-                                onClick={() => setMostrarSenha(!mostrarSenha)}
-                                aria-label={mostrarSenha ? 'Ocultar senha' : 'Mostrar senha'}
-                            >
-                                {mostrarSenha ? 'Ocultar' : 'Mostrar'}
-                            </button>
+                                <button
+                                    type="button"
+                                    className="cadastro-password-toggle"
+                                    onClick={() => setMostrarSenha(!mostrarSenha)}
+                                    aria-label={mostrarSenha ? 'Ocultar senha' : 'Mostrar senha'}
+                                >
+                                    {mostrarSenha ? 'Ocultar' : 'Mostrar'}
+                                </button>
                             </div>
                         </div>
 
@@ -176,26 +185,26 @@ function CadastroCliente() {
                             </label>
 
                             <div className="cadastro-password-wrapper">
-                                <input 
-                                id="cadastro-confirmar-senha"
-                                type={mostrarConfirmacao ? 'text' : 'password'}
-                                value={confirmarSenha}
-                                onChange={(event) => setConfirmarSenha(event.target.value)}
-                                placeholder="Digite sua senha novamente"
-                                autoComplete="new-password"
-                                minLength={6}
-                                maxLength={72}
-                                required
-                            />
+                                <input
+                                    id="cadastro-confirmar-senha"
+                                    type={mostrarConfirmacao ? 'text' : 'password'}
+                                    value={confirmarSenha}
+                                    onChange={(event) => setConfirmarSenha(event.target.value)}
+                                    placeholder="Digite sua senha novamente"
+                                    autoComplete="new-password"
+                                    minLength={6}
+                                    maxLength={72}
+                                    required
+                                />
 
-                            <button 
-                                type="button"
-                                className="cadastro-password-toggle"
-                                onClick={() => setMostrarConfirmacao(!mostrarConfirmacao)}
-                                aria-label={mostrarConfirmacao ? 'Ocultar senha' : 'Mostrar senha'}
-                            >
-                                {mostrarConfirmacao ? 'Ocultar' : 'Mostrar'}
-                            </button>
+                                <button
+                                    type="button"
+                                    className="cadastro-password-toggle"
+                                    onClick={() => setMostrarConfirmacao(!mostrarConfirmacao)}
+                                    aria-label={mostrarConfirmacao ? 'Ocultar senha' : 'Mostrar senha'}
+                                >
+                                    {mostrarConfirmacao ? 'Ocultar' : 'Mostrar'}
+                                </button>
                             </div>
                         </div>
 
@@ -220,8 +229,8 @@ function CadastroCliente() {
                     </form>
 
                     <p className="cadastro-login-link">
-                        Já possui uma conta?{''}
-                        <Link to="/LoginCliente">Entrar</Link>
+                        Já possui uma conta?{' '}
+                        <Link to="/LoginCliente" state={location.state}>Entrar</Link>
                     </p>
                 </section>
             </main>

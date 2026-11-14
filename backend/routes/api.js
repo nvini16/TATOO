@@ -1,11 +1,219 @@
 const express = require('express');
 const supabase = require('../lib/supabase');
 const upload = require('../middleware/upload');
-const crypto = require('crypto');
+const criarAgendamento = require('../services/criarAgendamento');
 const requireAdmin = require('../middleware/requireAdmin');
+const normalizarWhatsapp = require('../utils/normalizarWhatsapp');
+const requireCliente = require('../middleware/requireCliente');
 
 
 const router = express.Router();
+
+router.get('/cliente/perfil', requireCliente, (req, res) => {
+    return res.status(200).json({
+        cliente: req.cliente,
+    });
+});
+
+router.get('/cliente/agendamentos', requireCliente, async (req, res) => {
+    try {
+        const { data, error } = await supabase
+            .from('agendamentos')
+            .select(`
+                id,
+                arte,
+                estilo,
+                descricao,
+                data,
+                horario,
+                status,
+                pagamento_sinal,
+                valor_sinal,
+                criado_em
+                `)
+            .eq('cliente_id', req.cliente.id)
+            .order('data', { ascending: true })
+            .order('horario', { ascending: true });
+        
+        if (error) {
+            console.error('Erro ao consultar agenda do cliente:', error);
+
+            return res.status(500).json({
+                erro: 'Não foi possível carregar seus agendamentos.'
+            });
+        }
+
+        return res.status(200).json({
+            agendamentos: data || []
+        });
+    } catch (error) {
+        console.error('Erro inesperado ao consultar agenda:', error);
+
+        return res.status(500).json({
+            erro: 'Ocorreu um erro ao carregar sua agenda.'
+        });
+    }
+});
+
+router.get('/cliente/referencias', requireCliente, async (req, res) => {
+    try {
+        const { data: agendamentos, error: erroAgendamentos } = await supabase
+            .from('agendamentos')
+            .select('id, arte, estilo, data, horario, status')
+            .eq('cliente_id', req.cliente.id);
+
+        if (erroAgendamentos) {
+            throw erroAgendamentos;
+        }
+
+        if (!agendamentos || agendamentos.length === 0) {
+            return res.status(200).json({
+                referencias: []
+            });
+        }
+
+        const idsAgendamentos = agendamentos.map(
+            agendamento => agendamento.id
+        );
+
+        const { data: imagens, error: erroImagens } = await supabase
+            .from('agendamento_imagens')
+            .select('id, agendamento_id, caminho, criado_em')
+            .in('agendamento_id', idsAgendamentos)
+            .order('criado_em', { ascending: false });
+
+        if (erroImagens) {
+            throw erroImagens;
+        }
+
+        if (!imagens || imagens.length === 0) {
+            return res.status(200).json({
+                referencias: []
+            });
+        }
+
+        const referencias = await Promise.all(
+            imagens.map(async imagem => {
+                const { data, error } = await supabase.storage
+                    .from('agendamento-imagens')
+                    .createSignedUrl(imagem.caminho, 3600);
+
+                    if (error) {
+                        throw error;
+                    }
+
+                    const agendamento = agendamentos.find(
+                        item => item.id === imagem.agendamento_id
+                    );
+
+                    return {
+                        id: imagem.id,
+                        agendamento_id: imagem.agendamento_id,
+                        criado_em: imagem.criado_em,
+                        url: data.signedUrl,
+                        arte: agendamento?.arte ?? null,
+                        estilo: agendamento?.estilo ?? null,
+                        data: agendamento?.data ?? null,
+                        horario: agendamento?.horario ?? null,
+                        status: agendamento?.status ?? null
+                    };
+            })
+        );
+
+        return res.status(200).json({
+            referencias
+        });
+    } catch (error) {
+        console.error(
+            'Erro ao consultar referências do cliente:', error
+        );
+
+        return res.status(500).json({
+            erro: 'Não foi possível carregar suas referências.'
+        });
+    }
+});
+
+function textoValido(valor, tamanhoMaximo) {
+    return (
+        typeof valor === 'string' &&
+        valor.trim().length > 0 &&
+        valor.trim().length <= tamanhoMaximo
+    );
+}
+
+function dataValida(data) {
+    if (typeof data !== 'string') return false;
+
+    const formato = /^\d{4}-\d{2}-\d{2}$/;
+
+    if (!formato.test(data)) return false;
+
+    const [ano, mes, dia] = data.split('-').map(Number);
+
+    const dataConvertida = new Date(Date.UTC(ano, mes -1, dia));
+
+    return (
+        dataConvertida.getUTCFullYear() === ano &&
+        dataConvertida.getUTCMonth() === mes -1 &&
+        dataConvertida.getUTCDate() === dia
+    );
+}
+
+const HORARIOS_PERMITIDOS = [
+    '09:00',
+    '10:00',
+    '11:00',
+    '14:00',
+    '15:00',
+    '16:00',
+    '17:00'
+];
+
+function horarioValido(horario) {
+    return (
+        typeof horario === 'string' &&
+
+    HORARIOS_PERMITIDOS.includes(horario)
+    );
+}
+
+function dataHoraAtualSP() {
+    const partes = new Intl.DateTimeFormat('en-CA', {
+        timeZone: 'America/Sao_Paulo',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        hourCycle: 'h23'
+    }).formatToParts(new Date());
+
+    const valores = {};
+
+    for (const parte of partes) {
+        valores[parte.type] = parte.value;
+    }
+
+    return {
+        data: `${valores.year}-${valores.month}-${valores.day}`,
+        horario: `${valores.hour}:${valores.minute}`
+    };
+}
+
+function agendamentoNoFuturo(data, horario) {
+    const atual = dataHoraAtualSP();
+
+    if (data < atual.data) {
+        return false;
+    }
+
+    if (data === atual.data && horario <= atual.horario) {
+        return false;
+    }
+
+    return true;
+}
 
 router.get('/admin/verify', requireAdmin, (req, res) => {
     res.status(200).json({
@@ -31,14 +239,26 @@ router.get('/', requireAdmin, async (req, res) => {
 router.post('/clientes', requireAdmin, async (req, res) => {
     const { nome, whatsapp } = req.body;
 
-    if (!nome?.trim() || !whatsapp?.trim()) {
+    if (
+        typeof nome !== 'string' || !nome.trim() ||
+        typeof whatsapp !== 'string' || !whatsapp.trim()
+    ) {
         return res.status(400).json({
             erro: 'Nome e WhatsApp são obrigatórios.',
         });
     }
 
     const nomeLimpo = nome.trim();
-    const whatsappLimpo = whatsapp.trim();
+
+    let whatsappLimpo;
+
+    try {
+        whatsappLimpo = normalizarWhatsapp(whatsapp);
+    } catch (error) {
+        return res.status(400).json({
+            erro: error.message
+        });
+    }
 
     const { data, error } = await supabase
         .from('clientes')
@@ -232,7 +452,6 @@ router.patch('/agendamentos/:id', requireAdmin, async (req, res) => {
 
     if (
         typeof nome !== 'string' || !nome.trim() ||
-        typeof whatsapp !== 'string' || !whatsapp.trim() ||
         typeof arte !== 'string' || !arte.trim() ||
         typeof estilo !== 'string' || !estilo.trim() ||
         typeof data !== 'string' ||
@@ -248,13 +467,23 @@ router.patch('/agendamentos/:id', requireAdmin, async (req, res) => {
         });
     }
 
+    let whatsappLimpo;
+
+    try {
+        whatsappLimpo = normalizarWhatsapp(whatsapp);
+    } catch (error) {
+        return res.status(400).json({
+            erro: error.message
+        });
+    }
+
     try {
         const { data: atualizado, error } = await supabase.rpc(
             'editar_agendamento_admin',
             {
                 p_id: id,
                 p_nome: nome.trim(),
-                p_whatsapp: whatsapp.trim(),
+                p_whatsapp: whatsappLimpo,
                 p_arte: arte.trim(),
                 p_estilo: estilo.trim(),
                 p_descricao: descricao ?? null,
@@ -332,7 +561,7 @@ router.patch('/agendamentos/:id', requireAdmin, async (req, res) => {
 
 
 
-router.post('/agendamentos', upload.array('imagens', 5), async (req, res) => {
+router.post('/agendamentos', upload.array('imagens', 5), upload.validarConteudo, async (req, res) => {
     const {
         nome,
         whatsapp,
@@ -344,32 +573,80 @@ router.post('/agendamentos', upload.array('imagens', 5), async (req, res) => {
     } = req.body;
 
 
-    if (!nome?.trim() || !whatsapp?.trim()) {
+    if (!textoValido(nome, 50)) {
         return res.status(400).json({
-            erro: 'Nome e WhatsApp são obrigatórios.'
+            erro: 'O nome é obrigatório e deve ter até 50 caracteres.'
         });
     }
 
-    if (!trabalho?.trim()) {
+    if (typeof whatsapp !== 'string' || !whatsapp.trim()) {
         return res.status(400).json({
-            erro: 'O trabalho é obrigatório.'
+            erro: 'O WhatsApp é obrigatório.'
         });
     }
 
-    if (!estilo?.trim()) {
+    if (!textoValido(trabalho, 1000)) {
         return res.status(400).json({
-            erro: 'O estilo é obrigatório.'
+            erro: 'O trabalho é obrigatório e deve ter até 1.000 caracteres.'
         });
     }
 
-    if (!data || !horario) {
+    if (!textoValido(estilo, 50)) {
         return res.status(400).json({
-            erro: 'Data e horário são obrigatórios.'
+            erro: 'O estilo é obrigatório e deve ter até 50 caracteres.'
+        });
+    }
+
+    if (
+        descricao !== undefined &&
+        descricao !== null &&
+        typeof descricao !== 'string'
+    ) {
+        return res.status(400).json({
+            erro: 'A descrição deve ser um texto válido.'
+        });
+    }
+
+    if (typeof descricao === 'string' &&
+        descricao.trim().length > 1000) {
+            return res.status(400).json({
+                erro: 'A descrição deve ter até 1.000 caracteres.'
+            });
+        }
+
+        const descricaoLimpa = typeof descricao === 'string' && descricao.trim()
+            ? descricao.trim() : null;
+
+
+    if (!dataValida(data)) {
+        return res.status(400).json({
+            erro: 'A data informada é inválida.'
+        });
+    }
+
+    if (!horarioValido(horario)) {
+        return res.status(400).json({
+            erro: 'O horário informado não é permitido.'
+        });
+    }
+
+    if (!agendamentoNoFuturo(data, horario)) {
+        return res.status(400).json({
+            erro: 'O agendamento deve ser realizado para uma data e horário futuros.'
         });
     }
 
     const nomeLimpo = nome.trim();
-    const whatsappLimpo = whatsapp.trim();
+
+    let whatsappLimpo;
+
+    try {
+        whatsappLimpo = normalizarWhatsapp(whatsapp);
+    } catch (error) {
+        return res.status(400).json({
+            erro: error.message
+        });
+    }
 
     const { data: agendamentoExistente, error: erroDisponibilidade } = await supabase
         .from('agendamentos')
@@ -397,114 +674,100 @@ router.post('/agendamentos', upload.array('imagens', 5), async (req, res) => {
         });
     }
 
-    const { data: clienteExistente, error: erroBusca } = await supabase
-        .from('clientes')
-        .select('id, nome, whatsapp')
-        .eq('nome', nomeLimpo)
-        .eq('whatsapp', whatsappLimpo)
-        .maybeSingle();
+    let clienteId = null;
 
-    if (erroBusca) {
-        console.error('Erro ao buscar cliente:', erroBusca);
+    const authorization = req.headers.authorization;
 
-        return res.status(500).json({
-            erro: 'Não foi possível verificar o cadastro do cliente.'
-        });
-    }
+    if (authorization) {
+        if (!authorization.startsWith('Bearer ')) {
+            return res.status(401).json({
+                erro: 'Formato de autenticação inválido.'
+            });
+        }
 
-    let cliente = clienteExistente;
+        const token = authorization.slice(7).trim();
 
-    if (!cliente) {
-        const { data: novoCliente, error: erroCadastro } = await supabase
+        const {
+            data: { user },
+            error: erroAuth
+        } = await supabase.auth.getUser(token);
+
+        if (erroAuth || !user) {
+            return res.status(401).json({
+                erro: 'Sessão inválida ou expirada.'
+            });
+        }
+
+        const {
+            data: cliente,
+            error: erroCliente
+        } = await supabase
             .from('clientes')
-            .insert({
-                nome: nomeLimpo,
-                whatsapp: whatsappLimpo
-            })
-            .select('id, nome, whatsapp')
-            .single();
+            .select('id')
+            .eq('auth_user_id', user.id)
+            .maybeSingle();
 
-    if (erroCadastro) {
-        console.error('Erro ao cadastrar cliente:', erroCadastro);
+        if (erroCliente) {
+            return res.status(500).json({
+                erro: 'Não foi possível indentificar seu perfil.'
+            });
+        }
 
-        return res.status(500).json({
-            erro: 'Não foi possível cadastrar o cliente.'
-        });
+        if (!cliente) {
+            return res.status(404).json({
+                erro: 'Perfil de cliente mão encontrado.'
+            });
+        }
+
+        const { error: erroAtualizacaoWhatsapp } = await supabase
+            .from('clientes')
+            .update({ whatsapp: whatsappLimpo })
+            .eq('id', cliente.id);
+
+        if (erroAtualizacaoWhatsapp) {
+            console.error(
+                'Erro ao atualizar WhatsApp do perfil do cliente:',
+                erroAtualizacaoWhatsapp
+            );
+
+            return res.status(500).json({
+                erro: 'Não foi possível atualizar o WhatsApp do seu perfil.'
+            });
+        }
+
+        clienteId = cliente.id;
     }
 
-    cliente = novoCliente;
-}
+    try {
+        const agendamento = await criarAgendamento({
+            nome: nomeLimpo,
+            whatsapp: whatsappLimpo,
+            trabalho: trabalho.trim(),
+            estilo: estilo.trim(),
+            descricao: descricaoLimpa,
+            data,
+            horario,
+            arquivos: req.files || [],
+            clienteId
+        });
 
-const { data: agendamento, error: erroAgendamento } = await supabase
-    .from('agendamentos')
-    .insert({
-        cliente_id: cliente.id,
-        arte: trabalho.trim(),
-        estilo: estilo.trim(),
-        descricao: descricao?.trim() || null,
-        data,
-        horario,
-    })
-    .select()
-    .single();
+        return res.status(201).json({
+            mensagem: 'Agendamento criado com sucesso.',
+            agendamento
+        });
 
-if (erroAgendamento) {
-    console.error('Erro ao criar agendamento:', erroAgendamento);
+    } catch (error) {
+        console.error(
+            error.contexto || 'Erro inesperado ao criar agendamento:',
+            error.originalError || error
+        );
 
-    if (erroAgendamento.code === '23505') {
-        return res.status(409).json({
-            erro: 'Já existe um agendamento ativo para essa data'
+        return res.status(error.statusCode || 500).json({
+            erro: error.statusCode
+                ? error.message
+                : 'Ocorreu um erro interno ao criar o agendamento.'
         });
     }
-
-    return res.status(500).json({
-        erro: 'Não foi possível criar o agendamento.'
-    });
-    
-}
-
-for (const arquivo of req.files || []) {
-    const nomeUnico = `${crypto.randomUUID()}-${arquivo.originalname}`;
-    
-    const caminho = `${agendamento.id}/${nomeUnico}`;
-
-    const { error: erroUpload } = await supabase.storage
-        .from('agendamento-imagens')
-        .upload(caminho, arquivo.buffer, {
-            contentType: arquivo.mimetype,
-            upsert: false,
-        });
-        
-        if (erroUpload) {
-        console.error('Erro ao enviar imagem:', erroUpload);
-        
-        return res.status(500).json({
-            erro: 'Não foi possível enviar uma das imagens.'
-        });
-    }
-
-    const { error: erroRegistroImagem } = await supabase
-        .from('agendamento_imagens')
-        .insert({
-            agendamento_id: agendamento.id,
-            caminho: caminho
-        });
-
-    if (erroRegistroImagem) {
-        console.error('Erro ao registrar imagem no banco:', erroRegistroImagem);
-
-        return res.status(500).json({
-            erro: 'A imagem foi enviada, mas não foi possível registrar sua referência.'
-        }); 
-    }
-}
-
-return res.status(201).json({ 
-    mensagem: 'Agendamento criado com sucesso.',
-    agendamento
-})
-
-
 });
 
 

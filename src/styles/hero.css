@@ -53,7 +53,7 @@
 }
 
 .hero .hero-button {
-  background-color: var(--marsali-tatoo-color-gr);
+  background-color: transparent;
   color: var(--marsali-tatoo-color-gold);
   border-top: 1px solid var(--marsali-tatoo-color-gold);
   border-bottom: 1px solid var(--marsali-tatoo-color-gold);

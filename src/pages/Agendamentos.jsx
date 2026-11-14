@@ -5,6 +5,7 @@ import CalendarioAgendamento from '../components/CalendarioAgendamento';
 import Alert from '../components/Alert';
 import ScrollReveal from '../components/ScrollReveal';
 import Footer from '../components/Footer';
+import { supabase } from '../lib/supabase';
 
 const API_URL = import.meta.env.VITE_API_URL || '';
 
@@ -128,6 +129,7 @@ function Agendamento() {
                 String(agora.getMonth() + 1).padStart(2, '0'),
                 String(agora.getDate()).padStart(2, '0')
             ].join('-');
+
             const horaAtual = agora.toTimeString().slice(0, 5)
                 if (data === dataAtual && horario <= horaAtual) {
                     setAlerta({
@@ -150,24 +152,26 @@ function Agendamento() {
         formDataAgendamento.append('data', data);
         formDataAgendamento.append('horario', horario); 
 
-        for (const [chave, valor] of formDataAgendamento.entries()) {
-            console.log('Enviado:', chave, valor);
-        }
-
         imagens.forEach((imagem) => {
             formDataAgendamento.append('imagens', imagem.arquivo);
         });
 
         try {
+            const {
+                data: { session }
+            } = await supabase.auth.getSession();
+
             const resposta = await fetch(`${API_URL}/api/agendamentos`, {
                 method: 'POST',
+                headers: session
+                    ? {
+                        Authorization: `Bearer ${session.access_token}`
+                    }
+                    : {},
                 body: formDataAgendamento,
             });
 
-            const textoResposta = await resposta.text();
-
-            console.log('Status:', resposta.status);
-            console.log('Resposta do backend', textoResposta);
+            const resultado = await resposta.json().catch(() => ({}));
 
             if (resposta.status === 201) {
                 setAlerta({
@@ -176,25 +180,32 @@ function Agendamento() {
                     titulo: 'Agendamento enviado.',
                     mensagem: 'Sua solicitação foi recebida com sucesso.'
                 });
-            } else if (resposta.status === 409) {
+            } else if (resposta.status  === 409) {
                 setAlerta({
                     mostrar: true,
                     tipo: 'erro',
                     titulo: 'Data indisponível.',
-                    mensagem: 'Já existe um agendamento ativo para essa data. Escolha outro dia.'
+                    mensagem: resultado.erro || 'Já existe um agendamento ativo para essa data. Escolha outro dia.'
                 });
             } else {
                 setAlerta({
                     mostrar: true,
                     tipo: 'erro',
-                    titulo: 'Erro no agendamento.',
-                    mensagem: 'Não foi possível realizar o agendamento. Tente novamente.'
+                    titulo: 'Erro no agendamento',
+                    mensagem: resultado.erro || 'Não foi possível realizar o agendamento. Tente novamente.'
                 });
             }
 
 
         } catch (erro) {
-            console.error('Erro ao enviar agendamento! Tente novamente mais tarde:', erro);
+            console.error('Erro ao enviar agendamento:', erro);
+
+            setAlerta({
+                mostrar: true,
+                tipo: 'erro',
+                titulo: 'Falha na conexão.',
+                mensagem: 'Não foi possível conectar ao servidor. Verifique sua conexao e tente novamente.'
+            });
         }
 
         

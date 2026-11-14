@@ -1,6 +1,8 @@
 .cadastro-page {
   min-height: 100vh;
   min-height: 100svh;
+  height: 100svh;
+  box-sizing: border-box;
   position: relative;
   overflow: hidden;
 
@@ -70,11 +72,10 @@
   width: 100%;
   position: relative;
   max-width: 480px;
-  min-height: 100vh;
-  min-height: 100svh;
+  min-height: 100%;
 
   box-sizing: border-box;
-  padding: 50px 30px;
+  padding: 32px 30px;
 
   display: flex;
   flex-direction: column;
@@ -92,7 +93,7 @@
 }
 
 .cadastro-brand img {
-  width: 115px;
+  width: 100px;
   height: auto;
   object-fit: contain;
 }
@@ -119,11 +120,11 @@
   width: 100%;
   max-width: 380px;
 
-  margin-top: 28px;
+  margin-top: 20px;
 
   display: flex;
   flex-direction: column;
-  gap: 17px;
+  gap: 13px;
 }
 
 .cadastro-field {
@@ -210,7 +211,7 @@
 }
 
   .cadastro-login-link {
-    margin-top: 24px;
+    margin-top: 16px;
 
     color: rgba(255, 255, 255, 0.685);
     font-size: 18px;
@@ -267,8 +268,7 @@
 
   @media (max-width: 767px) {
     .cadastro-page {
-      align-items: flex-start;
-      overflow-y: auto;
+      align-items: center;
     }
 
     .cadastro-image img {
@@ -276,10 +276,8 @@
     }
 
     .cadastro-content {
-      min-height: 100vh;
-      min-height: 100svh;
-
-      padding: 90px 24px 45px;
+      min-height: 100%;
+      padding: 68px 24px 24px;
     }
 
     .cadastro-home-link {
@@ -296,8 +294,8 @@
     }
 
     .cadastro-form {
-      margin-top: 25px;
-      gap: 16px;
+      margin-top: 18px;
+      gap: 12px;
     }
   }
 

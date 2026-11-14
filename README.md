@@ -21,11 +21,52 @@ A versão atual possui:
 
 ## Tecnologias
 
-- React
-- Vite
-- React Router
-- JavaScript
-- CSS
+### Frontend
+
+- **HTML5** — estrutura das páginas;
+- **CSS3** — estilização e identidade visual;
+- **JavaScript (ES Modules)** — lógica da aplicação;
+- **React 19** — construção da interface;
+- **React Router 7** — navegação entre páginas;
+- **Vite 8** — servidor de desenvolvimento e ferramenta de build;
+- **Lucide React** — biblioteca de ícones.
+
+### Bibliotecas do frontend
+
+- **@supabase/supabase-js** — comunicação com os serviços do Supabase;
+- **date-fns 4** — manipulação e formatação de datas;
+- **react-day-picker** — componentes de calendário;
+- **sharp** — processamento de imagens.
+
+### Backend
+
+- **Node.js** — ambiente de execução JavaScript;
+- **JavaScript (CommonJS)** — módulos utilizados no backend;
+- **Express 5** — servidor e construção da API REST;
+- **cors** — configuração de acesso entre diferentes origens;
+- **dotenv** — carregamento de variáveis de ambiente;
+- **Multer 2** — recebimento de arquivos enviados;
+- **image-type** — identificação do formato dos arquivos de imagem;
+- **@supabase/supabase-js** — integração do backend com o Supabase.
+
+### Banco de dados, autenticação e armazenamento
+
+- **Supabase** — plataforma de backend utilizada pelo projeto;
+- **PostgreSQL** — banco de dados relacional;
+- **Supabase Auth** — autenticação e gerenciamento de sessões;
+- **Supabase Storage** — armazenamento de imagens e arquivos.
+
+### Desenvolvimento e qualidade de código
+
+- **npm** — gerenciamento de pacotes e dependências;
+- **ESLint 10** — análise estática e identificação de problemas no código;
+- **Git** — controle de versão;
+- **GitHub** — hospedagem do repositório e gerenciamento do código.
+
+### Hospedagem e implantação
+
+- **GitHub Pages** — hospedagem do frontend;
+- **Vercel** — hospedagem do backend.
 
 ## Estrutura do projeto
 

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import logo from '../assets/logo/marsali-tatoo-logo-fundo-none.png';
 import { supabase } from '../lib/supabase';
@@ -9,45 +9,50 @@ function Header() {
 
   const [usuarioAutenticado, setUsuarioAutenticado] = useState(false);
   const [authVerificada, setAuthVerificada] = useState(false);
-    useEffect(() => {
-      let lastScrollY = window.scrollY;
+  const location = useLocation();
 
-      function handleScroll() {
-        const currentScrollY = window.scrollY;
+  const rotaAtual = `${location.pathname}${location.search}${location.hash}`;
+  const estadoRetornoLogin = { from: rotaAtual };
 
-        if (currentScrollY > lastScrollY) {
-          setHeaderVisible(false); 
-        } else {
-          setHeaderVisible(true);
-        }
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
 
-        lastScrollY = currentScrollY;
+    function handleScroll() {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY > lastScrollY) {
+        setHeaderVisible(false);
+      } else {
+        setHeaderVisible(true);
       }
 
-      window.addEventListener('scroll', handleScroll);
+      lastScrollY = currentScrollY;
+    }
 
-      return () => {
-        window.removeEventListener('scroll', handleScroll);
-      };
-    }, []);
+    window.addEventListener('scroll', handleScroll);
 
-    useEffect(() => {
-  document.body.classList.toggle('header-hidden', !headerVisible);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
-  return () => {
-    document.body.classList.remove('header-hidden');
-  };
-}, [headerVisible]);
+  useEffect(() => {
+    document.body.classList.toggle('header-hidden', !headerVisible);
+
+    return () => {
+      document.body.classList.remove('header-hidden');
+    };
+  }, [headerVisible]);
 
   function closeMenu() {
     setMenuOpen(false);
   }
 
   useEffect(() => {
-    const { data: { subscription }} = supabase.auth.onAuthStateChange(
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (_event, session) => {
         setUsuarioAutenticado(Boolean(session));
-          setAuthVerificada(true);
+        setAuthVerificada(true);
       }
     );
 
@@ -58,70 +63,73 @@ function Header() {
 
   return (
     <>
-    <header className={`header ${headerVisible ? 'visible' : 'hidden'}`}>
-      <div className="header-brand">
-        <a href="/" className="brand" onClick={closeMenu}>
-          <img src={logo} alt="Marsali Tattoo Studio" className="brand-logo" />
-        </a>
-      </div>
+      <header className={`header ${headerVisible ? 'visible' : 'hidden'}`}>
+        <div className="header-brand">
+          <a href="/" className="brand" onClick={closeMenu}>
+            <img src={logo} alt="Marsali Tattoo Studio" className="brand-logo" />
+          </a>
+        </div>
 
-      <nav className="header-nav">
-        <Link to="/Header.jsx">Início</Link>
-        <a href="#trabalhos">Trabalhos</a>
-        <a href="#cuidados">Cuidados</a>
-        <a href="#sobre">Sobre</a>
-      </nav> 
+        <nav className="header-nav">
+          <Link to="/Header.jsx">Início</Link>
+          <a href="#trabalhos">Trabalhos</a>
+          <a href="#cuidados">Cuidados</a>
+          <a href="#sobre">Sobre</a>
+        </nav>
 
-      <div className="header-actions">
-        {authVerificada && (usuarioAutenticado ? (
-          <Link className="header-login" to="/MarsaliUser">
-            Meu perfil
+        <div className="header-actions">
+          {authVerificada && (usuarioAutenticado ? (
+            <Link className="header-login" to="/MarsaliUser">
+              Meu perfil
+            </Link>
+          ) : (
+            <Link
+              className="header-login"
+              to="/LoginCliente"
+              state={estadoRetornoLogin}
+            >
+              Entrar
+            </Link>
+          ))}
+          <Link className="header-cta" to="/Agendamento">
+            Agendar-se
           </Link>
-        ) : (
-          <Link className="header-login" to="/LoginCliente">
-            Entrar
-          </Link>
-        )
-        )}
+        </div>
+      </header>
 
-        <Link className="header-cta" to="/Agendamento">
-          Agendar-se
-        </Link>
-      </div>
-
-      
-
-
-    </header>
-
-     <nav className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
+      <nav className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
         <a className="mobile-menu-a" href="#inicio" onClick={closeMenu}>Inicío</a>
         <a className="mobile-menu-a" href="#trabalhos" onClick={closeMenu}>Trabalhos</a>
         <a className="mobile-menu-a" href="#cuidados" onClick={closeMenu}>Cuidados</a>
         <a className="mobile-menu-a" href="#sobre" onClick={closeMenu}>Sobre</a>
 
-          {authVerificada && (
-            usuarioAutenticado ? (
-              <Link className="mobile-menu-login" to="/MarsaliUser" onClick={closeMenu}>
-                Perfil
-              </Link>
+        {authVerificada && (
+          usuarioAutenticado ? (
+            <Link className="mobile-menu-login" to="/MarsaliUser" onClick={closeMenu}>
+              Perfil
+            </Link>
           ) : (
-            <Link className="mobile-menu-login" to="/LoginCliente" onClick={coleMenu}>
+            <Link
+              className="mobile-menu-login"
+              to="/LoginCliente"
+              state={estadoRetornoLogin}
+              onClick={closeMenu}
+            >
               Entrar
             </Link>
-            )
-          )}
+          )
+        )}
 
-          <Link 
-            className="mobile-menu-cta"
-            to="/Agendamento"
-            onClick={closeMenu}
-          >
-            Agendar-se
-          </Link>
+        <Link
+          className="mobile-menu-cta"
+          to="/Agendamento"
+          onClick={closeMenu}
+        >
+          Agendar-se
+        </Link>
       </nav>
 
-    <button 
+      <button
         type="button"
         className="mobile-menu-button"
         onClick={() => setMenuOpen(!menuOpen)}
@@ -132,11 +140,7 @@ function Header() {
         <span></span>
         <span></span>
       </button>
-
-     
-
     </>
-
   );
 }
 

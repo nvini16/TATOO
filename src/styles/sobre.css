@@ -4,6 +4,11 @@
   text-align: center;
   padding-top: 40px;
   border-top: 3px solid var(--marsali-tatoo-color-gold);
+  background: rgba(255, 255, 255, 0.438);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .sobre-label {
@@ -44,7 +49,6 @@
 
 .sobre-intro {
   max-width: 650px;
-  margin: 0 auto;
 
   color: var(--marsali-tatoo-color-gold);
 
@@ -53,6 +57,10 @@
   font-size: 19px;
   line-height: 1.6;
   
+  font-weight: bold;
+  background: rgb(255, 255, 255);
+  border-radius: 0 50px 50px 50px;
+
 }
 
 .fundo {

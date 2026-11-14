@@ -15,6 +15,7 @@ A versão atual possui:
 - Galeria de trabalhos;
 - Página de login;
 - Página de cadastro;
+- Perfil do cliente;
 - Navegação entre páginas;
 - Identidade visual própria.
 

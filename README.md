@@ -6,18 +6,23 @@ Site em desenvolvimento destinado à **Leticia Marsali**, desenvolvido como um M
 
 ## Sobre o projeto
 
-O TATOO é uma aplicação web desenvolvida para criar uma presença digital para **Leticia Marsali** e apresentar seu trabalho de forma organizada.
+O **TATOO** é uma plataforma web desenvolvida para **Leticia Marsali**, com o objetivo de estabelecer sua presença digital, apresentar seu trabalho artístico e oferecer uma experiência integrada de atendimento aos clientes.
 
-A versão atual possui:
+A aplicação reúne recursos de apresentação profissional, autenticação, agendamento e gerenciamento, conectando a experiência pública do site às funcionalidades disponíveis para clientes e administração.
 
-- Página inicial;
-- Apresentação;
-- Galeria de trabalhos;
-- Página de login;
-- Página de cadastro;
-- Perfil do cliente;
-- Navegação entre páginas;
-- Identidade visual própria.
+### Funcionalidades disponíveis
+
+- **Página inicial:** apresentação profissional e identidade visual da tatuadora;
+- **Galeria de trabalhos:** exposição de tatuagens e produções autorais;
+- **Área de clientes:** cadastro, login e gerenciamento de perfil;
+- **Galeria de referências pessoais:** armazenamento e visualização de referências dos clientes;
+- **Agendamentos:** solicitação e acompanhamento de atendimentos;
+- **Histórico de atendimentos:** consulta aos registros de agendamentos anteriores;
+- **Painel administrativo:** gerenciamento de clientes e agendamentos;
+- **Dashboard de indicadores:** visualização de informações e métricas dos atendimentos;
+- **Interface responsiva:** adaptação da experiência a diferentes tamanhos de tela.
+
+O projeto utiliza uma arquitetura com frontend e backend integrados ao Supabase, permitindo organizar dados, autenticação e armazenamento de arquivos.
 
 ## Tecnologias
 

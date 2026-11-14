@@ -249,45 +249,109 @@ TATOO/
 
 ## Executando o projeto
 
-Instale as dependências:
+### 1. Pré-requisitos
+
+Antes de iniciar, certifique-se de ter instalado:
+
+- **Node.js** — ambiente de execução JavaScript;
+- **npm** — gerenciador de pacotes, instalado junto com o Node.js;
+- **Git** — para clonar o repositório.
+
+### 2. Clonando o repositório
+
+Clone o repositório:
+
+```bash
+git clone https://github.com/nvini16/TATOO.git
+```
+
+Acesse a pasta do projeto:
+
+```bash
+cd TATOO
+```
+
+### 3. Instalando as dependências
+
+Instale as dependências do frontend, na raiz do projeto:
 
 ```bash
 npm install
 ```
 
-Inicie o servidor de desenvolvimento:
+Em seguida, acesse a pasta do backend e instale suas dependências:
+
+```bash
+cd backend
+npm install
+```
+
+### 4. Configurando as variáveis de ambiente
+
+O projeto utiliza arquivos `.env` para configurar a comunicação com o Supabase e a API local.
+
+**Frontend — arquivo `.env` na raiz do projeto:**
+
+```env
+VITE_API_URL=http://localhost:3000
+VITE_SUPABASE_URL=sua_url_supabase
+VITE_SUPABASE_PUBLISHABLE_KEY=sua_chave_publica
+```
+
+**Backend — arquivo `backend/.env`:**
+
+```env
+PORT=3000
+SUPABASE_URL=sua_url_supabase
+SUPABASE_SECRET_KEY=sua_chave_secreta
+```
+
+Substitua os valores de exemplo pelas credenciais correspondentes ao seu projeto Supabase.
+
+**Importante:** os arquivos `.env` estão listados no `.gitignore` para evitar que arquivos de configuração não rastreados sejam enviados ao GitHub. Essa regra não remove do controle de versão arquivos que já estejam rastreados.
+
+### 5. Iniciando o projeto
+
+O frontend e o backend devem ser executados simultaneamente em terminais separados.
+
+**Backend**
+
+No primeiro terminal, acesse a pasta `backend` e execute:
+
+```bash
+node server.js
+```
+
+O servidor será iniciado na porta `3000`, por padrão.
+
+**Frontend**
+
+Abra outro terminal na raiz do projeto e execute:
 
 ```bash
 npm run dev
 ```
 
-Depois, acesse o endereço exibido pelo Vite no terminal.
+Após a inicialização, acesse o endereço apresentado pelo Vite no terminal.
 
-## Scripts disponíveis
+### 6. Scripts disponíveis
 
-```bash
-npm run dev
-```
+Os comandos abaixo devem ser executados na raiz do projeto.
 
-Inicia o servidor de desenvolvimento.
+| Comando | Descrição |
+|---|---|
+| `npm run dev` | Inicia o servidor de desenvolvimento do frontend. |
+| `npm run build` | Gera a versão de produção do frontend. |
+| `npm run lint` | Verifica possíveis problemas no código utilizando ESLint. |
+| `npm run preview` | Executa uma prévia da versão de produção do frontend. |
 
-```bash
-npm run build
-```
+**Backend — teste automatizado:**
 
-Gera a versão de produção da aplicação.
-
-```bash
-npm run lint
-```
-
-Verifica possíveis problemas no código utilizando ESLint.
+Para executar os testes do backend, acesse a pasta `backend` e utilize:
 
 ```bash
-npm run preview
+npm test
 ```
-
-Executa uma prévia da versão de produção.
 
 ## Status
 

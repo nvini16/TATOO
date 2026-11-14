@@ -106,7 +106,7 @@ function Header() {
                 Perfil
               </Link>
           ) : (
-            <Link className="mobile-menu-login" to="/LoginCliente" onClick={coleMenu}>
+            <Link className="mobile-menu-login" to="/LoginCliente" onClick={closeMenu}>
               Entrar
             </Link>
             )

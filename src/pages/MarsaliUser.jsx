@@ -613,7 +613,7 @@ function MarsaliUser() {
                         type="button"
                         onClick={() => {
                             setReferenciasCarregadas(false);
-                            setTentativaReferencias(atual => atual + 1);
+                            setTentativasReferencias(atual => atual + 1);
                         }}
                     >
                         Tentar novamente
@@ -930,7 +930,7 @@ function MarsaliUser() {
 
                                     <button className="mu-dashboard-card" onClick={() => abrirAba('referencias')}>
                                         <span className="mu-card-icon">
-                                            <image />
+                                            <Image />
                                         </span>
 
                                         <span className="mu-card-title">

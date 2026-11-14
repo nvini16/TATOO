@@ -16,7 +16,8 @@ function criarSupabaseSimulado({
     const chamadas = {
         exclusoes: [],
         uploads: [],
-        arquivosRemovidos: []
+        arquivosRemovidos: [],
+        filtros: []
     };
 
     const cliente = { id: 'cliente-teste', nome: 'Cliente Teste', whatsapp: '13999999999' };
@@ -30,7 +31,12 @@ function criarSupabaseSimulado({
             select() {
                 return this;
             },
-            eq() {
+            eq(coluna, valor) {
+                chamadas.filtros.push({ tipo: 'eq', coluna, valor });
+                return this;
+            },
+            is(coluna, valor) {
+                chamadas.filtros.push({ tipo: 'is', coluna, valor });
                 return this;
             },
             maybeSingle() {
@@ -125,6 +131,14 @@ test('cria o agendamento e registra a imagem quando tudo funciona', async () => 
     const resultado = await criarAgendamento(dadosAgendamento, supabase);
 
     assert.equal(resultado.id, 'agendamento-teste');
+    assert.ok(
+        supabase.chamadas.filtros.some(
+            filtro => filtro.tipo === 'is' &&
+                filtro.coluna === 'auth_user_id' &&
+                filtro.valor === null
+        ),
+        'a busca pública deve ignorar cadastros autenticados'
+    );
     assert.equal(supabase.chamadas.uploads.length, 1);
     assert.deepEqual(supabase.chamadas.exclusoes, []);
     assert.deepEqual(supabase.chamadas.arquivosRemovidos, []);

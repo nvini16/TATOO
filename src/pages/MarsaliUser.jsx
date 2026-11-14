@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
     LayoutDashboard,
     CalendarDays,
@@ -139,6 +139,9 @@ function MarsaliUser() {
     const [carregando, setCarregando] = useState(true);
     const [erro, setErro] = useState('');
     const [abaAtiva, setAbaAtiva] = useState('inicio');
+    const [saindo, setSaindo] = useState(false);
+    const [erroSaida, setErroSaida] = useState('');
+    const navigate = useNavigate();
 
     const [agendamentos, setAgendamentos] = useState([]);
     const [carregandoAgenda, setCarregandoAgenda] = useState(false);
@@ -431,6 +434,21 @@ function MarsaliUser() {
         .join('')
         .toUpperCase() || 'C';
 
+
+    async function sairDaConta() {
+        setSaindo(true);
+        setErroSaida('');
+
+        try {
+            const { error } = await supabase.auth.signOut({ scope: 'local' });
+            if (error) throw error;
+            navigate('/', { replace: true });
+        } catch (erro) {
+            console.error('Erro ao sair da conta:', erro);
+            setErroSaida('Não foi possível encerrar sua sessão. Tente novamente.');
+            setSaindo(false);
+        }
+    }
 
     function limparFiltrosReferencias() {
         setBuscaReferencias('');
@@ -849,9 +867,18 @@ function MarsaliUser() {
                                         <strong>{perfil.whatsapp || 'Não informado'}</strong>
                                     </div>
 
-                                    <p>
-                                        {/* EDIÇAÕ DO PERFIL. ETAPA POSTERIOR  */}
-                                    </p>
+                                    {erroSaida && (
+                                        <p className="mu-logout-error" role="alert">{erroSaida}</p>
+                                    )}
+
+                                    <button
+                                        type="button"
+                                        className="mu-logout-button"
+                                        onClick={sairDaConta}
+                                        disabled={saindo}
+                                    >
+                                        {saindo ? 'Saindo...' : 'Sair da conta'}
+                                    </button>
                                 </div>
                             </section>
                         );

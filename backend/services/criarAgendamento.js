@@ -35,6 +35,7 @@ async function criarAgendamento({
             .select('id, nome, whatsapp')
             .eq('nome', nome)
             .eq('whatsapp', whatsapp)
+            .is('auth_user_id', null)
             .maybeSingle();
 
         if (erroBusca) {

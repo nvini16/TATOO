@@ -8,7 +8,8 @@
     min-height: 100vh;
     min-height: 100svh;
     width: 100%;
-    padding: 48px 24px;
+    box-sizing: border-box;
+    padding: 32px 24px;
     background-color: var(--marsali-tatoo-color-black, #101010);
     background-position: center;
     background-size: cover;
@@ -181,7 +182,7 @@
 
 @media (max-width: 600px) {
     .login-cliente-page {
-        padding: 88px 26px 48px;
+        padding: 76px 26px 28px;
         background-position: 58% center;
     }
 
@@ -200,11 +201,11 @@
 
     .login-cliente-logo {
         width: min(165px, 52vw);
-        margin-bottom: 24px;
+        margin-bottom: 18px;
     }
 
     .login-cliente-description {
-        margin-bottom: 29px;
+        margin-bottom: 22px;
     }
 }
 

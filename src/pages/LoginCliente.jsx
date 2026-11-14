@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 
 import '../styles/loginCliente.css';
@@ -13,7 +13,16 @@ function LoginCliente() {
     const [carregando, setCarregando] = useState(false);
     const [erro, setErro] = useState('');
 
+    const location = useLocation();
     const navigate = useNavigate();
+
+    const rotaRetorno = location.state?.from;
+    const destinoAposLogin =
+        typeof rotaRetorno === 'string' &&
+        rotaRetorno.startsWith('/') &&
+        !rotaRetorno.startsWith('//')
+            ? rotaRetorno
+            : '/Agendamento';
 
     async function handleSubmit(event) {
         event.preventDefault();
@@ -31,7 +40,7 @@ function LoginCliente() {
                 throw error;
             }
 
-            navigate('/Agendamento', { replace: true });
+            navigate(destinoAposLogin, { replace: true });
         } catch (error) {
             console.error('Erro ao entrar na conta do cliente:', error);
             setErro(
@@ -116,7 +125,7 @@ function LoginCliente() {
 
                 <p className="login-cliente-register">
                     Ainda não possui uma conta?{' '}
-                    <Link to="/CadastroCliente">
+                    <Link to="/CadastroCliente" state={location.state}>
                         Cadastre-se
                     </Link>
                 </p>

@@ -3,8 +3,6 @@ import { useEffect, useState } from 'react';
 const STATUS_AGENDAMENTOS = [
     { valor: 'aguardando_sinal', titulo: 'Aguardando sinal', cor: '#F2C94C' },
     { valor: 'sinal_pago', titulo: 'Sinal pago', cor: '#3498DB' },
-    { valor: 'aguardando_confirmacao', titulo: 'Aguardando confirmação', cor: '#F2994A' },
-    { valor: 'confirmado', titulo: 'Confirmado', cor: '#9B51E0' },
     { valor: 'concluido', titulo: 'Concluído', cor: '#27AE60' },
     { valor: 'cancelado', titulo: 'Cancelado', cor: '#EB5757' },
     { valor: 'faltou', titulo: 'Faltou', cor: '#828282' },
@@ -93,7 +91,6 @@ function DistribuicaoStatus({ agendamentos, carregando, erro }) {
                     const possuiDescricao = [
                         'aguardando_sinal',
                         'sinal_pago',
-                        'aguardando_confirmacao',
                     ].includes(status.valor);
 
                     const conteudoStatus = (
@@ -179,9 +176,7 @@ function DistribuicaoStatus({ agendamentos, carregando, erro }) {
                                     <p>
                                         {status.valor === 'aguardando_sinal'
                                             ? 'O cliente realizou a solicitação do agendamento, mas ainda não efetuou o pagamento do sinal. O horário permanece aguardando essa etapa para avançar no processo de confirmação.'
-                                            : status.valor === 'sinal_pago'
-                                                ? 'O cliente realizou o pagamento do sinal solicitado. O agendamento agora aguarda a confirmação manual do estúdio para que o horário seja oficialmente confirmado.'
-                                                : 'O sinal foi pago e o horário está reservado provisoriamente. O cliente recebeu uma solicitação de confirmação pelo WhatsApp e precisa confirmar sua presença para que o agendamento avance.'}
+                                            : 'O cliente realizou o pagamento do sinal solicitado. O agendamento agora aguarda a confirmação manual do estúdio para que o horário seja oficialmente confirmado.'}
                                     </p>
                                 </div>
                             )}

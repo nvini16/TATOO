@@ -98,7 +98,7 @@ function DistribuicaoStatus({ agendamentos, carregando, erro }) {
 
                     const conteudoStatus = (
                         <>
-                            <div className="distribuicao-status-info">
+                            <span className="distribuicao-status-info">
                                 <span className="distribuicao-status-nome">
                                     <span
                                         className="distribuicao-status-legenda"
@@ -116,9 +116,9 @@ function DistribuicaoStatus({ agendamentos, carregando, erro }) {
                                         })}%
                                     </span>
                                 </span>
-                            </div>
+                            </span>
 
-                            <div
+                            <span
                                 className="distribuicao-status-trilho"
                                 role="progressbar"
                                 aria-label={`Percentual de agendamentos: ${status.titulo}`}
@@ -126,14 +126,14 @@ function DistribuicaoStatus({ agendamentos, carregando, erro }) {
                                 aria-valuemax="100"
                                 aria-valuenow={Number(status.percentual.toFixed(1))}
                             >
-                                <div
+                                <span
                                     className="distribuicao-status-barra"
                                     style={{
                                         width: `${status.percentual}%`,
                                         backgroundColor: status.cor,
                                     }}
                                 />
-                            </div>
+                            </span>
                         </>
                     );
 

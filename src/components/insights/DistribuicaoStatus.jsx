@@ -93,6 +93,7 @@ function DistribuicaoStatus({ agendamentos, carregando, erro }) {
                         'sinal_pago',
                         'concluido',
                         'cancelado',
+                        'faltou',
                     ].includes(status.valor);
 
                     const conteudoStatus = (
@@ -182,7 +183,9 @@ function DistribuicaoStatus({ agendamentos, carregando, erro }) {
                                                 ? 'O cliente realizou o pagamento do sinal solicitado. O agendamento agora aguarda a confirmação manual do estúdio para que o horário seja oficialmente confirmado.'
                                                 : status.valor === 'cancelado'
                                                     ? 'O agendamento foi cancelado e não está mais ativo na agenda do estúdio.'
-                                                    : 'O horário está oficialmente reservado para o cliente, garantindo sua vaga na agenda do estúdio.'}
+                                                    : status.valor === 'faltou'
+                                                        ? 'O cliente não compareceu ao horário agendado, e o atendimento não foi realizado.'
+                                                        : 'O horário está oficialmente reservado para o cliente, garantindo sua vaga na agenda do estúdio.'}
                                     </p>
                                 </div>
                             )}

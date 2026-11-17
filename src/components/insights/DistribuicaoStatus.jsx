@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const STATUS_AGENDAMENTOS = [
     { valor: 'aguardando_sinal', titulo: 'Aguardando sinal', cor: '#F2C94C' },
@@ -12,6 +12,21 @@ const STATUS_AGENDAMENTOS = [
 
 function DistribuicaoStatus({ agendamentos, carregando, erro }) {
     const [descricaoAberta, setDescricaoAberta] = useState(null);
+
+    useEffect(() => {
+        const fecharAoTocarFora = (event) => {
+            if (!event.target.closest('.distribuicao-status-interativo')) {
+                setDescricaoAberta(null);
+            }
+        };
+
+        document.addEventListener('pointerdown', fecharAoTocarFora);
+
+        return () => {
+            document.removeEventListener('pointerdown', fecharAoTocarFora);
+        };
+    }, []);
+
     if (carregando) {
         return (
             <section className="distribuicao-status" aria-live="polite">
@@ -99,11 +114,9 @@ function DistribuicaoStatus({ agendamentos, carregando, erro }) {
                             {['aguardando_sinal', 'sinal_pago', 'aguardando_confirmacao'].includes(status.valor) ? (
                                 <button
                                     type="button"
-                                    className="distribuicao-status-nome distribuicao-status-nome-botao"
+                                    className="distribuicao-status-nome distribuicao-status-nome-botao distribuicao-status-interativo"
                                     aria-expanded={descricaoAberta === status.valor}
                                     aria-controls={`descricao-${status.valor}`}
-                                    onFocus={() => setDescricaoAberta(status.valor)}
-                                    onBlur={() => setDescricaoAberta(null)}
                                     onClick={() => setDescricaoAberta((atual) =>
                                         atual === status.valor ? null : status.valor
                                     )}
@@ -128,7 +141,7 @@ function DistribuicaoStatus({ agendamentos, carregando, erro }) {
 
                             {['aguardando_sinal', 'sinal_pago', 'aguardando_confirmacao'].includes(status.valor) && descricaoAberta === status.valor && (
                                 <div
-                                    className="distribuicao-status-descricao"
+                                    className="distribuicao-status-descricao distribuicao-status-interativo"
                                     id={`descricao-${status.valor}`}
                                     role="tooltip"
                                     style={{ borderColor: status.cor }}

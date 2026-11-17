@@ -23,6 +23,11 @@ function AgendamentosAdmin() {
     const [erro, setErro] = useState(null);
 
     const [agendamentoSelecionado, setAgendamentoSelecionado] = useState(null);
+    const [termoBuscaChamada, setTermoBuscaChamada] = useState('');
+    const [agendamentoChamadaSelecionado, setAgendamentoChamadaSelecionado] = useState(null);
+    const [salvandoSinal, setSalvandoSinal] = useState(false);
+    const [erroChamada, setErroChamada] = useState('');
+    const [sucessoChamada, setSucessoChamada] = useState('');
 
     const [editando, setEditando] = useState(false);
     const [salvando, setSalvando] = useState(false);
@@ -129,6 +134,90 @@ async function salvarEdicao() {
 
 
 
+
+    const termoNormalizado = termoBuscaChamada.trim().toLocaleLowerCase('pt-BR');
+    const termoNumerico = termoBuscaChamada.replace(/\D/g, '');
+
+    const agendamentosEncontrados = termoNormalizado
+        ? agendamentos.filter((agendamento) => {
+            const nome = agendamento.clientes?.nome?.toLocaleLowerCase('pt-BR') || '';
+            const whatsappNumerico = (agendamento.clientes?.whatsapp || '').replace(/\D/g, '');
+            const idCliente = String(agendamento.cliente_id || agendamento.clientes?.id || '');
+
+            return (
+                nome.includes(termoNormalizado) ||
+                (termoNumerico && whatsappNumerico.includes(termoNumerico)) ||
+                idCliente.toLocaleLowerCase('pt-BR').includes(termoNormalizado)
+            );
+        })
+        : [];
+
+    function obterEstadoComparecimento(status) {
+        if (status === 'concluido') return 'Sim';
+        if (status === 'faltou') return 'Não';
+        if (status === 'cancelado') return 'Não aplicável';
+        return 'Pendente';
+    }
+
+    async function atualizarPagamentoSinal(pagamentoSinal) {
+        if (!agendamentoChamadaSelecionado || salvandoSinal) return;
+
+        setSalvandoSinal(true);
+        setErroChamada('');
+        setSucessoChamada('');
+
+        try {
+            const {
+                data: { session },
+                error: erroSessao,
+            } = await supabase.auth.getSession();
+
+            if (erroSessao || !session) {
+                await supabase.auth.signOut();
+                navigate('/LoginAdmin', { replace: true });
+                return;
+            }
+
+            const resposta = await fetch(
+                `${API_URL}/api/agendamentos/${agendamentoChamadaSelecionado.id}/pagamento-sinal`,
+                {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${session.access_token}`,
+                    },
+                    body: JSON.stringify({ pagamento_sinal: pagamentoSinal }),
+                }
+            );
+
+            const resultado = await resposta.json();
+
+            if (resposta.status === 401 || resposta.status === 403) {
+                await supabase.auth.signOut();
+                navigate('/LoginAdmin', { replace: true });
+                return;
+            }
+
+            if (!resposta.ok) {
+                throw new Error(
+                    resultado.erro || 'Não foi possível atualizar o pagamento do sinal.'
+                );
+            }
+
+            const atualizado = resultado.agendamento;
+
+            setAgendamentos((anteriores) =>
+                anteriores.map((item) => item.id === atualizado.id ? atualizado : item)
+            );
+            setAgendamentoChamadaSelecionado(atualizado);
+            setSucessoChamada('Pagamento do sinal atualizado.');
+        } catch (error) {
+            setErroChamada(error.message || 'Erro ao atualizar o pagamento do sinal.');
+        } finally {
+            setSalvandoSinal(false);
+        }
+    }
+
     useEffect(() => {
         async function carregarAgendamentos() {
             setCarregando(true);
@@ -197,6 +286,114 @@ async function salvarEdicao() {
                         </p>
                     </div>
                 </header>
+
+                {!carregando && !erro && (
+                    <section className="lista-chamada" aria-labelledby="lista-chamada-titulo">
+                        <header className="lista-chamada-cabecalho">
+                            <div>
+                                <h2 id="lista-chamada-titulo">Lista de chamada</h2>
+                                <p>Localize o cliente e selecione o agendamento que deseja conferir.</p>
+                            </div>
+                            <label className="lista-chamada-pesquisa">
+                                <span>Pesquisar cliente</span>
+                                <input
+                                    type="search"
+                                    value={termoBuscaChamada}
+                                    onChange={(event) => {
+                                        setTermoBuscaChamada(event.target.value);
+                                        setAgendamentoChamadaSelecionado(null);
+                                        setErroChamada('');
+                                        setSucessoChamada('');
+                                    }}
+                                    placeholder="Nome, WhatsApp ou ID do cliente"
+                                />
+                            </label>
+                        </header>
+
+                        {termoNormalizado && (
+                            <div className="lista-chamada-resultados" aria-live="polite">
+                                {agendamentosEncontrados.length > 0 ? (
+                                    <>
+                                        <p className="lista-chamada-ajuda">
+                                            {agendamentosEncontrados.length} agendamento(s) encontrado(s). Selecione uma sessão:
+                                        </p>
+                                        {agendamentosEncontrados.map((agendamento) => (
+                                            <button
+                                                className={`lista-chamada-resultado ${agendamentoChamadaSelecionado?.id === agendamento.id ? 'selecionado' : ''}`}
+                                                type="button"
+                                                key={agendamento.id}
+                                                onClick={() => {
+                                                    setAgendamentoChamadaSelecionado(agendamento);
+                                                    setErroChamada('');
+                                                    setSucessoChamada('');
+                                                }}
+                                            >
+                                                <span>{agendamento.clientes?.nome || 'Cliente sem nome'}</span>
+                                                <small>
+                                                    {formatarData(agendamento.data)} às {agendamento.horario?.slice(0, 5) || '--:--'}
+                                                    {' · '}Agendamento #{agendamento.id}
+                                                </small>
+                                            </button>
+                                        ))}
+                                    </>
+                                ) : (
+                                    <p className="lista-chamada-vazio">Nenhum agendamento encontrado para essa pesquisa.</p>
+                                )}
+                            </div>
+                        )}
+
+                        {agendamentoChamadaSelecionado && (
+                            <div className="lista-chamada-ficha">
+                                <div className="lista-chamada-identificacao">
+                                    <p><strong>Cliente:</strong> {agendamentoChamadaSelecionado.clientes?.nome || 'Não informado'}</p>
+                                    <p><strong>WhatsApp:</strong> {agendamentoChamadaSelecionado.clientes?.whatsapp || 'Não informado'}</p>
+                                    <p><strong>ID do cliente:</strong> {agendamentoChamadaSelecionado.clientes?.id || agendamentoChamadaSelecionado.cliente_id || 'Não vinculado'}</p>
+                                    <p><strong>Sessão:</strong> {formatarData(agendamentoChamadaSelecionado.data)} às {agendamentoChamadaSelecionado.horario?.slice(0, 5) || '--:--'} · Agendamento #{agendamentoChamadaSelecionado.id}</p>
+                                </div>
+
+                                <div className="lista-chamada-controles">
+                                    <fieldset>
+                                        <legend>Sinal pago?</legend>
+                                        <div className="lista-chamada-opcoes">
+                                            <button
+                                                type="button"
+                                                className={agendamentoChamadaSelecionado.pagamento_sinal ? 'ativo' : ''}
+                                                aria-pressed={Boolean(agendamentoChamadaSelecionado.pagamento_sinal)}
+                                                disabled={salvandoSinal}
+                                                onClick={() => atualizarPagamentoSinal(true)}
+                                            >
+                                                Sim
+                                            </button>
+                                            <button
+                                                type="button"
+                                                className={!agendamentoChamadaSelecionado.pagamento_sinal ? 'ativo' : ''}
+                                                aria-pressed={!agendamentoChamadaSelecionado.pagamento_sinal}
+                                                disabled={salvandoSinal}
+                                                onClick={() => atualizarPagamentoSinal(false)}
+                                            >
+                                                Não
+                                            </button>
+                                        </div>
+                                    </fieldset>
+
+                                    <div className="lista-chamada-estado">
+                                        <span>Cliente compareceu?</span>
+                                        <strong>{obterEstadoComparecimento(agendamentoChamadaSelecionado.status)}</strong>
+                                    </div>
+
+                                    <div className="lista-chamada-estado">
+                                        <span>Atendimento realizado?</span>
+                                        <strong>{agendamentoChamadaSelecionado.status === 'concluido' ? 'Sim' : 'Não'}</strong>
+                                    </div>
+                                </div>
+
+                                {salvandoSinal && <p className="lista-chamada-mensagem">Atualizando pagamento...</p>}
+                                {erroChamada && <p className="lista-chamada-erro" role="alert">{erroChamada}</p>}
+                                {sucessoChamada && <p className="lista-chamada-sucesso" role="status">{sucessoChamada}</p>}
+                            </div>
+                        )}
+                    </section>
+                )}
 
                 {carregando && (
                     <p role="status">Carregando agendamentos...</p>

@@ -4,6 +4,17 @@
 -- A API chama esta função usando a chave service_role, após validar
 -- a sessão administrativa com requireAdmin.
 
+-- Permissões mínimas adicionais para a rotina de exclusão.
+-- O service_role já possui acesso de leitura às tabelas envolvidas.
+grant delete on table
+    public.historico_agendamentos,
+    public.historico_conquistas
+to service_role;
+
+grant update (movimentacao_original_id), delete
+on table public.movimentacoes_pontos
+to service_role;
+
 create or replace function public.excluir_agendamento_admin(p_id bigint)
 returns boolean
 language plpgsql

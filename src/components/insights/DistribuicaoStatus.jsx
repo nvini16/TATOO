@@ -79,18 +79,18 @@ function DistribuicaoStatus({ agendamentos, carregando, erro }) {
                         className="distribuicao-status-item"
                         key={status.valor}
                         onMouseEnter={() => {
-                            if (['aguardando_sinal', 'sinal_pago'].includes(status.valor)) {
+                            if (['aguardando_sinal', 'sinal_pago', 'aguardando_confirmacao'].includes(status.valor)) {
                                 setDescricaoAberta(status.valor);
                             }
                         }}
                         onMouseLeave={() => {
-                            if (['aguardando_sinal', 'sinal_pago'].includes(status.valor)) {
+                            if (['aguardando_sinal', 'sinal_pago', 'aguardando_confirmacao'].includes(status.valor)) {
                                 setDescricaoAberta(null);
                             }
                         }}
                     >
                         <div className="distribuicao-status-info">
-                            {['aguardando_sinal', 'sinal_pago'].includes(status.valor) ? (
+                            {['aguardando_sinal', 'sinal_pago', 'aguardando_confirmacao'].includes(status.valor) ? (
                                 <button
                                     type="button"
                                     className="distribuicao-status-nome distribuicao-status-nome-botao"
@@ -118,7 +118,7 @@ function DistribuicaoStatus({ agendamentos, carregando, erro }) {
                                 </span>
                             )}
 
-                            {['aguardando_sinal', 'sinal_pago'].includes(status.valor) && descricaoAberta === status.valor && (
+                            {['aguardando_sinal', 'sinal_pago', 'aguardando_confirmacao'].includes(status.valor) && descricaoAberta === status.valor && (
                                 <div
                                     className="distribuicao-status-descricao"
                                     id={`descricao-${status.valor}`}
@@ -129,7 +129,9 @@ function DistribuicaoStatus({ agendamentos, carregando, erro }) {
                                     <p>
                                         {status.valor === 'aguardando_sinal'
                                             ? 'O cliente realizou a solicitação do agendamento, mas ainda não efetuou o pagamento do sinal. O horário permanece aguardando essa etapa para avançar no processo de confirmação.'
-                                            : 'O cliente realizou o pagamento do sinal solicitado. O agendamento agora aguarda a confirmação manual do estúdio para que o horário seja oficialmente confirmado.'}
+                                            : status.valor === 'sinal_pago'
+                                                ? 'O cliente realizou o pagamento do sinal solicitado. O agendamento agora aguarda a confirmação manual do estúdio para que o horário seja oficialmente confirmado.'
+                                                : 'O sinal foi pago e o horário está reservado provisoriamente. O cliente recebeu uma solicitação de confirmação pelo WhatsApp e precisa confirmar sua presença para que o agendamento avance.'}
                                     </p>
                                 </div>
                             )}

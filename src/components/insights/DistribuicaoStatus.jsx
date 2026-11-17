@@ -89,46 +89,16 @@ function DistribuicaoStatus({ agendamentos, carregando, erro }) {
             </header>
 
             <ul className="distribuicao-status-lista">
-                {dados.map((status) => (
-                    <li
-                        className="distribuicao-status-item"
-                        key={status.valor}
-                        onPointerEnter={(event) => {
-                            if (
-                                event.pointerType === 'mouse' &&
-                                ['aguardando_sinal', 'sinal_pago', 'aguardando_confirmacao'].includes(status.valor)
-                            ) {
-                                setDescricaoAberta(status.valor);
-                            }
-                        }}
-                        onPointerLeave={(event) => {
-                            if (
-                                event.pointerType === 'mouse' &&
-                                ['aguardando_sinal', 'sinal_pago', 'aguardando_confirmacao'].includes(status.valor)
-                            ) {
-                                setDescricaoAberta(null);
-                            }
-                        }}
-                    >
-                        <div className="distribuicao-status-info">
-                            {['aguardando_sinal', 'sinal_pago', 'aguardando_confirmacao'].includes(status.valor) ? (
-                                <button
-                                    type="button"
-                                    className="distribuicao-status-nome distribuicao-status-nome-botao distribuicao-status-interativo"
-                                    aria-expanded={descricaoAberta === status.valor}
-                                    aria-controls={`descricao-${status.valor}`}
-                                    onClick={() => setDescricaoAberta((atual) =>
-                                        atual === status.valor ? null : status.valor
-                                    )}
-                                >
-                                    <span
-                                        className="distribuicao-status-legenda"
-                                        style={{ backgroundColor: status.cor }}
-                                        aria-hidden="true"
-                                    />
-                                    {status.titulo}
-                                </button>
-                            ) : (
+                {dados.map((status) => {
+                    const possuiDescricao = [
+                        'aguardando_sinal',
+                        'sinal_pago',
+                        'aguardando_confirmacao',
+                    ].includes(status.valor);
+
+                    const conteudoStatus = (
+                        <>
+                            <div className="distribuicao-status-info">
                                 <span className="distribuicao-status-nome">
                                     <span
                                         className="distribuicao-status-legenda"
@@ -137,9 +107,68 @@ function DistribuicaoStatus({ agendamentos, carregando, erro }) {
                                     />
                                     {status.titulo}
                                 </span>
+
+                                <span className="distribuicao-status-valor">
+                                    <strong>{status.quantidade}</strong>
+                                    <span>
+                                        {status.percentual.toLocaleString('pt-BR', {
+                                            maximumFractionDigits: 1,
+                                        })}%
+                                    </span>
+                                </span>
+                            </div>
+
+                            <div
+                                className="distribuicao-status-trilho"
+                                role="progressbar"
+                                aria-label={`Percentual de agendamentos: ${status.titulo}`}
+                                aria-valuemin="0"
+                                aria-valuemax="100"
+                                aria-valuenow={Number(status.percentual.toFixed(1))}
+                            >
+                                <div
+                                    className="distribuicao-status-barra"
+                                    style={{
+                                        width: `${status.percentual}%`,
+                                        backgroundColor: status.cor,
+                                    }}
+                                />
+                            </div>
+                        </>
+                    );
+
+                    return (
+                        <li
+                            className="distribuicao-status-item"
+                            key={status.valor}
+                            onPointerEnter={(event) => {
+                                if (event.pointerType === 'mouse' && possuiDescricao) {
+                                    setDescricaoAberta(status.valor);
+                                }
+                            }}
+                            onPointerLeave={(event) => {
+                                if (event.pointerType === 'mouse' && possuiDescricao) {
+                                    setDescricaoAberta(null);
+                                }
+                            }}
+                        >
+                            {possuiDescricao ? (
+                                <button
+                                    type="button"
+                                    className="distribuicao-status-area-botao distribuicao-status-interativo"
+                                    aria-expanded={descricaoAberta === status.valor}
+                                    aria-controls={`descricao-${status.valor}`}
+                                    onClick={() => setDescricaoAberta((atual) =>
+                                        atual === status.valor ? null : status.valor
+                                    )}
+                                >
+                                    {conteudoStatus}
+                                </button>
+                            ) : (
+                                conteudoStatus
                             )}
 
-                            {['aguardando_sinal', 'sinal_pago', 'aguardando_confirmacao'].includes(status.valor) && descricaoAberta === status.valor && (
+                            {possuiDescricao && descricaoAberta === status.valor && (
                                 <div
                                     className="distribuicao-status-descricao distribuicao-status-interativo"
                                     id={`descricao-${status.valor}`}
@@ -156,35 +185,9 @@ function DistribuicaoStatus({ agendamentos, carregando, erro }) {
                                     </p>
                                 </div>
                             )}
-
-                            <span className="distribuicao-status-valor">
-                                <strong>{status.quantidade}</strong>
-                                <span>
-                                    {status.percentual.toLocaleString('pt-BR', {
-                                        maximumFractionDigits: 1,
-                                    })}%
-                                </span>
-                            </span>
-                        </div>
-
-                        <div
-                            className="distribuicao-status-trilho"
-                            role="progressbar"
-                            aria-label={`Percentual de agendamentos: ${status.titulo}`}
-                            aria-valuemin="0"
-                            aria-valuemax="100"
-                            aria-valuenow={Number(status.percentual.toFixed(1))}
-                        >
-                            <div
-                                className="distribuicao-status-barra"
-                                style={{
-                                    width: `${status.percentual}%`,
-                                    backgroundColor: status.cor,
-                                }}
-                            />
-                        </div>
-                    </li>
-                ))}
+                        </li>
+                    );
+                })}
             </ul>
         </section>
     );

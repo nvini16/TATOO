@@ -607,3 +607,9 @@
         width: 100%;
     }
 }
+
+.agendamentos-admin-exclusao-confirmacao .agendamentos-admin-exclusao-erro {
+    margin-top: 8px;
+    color: #ffc1c1;
+    font-weight: 600;
+}

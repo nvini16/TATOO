@@ -443,9 +443,8 @@ async function salvarEdicao() {
                                     {agendamento.clientes?.whatsapp || 'Não informado'}
                                 </p>
 
-                                <p>
-                                    <strong>Status:</strong>{' '}
-                                    {agendamento.status}
+                                <p className="agendamentos-admin-aviso-status">
+                                    A atualização do status deve ser realizada pela Lista de chamada.
                                 </p>
 
                                <div className="agendamentos-admin-card-btn">

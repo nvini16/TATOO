@@ -98,7 +98,7 @@ function DistribuicaoStatus({ agendamentos, carregando, erro }) {
                                     aria-controls="descricao-aguardando-sinal"
                                     onFocus={() => setDescricaoAberta(true)}
                                     onBlur={() => setDescricaoAberta(false)}
-                                    onClick={() => setDescricaoAberta((aberta) => !aberta)}
+                                    onClick={() => setDescricaoAberta(true)}
                                 >
                                     <span
                                         className="distribuicao-status-legenda"

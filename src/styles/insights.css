@@ -1,6 +1,6 @@
 .insights-page {
     min-height: 100vh;
-    padding: 40px;
+    padding: 40px 40px 80px;
     color: var(--marsali-tatoo-color-white);
     background-color: var(--marsali-tatoo-color-white);
 }
@@ -41,7 +41,7 @@
 
 @media (max-width: 600px) {
     .insights-page {
-        padding: 24px 16px;
+        padding: 24px 16px 120px;
     }
     
     .insights-header {

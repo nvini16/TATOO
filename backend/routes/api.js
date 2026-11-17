@@ -428,7 +428,10 @@ router.patch('/agendamentos/:id/pagamento-sinal', requireAdmin, async (req, res)
     try {
         const { data: agendamento, error } = await supabase
             .from('agendamentos')
-            .update({ pagamento_sinal })
+            .update({
+                pagamento_sinal,
+                status: pagamento_sinal ? 'sinal_pago' : 'aguardando_sinal'
+            })
             .eq('id', id)
             .select('*, clientes(id, nome, whatsapp)')
             .maybeSingle();

@@ -12,7 +12,7 @@ function DistribuicaoStatus({ agendamentos, carregando, erro }) {
     if (carregando) {
         return (
             <section className="distribuicao-status" aria-live="polite">
-                <h2>Distribuição de agendamentos</h2>
+                <h2>Distribuição de status</h2>
                 <p className="distribuicao-status-mensagem">
                     Carregando distribuição dos agendamentos...
                 </p>
@@ -23,7 +23,7 @@ function DistribuicaoStatus({ agendamentos, carregando, erro }) {
     if (erro) {
         return (
             <section className="distribuicao-status" aria-live="polite">
-                <h2>Distribuição de agendamentos</h2>
+                <h2>Distribuição de status</h2>
                 <p className="distribuicao-status-mensagem" role="alert">
                     Não foi possível carregar o gráfico: {erro}
                 </p>
@@ -59,9 +59,9 @@ function DistribuicaoStatus({ agendamentos, carregando, erro }) {
             <header className="distribuicao-status-header">
                 <div>
                     <h2 id="distribuicao-status-titulo">
-                        Distribuição de agendamentos
+                        Distribuição de status
                     </h2>
-                    <p>Quantidade de agendamentos por situação.</p>
+                    <p>Quantidade de agendamentos por status.</p>
                 </div>
 
                 <div className="distribuicao-status-total">

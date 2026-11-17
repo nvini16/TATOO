@@ -159,6 +159,13 @@ async function salvarEdicao() {
         return 'Pendente';
     }
 
+    function obterEstadoAtendimento(status) {
+        if (status === 'concluido') return 'Sim';
+        if (status === 'faltou') return 'Não';
+        if (status === 'cancelado') return 'Não aplicável';
+        return 'Pendente';
+    }
+
     async function atualizarPagamentoSinal(pagamentoSinal) {
         if (!agendamentoChamadaSelecionado || salvandoSinal) return;
 
@@ -383,7 +390,7 @@ async function salvarEdicao() {
 
                                     <div className="lista-chamada-estado">
                                         <span>Atendimento realizado?</span>
-                                        <strong>{agendamentoChamadaSelecionado.status === 'concluido' ? 'Sim' : 'Não'}</strong>
+                                        <strong>{obterEstadoAtendimento(agendamentoChamadaSelecionado.status)}</strong>
                                     </div>
                                 </div>
 

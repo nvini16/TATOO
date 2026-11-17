@@ -11,7 +11,7 @@ const STATUS_AGENDAMENTOS = [
 ];
 
 function DistribuicaoStatus({ agendamentos, carregando, erro }) {
-    const [descricaoAberta, setDescricaoAberta] = useState(false);
+    const [descricaoAberta, setDescricaoAberta] = useState(null);
     if (carregando) {
         return (
             <section className="distribuicao-status" aria-live="polite">
@@ -79,26 +79,26 @@ function DistribuicaoStatus({ agendamentos, carregando, erro }) {
                         className="distribuicao-status-item"
                         key={status.valor}
                         onMouseEnter={() => {
-                            if (status.valor === 'aguardando_sinal') {
-                                setDescricaoAberta(true);
+                            if (['aguardando_sinal', 'sinal_pago'].includes(status.valor)) {
+                                setDescricaoAberta(status.valor);
                             }
                         }}
                         onMouseLeave={() => {
-                            if (status.valor === 'aguardando_sinal') {
-                                setDescricaoAberta(false);
+                            if (['aguardando_sinal', 'sinal_pago'].includes(status.valor)) {
+                                setDescricaoAberta(null);
                             }
                         }}
                     >
                         <div className="distribuicao-status-info">
-                            {status.valor === 'aguardando_sinal' ? (
+                            {['aguardando_sinal', 'sinal_pago'].includes(status.valor) ? (
                                 <button
                                     type="button"
                                     className="distribuicao-status-nome distribuicao-status-nome-botao"
-                                    aria-expanded={descricaoAberta}
-                                    aria-controls="descricao-aguardando-sinal"
-                                    onFocus={() => setDescricaoAberta(true)}
-                                    onBlur={() => setDescricaoAberta(false)}
-                                    onClick={() => setDescricaoAberta(true)}
+                                    aria-expanded={descricaoAberta === status.valor}
+                                    aria-controls={`descricao-${status.valor}`}
+                                    onFocus={() => setDescricaoAberta(status.valor)}
+                                    onBlur={() => setDescricaoAberta(null)}
+                                    onClick={() => setDescricaoAberta(status.valor)}
                                 >
                                     <span
                                         className="distribuicao-status-legenda"
@@ -118,17 +118,18 @@ function DistribuicaoStatus({ agendamentos, carregando, erro }) {
                                 </span>
                             )}
 
-                            {status.valor === 'aguardando_sinal' && descricaoAberta && (
+                            {['aguardando_sinal', 'sinal_pago'].includes(status.valor) && descricaoAberta === status.valor && (
                                 <div
                                     className="distribuicao-status-descricao"
-                                    id="descricao-aguardando-sinal"
+                                    id={`descricao-${status.valor}`}
                                     role="tooltip"
+                                    style={{ borderColor: status.cor }}
                                 >
-                                    <strong>{status.titulo}</strong>
+                                    <strong style={{ color: status.cor }}>{status.titulo}</strong>
                                     <p>
-                                        O cliente realizou a solicitação do agendamento, mas ainda não
-                                        efetuou o pagamento do sinal. O horário permanece aguardando
-                                        essa etapa para avançar no processo de confirmação.
+                                        {status.valor === 'aguardando_sinal'
+                                            ? 'O cliente realizou a solicitação do agendamento, mas ainda não efetuou o pagamento do sinal. O horário permanece aguardando essa etapa para avançar no processo de confirmação.'
+                                            : 'O cliente realizou o pagamento do sinal solicitado. O agendamento agora aguarda a confirmação manual do estúdio para que o horário seja oficialmente confirmado.'}
                                     </p>
                                 </div>
                             )}

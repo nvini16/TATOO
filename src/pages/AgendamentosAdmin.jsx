@@ -33,6 +33,7 @@ function AgendamentosAdmin() {
     const [salvando, setSalvando] = useState(false);
     const [etapaExclusao, setEtapaExclusao] = useState(0);
     const [salvandoExclusao, setSalvandoExclusao] = useState(false);
+    const [erroExclusao, setErroExclusao] = useState('');
     const [formEdicao, setFormEdicao] = useState({
         nome: '',
         whatsapp: '',
@@ -138,7 +139,7 @@ async function salvarEdicao() {
         if (!agendamentoSelecionado || salvandoExclusao || etapaExclusao !== 2) return;
 
         setSalvandoExclusao(true);
-        setErro(null);
+        setErroExclusao('');
 
         try {
             const {
@@ -192,7 +193,7 @@ async function salvarEdicao() {
             setEtapaExclusao(0);
             setEditando(false);
         } catch (error) {
-            setErro(error.message || 'Erro ao excluir o agendamento.');
+            setErroExclusao(error.message || 'Erro ao excluir o agendamento.');
         } finally {
             setSalvandoExclusao(false);
         }
@@ -583,6 +584,11 @@ async function salvarEdicao() {
                         <p><strong>Data:</strong> {formatarData(agendamentoSelecionado.data)}</p>
                         <p><strong>Horário:</strong> {agendamentoSelecionado.horario?.slice(0, 5) || 'Não informado'}</p>
                         <p><strong>ID:</strong> #{agendamentoSelecionado.id}</p>
+                        {erroExclusao && (
+                            <p className="agendamentos-admin-exclusao-erro" role="alert">
+                                {erroExclusao}
+                            </p>
+                        )}
                         {etapaExclusao === 2 && (
                             <p className="agendamentos-admin-exclusao-alerta">
                                 As imagens de referência deste agendamento também serão removidas. O perfil do cliente e os demais agendamentos serão preservados.
@@ -786,7 +792,10 @@ async function salvarEdicao() {
                     <button
                         type="button"
                         className="agendamentos-admin-botao-excluir"
-                        onClick={() => setEtapaExclusao(1)}
+                        onClick={() => {
+                            setErroExclusao('');
+                            setEtapaExclusao(1);
+                        }}
                     >
                         Excluir agendamento
                     </button>

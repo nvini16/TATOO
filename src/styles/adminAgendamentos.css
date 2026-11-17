@@ -311,3 +311,305 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* LISTA DE CHAMADA */
+.lista-chamada {
+    margin-bottom: 32px;
+    padding: 28px;
+    color: var(--marsali-tatoo-color-white);
+    background: var(--marsali-tatoo-color-dark-green);
+    border: 1px solid var(--marsali-tatoo-color-transparent-gold);
+    border-radius: 14px;
+}
+
+.lista-chamada-cabecalho {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 22px;
+}
+
+.lista-chamada-cabecalho h2 {
+    margin: 0 0 8px;
+    color: var(--marsali-tatoo-color-gold);
+    font-size: 1.7rem;
+}
+
+.lista-chamada-cabecalho p,
+.lista-chamada-ajuda {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.78);
+    line-height: 1.5;
+}
+
+.lista-chamada-pesquisa {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 440px;
+    color: var(--marsali-tatoo-color-gold);
+    font-weight: 600;
+}
+
+.lista-chamada-pesquisa input {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    padding: 12px 14px;
+    color: var(--marsali-tatoo-color-dark-green);
+    background: var(--marsali-tatoo-color-white);
+    border: 1px solid var(--marsali-tatoo-color-gold);
+    border-radius: 8px;
+    font: inherit;
+}
+
+.lista-chamada-pesquisa input:focus-visible {
+    outline: 3px solid rgba(229, 233, 3, 0.55);
+    outline-offset: 2px;
+}
+
+.lista-chamada-resultados {
+    display: grid;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.lista-chamada-ajuda {
+    margin-bottom: 4px;
+    font-size: 0.9rem;
+}
+
+.lista-chamada-resultado {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    width: 100%;
+    padding: 12px 14px;
+    color: var(--marsali-tatoo-color-white);
+    text-align: left;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.lista-chamada-resultado:hover,
+.lista-chamada-resultado.selecionado {
+    border-color: var(--marsali-tatoo-color-gold);
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.lista-chamada-resultado span {
+    color: var(--marsali-tatoo-color-gold);
+    font-weight: 700;
+}
+
+.lista-chamada-resultado small {
+    color: rgba(255, 255, 255, 0.76);
+}
+
+.lista-chamada-vazio {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.82);
+}
+
+.lista-chamada-ficha {
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.13);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 10px;
+}
+
+.lista-chamada-identificacao {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px 20px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.lista-chamada-identificacao p {
+    margin: 0;
+    overflow-wrap: anywhere;
+    line-height: 1.5;
+}
+
+.lista-chamada-identificacao strong,
+.lista-chamada-controles legend,
+.lista-chamada-estado span {
+    color: var(--marsali-tatoo-color-gold);
+}
+
+.lista-chamada-controles {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    padding-top: 18px;
+}
+
+.lista-chamada-controles fieldset {
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.lista-chamada-controles legend,
+.lista-chamada-estado span {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.lista-chamada-opcoes {
+    display: flex;
+    gap: 8px;
+}
+
+.lista-chamada-opcoes button {
+    flex: 1;
+    padding: 10px 12px;
+    color: var(--marsali-tatoo-color-white);
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 7px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.lista-chamada-opcoes button.ativo {
+    color: var(--marsali-tatoo-color-dark-green);
+    background: var(--marsali-tatoo-color-gold);
+    border-color: var(--marsali-tatoo-color-gold);
+    font-weight: 700;
+}
+
+.lista-chamada-opcoes button:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
+.lista-chamada-estado strong {
+    display: inline-block;
+    padding: 8px 12px;
+    color: var(--marsali-tatoo-color-white);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 7px;
+}
+
+.lista-chamada-mensagem,
+.lista-chamada-erro,
+.lista-chamada-sucesso {
+    margin: 14px 0 0;
+    font-size: 0.9rem;
+}
+
+.lista-chamada-erro {
+    color: #ffc1c1;
+}
+
+.lista-chamada-sucesso {
+    color: #b8edc7;
+}
+
+@media (max-width: 760px) {
+    .lista-chamada-cabecalho {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .lista-chamada-pesquisa {
+        max-width: none;
+    }
+
+    .lista-chamada-controles {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .lista-chamada {
+        padding: 20px 16px;
+    }
+
+    .lista-chamada-identificacao {
+        grid-template-columns: 1fr;
+    }
+}
+
+ 
+.agendamentos-admin-botao-excluir {
+    margin-left: 12px;
+    color: #ff8b8b !important;
+    border-color: #ff8b8b !important;
+}
+
+.agendamentos-admin-botao-excluir:hover {
+    background-color: #ff8b8b !important;
+    color: var(--marsali-tatoo-color-dark-green) !important;
+}
+
+.agendamentos-admin-exclusao-confirmacao {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.agendamentos-admin-exclusao-confirmacao p {
+    margin: 0;
+}
+
+.agendamentos-admin-exclusao-confirmacao .agendamentos-admin-exclusao-alerta {
+    margin-top: 8px;
+    padding: 12px;
+    border: 1px solid rgba(255, 139, 139, 0.65);
+    border-radius: 8px;
+    color: #ffb0b0;
+}
+
+.agendamentos-admin-exclusao-acoes {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--marsali-tatoo-color-gold);
+}
+
+.agendamentos-admin-exclusao-acoes button {
+    padding: 8px 12px;
+    border: 1px solid var(--marsali-tatoo-color-gold);
+    background: transparent;
+    color: var(--marsali-tatoo-color-gold);
+    cursor: pointer;
+}
+
+.agendamentos-admin-exclusao-acoes button:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+    .agendamentos-admin-botao-excluir {
+        margin: 12px 0 0;
+    }
+
+    .agendamentos-admin-exclusao-acoes {
+        flex-direction: column-reverse;
+    }
+
+    .agendamentos-admin-exclusao-acoes button {
+        width: 100%;
+    }
+}
+
+.agendamentos-admin-exclusao-confirmacao .agendamentos-admin-exclusao-erro {
+    margin-top: 8px;
+    color: #ffc1c1;
+    font-weight: 600;
+}

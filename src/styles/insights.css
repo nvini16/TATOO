@@ -1,6 +1,6 @@
 .insights-page {
     min-height: 100vh;
-    padding: 40px;
+    padding: 40px 40px 80px;
     color: var(--marsali-tatoo-color-white);
     background-color: var(--marsali-tatoo-color-white);
 }
@@ -41,7 +41,7 @@
 
 @media (max-width: 600px) {
     .insights-page {
-        padding: 24px 16px;
+        padding: 24px 16px 120px;
     }
     
     .insights-header {
@@ -92,4 +92,223 @@
 .insights-card-description {
     color: #b5b5b5;
     font-size: 0.85rem;
+}
+
+/* DISTRIBUICAO DE AGENDAMENTOS POR STATUS */
+
+.distribuicao-status {
+    margin-top: 28px;
+    padding: 28px;
+    background-color: var(--marsali-tatoo-color-dark-green);
+    border: 1px solid var(--marsali-tatoo-color-transparent-gold);
+    border-radius: 12px;
+}
+
+.distribuicao-status-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 28px;
+}
+
+.distribuicao-status-header h2 {
+    margin: 0 0 8px;
+    color: var(--marsali-tatoo-color-white);
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.distribuicao-status-header p {
+    margin: 0;
+    color: #b5b5b5;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.distribuicao-status-total {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+    flex-shrink: 0;
+}
+
+.distribuicao-status-total span {
+    color: #b5b5b5;
+    font-size: 0.8rem;
+}
+
+.distribuicao-status-total strong {
+    color: var(--marsali-tatoo-color-gold);
+    font-size: 1.8rem;
+    line-height: 1;
+}
+
+.distribuicao-status-lista {
+    display: grid;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.distribuicao-status-item {
+    min-width: 0;
+}
+
+.distribuicao-status-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 9px;
+}
+
+.distribuicao-status-nome {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--marsali-tatoo-color-white);
+    font-size: 0.9rem;
+}
+
+.distribuicao-status-legenda {
+    width: 10px;
+    height: 10px;
+    flex: 0 0 10px;
+    border-radius: 50%;
+}
+
+.distribuicao-status-valor {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 12px;
+    color: var(--marsali-tatoo-color-white);
+    white-space: nowrap;
+}
+
+.distribuicao-status-valor strong {
+    min-width: 22px;
+    font-size: 0.95rem;
+    text-align: right;
+}
+
+.distribuicao-status-valor span {
+    min-width: 48px;
+    color: #b5b5b5;
+    font-size: 0.8rem;
+    text-align: right;
+}
+
+.distribuicao-status-trilho {
+    display: block;
+    width: 100%;
+    height: 10px;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+}
+
+.distribuicao-status-barra {
+    display: block;
+    height: 100%;
+    min-width: 0;
+    border-radius: inherit;
+    transition: width 0.4s ease;
+}
+
+.distribuicao-status-mensagem {
+    margin: 0;
+    color: #b5b5b5;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+    .distribuicao-status {
+        margin-top: 24px;
+        padding: 20px 16px;
+    }
+
+    .distribuicao-status-header {
+        gap: 12px;
+        margin-bottom: 24px;
+    }
+
+    .distribuicao-status-header h2 {
+        font-size: 1.05rem;
+    }
+
+    .distribuicao-status-info {
+        gap: 10px;
+    }
+
+    .distribuicao-status-nome {
+        gap: 8px;
+        font-size: 0.82rem;
+    }
+
+    .distribuicao-status-valor {
+        gap: 8px;
+    }
+}
+
+
+/* DESCRICAO FLUTUANTE DOS STATUS */
+
+.distribuicao-status-item {
+    position: relative;
+}
+
+.distribuicao-status-area-botao {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    cursor: pointer;
+    text-align: left;
+}
+
+.distribuicao-status-area-botao:focus-visible {
+    outline: 2px solid var(--marsali-tatoo-color-gold);
+    outline-offset: 4px;
+    border-radius: 3px;
+}
+
+.distribuicao-status-descricao {
+    pointer-events: none;
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    z-index: 5;
+    width: min(360px, 100%);
+    padding: 16px;
+    color: var(--marsali-tatoo-color-white);
+    background-color: #123d20;
+    border: 1px solid #F2C94C;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+}
+
+.distribuicao-status-descricao strong {
+    display: block;
+    margin-bottom: 7px;
+    color: #F2C94C;
+    font-size: 0.9rem;
+}
+
+.distribuicao-status-descricao p {
+    margin: 0;
+    color: var(--marsali-tatoo-color-white);
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+
+@media (max-width: 600px) {
+    .distribuicao-status-descricao {
+        width: min(320px, calc(100vw - 72px));
+    }
 }

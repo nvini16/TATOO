@@ -7,6 +7,7 @@ import AgendamentosCancelados from '../components/insights/AgendamentosCancelado
 import AgendamentosConcluidos from '../components/insights/AgendamentosConcluidos';
 import AgendamentosFaltou from '../components/insights/AgendamentosFaltou';
 import TaxaComparecimento from '../components/insights/TaxaComparecimento';
+import DistribuicaoStatus from '../components/insights/DistribuicaoStatus';
 import AdminLayout from '../components/AdminLayout';
 
 function Insights() {
@@ -82,61 +83,65 @@ function Insights() {
     }, [navigate]);
 
     return (
-
         <AdminLayout>
             <main className="insights-page">
-            <header className="insights-header">
-                <div>
-                    <h1>Insights</h1>
-                    <p>
-                        Acompanhe o desempenho e a rotina do estúdio.
-                    </p>
-                </div>
-            </header>
+                <header className="insights-header">
+                    <div>
+                        <h1>Insights</h1>
+                        <p>
+                            Acompanhe o desempenho e a rotina do estúdio.
+                        </p>
+                    </div>
+                </header>
 
-            <section
-                className="insights-overview"
-                aria-label="Visão geral do estúdio"
-            >
-                <TotalAgendamentos
+                <section
+                    className="insights-overview"
+                    aria-label="Visão geral do estúdio"
+                >
+                    <TotalAgendamentos
+                        agendamentos={agendamentos}
+                        carregando={carregando}
+                        erro={erro}
+                    />
+
+                    <AgendamentosAtivos
+                        agendamentos={agendamentos}
+                        carregando={carregando}
+                        erro={erro}
+                    />
+
+                    <AgendamentosCancelados
+                        agendamentos={agendamentos}
+                        carregando={carregando}
+                        erro={erro}
+                    />
+
+                    <AgendamentosConcluidos
+                        agendamentos={agendamentos}
+                        carregando={carregando}
+                        erro={erro}
+                    />
+
+                    <AgendamentosFaltou
+                        agendamentos={agendamentos}
+                        carregando={carregando}
+                        erro={erro}
+                    />
+
+                    <TaxaComparecimento
+                        agendamentos={agendamentos}
+                        carregando={carregando}
+                        erro={erro}
+                    />
+                </section>
+
+                <DistribuicaoStatus
                     agendamentos={agendamentos}
                     carregando={carregando}
                     erro={erro}
                 />
-
-                <AgendamentosAtivos
-                    agendamentos={agendamentos}
-                    carregando={carregando}
-                    erro={erro}
-                />
-
-                <AgendamentosCancelados
-                    agendamentos={agendamentos}
-                    carregando={carregando}
-                    erro={erro}
-                />
-
-                <AgendamentosConcluidos
-                    agendamentos={agendamentos}
-                    carregando={carregando}
-                    erro={erro}
-                />
-
-                <AgendamentosFaltou
-                    agendamentos={agendamentos}
-                    carregando={carregando}
-                    erro={erro}
-                />
-
-                <TaxaComparecimento
-                    agendamentos={agendamentos}
-                    carregando={carregando}
-                    erro={erro}
-                />
-            </section>
-        </main>
+            </main>
         </AdminLayout>
-        
     );
 }
 

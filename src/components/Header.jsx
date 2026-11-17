@@ -71,7 +71,7 @@ function Header() {
         </div>
 
         <nav className="header-nav">
-          <Link to="/Header.jsx">Início</Link>
+          <Link to="/">Início</Link>
           <a href="#trabalhos">Trabalhos</a>
           <a href="#cuidados">Cuidados</a>
           <a href="#sobre">Sobre</a>

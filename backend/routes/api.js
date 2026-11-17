@@ -436,6 +436,8 @@ router.delete('/agendamentos/:id', requireAdmin, async (req, res) => {
             });
         }
 
+        // Guardamos os caminhos antes da exclusão, pois os metadados
+        // serão removidos pela chave estrangeira ON DELETE CASCADE.
         const { data: imagens, error: erroImagens } = await supabase
             .from('agendamento_imagens')
             .select('caminho')
@@ -451,26 +453,12 @@ router.delete('/agendamentos/:id', requireAdmin, async (req, res) => {
                 .filter((caminho) => typeof caminho === 'string' && caminho.trim())
         )];
 
-        if (caminhos.length > 0) {
-            const { error: erroStorage } = await supabase.storage
-                .from('agendamento-imagens')
-                .remove(caminhos);
-
-            if (erroStorage) {
-                console.error('Erro ao remover imagens do agendamento:', erroStorage);
-
-                return res.status(500).json({
-                    erro: 'Não foi possível remover as imagens vinculadas. O agendamento foi preservado.'
-                });
-            }
-        }
-
-        const { data: removido, error: erroExclusao } = await supabase
-            .from('agendamentos')
-            .delete()
-            .eq('id', id)
-            .select('id')
-            .maybeSingle();
+        // A função executa as exclusões relacionadas em uma única
+        // transação no PostgreSQL.
+        const { data: removido, error: erroExclusao } = await supabase.rpc(
+            'excluir_agendamento_admin',
+            { p_id: id }
+        );
 
         if (erroExclusao) {
             throw erroExclusao;
@@ -482,9 +470,28 @@ router.delete('/agendamentos/:id', requireAdmin, async (req, res) => {
             });
         }
 
+        // O banco já foi excluído com sucesso. Uma falha no Storage
+        // não deve transformar a exclusão do agendamento em erro,
+        // pois isso deixaria o cliente sem saber que o registro foi removido.
+        let aviso = null;
+
+        if (caminhos.length > 0) {
+            const { error: erroStorage } = await supabase.storage
+                .from('agendamento-imagens')
+                .remove(caminhos);
+
+            if (erroStorage) {
+                console.error('Agendamento excluído, mas houve falha ao remover imagens do Storage:', erroStorage);
+                aviso = 'O agendamento foi excluído, mas não foi possível remover todos os arquivos de imagem.';
+            }
+        }
+
         return res.status(200).json({
-            mensagem: 'Agendamento e imagens vinculadas excluídos com sucesso.',
-            id: removido.id
+            mensagem: aviso
+                ? 'Agendamento e dados relacionados excluídos.'
+                : 'Agendamento, histórico e imagens vinculadas excluídos com sucesso.',
+            aviso,
+            id
         });
     } catch (error) {
         console.error('Erro ao excluir agendamento:', error);

@@ -251,3 +251,58 @@
         gap: 8px;
     }
 }
+
+
+/* DESCRICAO FLUTUANTE DOS STATUS */
+
+.distribuicao-status-item {
+    position: relative;
+}
+
+.distribuicao-status-nome-botao {
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    text-align: left;
+}
+
+.distribuicao-status-nome-botao:focus-visible {
+    outline: 2px solid var(--marsali-tatoo-color-gold);
+    outline-offset: 4px;
+    border-radius: 3px;
+}
+
+.distribuicao-status-descricao {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    z-index: 5;
+    width: min(360px, 100%);
+    padding: 16px;
+    color: var(--marsali-tatoo-color-white);
+    background-color: #123d20;
+    border: 1px solid #F2C94C;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+}
+
+.distribuicao-status-descricao strong {
+    display: block;
+    margin-bottom: 7px;
+    color: #F2C94C;
+    font-size: 0.9rem;
+}
+
+.distribuicao-status-descricao p {
+    margin: 0;
+    color: var(--marsali-tatoo-color-white);
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+
+@media (max-width: 600px) {
+    .distribuicao-status-descricao {
+        width: min(320px, calc(100vw - 72px));
+    }
+}

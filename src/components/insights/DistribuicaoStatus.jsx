@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 const STATUS_AGENDAMENTOS = [
     { valor: 'aguardando_sinal', titulo: 'Aguardando sinal', cor: '#F2C94C' },
     { valor: 'sinal_pago', titulo: 'Sinal pago', cor: '#3498DB' },
@@ -9,6 +11,7 @@ const STATUS_AGENDAMENTOS = [
 ];
 
 function DistribuicaoStatus({ agendamentos, carregando, erro }) {
+    const [descricaoAberta, setDescricaoAberta] = useState(false);
     if (carregando) {
         return (
             <section className="distribuicao-status" aria-live="polite">
@@ -72,16 +75,63 @@ function DistribuicaoStatus({ agendamentos, carregando, erro }) {
 
             <ul className="distribuicao-status-lista">
                 {dados.map((status) => (
-                    <li className="distribuicao-status-item" key={status.valor}>
+                    <li
+                        className="distribuicao-status-item"
+                        key={status.valor}
+                        onMouseEnter={() => {
+                            if (status.valor === 'aguardando_sinal') {
+                                setDescricaoAberta(true);
+                            }
+                        }}
+                        onMouseLeave={() => {
+                            if (status.valor === 'aguardando_sinal') {
+                                setDescricaoAberta(false);
+                            }
+                        }}
+                    >
                         <div className="distribuicao-status-info">
-                            <span className="distribuicao-status-nome">
-                                <span
-                                    className="distribuicao-status-legenda"
-                                    style={{ backgroundColor: status.cor }}
-                                    aria-hidden="true"
-                                />
-                                {status.titulo}
-                            </span>
+                            {status.valor === 'aguardando_sinal' ? (
+                                <button
+                                    type="button"
+                                    className="distribuicao-status-nome distribuicao-status-nome-botao"
+                                    aria-expanded={descricaoAberta}
+                                    aria-controls="descricao-aguardando-sinal"
+                                    onFocus={() => setDescricaoAberta(true)}
+                                    onBlur={() => setDescricaoAberta(false)}
+                                    onClick={() => setDescricaoAberta(true)}
+                                >
+                                    <span
+                                        className="distribuicao-status-legenda"
+                                        style={{ backgroundColor: status.cor }}
+                                        aria-hidden="true"
+                                    />
+                                    {status.titulo}
+                                </button>
+                            ) : (
+                                <span className="distribuicao-status-nome">
+                                    <span
+                                        className="distribuicao-status-legenda"
+                                        style={{ backgroundColor: status.cor }}
+                                        aria-hidden="true"
+                                    />
+                                    {status.titulo}
+                                </span>
+                            )}
+
+                            {status.valor === 'aguardando_sinal' && descricaoAberta && (
+                                <div
+                                    className="distribuicao-status-descricao"
+                                    id="descricao-aguardando-sinal"
+                                    role="tooltip"
+                                >
+                                    <strong>{status.titulo}</strong>
+                                    <p>
+                                        O cliente realizou a solicitação do agendamento, mas ainda não
+                                        efetuou o pagamento do sinal. O horário permanece aguardando
+                                        essa etapa para avançar no processo de confirmação.
+                                    </p>
+                                </div>
+                            )}
 
                             <span className="distribuicao-status-valor">
                                 <strong>{status.quantidade}</strong>

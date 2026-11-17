@@ -274,6 +274,7 @@
 }
 
 .distribuicao-status-descricao {
+    pointer-events: none;
     position: absolute;
     top: calc(100% + 10px);
     left: 0;

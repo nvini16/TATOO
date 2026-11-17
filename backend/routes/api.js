@@ -409,6 +409,92 @@ router.get('/clientes/:id/referencias', requireAdmin, async (req, res) => {
 });
 
 
+
+router.delete('/agendamentos/:id', requireAdmin, async (req, res) => {
+    const id = Number(req.params.id);
+
+    if (!Number.isSafeInteger(id) || id <= 0) {
+        return res.status(400).json({
+            erro: 'ID do agendamento inválido.'
+        });
+    }
+
+    try {
+        const { data: agendamento, error: erroAgendamento } = await supabase
+            .from('agendamentos')
+            .select('id')
+            .eq('id', id)
+            .maybeSingle();
+
+        if (erroAgendamento) {
+            throw erroAgendamento;
+        }
+
+        if (!agendamento) {
+            return res.status(404).json({
+                erro: 'Agendamento não encontrado.'
+            });
+        }
+
+        const { data: imagens, error: erroImagens } = await supabase
+            .from('agendamento_imagens')
+            .select('caminho')
+            .eq('agendamento_id', id);
+
+        if (erroImagens) {
+            throw erroImagens;
+        }
+
+        const caminhos = [...new Set(
+            (imagens || [])
+                .map((imagem) => imagem.caminho)
+                .filter((caminho) => typeof caminho === 'string' && caminho.trim())
+        )];
+
+        if (caminhos.length > 0) {
+            const { error: erroStorage } = await supabase.storage
+                .from('agendamento-imagens')
+                .remove(caminhos);
+
+            if (erroStorage) {
+                console.error('Erro ao remover imagens do agendamento:', erroStorage);
+
+                return res.status(500).json({
+                    erro: 'Não foi possível remover as imagens vinculadas. O agendamento foi preservado.'
+                });
+            }
+        }
+
+        const { data: removido, error: erroExclusao } = await supabase
+            .from('agendamentos')
+            .delete()
+            .eq('id', id)
+            .select('id')
+            .maybeSingle();
+
+        if (erroExclusao) {
+            throw erroExclusao;
+        }
+
+        if (!removido) {
+            return res.status(404).json({
+                erro: 'O agendamento não foi encontrado para exclusão.'
+            });
+        }
+
+        return res.status(200).json({
+            mensagem: 'Agendamento e imagens vinculadas excluídos com sucesso.',
+            id: removido.id
+        });
+    } catch (error) {
+        console.error('Erro ao excluir agendamento:', error);
+
+        return res.status(500).json({
+            erro: 'Não foi possível excluir o agendamento.'
+        });
+    }
+});
+
 router.patch('/agendamentos/:id/pagamento-sinal', requireAdmin, async (req, res) => {
     const id = Number(req.params.id);
     const { pagamento_sinal } = req.body || {};

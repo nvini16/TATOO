@@ -78,13 +78,19 @@ function DistribuicaoStatus({ agendamentos, carregando, erro }) {
                     <li
                         className="distribuicao-status-item"
                         key={status.valor}
-                        onMouseEnter={() => {
-                            if (['aguardando_sinal', 'sinal_pago', 'aguardando_confirmacao'].includes(status.valor)) {
+                        onPointerEnter={(event) => {
+                            if (
+                                event.pointerType === 'mouse' &&
+                                ['aguardando_sinal', 'sinal_pago', 'aguardando_confirmacao'].includes(status.valor)
+                            ) {
                                 setDescricaoAberta(status.valor);
                             }
                         }}
-                        onMouseLeave={() => {
-                            if (['aguardando_sinal', 'sinal_pago', 'aguardando_confirmacao'].includes(status.valor)) {
+                        onPointerLeave={(event) => {
+                            if (
+                                event.pointerType === 'mouse' &&
+                                ['aguardando_sinal', 'sinal_pago', 'aguardando_confirmacao'].includes(status.valor)
+                            ) {
                                 setDescricaoAberta(null);
                             }
                         }}
@@ -98,7 +104,9 @@ function DistribuicaoStatus({ agendamentos, carregando, erro }) {
                                     aria-controls={`descricao-${status.valor}`}
                                     onFocus={() => setDescricaoAberta(status.valor)}
                                     onBlur={() => setDescricaoAberta(null)}
-                                    onClick={() => setDescricaoAberta(status.valor)}
+                                    onClick={() => setDescricaoAberta((atual) =>
+                                        atual === status.valor ? null : status.valor
+                                    )}
                                 >
                                     <span
                                         className="distribuicao-status-legenda"

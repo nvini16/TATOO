@@ -380,25 +380,6 @@ async function salvarEdicao() {
                         </label>
 
                         <label>
-                            Status
-
-                            <select 
-                                name="status"
-                                value={formEdicao.status}
-                                onChange={atualizarCampo}
-                                required
-                            >
-                        <option value="aguardando_sinal">Aguardando sinal</option>
-                        <option value="sinal_pago">Sinal pago</option>
-                        <option value="aguardando_confirmacao">Aguardando confirmação</option>
-                        <option value="confirmado">Confirmado</option>
-                        <option value="concluido">Concluído</option>
-                        <option value="cancelado">Cancelado</option>
-                        <option value="faltou">Faltou</option>
-                            </select> 
-                        </label>
-
-                        <label>
                             Valor do sinal (R$)
 
                             <input 
@@ -409,16 +390,6 @@ async function salvarEdicao() {
                                 value={formEdicao.valor_sinal}
                                 onChange={atualizarCampo}
                             />
-                        </label>
-
-                        <label>
-                            <input 
-                                type="checkbox"
-                                name="pagamento_sinal"
-                                checked={formEdicao.pagamento_sinal}
-                                onChange={atualizarCampo}
-                            />
-                                Sinal pago
                         </label>
 
                         <div

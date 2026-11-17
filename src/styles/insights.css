@@ -259,15 +259,18 @@
     position: relative;
 }
 
-.distribuicao-status-nome-botao {
+.distribuicao-status-area-botao {
+    display: block;
+    width: 100%;
     padding: 0;
     border: 0;
     background: none;
+    color: inherit;
     cursor: pointer;
     text-align: left;
 }
 
-.distribuicao-status-nome-botao:focus-visible {
+.distribuicao-status-area-botao:focus-visible {
     outline: 2px solid var(--marsali-tatoo-color-gold);
     outline-offset: 4px;
     border-radius: 3px;

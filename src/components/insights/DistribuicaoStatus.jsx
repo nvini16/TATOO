@@ -91,6 +91,7 @@ function DistribuicaoStatus({ agendamentos, carregando, erro }) {
                     const possuiDescricao = [
                         'aguardando_sinal',
                         'sinal_pago',
+                        'concluido',
                     ].includes(status.valor);
 
                     const conteudoStatus = (
@@ -176,7 +177,9 @@ function DistribuicaoStatus({ agendamentos, carregando, erro }) {
                                     <p>
                                         {status.valor === 'aguardando_sinal'
                                             ? 'O cliente realizou a solicitação do agendamento, mas ainda não efetuou o pagamento do sinal. O horário permanece aguardando essa etapa para avançar no processo de confirmação.'
-                                            : 'O cliente realizou o pagamento do sinal solicitado. O agendamento agora aguarda a confirmação manual do estúdio para que o horário seja oficialmente confirmado.'}
+                                            : status.valor === 'sinal_pago'
+                                                ? 'O cliente realizou o pagamento do sinal solicitado. O agendamento agora aguarda a confirmação manual do estúdio para que o horário seja oficialmente confirmado.'
+                                                : 'O horário está oficialmente reservado para o cliente, garantindo sua vaga na agenda do estúdio.'}
                                     </p>
                                 </div>
                             )}

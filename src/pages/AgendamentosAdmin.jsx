@@ -31,6 +31,8 @@ function AgendamentosAdmin() {
 
     const [editando, setEditando] = useState(false);
     const [salvando, setSalvando] = useState(false);
+    const [etapaExclusao, setEtapaExclusao] = useState(0);
+    const [salvandoExclusao, setSalvandoExclusao] = useState(false);
     const [formEdicao, setFormEdicao] = useState({
         nome: '',
         whatsapp: '',
@@ -131,6 +133,71 @@ async function salvarEdicao() {
     setSalvando(false);
   }
 }
+
+    async function excluirAgendamento() {
+        if (!agendamentoSelecionado || salvandoExclusao || etapaExclusao !== 2) return;
+
+        setSalvandoExclusao(true);
+        setErro(null);
+
+        try {
+            const {
+                data: { session },
+                error: erroSessao,
+            } = await supabase.auth.getSession();
+
+            if (erroSessao || !session) {
+                await supabase.auth.signOut();
+                navigate('/LoginAdmin', { replace: true });
+                return;
+            }
+
+            const resposta = await fetch(
+                `${API_URL}/api/agendamentos/${agendamentoSelecionado.id}`,
+                {
+                    method: 'DELETE',
+                    headers: {
+                        Authorization: `Bearer ${session.access_token}`,
+                    },
+                }
+            );
+
+            const resultado = await resposta.json();
+
+            if (resposta.status === 401 || resposta.status === 403) {
+                await supabase.auth.signOut();
+                navigate('/LoginAdmin', { replace: true });
+                return;
+            }
+
+            if (!resposta.ok) {
+                throw new Error(
+                    resultado.erro || 'Não foi possível excluir o agendamento.'
+                );
+            }
+
+            const idExcluido = agendamentoSelecionado.id;
+
+            setAgendamentos((anteriores) =>
+                anteriores.filter((item) => item.id !== idExcluido)
+            );
+
+            if (agendamentoChamadaSelecionado?.id === idExcluido) {
+                setAgendamentoChamadaSelecionado(null);
+                setErroChamada('');
+                setSucessoChamada('');
+            }
+
+            setAgendamentoSelecionado(null);
+            setEtapaExclusao(0);
+            setEditando(false);
+        } catch (error) {
+            setErro(error.message || 'Erro ao excluir o agendamento.');
+        } finally {
+            setSalvandoExclusao(false);
+        }
+    }
+
 
 
 
@@ -472,7 +539,11 @@ async function salvarEdicao() {
 {agendamentoSelecionado && (
     <div
         className="agendamentos-admin-modal-overlay"
-        onClick={() => setAgendamentoSelecionado(null)}
+        onClick={() => {
+            if (salvandoExclusao) return;
+            setAgendamentoSelecionado(null);
+            setEtapaExclusao(0);
+        }}
     >
         <section
             className="agendamentos-admin-modal"
@@ -483,20 +554,44 @@ async function salvarEdicao() {
         >
             <header className="agendamentos-admin-modal-header">
                 <h2 id="agendamento-modal-titulo">
-                    Detalhes do agendamento
+                    {etapaExclusao === 0 ? 'Detalhes do agendamento' : 'Excluir agendamento'}
                 </h2>
 
                 <button
                     type="button"
                     aria-label="Fechar detalhes"
-                    onClick={() => setAgendamentoSelecionado(null)}
+                    onClick={() => {
+                        if (salvandoExclusao) return;
+                        setAgendamentoSelecionado(null);
+                        setEtapaExclusao(0);
+                    }}
+                    disabled={salvandoExclusao}
                 >
                     ×
                 </button>
             </header>
 
             <div className="agendamentos-admin-modal-conteudo">
-                {editando && (
+                {etapaExclusao > 0 && (
+                    <div className="agendamentos-admin-exclusao-confirmacao">
+                        <p>
+                            {etapaExclusao === 1
+                                ? 'Você está prestes a excluir permanentemente este agendamento:'
+                                : 'Confirme pela segunda vez: esta exclusão é permanente e não poderá ser desfeita.'}
+                        </p>
+                        <p><strong>Cliente:</strong> {agendamentoSelecionado.clientes?.nome || 'Não informado'}</p>
+                        <p><strong>Data:</strong> {formatarData(agendamentoSelecionado.data)}</p>
+                        <p><strong>Horário:</strong> {agendamentoSelecionado.horario?.slice(0, 5) || 'Não informado'}</p>
+                        <p><strong>ID:</strong> #{agendamentoSelecionado.id}</p>
+                        {etapaExclusao === 2 && (
+                            <p className="agendamentos-admin-exclusao-alerta">
+                                As imagens de referência deste agendamento também serão removidas. O perfil do cliente e os demais agendamentos serão preservados.
+                            </p>
+                        )}
+                    </div>
+                )}
+
+                {etapaExclusao === 0 && editando && (
                     <form
                         className="agendamentos-admin-form-edicao"
                         onSubmit={(event) => {
@@ -618,7 +713,7 @@ async function salvarEdicao() {
                     </form>
                 )}
 
-                {!editando && (
+                {etapaExclusao === 0 && !editando && (
                     <>
 
                 <p>
@@ -680,16 +775,60 @@ async function salvarEdicao() {
                     )}
             </div>
 
-            {!editando && (
-                <div
-                    className="agendamentos-admin-modal-acoes"
-                >
+            {etapaExclusao === 0 && !editando && (
+                <div className="agendamentos-admin-modal-acoes">
                     <button
                         type="button"
                         onClick={iniciarEdicao}
                     >
                         Editar agendamento
                     </button>
+                    <button
+                        type="button"
+                        className="agendamentos-admin-botao-excluir"
+                        onClick={() => setEtapaExclusao(1)}
+                    >
+                        Excluir agendamento
+                    </button>
+                </div>
+            )}
+
+            {etapaExclusao > 0 && (
+                <div className="agendamentos-admin-exclusao-acoes">
+                    {etapaExclusao === 1 ? (
+                        <>
+                            <button
+                                type="button"
+                                onClick={() => setEtapaExclusao(0)}
+                            >
+                                Cancelar
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => setEtapaExclusao(2)}
+                            >
+                                Continuar
+                            </button>
+                        </>
+                    ) : (
+                        <>
+                            <button
+                                type="button"
+                                onClick={() => setEtapaExclusao(1)}
+                                disabled={salvandoExclusao}
+                            >
+                                Voltar
+                            </button>
+                            <button
+                                type="button"
+                                className="agendamentos-admin-botao-excluir"
+                                onClick={excluirAgendamento}
+                                disabled={salvandoExclusao}
+                            >
+                                {salvandoExclusao ? 'Excluindo...' : 'Excluir definitivamente'}
+                            </button>
+                        </>
+                    )}
                 </div>
             )}
         </section>

@@ -953,7 +953,7 @@ function MarsaliUser() {
 
                                     <span className="mu-card-description">
                                         Consulte seus dados pessoais
-                                    </span>
+                                        </span>
                                     <ChevronRight className="mu-card-arrow" />
                                 </div>
                             </section>

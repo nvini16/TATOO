@@ -11,6 +11,7 @@
     background: var(--marsali-tatoo-color-dark-green);
     color: var(--marsali-tatoo-color-white);
     padding: 30px 24px;
+    display: flex;
 }
 
 .mu-header-content {
@@ -20,6 +21,23 @@
     display: flex;
     align-items: center;
     gap: 20px;
+}
+
+.mu-header-link {
+    display: flex;
+}
+
+.mu-header-link a {
+    text-decoration: none;
+    color: var(--marsali-tatoo-color-white);
+    font-size: 15px;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+.mu-header-link a:hover {
+    color: var(--marsali-tatoo-color-gold);
+    text-decoration: underline;
 }
 
 .mu-avatar {
@@ -360,17 +378,13 @@
     text-align: center;
 }
 
-.mu-footer a {
-    color: var(--marsali-tatoo-color-green);
-    font-size: 12px;
-    text-decoration: none;
-    transition: 0.2s ease;
-}
+/* .mu-footer a {
+    
+} */
 
-.mu-footer a:hover {
-    color: var(--marsali-tatoo-color-dark-green);
-    text-decoration: underline;
-}
+/* .mu-footer a:hover {
+    
+} */
 
 /* Acessibilidade */
 

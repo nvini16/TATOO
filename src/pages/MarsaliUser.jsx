@@ -965,7 +965,7 @@ function MarsaliUser() {
         <>
         <main className="marsali-user-page">
             <header className="mu-header">
-                <div className="mu-header-content">
+                    <div className="mu-header-content">
                     <div className="mu-avatar" aria-label={`Avatar de ${perfil.nome}`}>
                         {iniciais}
                     </div>
@@ -976,6 +976,11 @@ function MarsaliUser() {
                         <p>{perfil.whatsapp || 'WhatsApp não informado'}</p>
                     </div>
                 </div>
+
+                <div className="mu-header-link">
+                    <Link to="/">Iníco</Link>
+                </div>
+
             </header>
 
             <div className="mu-container">
@@ -1003,7 +1008,6 @@ function MarsaliUser() {
                 </div>
 
                 <footer className="mu-footer">
-                    <Link to="/">Aceder á página inícial</Link>
                 </footer>
             </div>
         </main>

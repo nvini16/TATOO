@@ -13,7 +13,13 @@ A aplicação reúne recursos de apresentação profissional, autenticação, ag
 ### Funcionalidades disponíveis
 
 - **Página inicial:** apresentação profissional e identidade visual da tatuadora;
+
+    <video src="docs/videos/page-inicial.mp4" controls loop autoplay mute width="720"></video>
+    
 - **Galeria de trabalhos:** exposição de tatuagens e produções autorais;
+
+    ![Tela inicial do Marsali Tattoo](docs/images/page-ini/galeri.jpg)
+
 - **Área de clientes:** cadastro, login e gerenciamento de perfil;
 - **Galeria de referências pessoais:** armazenamento e visualização de referências dos clientes;
 - **Agendamentos:** solicitação e acompanhamento de atendimentos;
